@@ -16,6 +16,7 @@ Please fee free to raise your issues in Issues Tab
 
 Updates History
 
+15 Apr 2016 : Uploaded all files to GitHub. Was originally kept at code.google.com
 28/02/2011 New convension for versioning is being introduced. All Version 1.xx will be Single File Java Script version i.e Just one single .html file should be sufficient for simple Panchanga Calculations.
 
 All Version 2.xx will be Multiple File Java Script version. You would need all the Grahas positions files and other HTML files to calculate the Dasa and Amshas (Divisionals).
