@@ -1,6 +1,7 @@
 
-1) For npm command get http://nodejs.org/
+If you are using Cordova to wrap around this HTML files, the following installing the following utilities can be helpful. Please note these are just a helpful note. You can use any tool you want to deploy this HTML.
 
+1) For npm command get http://nodejs.org/
 
 2) Swiss Ephemeris binding for node.js
 https://github.com/mivion/swisseph/blob/master/README.md
@@ -9,9 +10,6 @@ https://github.com/mivion/swisseph/blob/master/README.md
 https://codeload.github.com/phonegap/phonegap/zip/master
 
 4) install Android Studio
- set ANDROID_HOME=C:\Users\sprabhakara2\AppData\Local\Android\android-studio\sdk
- PATH=${PATH}:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools
- 
   Install sdk 19
   
 5) install ant 
@@ -29,8 +27,8 @@ rem http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md
 cordova plugin add org.apache.cordova.inappbrowser
 npm cache clean 
 rem #before do remove "Error: EPERM, operation not permitted"
-cd C:\Users\sprabhakara2\GOOGLE~1\JYOTIS~1\SJPv3 
-rem #note no spaces module.js:340   throw err;	Error: Cannot find module 'C:\Users\sprabhakara2\GOOGLE~1\Jyotish'
+cd <replace with project folder>\SJPv3 
+rem #note no spaces module.js:340   throw err;	Error: Cannot find module '....h'
 cordova build android
 
 If needed
@@ -49,12 +47,12 @@ app/AndroidManifest.xml
 LoadModule alias_module modules/mod_alias.so #(verify)
 <IfModule alias_module>
 # ADD THIS LINES FOR YOUR VIRTUAL DIRECTORIES
-Alias /sjp C:/Users/sprabhakara2/Google Drive/Jyotish Tool/SJPv3/www
+Alias /sjp <replace with project folder>/SJPv3/www
 Alias /project2 /home/me/web/project2
 Alias /project3 /home/me/web/project3
 </IfModule>
 # SETTING DIRECTORY FOR /home/me/web/project1
-<Directory "C:/Users/sprabhakara2/Google Drive/Jyotish Tool/SJPv3/www">
+<Directory "<replace with project folder>l/SJPv3/www">
 Options None
 AllowOverride All
 Order allow,deny
