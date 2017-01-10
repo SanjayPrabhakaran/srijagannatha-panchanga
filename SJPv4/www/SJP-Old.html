@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<HTML manifest="sjp.appcache">
+<HEAD>
+<title>Sri Jagannatha Panchanga</title>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="icon" href="img/logo.png" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="img/logo.png"/>
+
+</HEAD>
+
+<BODY id=contents onload="javascript:init()">
+ <style scoped type="text/css">
+	body{background-color:#ffcc33;}
+	input,select{background-color:#ffff99;}
+</style>
+
+<form id=datetimeplace method=get>
+<table id=inputtable >
+  <tr>
+    <td colspan=2 >
+      Chart Name:<input id=chartname name="chartname" size=20 type=text value=Prashna>
+        <div><br/>
+            Load a .JHD file:
+            <input type="file" title=".jhd file name" id="fileInput" >
+        </div>
+        <input id=submit name=submit type=submit value=Calculate>
+    </td>
+  </tr>
+  <tr>
+    <td  colspan=2>OR Provide Date, Time, Time Zone, Location, Latitude and Longitude.
+	</td>
+  </tr>
+  <tr>
+    <td colspan=2>
+	<!--input id=date name=date type=hidden size=50--></td>
+  </tr><tr>
+   <td>
+	<input id=bdate name=bdate type=date >
+	<input id=btime name=btime type=time step=1>
+	</td>
+  </tr>
+  <tr>
+	<td>Time Zone:
+	</td>
+    <td>
+	<input id=timezone	name=timezone type=text size=5 value="+5.5"><br/>
+	</td>
+  </tr>
+  <tr>
+    <td>Place Name:</td>
+    <td><input id=placename name=placename type=text size=15 value=Chennai>
+    </td>
+  </tr>
+  <tr >
+    <td>Longitude:
+    </td>
+    <td><input id=longitude name=longitude type=text size=5 value=-80.23>East -ve/West+ve
+    </td>
+  </tr>
+  <tr>
+    <td>Latitude: 
+    </td>
+    <td><input id=latitude name=latitude type=text size=5 value=13.5>South -ve/North +ve
+    </td>
+  </tr>
+</table>
+</form>
+<table>
+  <tr>
+      <td>
+		  <button onclick="getLocation()">Use Current Position</button>
+      </td>
+  </tr>
+  <tr>
+	  <td>
+		  <button onclick="initialize()">Load Google Maps</button>
+          <br/>
+      </td>
+  </tr><tr>
+      <TD>OR Load Places File
+        <select id=placeslist name=placeslist onchange=setLatLong() > 
+		<option selected>Chennai#-80.23;13.5</option>
+	</select>
+        <input type="file"  name="LoadPlaces" id="PlacesInput">
+      </TD>
+  </tr>
+</table>
+<pre id="fileDisplayArea"></pre>
+©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
+To save this file on your local machine or mobile, <br>Go to  
+<a href="#" onclick="window.open('http://srijagannatha-panchanga.googlecode.com/', '_system');">http://srijagannatha-panchanga.googlecode.com/</a>
+
+<br> Feel Free to edit this program.
+<i>For Credits do View,Source in menu.</i> <br>
+<br>
+Chennai(-80.23E 13.5N),India location is default as example.<br>
+NOTE: ACCURACY warning: Calculations are approximate upto few minutes. <br>
+This panchanga is for approximate reference only. <br>
+Valid for dates from 1/Jan/1930 to 31/Dec/2024.<br> 
+You can create your own list Places with Latitude and Longitude. By saving this example to your disk 
+<a href="#" onclick="window.open('places.txt', '_system')">places.txt 
+</a> <b><br>
+<br><em>WAIT PAGE LOADING.....</em></b>
+<script>
+console.log("declare getgrahas");
+	function getGrahas(date_time){
+	//2d Array contains 1) start date, 2) four Characters string for 21915 days, i.e 60 years
+	//Usings SWETEST -p0 -b2.4.1927 -head -edir. -ut0  -fPTl -g, -n21915 >sun2apr1927.txt
+	var grahas29031987 = new ephemeris29031987();
+        var grahas30121929 = new ephemeris30121929();
+	var grahas=[[ 	"30 DEC 1929 00:00:01 UTC",//Header Content
+					"29 MAR 1987 00:00:01 UTC" //Header Content
+				],
+				//Sun
+				[ //"sun30121929.txt",
+		 		  grahas30121929.sun,
+		 		  grahas29031987.sun//"sun29031987.txt" //31/12/2024
+			 	],
+			 	//Moon
+				[ //"moon30121929.txt",
+			  	  grahas30121929.moon,
+			  	  grahas29031987.moon//"moon29031987.txt"
+			 	],
+			 	//Mars
+				[ //"mars30121929.txt",
+			   	  grahas30121929.mars,
+			   	  grahas29031987.mars//"mars29031987.txt"
+			 	],
+			 	///Mercury
+				[ //"mercury30121929.txt",
+			  	  grahas30121929.mercury,
+			  	  grahas29031987.mercury//"mercury29031987.txt"
+			 	],
+			 	//Jupiter
+				[ //"jupiter30121929.txt",
+                                  grahas30121929.jupiter,
+                                  grahas29031987.jupiter//"jupiter29031987.txt"
+			 	],
+			 	//Venus
+				[ //"venus30121929.txt",
+			  	  grahas30121929.venus,
+			  	  grahas29031987.venus//"venus29031987.txt"
+			 	],
+			 	//Saturn
+				[ //"saturn30121929.txt",
+				  grahas30121929.saturn,
+				  grahas29031987.saturn//"saturn29031987.txt"
+				]
+			   ];
+
+	var panchanga_date=Date.parse(date_time);//panchanga_date DateTime in In Milliseconds.
+	var difference_days,base_date,i,j;
+	this.grahas = new Array(9);
+	this.speed = new Array(7);
+	for(i=grahas[0].length-1;i>=0;--i){ //Go through the Header table in reverse chronology.
+		base_date = Date.parse(grahas[0][i]); //The Base date in header.
+		if(panchanga_date < base_date) continue;
+		difference_days = parseInt((panchanga_date - base_date)/day);//The offset days from Base Date
+		var g_0hrs,g_end;
+		for(j=1;j<8;++j){
+			var p ="";
+			p = ""+LoadFile(grahas[j][i]);
+			g_0hrs = hex2int(p.slice(difference_days*4,difference_days*4+4))/3600;
+			g_end = hex2int(p.slice((difference_days+1)*4,(difference_days+1)*4+4))/3600;
+			this.speed[j-1] = ((g_end - g_0hrs)%360)/day;
+			if(g_end<30 && g_0hrs >270)this.speed[j-1] = ((360+g_end - g_0hrs)%360)/day;
+			this.grahas[j-1] = (360+g_0hrs+this.speed[j-1]*(panchanga_date%day))%360;
+		}
+		break;
+	}
+	if ( i === grahas[0].length || difference_days < 0 ) return null;
+}
+console.log("declare hex2int");
+function hex2int(str){
+	var s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX";
+	str=""+str;
+	var i,v=0,k;
+    var pow=Math.pow(60,str.length-1);
+	for(i=0;i<str.length;++i){
+	try{
+	        var c = str.charAt(i);
+	        if(c==="+"){c="\\"+c;}
+		    k=s.search(c);
+		    if(k>=0){
+		    	v=v+k*pow;
+		    	pow=pow/60;
+		    }	
+		    else return -1;
+		}catch(err){
+		    console.log(err.message);
+		    console.log("str="+str+";i="+i+";k="+k+";v="+v);
+		}
+	}
+	return v;
+}
+console.log("declare showtime");
+function showtime(){
+ document.getElementById('date').value = (new Date()).toString();
+ timerID = setTimeout("showtime()",timeOut);
+}
+</script>
+<script type="text/javascript" src= "sjp.js"></script>
+<script type="text/javascript" src= "ephemeris29031987.js"></script>
+<script type="text/javascript" src= "ephemeris30121929.js"></script>
+<script type="text/javascript" id=main>
+//function window_onload()
+//Initialization block
+console.log("declare init");
+function init(){
+	console.log("enter init");
+	var today = new Date();
+	if(document.getElementById("datetimeplace")===null)return;//Form is not present.
+	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
+	//Time zone needs to be set before formattimess
+	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
+	//document.getElementById("bdate").value  = params['bdate']===undefined?String(today).substring(4,15):new Date(params['bdate']);
+	var bdate = params['bdate']===undefined?today:new Date(params['bdate']);
+	document.getElementById("bdate").value  = formatDate(bdate);
+//	debug(bdate,">>>"+document.getElementById("bdate").value,bdate.getFullYear()+"-"+(bdate.getMonth()+1)+"-"+bdate.getDate());
+	var tstring=formatTimeSS(today);
+	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];	
+//	document.getElementById("date").value = params['date']===undefined?today.toString():params['date'];	
+	var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);;
+//	document.getElementById("date").value = params['date']===undefined?date.toString():params['date'];	
+	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
+	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
+	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
+	document.getElementById('latitude').value = params["latitude"]===undefined?getCookie('latitude'):params["latitude"];
+	document.getElementById('placename').value = params["placename"]===undefined?getCookie('placename'):params["placename"];
+	if(document.getElementById('longitude').value==="") document.getElementById('longitude').value = "-80.23";
+	if(document.getElementById('latitude').value==="") document.getElementById('latitude').value = "13.5";
+	if(document.getElementById('placename').value==="") document.getElementById('placename').value = "Chennai";
+	
+        places_c = getCookie('placeslist');
+		if(places_c===""){
+		places_c="Puri#-85.83;19.81&New Delhi#-77.208833;28.613806&Chennai#-80.23;13.5&WashingtonDC#77.0366;38.8977";
+	}
+	populatePlacesList(places_c);
+	window.status="Intialised Form";
+
+}
+</script>
+<script id=initscript>
+//-----------------------------------------------------------
+submit=false;
+var fileInput = document.getElementById('fileInput');
+var PlacesInput = document.getElementById('PlacesInput');
+var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+try{
+
+PlacesInput.addEventListener('change', LoadPlacesListener);
+
+fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+        var textType = /text.*/;
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            fileDisplayArea.innerText = reader.result;
+            document.getElementById("chartname").value = file.name;
+            var lines = reader.result.replace("\r","").split("\n");
+            var time=lines[3].split(".");
+			var datetime = months[lines[0]-1]+" "+lines[1]+" "+lines[2]+" "+
+							time[0]+":"+time[1].slice(0,2)+":"+Math.round(time[1].slice(2,5)*60/1000);
+            //document.getElementById("date").value = datetime;
+			var d=new Date(datetime);
+			document.getElementById("bdate").valueAsDate  = d;	
+			document.getElementById("btime").value  = formatTimeSS(d);				
+            var tzone = lines[4].split(".");
+            tzone[0] = tzone[0] * -1;
+            tzone[1] = tzone[1]/60;
+            document.getElementById("timezone").value = tzone[0]+"."+tzone[1];
+            var l = lines[5].split(".");
+            tzone[1] = tzone[1]/60;
+            document.getElementById('longitude').value = l[0]+"."+l[1];
+            l = lines[6].split(".");
+            tzone[1] = tzone[1]/60;
+            document.getElementById('latitude').value = l[0]+"."+l[1];
+            if(lines.length>11){
+                    document.getElementById('placename').value=lines[12]+","+lines[13];
+            }
+        };
+        reader.readAsText(file);
+});
+}catch(err){
+    alert(err.message+":\nMaybe an older browser");
+}
+params=window.location.href.split("?");
+
+var fileInput = document.getElementById('fileInput');
+var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+if(params[1] !== null &&  params[1] !== undefined)
+{
+	 params=params[1].split("&");
+	 for(i=0;i<params.length;++i){
+			var p = params[i].split("=");
+			document.getElementById(p[0]).value =document.getElementById(p[0]).value.replace(/\+/g," ");
+			document.getElementById(p[0]).value=unescape(p[1]);
+			p[1]=p[1].replace(/\+/g," ");
+			params[p[0]]=unescape(p[1]);		
+			if(p[0]==="submit" && p[1]==="Calculate")submit=true;
+		}
+}
+window.status="Set values.";
+if(submit===true){
+	calculate();
+	}
+// Below not needed as maps is loaded by button.
+//	else { The maps
+//	google.maps.event.addDomListener(window, 'load', initialize);
+//	}
+//-----------------------------------------------------------
+function calculate(){
+ 	document.getElementsByTagName("body")[0].innerHTML="";	
+	doForm();
+	document.close();
+}
+</script>
+
+
+
+<script id=update_div_googlemaps>
+//var map;
+//var myCenter=new google.maps.LatLng(13.042020847922622,80.26611328125);
+//Code from https://developers.google.com/maps/documentation/javascript/examples/map-simple-async
+console.log("declare initialize");
+function initialize() {//Called thru callback
+	console.log("Entered initialize");
+	//alert("Please wait a moment while loading Google maps...");
+	latlong={
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        };
+	m=document.getElementById("googleMap");
+	console.log(m);
+	console.log("entered initialize");
+      map = new google.maps.Map(m, latlong);
+	return;
+}
+/*console.log("declare placemarker");
+function placeMarker(location) {
+	console.log("place marker enter");
+
+	  var marker = new google.maps.Marker({
+		position: location,
+		map: map,
+	  });
+	  var infowindow = new google.maps.InfoWindow({
+		content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+	  });
+	  infowindow.open(map,marker);
+	  document.getElementById('longitude').value=-1*location.lng();
+	  document.getElementById('latitude').value=location.lat();
+	 // document.getElementById('timezone').value="0";
+}
+console.log("end declare placemarker");
+*/
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ3cZzpvYTVpj6x85gkX4r91G-Oje8VJU&callback=initialize"
+    async defer></script>
+<div id="googleMap" style="width:500px;height:380px;" ></div>
+
+<br>PAGE LOADED
+<a href="savefile.html">.</a>
+</BODY>
+</HTML>

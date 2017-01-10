@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>SJP:Select the Location</title>
+<link rel="icon" href="img/logo.png" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="img/logo.png"/>
+</head>
+<body>
+<style scoped type="text/css">
+	body{background-color:#ffcc33;}
+	input,select{background-color:#ffff99;}
+</style>
+<script id=update_div_googlemaps>
+//var map;
+//var myCenter=new google.maps.LatLng(13.042020847922622,80.26611328125);
+//Code from https://developers.google.com/maps/documentation/javascript/examples/map-simple-async
+console.log("declare placemarker");
+function placeMarker(location) {
+	console.log("place marker enter");
+
+	  var marker = new google.maps.Marker({
+		position: location,
+		map: map,
+	  });
+	  var infowindow = new google.maps.InfoWindow({
+		content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+	  });
+	  infowindow.open(map,marker);
+	  document.getElementById('longitude').value=-1*location.lng();
+	  document.getElementById('latitude').value=location.lat();
+	  document.getElementById('placename').value="MapLocation";
+	  document.getElementById('timezone').value=location.lng()*4/60;
+}
+console.log("end declare placemarker");
+console.log("declare initialize");
+function initialize() {//Called thru callback
+	console.log("Entered initialize");
+	//alert("Please wait a moment while loading Google maps...");
+	latlong={
+          center:{lat: 13, lng: 80.135},
+          zoom: 8
+        };
+	m=document.getElementById("googleMap");
+	console.log(m);
+	console.log("entered initialize");
+      map = new google.maps.Map(m, latlong);
+      map.addListener('click',  function(event){
+												placeMarker(event.latLng, map);
+												}	  
+					);
+	  return;
+}
+</script>
+
+<form id=datetimeplace method=get>
+<table id=inputtable >
+  <tr>
+    <td colspan=2 >
+      Chart Name:<input id=chartname name="chartname" size=20 type=text value=Prashna>
+        <div><br/>
+            Load a .JHD file:
+            <input type="file" title=".jhd file name" id="fileInput" >
+        </div>
+        <input id=submit name=submit type=submit value=Calculate>
+    </td>
+  </tr>
+  <tr>
+    <td  colspan=2>OR Provide Date, Time, Time Zone, Location, Latitude and Longitude.
+	</td>
+  </tr>
+  <tr>
+    <td colspan=2>
+	<!--input id=date name=date type=hidden size=50--></td>
+  </tr><tr>
+   <td>
+	<input id=bdate name=bdate type=date >
+	<input id=btime name=btime type=time step=1>
+	</td>
+  </tr>
+  <tr>
+	<td>Time Zone:
+	</td>
+    <td>
+	<input id=timezone	name=timezone type=text size=5 value="+5.5"><br/>
+	</td>
+  </tr>
+  <tr>
+    <td>Place Name:</td>
+    <td><input id=placename name=placename type=text size=15 value=Chennai>
+    </td>
+  </tr>
+  <tr >
+    <td>Longitude:
+    </td>
+    <td><input id=longitude name=longitude type=text size=5 value=-80.23>East -ve/West+ve
+    </td>
+  </tr>
+  <tr>
+    <td>Latitude: 
+    </td>
+    <td><input id=latitude name=latitude type=text size=5 value=13.5>South -ve/North +ve
+    </td>
+  </tr>
+</table>
+</form>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initialize" async defer>
+	</script>
+<div id="googleMap" style="width:500px;height:380px;" >
+Map Area
+</div>
+</body>
+</html> 

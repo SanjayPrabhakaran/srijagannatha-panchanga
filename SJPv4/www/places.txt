@@ -1,0 +1,1637 @@
+Abhayapuri#-90.63;26.4&
+Abohar#-74.17;30.17&
+Abu#-72.83;24.68&
+Achalpur#-77.53;21.37&
+Acher#-72.53;23.17&
+Adhoi#-70.53;23.43&
+Adilabad#-78.33;19.55&
+Adoni#-77.3;15.55&
+Adra#-86.7;23.5&
+Agar#-76.03;23.67&
+Agartala#-91.38;23.83&
+Agori#-82.95;24.55&
+Agra#-77.97;27.28&
+Ahiri#-80;19.5&
+Ahemadabad#-72.67;23&
+Ahmadnagar#-74.77;19.12&
+Ahmedabad/Ahmadabd#-72.67;23&
+Ahmednagar/Ahmednagar#-74.77;19.12&
+Ai#-90.73;26.43&
+Ait#-79.23;25.9&
+Aizawl#-92.73;23.67&
+Ajaigarh#-80.27;24.87&
+Ajanta Ra.,#-75.83;20.47&
+Ajmer#-74.62;26.47&
+Ajnala#-74.8;31.83&
+Akbarpur, Bihar#-83.97;24.65&
+Akbarpur, Uttar Pradesh#-82.53;26.42&
+Akhnur#-74.75;32.87&
+Aklera#-76.53;24.43&
+Akola#-77.03;20.7&
+Alaknanda#-78.6;30.13&
+Alappuzha/Alleppey#-76.47;9.5&
+Aliganj#-79.17;27.5&
+Aligarh, Rajasthan.,#-76.25;25.92&
+Aligarh, Uttar Pradesh.,#-78.17;27.92&
+Alipur Duar#-89.58;26.5&
+Allahabad#-81.97;25.42&
+Alleppey#-76.47;9.5&
+Almora#-79.67;29.63&
+Alot#-75.67;23.93&
+Alwar#-76.57;27.63&
+Amalner#-75.08;21.08&
+Amanat#-84.07;24.12&
+Amarkantak#-81.75;22.67&
+Amarpur#-87;25.08&
+Amarwara#-79.17;22.3&
+Ambah#-78.22;26.72&
+Ambala#-76.93;30.38&
+Ambikapur#-83.25;23.25&
+Amdhi#-81.45;23.85&
+Amet#-73.93;25.3&
+Amla#-78.12;21.93&
+Amravati#-77.75;20.92&
+Amreli#-71.28;21.58&
+Amritsar#-74.95;31.58&
+Amroha#-78.5;28.88&
+Anakapalle#-83.1;17.7&
+Anand#-73.32;22.53&
+Anantnag#-75.17;33.75&
+Anas#-74;23.43&
+Andhra Pradesh#-79;18&
+Anjar#-70.17;23.1&
+Anupgarh#-73.17;29.17&
+Anuppur#-81.68;23.1&
+Aonla#-79.18;28.27&
+Ara#-84.53;25.58&
+Arain#-75.03;26.45&
+Araria#-87.55;26.15&
+Arcot#-79.33;12.88&
+Arki#-76.97;31.15&
+Aron#-77.93;25.95&
+Arrah/Ara#-84.53;25.58&
+Arunachal Pradesh#-95;28&
+Arwal#-84.68;25.25&
+Asan#-78.4;26.62&
+Asansol#-87.02;23.67&
+Ashta#-76.72;23.02&
+Asifabad#-79.4;19.33&
+Aspur#-74.12;23.97&
+Assam#-93;26&
+Atrauli#-53.97;37.58&
+Attur#-78.5;11.58&
+Auraiya#-79.55;26.47&
+Aurangabad, Bihar#-84.3;24.75&
+Aurangabad, Maharashtra#-75.38;19.83&
+Awantipur#-75.05;33.92&
+Azamgarh#-83.22;26.08&
+Azimganj#-88.27;24.23&
+Babai/Sarju#-81.38;27.35&
+Baberu#-80.72;25.55&
+Babuhri#-69.72;26.82&
+Bachhwara#-85.9;25.58&
+Bada Barabil#-85.4;22.12&
+Badagara#-75.67;11.58&
+Badampahar#-86.17;22.17&
+Badarinath#-79.5;30.75&
+Badgom#-74.75;34.02&
+Badrinath#-80.32;30.73&
+Bagasra#-71;21.5&
+Bagaud#-75.88;22.32&
+Baghain#-81.02;25.53&
+Bagodar#-85.87;24.08&
+Bah#-78.6;26.88&
+Bahadurganj#-87.82;26.27&
+Bahadurgarh#-76.95;28.67&
+Baharampur#-88.45;24.03&
+Baheri#-79.57;28.75&
+Bahgul#-79.6;27.75&
+Bahraich#-81.62;27.63&
+Bahror#-76.33;27.85&
+Baihar#-80.55;22.1&
+Baijnath#-79.62;29.92&
+Baikunthpur#-82.55;23.25&
+Baj Baj#-88.08;22.5&
+Bajag#-81.35;22.67&
+Bajana#-71.82;23.12&
+Bakswaho#-79.3;24.25&
+Balaghat#-80.2;21.82&
+Balaghat Ra.,#-76.5;18.83&
+Balamau#-80.35;27.17&
+Balasinor#-73.38;22.95&
+Balasore/Baleshwar#-87.05;21.58&
+Baleshwar#-87.05;21.58&
+Bali#-73.28;25.18&
+Baliapal#-87.28;21.67&
+Balipara#-92.75;26.83&
+Ballia#-84.2;25.77&
+Balotra#-72.23;25.83&
+Balrampur#-82.33;27.5&
+Balurghat#-88.73;25.25&
+Banaras/Varanasi#-83;25.37&
+Banas Gujarat#-71.42;23.75&
+Banas, Med. P.#-81.5;24.25&
+Banda, Mad. P.#-78.95;24.05&
+Banda, Ut. P.#-80.43;25.5&
+Bandanwara#-74.63;26.15&
+Bandar/Machilipatnam#-81.13;16.2&
+Bandhogarh#-81.03;23.67&
+Bandi#-75.78;26.2&
+Bandikui#-76.57;27.05&
+Bangaduni L.#-88.87;21.57&
+Bangalore#-77.67;12.98&
+Banganga#-77.42;27.1&
+Bangaon#-88.78;23&
+Bangong Co#-79.33;35.83&
+Banihal Pass#-75.2;33.5&
+Banjar#-77.35;31.63&
+Banjar#-80.37;22.6&
+Banka#-85.17;24.88&
+Bankipore#-85.17;25.58&
+Bankura#-87.3;23.18&
+Banmankhi#-87.18;25.88&
+Bano#-84.92;22.67&
+Bansgaon#-83.35;26.55&
+Banswara#-74.4;23.53&
+Banttva#-70.2;21.48&
+Bap#-72.3;27.38&
+Bapatla#-80.5;15.92&
+Bar Bigha#-85.78;25.35&
+Bara#-81.72;25.27&
+Bara Banki#-81.2;26.92&
+Barah#-77.08;27.7&
+Barail Range#-93.33;25.25&
+Barakar#-86.23;24.12&
+Barakhola#-92.75;25&
+Barakot#-84.98;21.55&
+Barakpur#-88.5;22.73&
+Baramula#-74.33;34.25&
+Baran#-76.67;25.15&
+Barasat#-88.52;22.77&
+Barauda#-75.25;23.55&
+Baraut#-77.12;29.22&
+Barddhaman#-87.65;23.23&
+Bareilly#-79.45;28.37&
+Barela#-80.05;23.1&
+Barh#-85.77;25.48&
+Barhaj#-83.73;26.3&
+Barharwa#-87.78;24.87&
+Barhi#-85.42;24.25&
+Bari#-77.65;26.65&
+Bari Sadri#-74.5;24.47&
+Barkakana#-85.48;23.62&
+Barmer#-71.33;25.75&
+Barna#-83.05;25.35&
+Barnagar#-75.32;23.12&
+Barnala#-75.55;30.38&
+Baroda/Vadodara#-73.17;22.33&
+Baroda#-76.58;25.48&
+Barpeta#-91.17;26.33&
+Barrackpur/Barakpur#-88.5;22.73&
+Barsi#-75.83;18.17&
+Barsoi#-87.95;25.8&
+Barwani#-74.95;22.03&
+Basim/Washim#-77;20.05&
+Basoda#-77.9;23.87&
+Bassi#-76.35;30.73&
+Bastar#-81.67;19.25&
+Basti#-82.92;26.87&
+Batala#-75.2;31.8&
+Bausi#-87.02;24.8&
+Bayana#-77.3;26.92&
+Bearma#-79.85;24.33&
+Beas#-74.98;31.17&
+Beawar#-74.3;26.05&
+Begusarai#-86.15;25.4&
+Behala#-88.33;22.5&
+Bela#-82;25.83&
+Belan#-81.75;24.03&
+Belgaum#-74.58;15.92&
+Bellary#-76.93;15.17&
+Belonia#-91.5;23.25&
+Belrain#-80.92;28.38&
+Bemetara#-81.53;21.7&
+Benares/Varanasi#-83;25.37&
+Ber Mota#-68.57;23.45&
+Berach#-75.03;25.25&
+Berhampore/Baharampur#-88.45;24.03&
+Berhampur/Brahmapur#-84.9;19.25&
+Bettiah#-84.55;26.8&
+Betul#-77.98;21.97&
+Bewas#-79.35;23.98&
+Bezwada/Vijayawada#-80.65;16.52&
+Bhabua#-83.62;25.05&
+Bhachau#-70.27;23.33&
+Bhadar, Gujarat#-72.33;22.28&
+Bhadar, Gujarat#-69.78;21.45&
+Bhadwrwah#-75.77;32.97&
+Bhadohi#-82.57;25.42&
+Bhadra#-75.23;29.13&
+Bhadrakh#-86.5;21.17&
+Bhadran#-72.1;22.32&
+Bhadravati#-75.67;13.82&
+Bhagalpur#-87;25.17&
+Bhagirathi, Uttaranchal#-78.58;30.13&
+Bhagirathi, W. Bengal#-88.38;23.42&
+Bhakra Dam#-76.75;31.5&
+Bhandara#-79.7;21.08&
+Bhanpura#-75.73;24.52&
+Bhanrer Ra.#-79.08;23.67&
+Bhaptiahi#-86.73;26.32&
+Bharatpur, Chhattisgarh#-81.77;23.73&
+Bharatpur, Raj.#-77.5;27.25&
+Bharno#-84.88;23.23&
+Bhatinda#-74.95;30.25&
+Bhatpara#-88.42;22.83&
+Bhattu#-75.32;29.6&
+Bhaunagar/Bhavnagar#-72.17;21.75&
+Bhavnagar#-72.17;21.75&
+Bhawari#-73.07;25.7&
+Bhayavadar#-70.25;21.85&
+Bhikangaon#-75.95;21.87&
+Bhilsa/Vidisha#-77.88;23.47&
+Bhilwara#-74.63;25.42&
+Bhima#-77.28;16.42&
+Bhind#-78.77;26.5&
+Bhinga#-81.93;27.72&
+Bhinmal#-72.25;25&
+Bhiwandi#-73;19.33&
+Bhiwani#-76.15;28.83&
+Bhogava#-72.33;22.43&
+Bhopal#-77.5;23.33&
+Bhubaneshwar#-85.83;20.25&
+Bhuj#-69.82;23.25&
+Bhusaval#-75.77;21.05&
+Biaora#-76.93;23.93&
+Bichia#-80.7;22.45&
+Bidar#-77.58;17.92&
+Bidhuna#-79.52;26.82&
+Bihar#-85.67;25.08&
+Bihar#-86;25&
+Bihariganj#-86.98;25.73&
+Bijaipur#-77.33;26.03&
+Bijapur, Chhattisgarh#-80.83;18.83&
+Bijapur, Karnataka#-75.92;16.83&
+Bijawar#-79.5;24.63&
+Bijnor#-78.18;29.45&
+Bikaner#-73.3;28.03&
+Bikapur#-82.12;26.5&
+Bilara#-73.88;26.23&
+Bilaspur, Chhattisgarh#-82.25;22.03&
+Bilaspur, Punjab#-76.83;31.32&
+Bilgram#-80.03;27.18&
+Bilhaur#-80.08;26.85&
+Bina-Etawah#-78.23;24.22&
+Bindki#-80.6;26.03&
+Bir#-75.77;19.07&
+Birmitrapur#-84.77;22.4&
+Birsilpur#-72.25;28.18&
+Birur#-75.92;13.5&
+Bisalpur#-79.8;28.23&
+Bishnupur#-87.33;23.13&
+Biswan#-81.03;27.48&
+Bobbili#-83.5;18.58&
+Bodhan#-77.73;18.67&
+Bokaro#-85.92;23.77&
+Bolpur#-87.75;23.67&
+Bombay/Mumbai#-72.83;18.92&
+Bonaigarh#-84.95;21.83&
+Borsad#-72.9;22.42&
+Botad#-71.67;22.25&
+Brahmani#-86.77;20.65&
+Brahmapur#-84.9;19.25&
+Brahmaputra#-95.5;27.8&
+Budaun#-79.17;28.08&
+Budge Budge/Baj Baj.#-88.08;22.5&
+Bulandshahr#-77.85;28.47&
+Bulsar/Valsad#-72.97;20.67&
+Bundi#-75.58;25.5&
+Burda#-77.58;25.83&
+Burdwan/Barddhaman#-87.65;23.23&
+Burhanpur#-76.23;21.3&
+Burhi Gandak#-86.62;25.33&
+Burhner#-80.52;22.72&
+Buxa Duar#-89.58;27.75&
+Buxar#-83.97;25.57&
+Calcutta/Kolkata#-88.4;22.6&
+Calicut#-75.72;11.25&
+Cambay/Khambhat#-72.55;22.38&
+Cambay, G. of/Khambhat G. of#-72.5;20.75&
+Cannanore#-75.45;11.88&
+Canning Town/Port Canning#-88.67;22.38&
+Cardamon Hills#-77.25;9.5&
+Cauvery#-78.87;11.15&
+Cawnpore/Kanpur#-80.33;26.47&
+chaibasa#-85.82;22.7&
+Chakradharpur#-85.67;22.75&
+Chakrata#-77.85;30.7&
+Chalisgaon#-75.17;20.5&
+Chamba#-76.17;32.58&
+Chambal#-79.25;26.48&
+Chamoli#-79.35;30.4&
+Champa#-82.72;22.03&
+Champawat#-80.1;29.33&
+Champua#-85.67;22.08&
+Chanasma#-72.08;23.73&
+Chand#-79.12;21.95&
+Chandan#-86.67;24.63&
+Chandan Chauki#-80.78;28.55&
+Chandannagar#-88.4;22.87&
+Chandausi#-78.82;28.45&
+Chandigarh#-76.78;30.72&
+Chandil#-86.05;22.97&
+Chandod#-73.47;21.98&
+Chandrapur#-79.42;19.95&
+Chnaga#-77.58;33.88&
+Changanacheri#-76.52;9.42&
+Channapatna#-77.25;12.67&
+Chapra= Chhapra#-84.73;25.8&
+Charanwala#-72.17;27.85&
+Charkhari#-79.75;25.4&
+Charkhi Dadri#-76.28;28.62&
+Chatra#-84.93;24.2&
+Chatrapur#-85.03;19.37&
+Chatsu#-75.95;26.6&
+Chennai#-80.32;13.13&
+Cherrapunji#-91.78;25.28&
+Chhabra#-76.9;24.67&
+Chhaktala#-74.18;22.1&
+Chhapra#-84.73;25.8&
+Chhata#-77.5;27.7&
+Chhatarpur, Jharkhand#-84.18;24.38&
+Chhatarpur, Mad. P.#-79.58;24.92&
+Chhattisgarh#-82;22&
+Chhindwara, Mad. P.#-79.48;23.05&
+Chhindwara, Mad. P.#-78.98;22.03&
+Chhota Tawa#-76.6;22.23&
+Chhoti Kali Sindh#-75.52;24.03&
+Chhuikhadan#-80.98;21.53&
+Chicacole/Srikakulam#-83.97;18.23&
+Chicholi#-77.67;22.02&
+Chidambaram#-79.75;11.33&
+Chik Bollapur#-77.75;13.42&
+Chikmagalur#-75.75;13.25&
+Chilka L.#-85.42;19.67&
+Chilo#-73.53;27.42&
+Chineni#-75.25;33.03&
+Chini#-75.25;31.53&
+Chirala#-80.43;15.83&
+Chirawa#-75.7;28.23&
+Chirmiri#-82.33;23.25&
+Chittaurgarh#-74.63;24.87&
+Chittoor#-79.08;13.25&
+Chomun#-75.67;27.25&
+Chorbat La#-76.62;34.7&
+Chotila#-71.25;22.38&
+Chotta Udepur#-74.02;22.32&
+Chuda#-71.68;22.48&
+Chumar#-78.58;32.67&
+Chunchura#-88.45;22.88&
+Churachandpur#-93.67;24.33&
+Churki#-83.2;23.83&
+Churu#-74.83;28.33&
+Chushal#-78.67;33.67&
+Cocanada/Kakinada#-82.18;16.95&
+Cochin#-76.33;9.97&
+Coimbatore#-76.98;11.03&
+Comorin, C.#-77.67;8.05&
+Conjeeveram/Kanchipuram#-79.75;12.87&
+Contai#-87.77;21.9&
+Cooch Behar/Koch Bihar#-89.48;26.37&
+Coondapoor#-74.67;13.7&
+Coromandel Coast#-81;12.5&
+Cuddalore#-79.75;11.77&
+Cuddapah#-78.78;14.5&
+Cumbum#-79.17;15.67&
+Cuttack#-85.95;20.42&
+Dabhoi#-73.33;22.17&
+Dadra & Nagar Haveli#-73;20.08&
+Dadri/Charkhi Dadri#-76.28;28.62&
+Dahod#-74.25;22.83&
+Dakor#-73.18;22.75&
+Dalhousie#-75.97;32.63&
+Dalmau#-81.03;26.07&
+Daltenganj#-84.07;24&
+Daman#-72.95;20.42&
+Damodar#-87.58;23.28&
+Damoh#-79.47;23.83&
+Dandell#-74.5;15.08&
+Dankhar Gompa#-78.17;32.17&
+Danta#-72.77;24.18&
+Dantan#-87.33;21.95&
+Darbhanga#-85.92;26.25&
+Darjeeling/Darjiling#-88.3;27.05&
+Darjiling#-88.3;27.05&
+Darwha#-77.75;20.25&
+Dasuya#-75.63;31.82&
+Datia#-78.45;25.65&
+Daudnagar#-84.4;25.03&
+Daulpur#-77.98;26.75&
+Dausa#-76.33;26.87&
+Davangere#-75.92;14.42&
+Deccan#-79;18&
+Dechhu#-72.33;26.77&
+Dechhu#-72.33;26.77&
+Degana#-74.33;26.83&
+Dehej#-72.67;21.73&
+Dehra Dun#-78.07;30.33&
+Dehri#-84.25;24.83&
+Delhi#-77.28;28.63&
+Delvada#-71.03;20.77&
+Demchok#-79.48;32.7&
+Deoband#-77.72;29.7&
+Deogarh#-73.9;25.53&
+Deoghar#-86.7;24.5&
+Deolali#-73.83;19.97&
+Deoli/Devli#-75.33;25.83&
+Deora#-70.92;26.37&
+Deori#-79.02;23.4&
+Deoria#-83.8;26.52&
+Deosri#-90.48;26.77&
+Depalpur#-75.55;22.85&
+Dergaon#-94;26.75&
+Deshnok#-73.35;27.8&
+Desuri#-73.58;25.3&
+Devakottai#-78.75;9.92&
+Devaprayag#-78.58;30.22&
+Devgadh Bariya#-73.92;22.67&
+Devikot#-71.2;26.7&
+Devil#-75.33;25.83&
+Dewas#-76.05;22.98&
+Dhadhar#-85.4;24.93&
+Dhampur#-78.55;29.32&
+Dhamtari#-81.58;20.7&
+Dhanbad#-86.5;23.83&
+Dhar#-75.43;22.58&
+Dharampur#-75.3;22.22&
+Dharamsala/Dharmsala#-76.38;32.27&
+Dhariwal#-75.32;31.95&
+Dharmapuri#-78.17;12.17&
+Dharmjaygarh#-83.22;22.47&
+Dharmsala#-76.38;32.27&
+Dharni#-76.88;21.55&
+Dharwad#-75.07;15.5&
+Dhasan#-79.4;25.8&
+Dhebar, L.#-74;24.17&
+Dhenkanal#-85.58;20.75&
+Dhilwan#-75.35;31.52&
+Dhimarkhera#-80.37;23.47&
+Dholka#-72.48;22.73&
+Dhoraji#-70.62;21.75&
+Dhrangadhra#-71.52;22.98&
+Dhrol#-70.42;22.55&
+Dhuburi#-89.98;26.03&
+Dhule#-74.83;20.97&
+Diamond Harbour#-88.23;22.18&
+Dibai#-78.25;28.22&
+Dibrugarh#-94.92;27.48&
+Didwana#-74.6;27.38&
+Dig#-77.33;27.47&
+Diggi#-75.43;26.37&
+Dihang/Brahmaputra#-95.5;27.8&
+Dinapur#-85.08;25.63&
+Dindigul#-78;10.42&
+Dindori#-81.08;22.95&
+Disa#-72.17;24.3&
+Diu#-70.97;20.75&
+Diyodar#-71.83;24.13&
+Doda#-75.57;33.17&
+Dohrighat#-83.52;26.27&
+Domariaganj#-83.73;26.28&
+Dras#-75.8;34.42&
+Dubrajpur#-87.42;23.8&
+Dudhi#-83.17;24.25&
+Dudwa#-80.68;28.5&
+Dum Dum#-88.55;22.65&
+Dum Duma#-95.67;27.67&
+Dumka#-87.25;24.2&
+Dumraon#-84.13;25.55&
+Dunagiri#-79.87;30.52&
+Dungarpur#-73.75;23.87&
+Durg#-81.37;21.25&
+Durgapur#-87.33;23.5&
+Dwarka#-69.13;22.3&
+Easter Ghats#-78.83;14&
+Egra#-174.08;39.28&
+Elore/Eluru#-81.13;16.8&
+Eluru#-81.13;16.8&
+English Bazar/Ingraj Bazar#-88.17;24.97&
+Erinpura#-73.05;25.15&
+Erode#-77.75;11.4&
+Errampala Hills#-78.25;15.5&
+Etah#-78.67;27.58&
+Etawah#-79.1;26.8&
+Faizabad#-82.17;26.75&
+Faridabad#-77.32;28.43&
+Faridkot#-74.75;30.73&
+Faridpur#-79.55;28.22&
+Fatehabad, Haryana#-75.45;29.52&
+Fatehabad, Ut. P.#-78.32;27.02&
+Fatehgarh#-79.58;27.42&
+Fatehpur, Bihar#-85.23;24.63&
+Fatehpur, Raj.#-74.67;28&
+Fatehpur, Ut. P.#-81.22;25.93&
+Fatehpur, Ut. P.#-81.22;27.17&
+Fatehpur Sikri#-77.67;27.1&
+Fazilka#-74.03;30.45&
+Ferozepore/Fiozpur#-74.67;30.92&
+Firozabad#-78.42;27.17&
+Firozpur#-74.67;30.92&
+Firozpur-Jhirka#-76.95;27.8&
+Forbesganj#-87.3;26.28&
+Gadag#-75.75;15.5&
+Gadarwara#-78.83;22.83&
+Gadhada#-71.58;22&
+Gadwal#-77.83;16.17&
+Gagaria#-70.77;25.72&
+Gahmar#-83.82;25.45&
+Gambhir#-77.45;26.97&
+Gandak#-85.22;25.65&
+Gandhi Sagar#-75.67;24.67&
+Gandhinagar#-72.75;23.25&
+Ganga#-90.5;23.33&
+Ganga Sagar#-88.08;21.63&
+Gangan#-78.97;28.63&
+Ganganagar#-73.93;29.93&
+Gangapur#-76.82;26.53&
+Ganges/Ganga#-90.5;23.33&
+Ganges, Mouths of the#-90;21.5&
+Gangoh#-77.3;29.77&
+Gangroti#-79.17;30.83&
+Gangtok#-88.62;27.33&
+Ganj#-78.95;27.75&
+Gapat#-82.47;24.5&
+Garautha#-79.3;25.57&
+Garbiyan#-80.9;30.13&
+Garo Hills#-90.5;25.5&
+Garot#-75.68;24.32&
+Garrauli#-79.37;25.08&
+Garu#-84.23;23.67&
+Garwa#-83.78;24.18&
+Gauhati/Guwahati#-91.75;26.17&
+Gauri Phanta#-80.6;28.68&
+Gawilgarh Hills#-76.75;21.25&
+Gaya#-85.07;24.78&
+Ghaggar#-74.88;29.5&
+Ghaghara#-84.67;25.75&
+Ghagra#-84.55;23.28&
+Ghagra#-81.15;27.48&
+Ghansor#-80.02;22.65&
+Ghatal#-87.77;22.67&
+Ghatampur#-80.22;26.13&
+Ghatsila#-86.48;22.6&
+Ghaziabad#-77.43;28.7&
+Ghazipur#-83.58;25.63&
+Ghotaru#-70.02;27.33&
+Ghughri#-80.68;22.65&
+Ghugus#-79.2;19.97&
+Gilgit#-74.25;35.83&
+Gir Hills#-71;21&
+Girab#-70.63;26.03&
+Giri#-77.68;30.47&
+Giridih#-86.35;24.17&
+Goa#-73.98;15.55&
+Goa#-73.98;15.55&
+Goalpara#-90.67;26.17&
+Goaltor#-87.17;22.72&
+Godavari#-82.3;16.42&
+Godavari Pt.#-82.33;17&
+Godda#-87.22;24.83&
+Godhra#-73.67;22.82&
+Gogra= Ghaghara#-84.67;25.75&
+Gohana#-76.7;29.13&
+Goharganj#-77.68;23.02&
+Goi#-74.77;22.07&
+Gola#-80.53;28.05&
+Golakganj#-89.87;26.13&
+Gomati#-83.18;25.53&
+Gomoh#-86.17;23.87&
+Gonda#-81.97;27.15&
+Gondal#-70.87;21.97&
+Gondia#-80.17;21.38&
+Gop#-69.83;22.08&
+Gopalganj#-84.5;26.47&
+Gorakhpur#-83.38;26.78&
+Goriganga#-80.38;29.75&
+Govindgarh#-81.3;24.38&
+Great Indian Desert/Thar Desert#-72;28&
+Gua#-85.33;22.3&
+Gudur#-79.92;14.2&
+Gujarat#-71;23.33&
+Gulbarga#-76.83;17.33&
+Gulmarg#-74.42;34.05&
+Gumla#-84.55;23.05&
+Guna#-77.32;24.67&
+Guntakal#-77.45;15.18&
+Guntur#-80.5;16.38&
+Gurdaspur#-75.52;32.08&
+Gurgaon#-77.02;28.45&
+Gurha#-71.65;25.2&
+Guwahati#-91.75;26.17&
+Gwalior#-78.17;26.2&
+Haflong#-93.08;25.17&
+Haidargarh#-81.37;26.62&
+Hajipur#-85.22;25.75&
+Haldia#-88.05;22.08&
+Haldwani#-79.5;29.52&
+Halia#-82.32;24.83&
+Halvad#-71.18;23.02&
+Hamirpur H.P.#-76.52;31.68&
+Hamirpur, Ut. P.#-80.15;25.95&
+Handwara#-74.33;34.35&
+Hanle#-79.07;32.7&
+Hansdiha#-87.08;24.6&
+Hansi#-75.95;29.17&
+Hanumangarh#-74.32;29.58&
+Haora#-88.33;22.62&
+Hapur#-77.75;28.75&
+Harda#-77.08;22.45&
+Hardoi#-80.1;27.43&
+Hardwar/Haridwar#-78.15;29.97&
+Haridwar#-78.15;29.97&
+Harrai#-79.22;22.62&
+Harsud#-76.73;22.1&
+Haryana#-76.17;29&
+Hasdo#-82.73;21.73&
+Hathras#-78.1;27.6&
+Hatta#-79.6;24.12&
+Hazaribag#-85.43;23.97&
+Hazaribag Road#-85.95;24.2&
+Himachal Pradesh#-77;31.5&
+Himatnagar#-72.95;23.62&
+Hindaun#-77.08;26.73&
+Hindupur#-77.53;13.82&
+Hinganghat#-78.87;20.5&
+Hingir#-83.68;21.95&
+Hingoli#-77.25;19.68&
+Hirakud Dam#-83.75;21.53&
+Hiran#-79.35;23.1&
+Hirapur#-79.22;24.37&
+Hisar#-75.75;29.2&
+Hooghly/Hugli#-88.07;21.93&
+Hooghly-Chinsura/Chunchura#-88.45;22.88&
+Hoshangabad#-77.75;22.75&
+Hoshiarpur#-75.97;31.5&
+Hospet#-76.33;15.25&
+Howrah/Haora#-88.33;22.62&
+Hugli#-88.07;21.93&
+Hunza#-74.33;35.9&
+Hyderabad#-78.48;17.37&
+Hymia#-78.03;33.67&
+Ib#-83.8;21.57&
+Ichchapuram#-84.67;19.17&
+Ichhawar#-77.02;23.02&
+Imphal#-93.93;24.8&
+Indore#-75.88;22.7&
+Indravati#-80.33;19.33&
+Ingraj Bazar#-88.17;24.97&
+Isagarh#-77.85;24.8&
+Isan#-80.12;26.85&
+Islampur#-85.2;25.15&
+Isogstalo#-78.77;34.25&
+Itarsi#-77.85;22.6&
+Jabalpur#-79.97;29.15&
+Jafarabad#-71.37;20.87&
+Jagadhri#-77.33;30.17&
+Jagadishpur#-84.35;25.5&
+Jagdalpur#-82;19.05&
+Jagraon#-75.42;30.83&
+Jagital#-79;18.83&
+Jahanabad#-81.12;22.58&
+Jahazpur#-84.98;25.22&
+Jaijon#-76.15;31.35&
+Jaipur#-75.83;27&
+Jais#-81.53;26.25&
+Jaisalmer#-70.9;26.92&
+Jaisinghnagar#-78.57;23.63&
+Jaitaran#-73.93;26.2&
+Jaithari#-78.62;23.23&
+Jakam#-74.22;23.9&
+Jakhal#-75.83;29.8&
+Jakhau#-68.72;23.22&
+Jalalabad#-79.7;27.68&
+Jalaun#-79.42;26.13&
+Jalesar#-78.32;27.48&
+Jalgaon#-75.7;21&
+Jalna#-75.63;19.8&
+Jalor#-72.62;25.35&
+Jalpaiguri#-88.77;26.53&
+Jamalpur#-86.47;25.3&
+Jamalpurganj#-87.98;23.03&
+Jambusar#-72.85;22.05&
+Jamira#-88.47;21.58&
+Jamkhandi#-75.25;16.5&
+Jammu#-74.9;32.72&
+Jammu & Kashmir#-77;34.42&
+Jamnagar#-70.1;22.5&
+Jamni#-78.58;25.22&
+Jamshedpur#-86.2;22.07&
+Jamtara#-86.82;23.98&
+Janghai#-82.32;25.55&
+Janjgir#-82.57;22.02&
+Jaora#-75.17;23.67&
+Japla#-84.02;24.55&
+Jarwa#-82.5;27.63&
+Jasdan#-71.2;22.03&
+Jashpurnagar#-84.15;22.9&
+Jasidih#-86.65;24.52&
+Jaso#-80.48;24.5&
+Jasrasar#-73.82;27.72&
+Jaunpur#-82.07;25.77&
+Jawad#-74.85;24.6&
+Jayanti#-89.67;26.75&
+Jaynagar#-86.15;26.72&
+Jetpur#-70.17;21.75&
+Jeypore#-82.63;18.83&
+Jha Jha#-86.37;24.77&
+Jhaarkand/Jharkhand#-85.83;24&
+Jhabua#-74.6;22.77&
+Jhajjar#-76.7;28.62&
+Jhalawar#-76.17;24.67&
+Jhalida#-85.97;23.37&
+Jhalrapatan#-76.17;24.55&
+Jhansi#-78.6;25.5&
+Jhargram#-86.98;22.45&
+Jharia#-86.43;23.75&
+Jharkhand#-85.83;24&
+Jharsuguda#-84.08;21.93&
+Jhilmilli#-82.85;23.4&
+Jhunjhunu#-75.5;28.17&
+Jido#-94.97;29.03&
+Jigni#-79.42;25.75&
+Jind#-76.37;29.32&
+Jobat#-74.57;22.42&
+Jodhpur#-73.13;26.38&
+Jodiya#-70.3;22.7&
+Jogbani#-87.25;26.42&
+Johilla#-81.23;23.62&
+Jora#-77.82;26.33&
+Jorhat#-94.2;26.75&
+Joshinath#-79.57;30.57&
+Jubbal#-77.67;31.08&
+Jubbulpore/Jabalpur#-79.97;23.15&
+Jullundur#-75.67;31.33&
+Jumna/Yamuna#-81.88;25.5&
+Junagadh#-70.5;21.5&
+Kachchh, Gulf of#-69.25;22.83&
+Kachchh, Rann of#-70;24&
+Kachchhidhana#-78.77;21.73&
+Kachnara#-75.1;23.83&
+Kadi#-72.38;23.3&
+Kadipur#-82.38;26.17&
+Kaimganj#-79.4;27.55&
+Kaimur Hills#-82;24.5&
+Kaira#-72.83;22.75&
+Kairana#-77.25;22.4&
+Kaithal#-76.43;29.8&
+Kakdwip#-88.18;21.88&
+Kakinada#-82.18;16.95&
+Kali#-79.92;27.1&
+Kali Sindh#-76.28;25.53&
+Kalimpong#-88.58;27.07&
+Kalka#-76.95;30.77&
+Kalna#-88.42;23.22&
+Kalnai#-83.5;22.77&
+Kalol, Gujarat#-73.52;22.62&
+Kalol, Gujarat#-72.55;23.25&
+Kalpi#-79.78;26.13&
+Kaman#-77.27;27.65&
+Kamla#-86.6;25.58&
+Kanchipuram#-79.75;12.87&
+Kandaghat#-77.12;30.98&
+Kandhla#-77.32;29.3&
+Kandi#-88.08;23.97&
+Kandla#-70.17;23&
+Kangra#-76.27;32.1&
+Kangto#-92.58;27.83&
+Kanhar#-83.13;24.47&
+Kanker#-81.67;20.17&
+Kankroli#-73.88;25.07&
+Kannauj#-79.93;27.05&
+Kannod#-76.67;22.75&
+Kanpur#-80.33;26.47&
+Kantaphor#-76.57;22.58&
+Kantli#-75.5;28.33&
+Kapadvanj#-73;23.08&
+Kapurthala#-75.42;31.38&
+Karad#-74.17;17.25&
+Karagola Road#-87.38;25.48&
+Karaikal#-79.83;10.98&
+Karaikkudi#-78.75;10.08&
+Karamnasa#-83.87;25.52&
+Karanjia#-85.97;21.78&
+Karauli#-77.07;26.5&
+Karchana#-81.93;25.28&
+Kareha#-86.35;25.73&
+Karera#-78.15;25.53&
+Kargil#-76.2;34.53&
+Karhal#-78.95;27.02&
+Karimnagar#-79.17;18.43&
+Karnal#-77.03;29.7&
+Karnaprayag#-79.25;30.27&
+Karnataka#-77;13.25&
+Karsiyang#-88.3;26.93&
+Karsog#-77.2;31.38&
+Kartapur#-75.53;31.45&
+Karur#-78.08;10.95&
+Karwan#-78.07;27.43&
+Karwar#-74.22;14.92&
+Karwi#-80.95;25.2&
+Kasaragod#-74.97;12.5&
+Kasganj#-78.7;27.8&
+Kashipur#-79;29.25&
+Kasiari#-87.23;22.13&
+Katangi#-79.83;21.93&
+Katghora#-82.55;22.5&
+Kathi#-74.05;21.78&
+Kathiawar#-71;22.33&
+Kathua#-75.57;32.38&
+Katihar#-87.6;25.57&
+Katni#-80.4;23.85&
+Katwa#-88.08;23.5&
+Kauwapur#-82.3;27.52&
+Karvali#-80.02;14.92&
+Kavi#-72.63;22.2&
+Kawardha#-81.28;22&
+Kedarnath#-79.07;30.73&
+Kekri#-75.17;26&
+Ken#-80.45;25.22&
+Kendai#-82.62;22.75&
+Kendrapara#-86.5;20.58&
+Keonjhargarh#-85.58;21.47&
+Kerala#-76.25;11&
+Ketri#-75.83;28.02&
+Khachrod#-75.33;23.42&
+Khaga#-81.12;25.78&
+Khagaria#-86.53;25.5&
+Khair#-77.77;27.95&
+Khairabad#-80.78;27.55&
+Khairgarh#-81.03;21.45&
+Khairwara#-73.63;23.97&
+Khalilabad#-83.08;26.8&
+Khamaria#-80.8;23.08&
+Khambhaliya#-69.68;22.23&
+Khambhat#-72.55;22.38&
+Khambhat, G. of#-72.5;20.75&
+Khandwa#-76.37;21.82&
+Khaniadhana#-78.13;25.02&
+Khanna#-76.27;30.7&
+Kharaghoda#-71.77;23.18&
+Kharagpur#-87.42;22.33&
+Kharda#-75.57;18.67&
+Khardung La.#-77.72;34.33&
+Khargon#-75.67;21.75&
+Khari#-74.52;25.9&
+Kharsawangarh#-85.83;22.8&
+Khatauli#-77.72;29.28&
+Khatra#-86.85;22.98&
+Khavda#-69.72;23.85&
+Khed Brahma#-73.08;24.12&
+Khekra#-77.33;28.87&
+Khilchipur#-76.57;24.03&
+Khirsadoh#-78.78;22.18&
+Khuiyala#-70.42;27.15&
+Khujner#-76.6;23.78&
+Khunti#-85.28;23.08&
+Khurai#-78.38;24.05&
+Khurja#-77.97;28.25&
+Kichha#-79.5;28.88&
+Kichha#-79.3;28.68&
+Kilar#-76.42;33.1&
+Kirkee#-73.93;18.57&
+Kishanganj#-88.23;26.05&
+Kishangarh, Raj.#-74.87;26.57&
+Kishangarh, Raj.#-70.5;27.83&
+Kishtwar#-75.8;33.33&
+Kivarli#-72.77;24.55&
+Koch Bihar#-89.48;26.37&
+Kochas#-83.93;25.25&
+Kochi/Cochin#-76.33;9.97&
+Kodarma#-85.6;24.47&
+Kodinar#-70.77;20.77&
+Kohima#-94.17;25.58&
+Kolahoi#-75.37;34.2&
+Kolar#-78.25;13.2&
+Kolar Gold Fields#-78.27;12.97&
+Kolaras#-77.6;25.23&
+Kolayat#-72.83;27.83&
+Kolhapur#-74.25;16.72&
+Kolkata#-88.4;22.6&
+Kollam/Quilon#-76.63;8.83&
+Kolosib#-92.75;24.25&
+Konch#-79.17;26&
+Koral#-73.2;21.83&
+Korba#-82.75;22.33&
+Korwai#-78.08;24.12&
+Kosi#-77.48;27.8&
+Kosi#-78.95;28.68&
+Kot Kapura#-74.83;30.58&
+Kota#-75.82;25.23&
+Kota Barrage#-75.85;25.1&
+Kotdwara#-78.53;29.75&
+Kothari#-75.07;25.33&
+Kothi, Chhattisgarh#-82.05;23.35&
+Kothi, Mad. P.#-80.67;24.75&
+Kotma#-81.97;23.2&
+Kotputli#-76.2;27.72&
+Kotturu#-76.17;14.75&
+Kozhikode/Calicut#-75.72;11.25&
+Krishna#-80.98;15.95&
+Krishnanagar#-88.55;23.4&
+Kucha Gompa#-76.93;34.42&
+Kuchaman#-74.78;27.22&
+Kuchinda#-84.35;21.73&
+Kuda#-71.25;23.17&
+Kulasekarappattinam#-78.08;8.33&
+Kulgam#-75.03;33.6&
+Kulti#-86.83;23.72&
+Kulu#-77.1;31.97&
+Kumbakonam#-79.42;10.97&
+Kumbhraj#-77.05;24.37&
+Kumdok#-78.17;33.53&
+Kumharsain#-77.45;31.32&
+Kunda#-81.52;25.72&
+Kundla#-71.42;21.35&
+Kunwari#-79.18;26.43&
+Kuranga#-69.17;22.07&
+Kuri#-70.72;26.62&
+Kurnool#-78;15.75&
+Kushalgarh#-74.45;23.17&
+Kushol#-76.6;33.67&
+Kusmi#-83.92;23.28&
+Kutch, Gulf of/Kachchh, Gulf of#-69.25;22.83&
+Kutch, Rann of/Kachchh Rann of#-70;24&
+Kutiyana#-70.03;21.6&
+Kuwana#-83.25;26.42&
+Kyelang#-77.03;32.58&
+Laccadive Is./Lakshadweep Is.#-72.5;10&
+Lachhmangarh#-75.07;27.83&
+Ladakh Ra.#-78;34&
+Ladnun#-74.42;27.63&
+Lahar#-78.95;26.2&
+Laharpur#-80.93;27.72&
+Lakha#-70.9;26.15&
+Lakhimpur#-80.77;27.95&
+Lakhnadon#-79.6;22.6&
+Lakhpat#-68.78;23.8&
+Laksar#-78.05;29.77&
+Lakshadweep Is.#-72.5;10&
+Lakshmanpur#-83.05;22.97&
+Lakshmikantapur#-88.33;22.08&
+Lala Ghat#-92.67;24.5&
+Lalganj#-85.22;25.87&
+Lalgola#-88.25;24.42&
+Lalitpur#-78.47;24.7&
+Lalkua#-79.52;29.08&
+Lalsot#-76.33;26.57&
+Lamta#-80.12;22.13&
+Lansdowne#-78.68;29.83&
+Lashkar#-78.17;26.17&
+Latehar#-84.5;23.75&
+Lathi#-71.38;27.72&
+Leh#-16.17;51.2&
+Limbdi#-71.85;22.57&
+Little Rann#-71.42;23.42&
+Lohardaga#-84.75;23.45&
+Loharia#-74.23;23.75&
+Loharu#-75.82;28.45&
+Londa#-74.5;15.5&
+Lormi#-81.68;22.28&
+Luajan#-85.02;24.73&
+Lucknow#-81;26.83&
+Ludhiana#-75.93;30.95&
+Lukhisaria#-86.08;25.18&
+Luna#-69.27;23.72&
+Lunavada#-73.62;23.13&
+Lunglei#-92.75;22.92&
+Luni#-73.1;26&
+Luni#-71.23;24.68&
+Lunkaransar#-73.73;28.48&
+Machhu#-70.77;23.1&
+MachilipatnaM#-81.13;16.2&
+Madha#-75.5;18&
+Madhavpur#-69.97;21.25&
+Madhepura#-86.38;26.18&
+Madhupur#-86.48;24.27&
+Madhya Pradesh#-78;22.83&
+Madikeri#-75.75;12.5&
+Madras/TaMil Naidu#-77;11&
+Madri#-73.53;24.27&
+Madurai#-78.17;9.92&
+MadurantakaM#-79.83;12.5&
+Magvana#-69.37;23.22&
+Mahadeo Hills#-78.5;22.33&
+Mahajan#-73.93;28.8&
+Mahan#-86.42;20.33&
+Maharashtra#-75.5;20.5&
+Mahbulnagar#-76.23;28.28&
+Mahe#-783.53;33.17&
+Mahendragarh#-76.23;28.28&
+Mahesana#-72.43;23.65&
+Maheshwar#-75.58;22.18&
+Mahgawan#-78.62;26.48&
+Mahi#-72.92;2.25&
+Mahoba#-79.92;25.08&
+Mahuva#-71.8;21.08&
+Maihar#-80.75;24.27&
+Maikala Ra#-81;22&
+Mailani#-80.35;28.28&
+Mainpuri#-79.07;27.3&
+Mairabari#-92.37;26.5&
+Makrai#-77;22.03&
+Malabar Coast#-75;11&
+Maldah#-88.15;25.03&
+Malegaon#-74.63;20.5&
+Malerkotla#-75.97;30.53&
+Malhargarh#-74.98;24.28&
+Maliya#-70.77;23.08&
+Mallawan#-80.2;27.07&
+Malpur#-73.45;23.35&
+Malpura#-75.38;26.28&
+Malvan#-73.5;16.03&
+Man Bazaar#-86.65;23.07&
+Manali#-77.17;32.27&
+Manas#-90.67;26.2&
+Mand#-83.25;21.7&
+Mandalgarh#-75.1;25.2&
+Mandi#-76.97;31.65&
+Mandi Dabwali#-74.7;29.97&
+Mandla#-80.5;22.65&
+Mandsaur#-75.13;24.05&
+Mandvi#-69.37;22.85&
+Mandya#-77;12.5&
+Mangalore#-74.78;12.92&
+Mangan#-88.53;27.52&
+Mangawan#-81.55;24.68&
+Manglaur#-77.82;29.73&
+Mangrol Mad. P.#-70.12;21.12&
+Mangrol Raj.#-76.52;25.33&
+Manihari#-87.63;25.35&
+Manikpur#-81.12;25.07&
+Manipur#-94;25&
+Manjra#-77.87;18.82&
+ManMad#-74.47;20.3&
+Manoharpur#-85.2;22.38&
+Manpur, Chhattisgarh#-83.58;23.28&
+Manpur,Mad. P.#-75.62;22.43&
+Mansa Gujrat#-72.75;23.45&
+Mansa Punjab#-75.45;30&
+Manthani#-79.58;18.67&
+Marmagao#-73.93;15.42&
+Marwar#-73.75;25.72&
+Mashrakh#-84.8;26.12&
+Matanomadh#-68.95;23.55&
+Mathura#-77.67;27.5&
+Matiali#-88.82;26.93&
+Matla#-88.67;21.67&
+Mattancheri#-76.25;9.83&
+#VALUE!
+Mau Ut. P.#-83.55;25.93&
+Mau, Ut. P.#-81.38;25.28&
+mau Ranjpur#-79.13;25.27&
+Mauganj#-81.92;24.83&
+Mavli#-7.01;24.25&
+Mawai#-81.07;22.5&
+#VALUE!
+Medinipur#-87.35;22.42&
+Meerut#-77.7;29.02&
+Megasini#-86.35;21.63&
+Meghalaya#-91;25.83&
+Mehndawal#-83.08;26.97&
+Meja#-82.12;25.15&
+Melagiri Hills#-77.5;12.33&
+Mendhar#-74.17;33.58&
+Merta#-74.07;26.65&
+Merta Road#-73.92;26.72&
+Mhow#-75.83;22.55&
+Minutang#-96.5;28.25&
+Miraj#-74.75;16.83&
+Mirzapur#-82.57;25.17&
+Mirzapur-cum-Vindhyachal=Mirzapur#-82.57;25.17&
+Miyani#-69.43;21.83&
+Mizoram#-92.67;23.5&
+Modasa#-73.35;23.5&
+Moga#-75.13;30.8&
+Mohana#-85;24.72&
+Mohanlalganj#-80.97;26.68&
+Mokameh#-85.92;25.4&
+Mokokchung#-94.5;26.25&
+Monghyr/Munger#-86.5;25.38&
+Moradabad#-78.83;28.83&
+Morar#-78.23;26.23&
+Morbi#-70.7;22.83&
+Morel#-76.6;26.22&
+Morena#-78.07;26.5&
+Morhar#-85.18;25.48&
+Moth#-78.95;25.72&
+Motihari#-84.92;26.5&
+Mubarakpur#-83.3;26.1&
+Mughal Sarai#-83.12;25.3&
+Muhammadabad#-83.42;26.07&
+Mukandwara#-75.98;24.82&
+Mukerian#-75.62;31.95&
+Mukstar#-74.5;30.5&
+Mumbai#-72.83;18.92&
+Munabao#-70.28;25.75&
+Mundra#-69.8;22.9&
+Mungaoli#-78.12;24.4&
+Mungeli#-81.68;22.07&
+Munger#-86.5;25.38&
+Muri#-85.87;23.37&
+Murliganj#-86.98;25.9&
+Murshidabad#-88.32;24.18&
+Murshidabad#-88.32;24.18&
+Murwara#-80.47;23.77&
+Musafirkhana#-81.8;26.37&
+Mussoorie#-78.1;30.45&
+Muzaffarnagar#-77.67;29.43&
+Muzaffarpur#-85.38;26.12&
+Myjlar#-70.33;26.25&
+Mysore/Karnataka#-77;13.25&
+Mysore#-76.68;12.28&
+Babadwip/Navadwip#-88.33;23.57&
+Nabha#-76.23;30.43&
+Nachna#-71.68;27.57&
+Nadiad#-72.93;22.68&
+Nagaland#-94.5;26&
+Nagappattinam#-79.85;10.77&
+Nagaur#-73.75;27.25&
+Nagda#-75.42;23.45&
+Nagercoil#-77.43;8.2&
+Nagina#-78.5;29.5&
+Nagod#-80.6;24.57&
+Nagpur#-79.17;21.13&
+Nahan#-77.3;30.55&
+Mahargarh Mad. P.#-75.23;24.17&
+Nahargarh Raj.#-76.83;24.92&
+Naimisharanya#-80.5;27.35&
+Naini Tal#-79.5;29.5&
+Nainpur#-80.17;22.5&
+Nainwa#-75.85;25.77&
+Najibabad#-78.33;29.67&
+Nakhtarana#-69.25;23.33&
+Nakodar#-75.52;31.13&
+Nalgonda#-79.25;17.1&
+Nalhati#-87.87;24.28&
+Naliya#-68.83;23.27&
+Nallamalai Hills#-78.83;15.5&
+Namgia#-78.67;31.8&
+Nanda Devi#-79.98;30.38&
+Nanda Kot#-80.08;30.28&
+Nanded#-77.33;21.33&
+Nandigram#-87.97;22.02&
+Nandurbar#-74.25;21.33&
+Nandyal#-78.5;15.5&
+Nanpara#-81.55;27.87&
+naraini#-80.48;25.18&
+Narsapur#-81.67;16.43&
+Narayanpet#-77.5;16.75&
+Narendernagar#-78.3;30.17&
+Narmada#-72.6;21.63&
+Narnaul#-76.18;28.08&
+Narsimhapur#-79.23;22.9&
+Narsinghgarh#-76.67;23.75&
+Narwana#-76.1;29.65&
+Nasik#-73.83;19.97&
+Nasirabad#-74.75;26.25&
+Nathdwara#-73.83;24.92&
+Nautanwa#-83.42;27.33&
+Navadwip#-88.33;23.57&
+Navinbandar#-69.8;21.43&
+Navlakhi#-70.47;22.97&
+Navsari#-72.98;20.95&
+Nawabganj Ut. P.#-81.23;26.93&
+Nawabganj Ut. P.#-79.67;28.53&
+Nawada#-85.55;24.83&
+Nawalgarh#-75.25;27.83&
+Nawanshahr#-74.8;32.55&
+Neemuch/Nimach#-74.93;24.5&
+Negapattam/Nagappattinam#-79.85;10.77&
+Negev Desert/Hanegev#-35;30.83&
+Nellore#-79.98;14.45&
+Nepalganj Road#-81.68;28.02&
+Netarhat#-84.27;23.48&
+Netrang#-73.35;21.65&
+New Delhi#-77.22;28.62&
+Newaj#-76.82;24.4&
+Nighasin#-80.87;28.23&
+NimKa Thana#-75.8;27.73&
+Nimach#-74.93;24.5&
+Nimbahera#-74.75;24.62&
+Nirmal#-78.33;19&
+Nirmali#-86.58;26.33&
+Niwas#-80.43;23.05&
+Nizamabad#-78.12;18.75&
+Nizamghat#-95.75;28.33&
+Nohar#-74.82;29.18&
+Nohta#-79.57;23.67&
+North East Frontier Agency/Arunachal Pradesh#-95;28&
+Norht Koel#-83.83;24.75&
+North Lakhimpur#-94.12;27.23&
+Norther Circars#-82.5;17.5&
+Nowgong Assam#-92.83;26.33&
+Nowgong Mad. P.#-79.45;25.07&
+Nubra#-77.58;34.58&
+Nunkun#-76.03;33.95&
+Nyoma Rap#-78.67;33.17&
+Okha#-69.07;22.45&
+Ongole#-80.03;15.55&
+Ootacamund/Udagamandalam#-76.73;11.5&
+Orai#-79.5;25.97&
+Orissa#-84;20&
+Osiyan#-72.92;26.72&
+Osmanabad#-76.17;18.08&
+Pachhar#-77.7;24.67&
+Pachmarhi#-78.43;22.47&
+Pachpadra#-72.17;25.97&
+Padma#-85.37;24.2&
+Padra#-73.12;22.25&
+Padrauna#-83.98;26.9&
+Pagara#-80.02;24.37&
+Pailani#-80.43;25.75&
+Pakaur#-87.85;24.63&
+Pal Lahara#-85.18;21.45&
+Palam#-77;19&
+Palampur#-76.5;32.17&
+Palani Hills#-77.55;10.23&
+Palanpur#-72.42;24.17&
+Palashi#-88.25;23.78&
+Palasponga#-85.57;21.78&
+Palayankottai#-77.75;8.75&
+Palghat#-76.7;10.77&
+Pali#-73.33;25.83&
+Palitana#-71.82;21.53&
+Pallu#-74.23;28.98&
+Palwal#-77.32;28.13&
+Panaji#-73.83;15.42&
+Pandhana#-76.22;21.7&
+Pandharpur#-75.33;17.68&
+Pangong Tso#-78.67;34.67&
+Pani Mines#-73.83;22.48&
+Panikota I.#-71.35;20.77&
+Panipat#-77.03;29.42&
+Panja Range/Pir Panjal Range#-76.83;32.5&
+Panjim/Panaji#-73.83;15.42&
+Panna#-80.25;24.67&
+Panna Hills#-81.25;24.67&
+Pansemal#-74.7;21.65&
+Paradip#-86.58;20.25&
+Parbati , Mad. P.#-76.5;25.83&
+Parbati Raj.#-77.88;26.9&
+Parbhani#-76.87;19.13&
+Parbhani#-76.87;19.13&
+ParvatiPuram#-83.42;18.83&
+Parvatsar#-74.82;26.87&
+Patan, Gujrat#-72.23;23.9&
+Patan Maharashtra#-72.23;23.9&
+Pataudi#-76.8;28.3&
+Pathankot#-75.75;32.3&
+Patiala, Punjab#-76.43;30.38&
+Patiala Ut. P.#-79.02;27.72&
+Patkai Bum#-95.5;27&
+Patna#-85.2;25.58&
+Patti Punjab#-82.2;25.92&
+Patti Ut. P.#-82.2;25.92&
+Pauri#-78.78;90.15&
+Pawayan#-80.1;28.07&
+Pendra#-81.95;22.77&
+Penner#-80.17;14.58&
+Petlad#-72.75;22.5&
+Phagwara#-75.67;31.17&
+Phalera/Phulera#-75.27;26.87&
+Phalodi#-72.4;27.2&
+Phaphund#-79.47;26.6&
+Pharenda#-83.28;27.08&
+Phul#-75.23;30.32&
+Phulad#-73.82;2.63&
+Phulera#-75.27;26.87&
+Phulpur#-82.82;25.52&
+Pichhor#-78.33;25.97&
+Pichor#-78.18;25.18&
+Pihani#-80.25;27.6&
+Pilani#-75.55;28.37&
+Pilibhit#-79.83;28.67&
+Pilkhawa#-77.7;28.72&
+Pipar#-73.52;26.42&
+Pipar Road#-73.45;26.45&
+Piparia Mad. P.#-78.38;22.75&
+Piparia Mad. P.#-77.62;21.82&
+Piploda#-74.93;23.62&
+Pir Panjal Range#-76.83;32.5&
+Piram I.#-72.35;21.6&
+Pirawa#-76.03;24.17&
+Pithapuram#-82.25;17.17&
+Pithoragarh#-80.22;29.58&
+Pohri#-77.37;25.53&
+Pokaran#-71.83;27&
+Pollachi#-77;10.58&
+Pondicherry#-79.83;11.98&
+Ponnani#-75.98;10.75&
+Poona/Pune#-73.95;18.48&
+Porbandar#-69.72;621.73&
+Port Canning#-88.67;22.38&
+Pratabpur#-83.25;23.47&
+Pratapgarh, Raj.#-74.67;24.03&
+Pratapgarh , Ut. P.#-81.98;25.93&
+Proddatur#-78.5;14.75&
+Puduchcheri/Pondicherry#-79.83;11.98&
+Pudukkottai#-78.78;10.47&
+Pugal#-72.8;28.5&
+Pukhrayan#-79.85;26.23&
+Pulicat L.#-80.25;13.67&
+Punasar#-73.1;27.1&
+Punch#-74.07;33.8&
+Pune#-73.95;18.48&
+Punjab#-76;31&
+Punpun#-85.3;25.52&
+Puralia/Puruliya#-86.4;23.28&
+Puranpur#-80.15;28.52&
+Puri#-85.97;19.83&
+Purnia#-87.52;25.75&
+Puruliya#-86.4;23.28&
+Purwa#-80.78;26.47&
+Pusa#-85.68;25.98&
+Quilon#-76.63;8.83&
+Radhanpur#-71.63;23.83&
+Rae Bareli#-81.33;26.3&
+Raghunathpalli#-84.8;22.23&
+Raghunathpur#-86.67;23.55&
+Rahatgarh#-78.37;23.78&
+Rahon#-76.12;31.05&
+Raichur#-77.33;16.17&
+Raiganj#-88.17;25.62&
+Raigarh#-83.42;21.93&
+Raikot#-75.7;30.68&
+Raipur#-81.75;21.28&
+Raisen#-77.8;23.83&
+Raj Nandgaon#-86.77;21.47&
+Raj Nilgiri#-86.77;21.47&
+Rajahnundry#-81.8;17.02&
+Rajapalaiyam#-77.58;9.42&
+Rajasthan#-73.5;26.75&
+Rajasthan#-73.5;26.75&
+Rajasthan Canal#-72;28&
+Rajauri#-74.35;33.42&
+Rajgarh Mad. P.#-76.75;24.03&
+Rajgarh Raj.#-76.63;27.23&
+Rajgarh Raj.#-75.42;28.67&
+Rajgir#-85.42;25.03&
+Rajkot#-70.93;22.25&
+Rajmahal Hills#-87.5;24.5&
+Rajpipla#-73.5;21.83&
+Rajpur#-74.35;22.3&
+Rajpura#-76.53;30.42&
+Rajula#-71.43;21.05&
+Ramakona#-78.83;21.72&
+Ramanathapuram#-78.92;9.42&
+Ramanujganj#-83.7;23.8&
+Ramban#-75.2;33.23&
+Ramganga#-79.97;27.08&
+Ramgarh Jharkhand#-85.58;23.67&
+Ramgarh Raj.#-75.23;27.27&
+Ramgarh Raj.#-70.6;27.5&
+Ramnad/Ramanathapuram#-78.92;9.42&
+Ramnagar, J&K#-75.3;32.78&
+Ramnagar , Uttranchal#-79.12;29.4&
+Rampur, H.P.#-77.72;31.43&
+Rampur Mad. P.#-73.88;23.42&
+Rampur Ut. P.#-79.08;28.83&
+Rampur Hat#-87.83;24.17&
+Rampura#-75.45;24.5&
+Ramrama Tola#-79.92;21.87&
+Ramtek#-79.25;21.33&
+Rana Pratap Sagar Dam#-75.63;24.97&
+Ranaghat#-88.58;23.25&
+Ranchi#-85.45;23.32&
+Rangia#-91.63;26.47&
+Ranibennur#-75.5;14.58&
+Raniganj ,Ut. P.#-82.22;27.05&
+Raniganj W. Bengal#-87.08;23.67&
+Ranikhet#-79.42;29.65&
+Raniwara#-72.17;24.83&
+Ranka#-83.78;23.98&
+Rapar#-70.63;23.57&
+Rapti#-83.68;26.3&
+Rasra#-83.83;25.83&
+Ratangarh#-74.58;28.08&
+Rath#-79.62;25.6&
+Ratlam#-75;23.33&
+Ratnagiri#-73.3;16.95&
+Raurkela#-84.83;22.23&
+Raxaul#-84.85;26.98&
+Rayadurg#-76.83;14.67&
+Rayagada#-83.33;19.25&
+Rehar#-82.67;23.92&
+Rehli#-79.08;23.63&
+Reotipur#-83.75;25.55&
+Revelganj#-84.67;25.83&
+Rewa#-81.42;24.55&
+Rewari#-76.67;28.25&
+Riasi#-74.83;33.17&
+Robertsganj#-83.07;24.73&
+Rohtak#-76.72;28.92&
+Roorkee#-77.98;29.87&
+Rupar#-76.63;31.03&
+Rupsa#-71.52;23.47&
+Sabi#-76.73;28.48&
+Sadri#-73.43;25.18&
+Sagar Mad P.#-75.1;14.23&
+Saharanpur#-77.55;29.97&
+Saharsa#-86.6;25.88&
+Sahaswan#-78.75;28.08&
+Sahibganj#-87.67;25.2&
+Sai#-82.78;25.65&
+Sailana#-74.92;23.47&
+Sairang#-92.75;23.83&
+Sajum#-79;33.33&
+Sakri#-86.08;26.22&
+Sakti#-82.97;22.03&
+Salaya#-69.58;22.32&
+Salem#-78.18;11.67&
+Salon#-81.45;26.03&
+Salur#-83.3;18.45&
+Sam#-70.52;26.83&
+Samana#-76.22;30.17&
+Samastipur#-85.83;25.83&
+Samba#-75.17;32.53&
+Sambalpur#-84.07;21.47&
+Sambhal#-78.62;28.58&
+Sambhar#-75.1;26.87&
+Sambhar L.#-75.2;26.92&
+Sanand#-72.42;22.98&
+Sandila#-80.52;27.08&
+Sangamner#-74.25;19.62&
+Sangod#-76.28;24.92&
+Sangrur#-75.83;30.23&
+Sanwer#-75.83;22.98&
+Saraikela#-85.93;22.7&
+Sarangarh#-83.08;21.5&
+Sardarshahr#-74.48;28.5&
+Saria#-83.37;21.63&
+Sarila#-79.68;25.77&
+Sarvar#-75;26.07&
+Sasan Gir#-70.6;21.17&
+Sasaram#-84.08;24.95&
+Saser#-77.83;34.83&
+Satara#-73.97;17.73&
+Satbarwa#-84.27;23.92&
+Satmala Hills#-74.67;20.25&
+Satna#-80.83;34.58&
+Satpura Ra#-76.17;21.42&
+Sawai Madhopur#-76.42;26&
+Secunderabad#-78.5;17.47&
+Sehore#-77.08;23.17&
+seohara#-82.47;21.73&
+Seondha#-78.8;26.15&
+Seoni#-79.5;22.08&
+sEoni Malwa#-77.47;22.45&
+Sewani#-75.65;28.97&
+Sihora#-80.1;23.48&
+Sika#-69.78;22.43&
+Sikar#-75.17;27.55&
+Sikkim#-88.5;27.83&
+Silawad#-74.9;21.9&
+Silchar#-92.8;24.82&
+Silghat#-93;26.58&
+Silvani#-78.42;23.3&
+Simaltala#-86.55;24.72&
+Simdega#-84.52;22.62&
+Simla#-77.15;31.03&
+Sind J & K#-74.75;34.3&
+Sindri#-86.7;23.75&
+Singoli#-75.37;25&
+Sinor#-73.33;21.92&
+Sipra#-75.47;23.92&
+Sirathu#-81.32;25.65&
+Sirmaur#-81.38;24.85&
+Sirohi#-72.88;24.87&
+Sironj#-77.65;24.08&
+Sirsa#-79.07;26.85&
+Siswa Bazar#-83.77;27.15&
+Sitamarhi#-85.5;26.62&
+Sitapur#-80.75;27.63&
+Siwan#-84.35;26.22&
+Siwana#-72.42;25.63&
+Sobhapur#-78.28;22.78&
+Soda Plains#-79;35.5&
+sojat#-73.75;25.92&
+Solan#-77.12;30.92&
+Somdari#-72.63;25.78&
+Somnath#-70.37;20.88&
+Son#-84.87;25.7&
+Sonamarg#-75.35;34.3&
+Sonamukhi#-79.93;24.4&
+Sonar#-79.93;24.4&
+Sonepur#-83.83;20.92&
+Sonhat#-82.52;23.48&
+Sonipat#-77.08;29&
+Sonkach#-76.35;22.98&
+Sopur#-74.45;34.3&
+Soraon#-81.85;25.62&
+Sot#-79.62;27.45&
+South Koel#-85.23;22.53&
+Srinagar#-74.83;34.08&
+Surat#-72.92;21.2&
+Sursar#-87.05;26.23&
+Susner#-76.08;23.95&
+Takh#-77.53;33.1&
+Takh#-77.53;33.1&
+Talcher#-85.3;21&
+Tamenglong#-93.58;25&
+Tamluk#-77;11&
+Tanda Ut. P.#-82.58;26.55&
+Tankhala#-73.78;21.97&
+Tapi#-72.68;21.13&
+Tawa#-77.8;22.8&
+Tehri#-78.48;30.38&
+Tejam#-80.18;29.95&
+Tekkali#-84.25;18.62&
+Tellicherry#-75.5;11.75&
+Tenali#-80.58;16.25&
+Tendukhera#-79.55;23.4&
+Tenkasi#-77.33;8.92&
+Tezpur#-92.75;26.67&
+Than#-71.18;22.57&
+Thanjavur#-79.2;10.8&
+Thar Desert#-72;28&
+Tharad#-71.73;24.5&
+Tikamgarh#-78.83;24.73&
+Tinnevelly/Tirunelveli#-77.75;8.75&
+Tinpahar#-87.73;24.98&
+Tipongpani#-95.92;27.33&
+Tirodi#-79.73;21.67&
+Tiruchchirappalli#-78.75;10.75&
+Tirunelveli#-77.75;8.75&
+Tirupati#-79.42;13.65&
+Tiruppur#-77.37;11.08&
+Tiruvannamalai#-79.08;12.25&
+Tisa#-76.15;32.83&
+Todgarh#-73.97;25.7&
+Tonk#-75.9;26.1&
+Tons, Haryana#-77.65;30.5&
+Tons , Ut.P.#-83.55;26.02&
+Torpa#-85.1;22.95&
+Towang#-91.83;27.62&
+Trichur#-76.3;10.5&
+Tripura#-92;24&
+Trishul#-79.78;30.32&
+Trivandrum#-77;8.68&
+Tso Moriri L.#-78.33;32.83&
+Tuna#-70.08;22.98&
+Tundla#-78.28;27.2&
+Tuticorin#-78.2;8.83&
+Udagamandalam#-76.73;11.5&
+Udainagar#-76.22;22.55&
+Udaipur#-73.73;24.6&
+Udala#-86.57;21.58&
+Udgir#-77.08;18.42&
+Udhampur#-75.08;33&
+Udupi#-74.7;13.42&
+Ujh#-75.3;32.17&
+Ujhani#-79.1;28&
+Ukki Fort#-76.9;33.47&
+Umaria#-80.83;23.58&
+Umreth#-73.07;22.68&
+Una#-71.13;2.77&
+Unnao#-80.5;26.58&
+Upleta#-70.27;21.77&
+Upshi#-77.87;33.8&
+Utraula#-82.42;27.32&
+Uttar Pradesh#-80;27&
+Uttaranchal#-79.5;30&
+Vadnagar#-73.17;22.33&
+Vadodara#-73.17;22.33&
+Vaisali#-78.88;26.47&
+Valsad#-72.97;20.67&
+Varanasi#-83;25.37&
+Vatrak#-73.03;23.15&
+Vav#-71.52;24.37&
+Velikonda Range#-79.17;14.75&
+Vellore#-79.17;12.95&
+Venguria#-73.75;15.88&
+Venkatapuram#-80.5;18.33&
+Veraval#-70.45;20.88&
+Victor#-77.4;42.97&
+Vidisha#-77.88;23.47&
+Vijayawada#-80.65;16.52&
+Vindhya Ra.#-77;22.83&
+Viramgam#-72;23.08&
+Virpur#-70.7;21.85&
+Virudunagar#-77.97;9.5&
+Vishakhapatnam#-83.33;17.75&
+Visnagar#-72.53;23.75&
+Vizianagaram#-83.5;18.1&
+Vrindavan#-77.67;27.62&
+Wankaner#-71;22.58&
+Warangal#-79.58;17.97&
+Waraseoni#-80.03;21.75&
+Wardha#-79.18;19.95&
+Washim#-77;20.05&
+West Bengal#-88;23&
+Western Ghats#-75;14&
+Wular L.#-74.5;34.33&
+Yadgir#-77.08;16.75&
+Yamuna#-81.88;25.5&
+Yamunagar#-77.28;30.12&
+Yavatmal#-78.25;20.33&
+Zaskar Mts.#-77.5;33.25&
