@@ -6,18 +6,18 @@ function debug(){
  console.log(k);
  return;
 }
-//alert("loading SJP.js");
+//alert("loading SJP.js"); -()
 var minutes = 1000 * 60; //Milliseconds
 var hours = minutes * 60;//Milliseconds
 var day = hours * 24;//Milliseconds
-var nakshatra =["Ashvini","Bharani","Kritika","Rohini","Mrigashira","Ardra","Punarvasu","Pushya","Ashlesha","Magha","Purva Phalguni","Uttara Phalguni","Hasta","Chitra","Swati","Vishakha","Anuradha","Jyeshtha","Mula","Purva Ashadha","Uttara Ashadha","Shravan","Dhanistha","Shatabhishaj","Purva Bhadrapad","Uttara Bhadrapad","Revati"];
-var yogas = ["Vishkambha-विष्कम्भ","Priti-प्रीति","Ayushman-आयुष्मान","Saubhagya-सौभाग्य","Shobhana-शोभन","Atiganda-अतिगण्ड","Sukarman-सुकर्मा","Dhriti-धृति","Shula-शूल","Ganda-गण्ड","Vriddhi-वृद्धि","Dhruva-ध्रुव","Vyaghata-व्याघात","Harshana-हर्षण","Vajra-वज्र","Siddhi-सिद्धि","Vyatipata-व्यतिपात","Varigha-वरीयस्","Parigha-परिघ","Shiva-शिव","Siddha-सिद्ध","Sadhya-साध्य","Shubha-शुभ","Shukla-शुक्ल","Brahma-ब्रह्म","Mahendra-महेन्द्र","Vaidhriti-वैधृति"];
-var tithi = ["Shukla Prathamai 1","Shukla Dwitiya 2","Shukla Tritiya 3","Shukla Chaturthi 4","Shukla Panchami 5","Shukla Shashti 6","Shukla Saptami 7","Shukla Ashtami 8","Shukla Navami 9","Shukla Dasami 10","Shukla Ekadashi 11","Shukla Dwadasi 12","Shukla Trayodasi 13","Shukla Chaturdashi 14","Poornima Full","Krishna Prathamai 1","Krishna Dwitiya 2","Krishna Tritiya 3","Krishna Chaturthi 4","Krishna Panchami 5","Krishna Shashti 6","Krishna Saptami 7","Krishna Ashtami 8","Krishna Navami 9","Krishna Dasami 10","Krishna Ekadashi 11","Krishna Dwadasi 12","Krishna Trayodasi 13","Krishna Chaturdashi 14","Amavasya New"];
+var nakshatra =["Ashvini-Ke","Bharani-Ve","Kritika-Su","Rohini-Mo","Mrigashira-Ma","Ardra-Ra","Punarvasu-Ju","Pushya-Sa","Ashlesha-Me","Magha-Ke","Purva Phalguni-Ve","Uttara Phalguni-Su","Hasta-Mo","Chitra-Ma","Swati-Ra","Vishakha-Ju","Anuradha-Sa","Jyeshtha-Me","Mula-Ke","Purva Ashadha-Ve","Uttara Ashadha-Su","Shravan-Mo","Dhanistha-Ma","Shatabhishaj-Ra","Purva Bhadrapad-Ju","Uttara Bhadrapad-Sa","Revati-Me"];
+var yogas = ["Vishkambha-विष्कम्भ-(Sa)","Priti-प्रीति-(Me)","Ayushman-आयुष्मान-(Ke)","Saubhagya-सौभाग्य-(Ve)","Shobhana-शोभन-(Su)","Atiganda-अतिगण्ड -(Mo)","Sukarman-सुकर्मा -(Ma)","Dhriti-धृति -(Ra)","Shula-शूल -(Ju)","Ganda-गण्ड -(Sa)","Vriddhi-वृद्धि -(Me)","Dhruva-ध्रुव -(Ke)","Vyaghata-व्याघात-(ve)","Harshana-हर्षण-(su)","Vajra-वज्र-(Mo)","Siddhi-सिद्धि-(Ma)","Vyatipata-व्यतिपात-(Ra)","Varigha-वरीयस्-(Ju)","Parigha-परिघ-(Sa)","Shiva-शिव-(Me)","Siddha-सिद्ध-(Ke)","Sadhya-साध्य-(Ve)","Shubha-शुभ-(Su)","Shukla-शुक्ल-(Mo)","Brahma-ब्रह्म-(Ma)","Mahendra-महेन्द्र-(Ra)","Vaidhriti-वैधृति"];
+var tithi = ["Shukla Prathamai 1-Su","Shukla Dwitiya 2-Mo","Shukla Tritiya 3-Ma","Shukla Chaturthi 4-Me","Shukla Panchami 5-Ju","Shukla Shashti 6-Ve","Shukla Saptami 7-Sa","Shukla Ashtami 8-Ra","Shukla Navami 9-Su","Shukla Dasami 10-Mo","Shukla Ekadashi 11-Ma","Shukla Dwadasi 12-Me","Shukla Trayodasi 13-Ju","Shukla Chaturdashi 14-Ve","Poornima Full-Sa","Krishna Prathamai 1-Su","Krishna Dwitiya 2-Mo","Krishna Tritiya 3-Ma","Krishna Chaturthi 4-Me","Krishna Panchami 5-Ju","Krishna Shashti 6-Ve","Krishna Saptami 7-Sa","Krishna Ashtami 8-Ra","Krishna Navami 9-Su","Krishna Dasami 10-Mo","Krishna Ekadashi 11-Ma","Krishna Dwadasi 12-Me","Krishna Trayodasi 13-Ju","Krishna Chaturdashi 14-Sa","Amavasya New-Ra"];
 var vara = ["Sun-Sunday","Moon-Monday","Mars-Tuesday","Mercury-Wednesday","Jupiter-Thursday","Venus-Friday","Saturn-Saturday"];
-var karana = ["Kimstugna-L10","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Shakuni-L1","Chatushpada-L4","Naaga-L7"];
+var karana = ["Kimstugna-L10/Ke","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Shakuni-L1/Ra","Chatushpada-L4/Ra","Naaga-L7/Ke"];
 var graha = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"]; //Normal Graha Sequence (Vara Sequence)
 var caughadiya = ["Udvega-Su","Chara-Ve","Laabha-Me","Amrit-Mo","Kaala-Sa","Shubha-Ju","Roga-Ma"];
-var muhurtha = ["1:Rudra-Ardra -ve","2:Ahi-Aslesha -ve","3:Mitra-Anuradha","4:Pitri-Magha -ve","5:Vasu-Dhanishtha","6:Ambu-Purvashadha","7:Visvadeva-Uttarashadha","8:Abhijit/Vidhi-Abhijit","9:Vidhata/Satamuki-Rohini","10:Puruhuta-Jyeshtha -ve","11:Indragni/Vahni-Visakha -ve","12:Nirriti/Naktancara-Mula -ve","13:Varuna/Udakanatha-Satabhisha","14:Aryaman-Uttaraphalguni","15:Bhaga-Purvaphalguni -ve","n1:Girisa-Ardra -ve","n2:Ajapada-Purvabhadrapada","n3:Ahirbudhnya-Uttarabhadrapada","n4:Pushan-Revati","n5:Asvi-Asvini","n6:Yama-Bharani -ve","n7:Agni-Krittika -ve","n8:Vidhaatri-Rohini","n9:Chanda-Mrigasira","n10:Aditi-Punarvasu","n11:Jiiva-Pushya","n12:Vishnu-Sravana","n13:Arka-Hasta","n14:Tvashtri-Chitra","n15:Maruta-Svati"];
+var muhurtha = ["1:Rudra-Ardra --","2:Ahi-Aslesha --","3:Mitra-Anuradha","4:Pitri-Magha --","5:Vasu-Dhanishtha","6:Ambu-Purvashadha","7:Visvadeva-Uttarashadha","8:Abhijit/Vidhi-Abhijit","9:Vidhata/Satamuki-Rohini","10:Puruhuta-Jyeshtha --","11:Indragni/Vahni-Visakha --","12:Nirriti/Naktancara-Mula --","13:Varuna/Udakanatha-Satabhisha","14:Aryaman-Uttaraphalguni","15:Bhaga-Purvaphalguni --","n1:Girisa-Ardra --","n2:Ajapada-Purvabhadrapada","n3:Ahirbudhnya-Uttarabhadrapada","n4:Pushan-Revati","n5:Asvi-Asvini","n6:Yama-Bharani --","n7:Agni-Krittika --","n8:Vidhaatri-Rohini","n9:Chanda-Mrigasira","n10:Aditi-Punarvasu","n11:Jiiva-Pushya","n12:Vishnu-Sravana","n13:Arka-Hasta","n14:Tvashtri-Chitra","n15:Maruta-Svati"];
 var week_days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 var hora = ["Sun","Venus","Mercury","Moon","Saturn","Jupiter","Mars"];
@@ -31,6 +31,7 @@ var vimshottari=[0,1,2,7,4,6,3,8,5]; //Vimshottari Sequence
 var order = [0,3,6,2,5,1,4];
 var nakshatra_size = 13+1/3; //Nakshatra Size in degrees.
 var samvatsara = ["Prabhava","Vibhava","Shukla","Pramodoota","Prajothpatti","Āngirasa","Shrīmukha","Baāva","Yuva","Dhātru","Īshvara","Bahudhānya","Pramāthi","Vikrama","Vrusha","Chitrabhānu","Svabhānu","Tārana","Pārthiva","Vyaya","Sarvajith","Sarvadhāri","Virodhi","Vikruta","Khara","Nandana","Vijaya","Jaya","Manmatha","Durmukhi","Hevilambi","Vilambi","Vikāri","Shārvari","Plava","Shubhakrutha","Shobhakrutha","Krodhi","Vishvāvasu","Parābhava","Plavanga","Kīlaka","Saumya","Sādhārana","Virodhikrutha","Paridhāvi","Pramādeecha","Ānanda","Rākshasa","Anala","Pingala","Kālayukthi","Siddhārthi","Raudra","Durmathi","Dundubhi","Rudhirodgāri","Raktākshi","Krodhana","Akshaya"];
+var KaliBaseDate = new Date(5070, 7, 19, 5, 30, 0, 0);//2017 = 5117–5118
 var panchanga;
 var timerID;
 var TimeZoneOffset;
@@ -223,7 +224,8 @@ function getPanchanga(date_time,longitude,latitude){
     this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
 
     this.iSamvatasara = ( (date_time.getFullYear()-1)%60 )+ ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6);
-    this.sSamvatsara = samvatsara[this.iSamvatasara];
+	KaliYear = new Date(date_time.getTime()+KaliBaseDate.getTime());
+    this.sSamvatsara = samvatsara[this.iSamvatasara]+" <b>Kali Abda:</b>"+KaliYear.getFullYear();
     this.iSauraMaasa = parseInt(this.grahas.grahas[0]/30);
     this.sSauraMaasa = asRashi[iSauraMaasa];
 
