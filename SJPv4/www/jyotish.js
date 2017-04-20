@@ -1,6 +1,6 @@
 //Functions for Jyotish 
 //By : Sanjay Prabhakaran
-//1 Aries, 2 Taurus....12/0 Pisces
+//Signs: 1 Aries, 2 Taurus....12/0 Pisces
 function GetDivisionalSign(degrees,division,object)//For a given degree get the division (D1,D2, etc) sign 
 {
 	//alert(object);
@@ -9,6 +9,10 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 		var SignOdd = Sign%2;//1=Odd 0=Even
 		var SignDeg = degrees%30;
 		var Amsha = 0;
+		var ParasharaTrimshamsa=[ 
+				[ 2,2,2,2,2, 6,6,6,6,6,6,6, 12,12,12,12,12,12,12,12,  10,10,10,10,10, 8,8,8,8,8  ], //For Even Signs
+				[1,1,1,1,1, 11,11,11,11,11, 9,9,9,9,9,9,9,9, 3,3,3,3,3,3,3, 7,7,7,7,7  ] //For Odd Signs
+				];
 		switch(division){
 			case "Rashi":
 			case "D1":
@@ -98,6 +102,12 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k=Sign+Amsha-1;
 				k%=12;
 				if(k==0)k=12;
+				break;
+			case "Trimshamsha":
+			case "D30":
+				AmshaPortion = 1;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=ParasharaTrimshamsa[SignOdd][Amsha];
 				break;
 		}
 	return k;

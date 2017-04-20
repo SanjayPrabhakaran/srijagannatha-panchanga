@@ -47,6 +47,25 @@ function debug()
 <div id=form>
 <form id=forminput  method=get>
 		<table id=formtable cellspacing=0 cellpadding=0 border=0>
+		<tr><td><b>Division</b></td><td><select id=Division name=Division><option selected>Rashi</option>
+			<option>Navamsa</option>
+			<option>Dreshkana</option>
+			<option>Saptamsa</option> 
+			<option>Dasamsa</option>
+			<option>Dwadasamsa</option>
+			<option>Shodashamsa</option>
+			<option>Vimsamsa</option>
+			<option>ChaturVimshamsha</option>
+			<option>Trimshamsha</option>
+			<option>KhaVedamsa</option>
+			<option>AkshaVedamsa</option>
+			<option>Shastiamsha</option>			
+			<option>Dasamsa-EvenReverse</option>
+			<option>ChaturVimshamsha-EvenReverse</option>
+		</select></td>
+		</tr>
+		<tr><td colspan=2 align=center><input type=button id=AddChart name=AddChart value=AddChart onclick=Refresh()></td></tr>
+		<tr><td><br/>  </td></tr>		
 		<tr><td>Lagna</td><td><input id=Lagna name="Lagna" type=text value=138.01></td></tr>
 		<tr><td>Sun</td><td><input id=Sun name="Sun" type=text value=92.38></td></tr>
 		<tr><td>Moon</td><td><input id=Moon name="Moon" type=text value=53></td></tr>
@@ -57,23 +76,8 @@ function debug()
 		<tr><td>Sat</td><td><input id=Sat name="Sat" type=text value=39.86></td></tr>
 		<tr><td>Rahu</td><td><input id=Rahu name="Rahu" type=text value=291.95></td></tr>
 		<tr><td>Ketu</td><td><input id=Ketu name="Ketu" type=text value=111.95></td></tr>
-		<tr><td><b>Division</b></td><td><select id=Division name=Division><option selected>Rashi</option>
-			<option>Navamsa</option>
-			<option>Dreshkana</option>
-			<option>Saptamsa</option> 
-			<option>Dasamsa</option>
-			<option>Dwadasamsa</option>
-			<option>Shodashamsa</option>
-			<option>Vimsamsa</option>
-			<option>ChaturVimshamsha</option>
-			<option>KhaVedamsa</option>
-			<option>AkshaVedamsa</option>
-			<option>Shastiamsha</option>			
-			<option>Dasamsa-EvenReverse</option>
-			<option>ChaturVimshamsha-EvenReverse</option>
-		</select></td></tr>
-		<tr><td colspan=2 align=center><input type=button id=AddChart name=AddChart value=AddChart onclick=Refresh()></td></tr>
-		<tr><td colspan=2 align=center><input type="submit" id=Submit name="submit" value=Calculate></td></tr>
+
+		<tr><td colspan=2 align=center><input type="submit" id=Submit name="submit" value=Re-Calculate></td></tr>
 	    </table>
 	</form>
 </div>
