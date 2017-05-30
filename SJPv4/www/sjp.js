@@ -10,6 +10,7 @@ function debug(){
 var minutes = 1000 * 60; //Milliseconds
 var hours = minutes * 60;//Milliseconds
 var day = hours * 24;//Milliseconds
+var t; //*   t : number of Julian centuries since J2000.0              t = ((jd - 2415020) + f/24 - 0.5)/36525;  */
 var nakshatra =["Ashvini-Ke","Bharani-Ve","Kritika-Su","Rohini-Mo","Mrigashira-Ma","Ardra-Ra","Punarvasu-Ju","Pushya-Sa","Ashlesha-Me","Magha-Ke","Purva Phalguni-Ve","Uttara Phalguni-Su","Hasta-Mo","Chitra-Ma","Swati-Ra","Vishakha-Ju","Anuradha-Sa","Jyeshtha-Me","Mula-Ke","Purva Ashadha-Ve","Uttara Ashadha-Su","Shravan-Mo","Dhanistha-Ma","Shatabhishaj-Ra","Purva Bhadrapad-Ju","Uttara Bhadrapad-Sa","Revati-Me"];
 var yogas = ["Vishkambha-विष्कम्भ-(Sa)","Priti-प्रीति-(Me)","Ayushman-आयुष्मान-(Ke)","Saubhagya-सौभाग्य-(Ve)","Shobhana-शोभन-(Su)","Atiganda-अतिगण्ड -(Mo)","Sukarman-सुकर्मा -(Ma)","Dhriti-धृति -(Ra)","Shula-शूल -(Ju)","Ganda-गण्ड -(Sa)","Vriddhi-वृद्धि -(Me)","Dhruva-ध्रुव -(Ke)","Vyaghata-व्याघात-(ve)","Harshana-हर्षण-(su)","Vajra-वज्र-(Mo)","Siddhi-सिद्धि-(Ma)","Vyatipata-व्यतिपात-(Ra)","Varigha-वरीयस्-(Ju)","Parigha-परिघ-(Sa)","Shiva-शिव-(Me)","Siddha-सिद्ध-(Ke)","Sadhya-साध्य-(Ve)","Shubha-शुभ-(Su)","Shukla-शुक्ल-(Mo)","Brahma-ब्रह्म-(Ma)","Mahendra-महेन्द्र-(Ra)","Vaidhriti-वैधृति"];
 var tithi = ["Shukla Prathamai 1-Su","Shukla Dwitiya 2-Mo","Shukla Tritiya 3-Ma","Shukla Chaturthi 4-Me","Shukla Panchami 5-Ju","Shukla Shashti 6-Ve","Shukla Saptami 7-Sa","Shukla Ashtami 8-Ra","Shukla Navami 9-Su","Shukla Dasami 10-Mo","Shukla Ekadashi 11-Ma","Shukla Dwadasi 12-Me","Shukla Trayodasi 13-Ju","Shukla Chaturdashi 14-Ve","Poornima Full-Sa","Krishna Prathamai 1-Su","Krishna Dwitiya 2-Mo","Krishna Tritiya 3-Ma","Krishna Chaturthi 4-Me","Krishna Panchami 5-Ju","Krishna Shashti 6-Ve","Krishna Saptami 7-Sa","Krishna Ashtami 8-Ra","Krishna Navami 9-Su","Krishna Dasami 10-Mo","Krishna Ekadashi 11-Ma","Krishna Dwadasi 12-Me","Krishna Trayodasi 13-Ju","Krishna Chaturdashi 14-Sa","Amavasya New-Ra"];
@@ -140,6 +141,38 @@ function handleErr(msg,url,l){
 Date.prototype.getJulian = function() {
     return Math.floor((this / 86400000) - (this.getTimezoneOffset()/1440) + 2440587.5);
 }
+
+Date.prototype.getMyTimezoneOffset=function(){
+	if(Date.MyTimezoneOffset == null){
+		var t=new Date();
+		Date.MyTimezoneOffset=t.getTimezoneOffset();
+	}
+	return Date.MyTimezoneOffset;
+}
+Date.prototype.setMyTimezoneOffset=function(t){
+	return Date.MyTimezoneOffset=t;
+}
+
+function getLagnaTable(AscData,date_time,longitude,latitude)
+{
+	this.html="<table border=2><tr><th>Lagna</th><th>Ending Time(Local Time)</th>";
+	var previous=Math.floor(AscData.Ascendant/30);
+	var a = new Date(date_time);
+	for(var i=0;i<24*60;++i)
+	{
+	a.setMinutes(a.getMinutes()+1);
+	//debugger;
+	l=new calculateAscendant(a,latitude,longitude);
+	var next = Math.floor(l.Ascendant/30)
+	if(next!=previous)
+		{	this.html+="<tr><td>"+asRashi[previous]+"</td><td>"+a.toLocaleString()+"</td></tr>";
+			console.log("gp:"+a+"-"+i+"-"+l.Ascendant);
+			previous=next;
+		}
+	}
+	this.html+="</table>";
+	return this;
+}
 /// the getPanchanga function take,
 /// INPUT VALUES: datetime, long and latitude.
 /// RETURN VALUES: It returns an object with all the panchange values.
@@ -149,6 +182,8 @@ function getPanchanga(date_time,longitude,latitude){
     var cur_date=Date.parse(date_time);  //In Milliseconds.
     this.grahas = new getGrahas(date_time);
     this.AscData = new calculateAscendant(date_time,latitude,longitude);
+	this.lagnatable= new getLagnaTable(AscData,date_time,longitude,latitude);
+	var a=date_time;
     this.grahas.grahas[7] = (this.AscData.node+360)%360; //Nodes are coming as -ve values sometime so correcting.
     this.grahas.grahas[8] = this.AscData.Ascendant;
     for(i=0;i<7;++i){
@@ -178,7 +213,8 @@ function getPanchanga(date_time,longitude,latitude){
     this.sun_next = this.AscData3.Ascendant+1.151008333;
     sun_speed = (this.sun_next - this.sun_begin)/(this.sunrise_next.getTime()-this.sunrise.getTime());
     this.sun_now = this.sun_begin+sun_speed*(cur_date-this.sunrise.getTime());
-    //this.bhaavaTable = new getBhaavaTable(this.sun_cur,latitude,longitude,date_time);
+    this.BhaavaTable = this.AscData.BhaavaTable;
+	console.log(AscData);
     var temp = new Date(cur_date-this.sunrise%day);
     this.vara_cur = this.sunrise.getDay();
     this.vara_name = vara[this.vara_cur];
@@ -242,7 +278,7 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.rasiHTML = getChart(chart);
 
-    this.html = "\n<p><b>Panchanga on </b> "+ calcLocalTime(this.date_time).toLocaleString() + "<br/><br/>";
+    this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue) 
     this.html += "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
@@ -291,13 +327,15 @@ function getPanchanga(date_time,longitude,latitude){
     
     this.html+= "<a href=SJPdasa.htm?degrees="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
                 "&datetime="+encodeURIComponent(this.date_time.toString())+"&submit=Calculate>Moon Vimshottari Dasa</a></br>";
-                
+     
     this.html =this.html +"</tr></table>"+
                 "\n<br/><b>Maandi Day Time & Position:</b>"+formatTimeSS(this.MaandiDayTime)+ " - " + toSignDeg(this.MaandiDay.Ascendant)+
                 "\n<br/><b>Maandi Night Time & Position:</b>"+formatTimeSS(this.MaandiNightTime)+ " - " + toSignDeg(this.MaandiNight.Ascendant)+
+				"\n<br/>"+this.lagnatable.html+
                 "\n<br/><br/>"+this.kaalatable.html+
                 "\n<br/>"+this.horatable.html+
                 "\n<br/>"+this.muhurthatable.html+
+                "\n<br/>"+this.BhaavaTable+			
                 "\n</p>";
     return this;
 }
@@ -333,7 +371,7 @@ function showError(error) {//Incase of error in Gelocation
     }
 }
 function calcLocalTime(d) {// function to calculate local time in a different city given the city"s UTC offset
-    utc = d.getTime() + (d.getTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
+    utc = d.getTime() + (d.getMyTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
     nd = new Date(utc + (3600000*TimeZoneOffset));// create new Date object for different city using supplied offset
     return nd;//nd.toLocaleString();
 }
@@ -391,7 +429,8 @@ function calcGamma2(julianDay, hour){
 }
 //    Return the equation of time value for the given date.
 function calcEqofTime(gamma){
-    //return (229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma) - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma)));
+    //Below line was commented lets see if uncommented apr 2017
+	return (229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma) - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma)));
         var epsilon = calcObliquityCorrection(t);
         var l0 = calcGeomMeanLongSun(t);
         var e = calcEccentricityEarthOrbit(t);
@@ -421,9 +460,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   the Geometric Mean Longitude of the Sun in degrees            */
 //***********************************************************************/
-
-    function calcGeomMeanLongSun(t)
-    {
+function calcGeomMeanLongSun(t)    {
         var L0 = 280.46646 + t * (36000.76983 + 0.0003032 * t);
         while(L0 > 360.0)
         {
@@ -446,9 +483,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   the Geometric Mean Anomaly of the Sun in degrees            */
 //***********************************************************************/
-
-    function calcGeomMeanAnomalySun(t)
-    {
+function calcGeomMeanAnomalySun(t){
         var M = 357.52911 + t * (35999.05029 - 0.0001537 * t);
         return M;        // in degrees
     }
@@ -462,10 +497,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   the unitless eccentricity                            */
 //***********************************************************************/
-
-
-    function calcEccentricityEarthOrbit(t)
-    {
+function calcEccentricityEarthOrbit(t){
         var e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
         return e;        // unitless
     }
@@ -479,10 +511,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   in degrees                                        */
 //***********************************************************************/
-
-
-    function calcSunEqOfCenter(t)
-    {
+function calcSunEqOfCenter(t){
         var m = calcGeomMeanAnomalySun(t);
 
         var mrad = degToRad(m);
@@ -503,16 +532,13 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   sun"s true longitude in degrees                        */
 //***********************************************************************/
-    function calcSunTrueLong(t)
-    {
+function calcSunTrueLong(t)    {
         var l0 = calcGeomMeanLongSun(t);
         var c = calcSunEqOfCenter(t);
 
         var O = l0 + c;
         return O;        // in degrees
     }
-
-
 //***********************************************************************/
 //* Name:    calcSunApparentLong                            */
 //* Type:    Function                                    */
@@ -522,9 +548,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   sun"s apparent longitude in degrees                        */
 //***********************************************************************/
-
-    function calcSunApparentLong(t)
-    {
+function calcSunApparentLong(t){
         var o = calcSunTrueLong(t);
 
         var omega = 125.04 - 1934.136 * t;
@@ -541,9 +565,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   mean obliquity in degrees                            */
 //***********************************************************************/
-
-    function calcMeanObliquityOfEcliptic(t)
-    {
+function calcMeanObliquityOfEcliptic(t){
         var seconds = 21.448 - t*(46.8150 + t*(0.00059 - t*(0.001813)));
         var e0 = 23.0 + (26.0 + (seconds/60.0))/60.0;
         return e0;        // in degrees
@@ -558,9 +580,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   corrected obliquity in degrees                        */
 //***********************************************************************/
-
-    function calcObliquityCorrection(t)
-    {
+function calcObliquityCorrection(t){
         var e0 = calcMeanObliquityOfEcliptic(t);
 
         var omega = 125.04 - 1934.136 * t;
@@ -577,9 +597,7 @@ function calcEqofTime(gamma){
 //* Return value:                                        */
 //*   sun"s right ascension in degrees                        */
 //***********************************************************************/
-
-    function calcSunRtAscension(t)
-    {
+function calcSunRtAscension(t){
         var e = calcObliquityCorrection(t);
         var lambda = calcSunApparentLong(t);
  
@@ -605,8 +623,7 @@ function calcSolarDec(gamma){
 //    zenith angle is 90.8 degrees.
 // the reason why its not 90 degrees is because we need to account for atmoshperic
 // refraction.
-function calcHourAngle(lat, solarDec, time)
-{
+function calcHourAngle(lat, solarDec, time){
     var latRad = degToRad(lat);
     if (time)         //    ii true, then calculationg for sunrise
         return (Math.acos(Math.cos(degToRad(90.833))/(Math.cos(latRad)*Math.cos(solarDec))-Math.tan(latRad) * Math.tan(solarDec)));
@@ -614,12 +631,10 @@ function calcHourAngle(lat, solarDec, time)
         return -(Math.acos(Math.cos(degToRad(90.833))/(Math.cos(latRad)*Math.cos(solarDec))-Math.tan(latRad) * Math.tan(solarDec)));
 }
 //    Return the length of the day in minutes.
-function calcDayLength(hourAngle)
-{
+function calcDayLength(hourAngle){
     return (2 * Math.abs(radToDeg(hourAngle))) / 15;
 }
-function calcSunriseGMT(julDay, latitude, longitude)
-{
+function calcSunriseGMT(julDay, latitude, longitude){
     // *** First pass to approximate sunrise
     var gamma = calcGamma(julDay);
     var eqTime = calcEqofTime(gamma);
@@ -638,11 +653,19 @@ function calcSunriseGMT(julDay, latitude, longitude)
     timeGMT = 720 + timeDiff - eqTime; // in minutes
     return timeGMT;
 }
-function hello(){
-alert("Hello");
+function calcRiseTime(degree,latitude,longitude){  
+	console.log("calcRiseTime"+degree+","+latitude+","+longitude+">"+degree/360*Math.PI);
+    var gamma = calcGamma(degree/360*365.25);
+    var eqTime = calcEqofTime(gamma);
+	var solarDec = calcSolarDec(gamma);
+    var hourAngle = calcHourAngle(latitude, solarDec, 1);
+    var delta = longitude - radToDeg(hourAngle);
+    var timeDiff = 4 * delta;
+    var timeGMT = 720 + timeDiff - eqTime; // in minutes
+	//var rise=new Date(timeGMT);
+    return timeGMT;
 }
-function calcSolNoonGMT(julDay, longitude)
-{
+function calcSolNoonGMT(julDay, longitude){
     // Adds approximate fractional day to julday before calc gamma
     var gamma_solnoon = calcGamma2(julDay, 12 + (longitude/15));
     var eqTime = calcEqofTime(gamma_solnoon);
@@ -650,8 +673,7 @@ function calcSolNoonGMT(julDay, longitude)
     var solNoonGMT = 720 + (longitude * 4) - eqTime; // min
     return solNoonGMT;
 }
-function calcSunsetGMT(julDay, latitude, longitude)
-{
+function calcSunsetGMT(julDay, latitude, longitude){
     // First calculates sunrise and approx length of day
     var gamma = calcGamma(julDay + 1);
     var eqTime = calcEqofTime(gamma);
@@ -670,7 +692,6 @@ function calcSunsetGMT(julDay, latitude, longitude)
     setTimeGMT = 720 + timeDiff - eqTime; // in minutes
     return setTimeGMT;
 }
-///////////////////////////////////////////////////////////////////
 function getChart(chart){
     var a="";
     var k=0;
@@ -707,15 +728,10 @@ function getChart(chart){
     a=a+" </table></div>";
  return a;
  }
-///////////////////////////////////////////////////////////////////
-function getPanchaPakshiTable(vara_cur,sunrise,sunset)
-{
+function getPanchaPakshiTable(vara_cur,sunrise,sunset){
     return this;
 }
-///////////////////////////////////////////////////////////////////
- 
-function getKaalaTable(vara_cur,sunrise,sunset)
-{
+function getKaalaTable(vara_cur,sunrise,sunset){
     this.html="<table border=2><tr><th>Start Time</th><th>RahuKaala Chakra</th><th>Gulika Chakra</th><th>Chaughadia Chakra</th></tr>";
     var k=0;
     var kaala = new Date();
@@ -763,9 +779,7 @@ function getKaalaTable(vara_cur,sunrise,sunset)
     this.html+="</table>";
     return this;
 }
-///////////////////////////////////////////////////////////////////
-function getMuhurthaTable(sunrise,sunset,paksha,vaara)
-{
+function getMuhurthaTable(sunrise,sunset,paksha,vaara){
     this.html="<table border=2><tr><th>Muhurtha Nakshatra</th><th>Start Time</th><th>Eagle</th><th>Owl</th><th>Crow</th><th>Cock</th><th>Peacock</th></tr>";
     var k=0;
     var m = new Date();
@@ -828,8 +842,7 @@ function getMuhurthaTable(sunrise,sunset,paksha,vaara)
     this.html+="</table>";
     return this;
 }
-function getHoraTable(vara_cur,sunrise,sunrise_next)
-{
+function getHoraTable(vara_cur,sunrise,sunrise_next){
     this.html="<table border=2><tr><th>Hora</th><th>Start Time</th></tr>";
     var k=0;
     var m = new Date();
@@ -852,84 +865,75 @@ function getHoraTable(vara_cur,sunrise,sunrise_next)
     this.html+="</table>";
     return this;
 }
-function getBhaavaTable(sun_cur,latitude,longitude,date_time)
-{
-    this.bhaava = new Array(12);
-    var i,t,deg,sr;
-    var cur_date=Date.parse(date_time);
-    var delta = sun_cur%30 - 30;
-    for (i=0;i<12;++i)
-    {
-        this.bhaava[i] = new Date();
-        this.bhaava[i].setTime(date_time);
-        deg = delta + i*30;
-        t = calcSunriseGMT(dateToJul(cur_date),latitude,longitude+deg);
-        this.bhaava[i].setTime(parseInt(cur_date/day)*day + t*minutes+(deg)*4*minutes);
-    }
-    return this;
+function BinarySearch(startval,endval,tofind,diff,func){
+  if(Math.abs(startval-endval)<=diff)return startval;
+  var mid=(startval-endval)/2;
+  if(func(startval)>tofind && tofind<func(startval+mid))return BinarySearch(startval,mid,tofind,diff,func);
+  if(func(startval+mid)<tofind && tofind<func(endval))return BinarySearch(startval,mid,tofind,diff,func);
+  return -999999999999999999999;
 }
+
 //Start Following code from http://www.astrojyoti.com/calculatoroflagna.htm
 zn = "AriTauGemCanLeoVirLibScoSagCapAquPis";  // Zodiac
 d2r = Math.PI/180;    // degrees to radians
 r2d = 180/Math.PI;    // radians to degrees
-var range = [1,12,1,31,1800,2100,0,23,0,59,0,12,0,59,0,0,0,179,0,59,0,0,0,89,0,59];
-
-function calculateAscendant(date_time,latitude,longitude)
-{
-    date_time=new Date(date_time);
-    with(Math){
-        var mon = date_time.getMonth()+1;
-        var day = date_time.getDate();
-        var year= date_time.getFullYear();
-        var hr= date_time.getHours();
-        hr    += date_time.getMinutes()/60;
-        var tz= date_time.getTimezoneOffset()/60;
-        var ln= longitude;
-        var la= latitude;
-    }
-
+//var range = [1,12,1,31,1800,2100,0,23,0,59,0,12,0,59,0,0,0,179,0,59,0,0,0,89,0,59];
+function calculateAscendant(date_time,latitude,longitude){//Returns Ascendant Object 
+	//alert(date_time);
+    this.date=date_time=new Date(date_time);
+   // with(Math){
+	var mon = date_time.getMonth()+1;
+	var day = date_time.getDate();
+	var year= date_time.getFullYear();
+	var hr= date_time.getHours();
+	hr    += date_time.getMinutes()/60;
+	var tz= date_time.getTimezoneOffset()/60;
+	var ln= longitude;
+	var la= latitude;
+   // }
     jd = mdy2julian(mon,day,year);
-
     f=hr+tz;
     //if(ln < 0.0)f = hr - tz;
     //else f = hr+tz;
-
-    t = ((jd - 2415020) + f/24 - 0.5)/36525;
+    t = ((jd - 2415020) + f/24 - 0.5)/36525; 
     ayObj = new calcAyanamsa(t);
     ay = this.Ayanamsa= ayObj.ayanamsa;
     this.node = ayObj.node;
 
+	//Right ascension (abbreviated RA; symbol α) is the angular distance measured eastward along the celestial equator from the vernal equinox to the hour circle of the point in questio
     //ra = (((6.6460656 + 2400.0513 * t + 2.58e-5 * t * t + f) * 15 - ln) % 360) * d2r; // RAMC
     ra = (((6.6460656 + 2400.0512617 * t + 2.581e-5 * t * t + f) * 15 - ln) % 360) * d2r; // RAMC
+	console.log("Calculate Ascendant t="+t);
+	//Obliquity of the ecliptic is the term used by astronomers for the inclination of Earth's equator with respect to the ecliptic, or of Earth's rotation axis to a perpendicular to the ecliptic. It is about 23.4° and is currently decreasing 0.013 degrees (47 arcseconds) per hundred years due to planetary perturbations.[11] ε epsilon
+	//https://en.wikipedia.org/wiki/Axial_tilt
+	//T is Julian centuries from J2000.0.[17]
     ob = (23.452294 - 0.0130125 * t  - 0.00000164 * t*t + 0.000000503 *t*t*t ) * d2r; // Obliquity of Ecliptic
     this.ra = ra*r2d;
     this.ob = ob*r2d;
     with(Math){
-        // Calculate Midheaven
-        mc = atan2(tan(ra),cos(ob));
-        if(mc < 0.0)mc += PI;
-        if(sin(ra) < 0.0)mc += PI;
-        mc *= r2d;
-
-        // Calculate Ascendant
-        as = atan2(cos(ra),-sin(ra)*cos(ob)-tan(la * d2r)*sin(ob));
-        if(as < 0.0)as += PI;
-        if(cos(ra) < 0.0)as += PI;
-        as *= r2d % 360.0;
+	// Calculate Midheaven
+	mc = atan2(tan(ra),cos(ob));
+	if(mc < 0.0)mc += PI;
+	if(sin(ra) < 0.0)mc += PI;
+	mc *= r2d;
+	// Calculate Ascendant
+	as = atan2(cos(ra),-sin(ra)*cos(ob)-tan(la * d2r)*sin(ob));
+	if(as < 0.0)as += PI;
+	if(cos(ra) < 0.0)as += PI;
+	as *= r2d % 360.0;
     }
     // add Ayanamsa
     as = fix360(as + ay);
     mc = fix360(mc + ay);
     this.Ascendant = as;
     this.Abhijit = mc;
-
-    // calculate bhavas as per
+   // calculate bhavas as per
     // Deepak Kapoors Astronomy and Mathematical Astrology - 1997 Ranjan Pub.
 
     var hs = new Array(24);
-    x = as - mc;
-    if(x < 0.0)x += 360.0;
-    x /= 6;
+    x = as - mc; //Difference between Asc and Mid Heaven
+    if(x < 0.0)x += 360.0; //If negative make it +ve
+    x /= 6; //Divide that distance in 6 parts 
     y = 18; // 10th house in the array
     for(i = 0; i < 7; i++){
         hs[y] = mc + x * i;
@@ -980,12 +984,22 @@ function calculateAscendant(date_time,latitude,longitude)
     this.BhaavaSandhi[9]  = hs[19];
     this.BhaavaSandhi[10] = hs[21];
     this.BhaavaSandhi[11] = hs[23];
+	this.BhaavaTable = "<table border=2><tr><th>Bhaaava</th><th>Bhaava Madya</th><th>Bhaava Sandhi</th></tr>";
+	for(i=0;i<12;++i)this.BhaavaTable+="<tr><td>"+(i+1)+"</td><td>"+toSignDeg(this.BhaavaMadya[i])+"</td><td>"+toSignDeg(this.BhaavaSandhi[i])+"</td></tr>";
+	this.BhaavaTable+="</table>";
 return this;
 }
+
+function getRaashiMaanaUdayaTable(latitude,AscObject){//
+this.html="<table border=2><tr><th>Raashi</th><th>Raashi Maana-Duration</th><th>Start Time</th><th>End Time</th></tr>";
+
+this.html+="</table>";
+return this;
+}
+
 // Calculate the Lahiri Ayanamsa by using Erlewine Fagan-Bradley sidereal calculation
 // with correction using Lahiri 1900 value in minutes (see below)
-function calcAyanamsa(t)
-{
+function calcAyanamsa(t){
     ln = ((933060-6962911*t+7.5*t*t)/3600.0) % 360.0;  /* Mean lunar node */
     Off = (259205536.0*t+2013816.0)/3600.0;             /* Mean Sun        */
     Off = 17.23*Math.sin(d2r * ln)+1.27*Math.sin(d2r * Off)-(5025.64+1.11*t)*t;
@@ -996,8 +1010,9 @@ function calcAyanamsa(t)
 }
 
 // calculate Julian Day from Month, Day and Year
-function mdy2julian(m,d,y)
-{
+//The Julian Day Number (JDN) is the integer assigned to a whole solar day in the Julian day count starting from noon Universal time, with Julian day number 0 assigned to the day starting at noon on January 1, 4713 BC, proleptic Julian calendar 
+//For example, the Julian Date for 00:30:00.0 UT January 1, 2013, is 2,456,293.520833.
+function mdy2julian(m,d,y){
     with(Math){
         im = 12 * (y + 4800) + m - 3;
         j = (2 * (im - floor(im/12) * 12) + 7 + 365 * im)/12;
@@ -1008,30 +1023,26 @@ function mdy2julian(m,d,y)
 }
 
 // keep within 360 degrees
-function fix360(v)
-{
+function fix360(v){
     if(v < 0.0)v += 360;
     if(v > 360)v -= 360;
     return v;
 }
 
 //End Code from http://www.astrojyoti.com/calculatoroflagna.htm
-function Array(len)
-{
+function Array(len){
  var i =0;
  for(i=1;i<len;++i)this[i]="";
 }
 ////////////////////////////////////////////////////////////////////////
-function setCookie(c_name,value,expiredays)
-{
+function setCookie(c_name,value,expiredays){
      var exdate=new Date();
     exdate.setDate(exdate.getDate()+expiredays);
     document.cookie=c_name+ "=" +escape(value)+((expiredays===null) ? "" : ";expires="+exdate.toGMTString());
     return value;
 }
 ////////////////////////////////////////////////////////////////////////
-function getCookie(c_name)
-{
+function getCookie(c_name){
     if (document.cookie.length>0)
       {
           c_start=document.cookie.indexOf(c_name + "=");
@@ -1051,8 +1062,7 @@ var xmlHttp;
     getXMLFile();
 }*/
 
-function getXMLFile(f)
-{
+function getXMLFile(f){
     xmlHttp=GetXmlHttpObject();
     if (xmlHttp===null)
       {
@@ -1072,15 +1082,13 @@ function getXMLFile(f)
         alert("send error:"+file+":"+xmlHttp.status+"--"+err );        
     }
 }
-function stateChanged()
-{
+function stateChanged(){
     if (xmlHttp.readyState===4)
     {
         xml_file_opened = true;
     }
 }
-function GetXmlHttpObject()
-{
+function GetXmlHttpObject(){
     var xmlHttp=null;
     try
       {
@@ -1105,11 +1113,20 @@ function doForm(){//Checked
     var d= new Date(params["bdate"].split("-")[0],params["bdate"].split("-")[1]-1,params["bdate"].split("-")[2]); 
     var t= new Date("January 1, 1970 "+params["btime"]);
 
+	   TimeZoneOffset = parseFloat(params["timezone"]);
+//	d.setUTCHours(d.getUTCHours()-TimeZoneOffset);
+	d.setMyTimezoneOffset(TimeZoneOffset*60);
+d.setUTCDate(d.getDate());
+d.setUTCFullYear(d.getFullYear());
+d.setUTCMonth(d.getMonth());
 //debug(d,t,params["bdate"],params["btime"]);
-d.setHours(t.getHours());
-d.setMinutes(t.getMinutes());
-d.setSeconds(t.getSeconds());
-d.setMilliseconds(t.getMilliseconds());
+d.setUTCHours(t.getHours());
+//alert(t.getHours());
+//alert(TimeZoneOffset);
+d.setUTCMinutes(t.getMinutes()-TimeZoneOffset*60);
+//alert(t.getMinutes());
+d.setUTCSeconds(t.getSeconds());
+d.setUTCMilliseconds(t.getMilliseconds());
 //debug(d,t,params["bdate"],params["btime"]);
 //    if (params["date"].toUpperCase()==="NOW")
 //            params["date"]=d.toString();
@@ -1123,8 +1140,7 @@ d.setMilliseconds(t.getMilliseconds());
     }
     lon = parseFloat(setCookie("latitude",params["longitude"],1000));
     lat = parseFloat(setCookie("latitude",params["latitude"],1000));
-    TimeZoneOffset = parseFloat(params["timezone"]);
-    c=params["placename"];
+   c=params["placename"];
     places[c]= lat+";"+lon;
     z=getCookie("placeslist");
     for (x in places )z=z+x+"#"+places[x]+"&";
@@ -1224,7 +1240,7 @@ function LoadFile(p){
     window.status="Loaded.."+p;
     return xmlHttp.responseText;
 }
-    function getGrahas(date_time){
+function getGrahas(date_time){
     //2d Array contains 1) start date, 2) four Characters string for 21915 days, i.e 60 years
     //Usings SWETEST -p0 -b2.4.1927 -head -edir. -ut0  -fPTl -g, -n21915 >sun2apr1927.txt
     var grahas29031987 = new ephemeris29031987();

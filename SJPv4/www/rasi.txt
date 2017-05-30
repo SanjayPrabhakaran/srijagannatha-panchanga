@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to display the Raasi maan.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+	t=new getRaashiMaanaUdayaTable(10.96305556,new getAs());
+    document.getElementById("demo").innerHTML = t.html;
+}
+function getAs()
+{
+ this.date=new Date("06:00");
+ this.Ascendant=123;
+  return this;
+}
+function getRaashiMaanaUdayaTable(latitude,AscObject){//
+this.html="<table border=2><tr><th>Raashi</th><th>Raashi Maana-Duration</th><th>Start Time</th><th>End Time</th></tr>";
+this.palabha=Math.tan((latitude/360)*2*Math.PI)*12;
+//alert(this.palabha);
+val1=10*this.palabha*6;//In Asus , 6Asus = 1 ViGh = 1 Pala
+val2=8*this.palabha*6;//In Asus
+val3=10/3*this.palabha*6;//In Asus
+
+//Lankodaya for three groups of signs
+gp1=1674;//In Asus//279 ViGh
+gp2=1795; //299 ViGh
+gp3=1931;//321 ViGh
+
+this.table = new Array(12);
+this.table[0]=new Date((gp1-val1)*4000);
+
+this.html +="<tr>"+
+			"<td>"+"Aries"+"</td>"+
+			"<td>"+(gp1-val1)+"</td>"+
+			"<td>"+this.table[0].toUTCString()+"</td>"+
+			"<td>"+(gp1-val1)*4000+"</td>"+
+            "</tr>";
+
+this.html+="</table>";
+return this;
+}
+</script>
+
+</body>
+</html>
