@@ -371,7 +371,7 @@ function showError(error) {//Incase of error in Gelocation
     }
 }
 function calcLocalTime(d) {// function to calculate local time in a different city given the city"s UTC offset
-    utc = d.getTime() + (d.getMyTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
+    utc = d.getTime() + (d.getTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
     nd = new Date(utc + (3600000*TimeZoneOffset));// create new Date object for different city using supplied offset
     return nd;//nd.toLocaleString();
 }
@@ -1110,10 +1110,16 @@ function GetXmlHttpObject(){
     return xmlHttp;
 }
 function doForm(){//Checked
-    var d= new Date(params["bdate"].split("-")[0],params["bdate"].split("-")[1]-1,params["bdate"].split("-")[2]); 
+    var d= new Date(params["bdate"]);
+	//params["bdate"].split("-")[0],params["bdate"].split("-")[1]-1,params["bdate"].split("-")[2]); 
     var t= new Date("January 1, 1970 "+params["btime"]);
 
 	   TimeZoneOffset = parseFloat(params["timezone"]);
+	   if(isNaN(TimeZoneOffset)) 
+	   {
+		   TimeZoneOffset=-1 * d.getTimezoneOffset()/60;
+		   alert("Corrected Invalid Time Zone Offset to Local Time Zone:"+params["timezone"]+" to "+TimeZoneOffset);
+	   }
 //	d.setUTCHours(d.getUTCHours()-TimeZoneOffset);
 	d.setMyTimezoneOffset(TimeZoneOffset*60);
 d.setUTCDate(d.getDate());
