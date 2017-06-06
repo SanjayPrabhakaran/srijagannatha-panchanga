@@ -1,21 +1,22 @@
-*srijagannatha-panchanga*
+***srijagannatha-panchanga
 
-*Objective*
+**Objective*
 
 Create a panchanga utililty to run across as many operating systems and devices. The utility should have most of the elements of a traditional panchanga.
 
-*Solution*
+**Solution*
 
 The Javascript and HTML has been chosen as the best development platform for this utility. Effort is made to keep each file at optimal minimal size(Current limit under 1MB) to enable to run on as many mobile devices.
 
-*How to install the package*
+**How to install the package*
+
  Download SJPV4 folder and open SJP.html
  For Android download and install SJP(1).apk
  For single file lite version download file SJPL.html
 
 Please fee free to raise your issues in Issues Tab
 
-*Updates History*
+**Updates History*
 ** 1 Jun 2016 ** Updated fixes with Lagna start end time and Bhaava Table.
 
 **15 Apr 2016 :** Uploaded all files to GitHub. Was originally kept at code.google.com
