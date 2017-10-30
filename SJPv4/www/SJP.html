@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <HTML manifest="sjp.appcache">
 <HEAD>
 <title>Sri Jagannatha Panchanga</title>
@@ -37,7 +37,7 @@
 	<!--input id=date name=date type=hidden size=50--></td>
   </tr><tr>
    <td>
-	<input id=bdate name=bdate type=date >
+	<input id=bdate name=bdate type=date > (Format YYYY-MM-DD)
 	<input id=btime name=btime type=time step=1>
 	</td>
   </tr>
@@ -261,13 +261,25 @@ fileInput.addEventListener('change', function(e) {
         reader.onload = function(e) {
             fileDisplayArea.innerText = reader.result;
             document.getElementById("chartname").value = file.name;
-            var lines = reader.result.replace("\r","").split("\n");
+            var lines = reader.result.replace(/\r/g,"").split("\n");
+//L0 Date 
+//L1 Month
+//L2 Year
+//L3 Time hh.mmss
+//L4 Time zone -5.mmss
+//L5 Long deg.mm
+//L6 Lat deg.mm
+
             var time=lines[3].split(".");
 			var datetime = months[lines[0]-1]+" "+lines[1]+" "+lines[2]+" "+
 							time[0]+":"+time[1].slice(0,2)+":"+Math.round(time[1].slice(2,5)*60/1000);
             //document.getElementById("date").value = datetime;
+			datetime=datetime.replace("\r","");
 			var d=new Date(datetime);
-			document.getElementById("bdate").valueAsDate  = d;	
+//alert(datetime);
+//alert(d);
+			document.getElementById("bdate").value  = formatDate(d); //4:23 PM 10/30/2017 Added toLocaleDateString() since it was not working on US time zone. on IE?
+//alert(	document.getElementById("bdate").value);
 			document.getElementById("btime").value  = formatTimeSS(d);				
             var tzone = lines[4].split(".");
             tzone[0] = tzone[0] * -1;

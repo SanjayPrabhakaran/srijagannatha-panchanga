@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <HTML>
 <HEAD>
 <TITLE></TITLE>
@@ -9,7 +10,7 @@
 		<tr><td>Dasha Degrees:</td><td><input id="degrees" name="degrees" value="53" type=text></td></tr>
 		<tr><td>Time Zone:</td><td><input id="timezone"  name="timezone" type=text value="+5.5" size=5></td></tr>
 		<tr><td>Birth Date Time:</td><td><input id="datetime" name="datetime" type=text value="19 Jul 1971" size=15></td></tr>
-		<tr><td>Purna Ayush:</td><td><input id=dasa_ayush name="ayush" type=text value="120" size=15></td></tr>
+		<tr><td>Purna Ayush:</td><td><input id=ayush name="ayush" type=text value="120" size=15></td></tr>
 		<tr><td>Dasha:</td><td><select id=dasha name="dasha">
 									<option selected>Vimshottari</option>
 									<option >Ashtottari-Ardra</option>
@@ -190,10 +191,11 @@ function getUduDasa(moon,date,dasa,eventdatetime,antaradasha){
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
 			for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
-			balance = (			moon-UduDasaVimshottari[i-1][2])
-					/	(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			balance = (moon-UduDasaVimshottari[i-1][2])
+				/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			balance=(1-balance)*UduDasaVimshottari[i][4];
 			this.html+= "<tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
-			this.html+= "<tr><td>"+UduDasaVimshottari[i][3]+"</td><td>"+d.toLocaleString()+"</td><td>"+balance.toPrecision(2)+"</td></tr>";
+			this.html+= "<tr><td>"+UduDasaVimshottari[i][3]+"</td><td>"+d.toLocaleString()+"</td><td>"+balance.toPrecision(4)+"</td></tr>";
 			d.setTime(d.getTime()+balance*365.25*24*60*60*1000);
 			for(k=1;k<10;++k){
 				++i;if(i>27)i=1;
