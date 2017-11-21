@@ -288,6 +288,11 @@ function getPanchanga(date_time,longitude,latitude){
     this.html+= "\n<br/><b>Vaara </b>" + this.vara_name +
                 "\n<br/><b>&nbsp;&nbsp; from:</b>" + week_days[this.sunrise.getDay()]+"-"+formatTime(this.sunrise) +
                 "\n<b> to:</b>" + week_days[this.sunrise_next.getDay()]+ "-"+formatTime(this.sunrise_next) +
+				"\n<br/><b>&nbsp;&nbsp;  Sunrise:</b>" + formatTimeSS(this.sunrise)+
+                "\n<b> Noon(Abhijit):</b>" + formatTimeSS(this.noon)+
+                "\n<b> Sunset:</b>" + formatTimeSS(this.sunset)+
+                "\n<b> Midnight:</b>" + formatTimeSS(this.midnight)+
+              //  "\n<b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
                 "\n<br/>"+
                 "\n<br/><b>Nakshatra </b>" + "(" + this.nakshatra_cur.toFixed(2) +")" + this.nakshatra_name+
                 "\n<br/><b>&nbsp;&nbsp; from:</b>" + week_days[this.nakshatra_enter.getDay()]+ "-"+formatTime(this.nakshatra_enter) +
@@ -310,14 +315,17 @@ function getPanchanga(date_time,longitude,latitude){
     var p = Math.round(this.nakshatra_cur+0.5)+(this.vara_cur+1)+Math.round(this.tithi_cur+0.5)+Math.round(chart[0].long/30+0.5);
     this.html+= "\n<br/><b>Panchaka Nx+Tithi+vara+lagna=</b>"+p+"->"+panchaka[p%9];
     }
-    this.html+= "\n<br/><b>Samvatsara </b>"+this.sSamvatsara;
+    this.html+= "\n<br/><br/><b>Samvatsara </b>"+this.sSamvatsara;
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
-    this.html+= "\n<br/><br/><b> Sunrise:</b>" + formatTimeSS(this.sunrise)+
+   /* 
+   this.html+=  "\n<br/><br/><b> Sunrise:</b>" + formatTimeSS(this.sunrise)+
                 "\n<br/><b> Noon(Abhijit):</b>" + formatTimeSS(this.noon)+
                 "\n<br/><b> Sunset:</b>" + formatTimeSS(this.sunset)+
                 "\n<br/><b> Midnight:</b>" + formatTimeSS(this.midnight)+
-                "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
+	*/
+    this.html+="\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
                 "\n<br/><br/>";
+	
     chart.sort(function(a,b){return a.long - b.long;});
     this.html =this.html + "<table><tr><th><b><small>Graha</small></b></th><th><b><small> sRasi d&deg; mm</small></b></th><th><b><small>Bhava</small></b></th><th><b><small>longitude</small></b></th></tr>";
     for(i=0;i<10;++i){
