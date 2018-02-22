@@ -10,12 +10,17 @@ function debug(){
 var minutes = 1000 * 60; //Milliseconds
 var hours = minutes * 60;//Milliseconds
 var day = hours * 24;//Milliseconds
-var t; //*   t : number of Julian centuries since J2000.0              t = ((jd - 2415020) + f/24 - 0.5)/36525;  */
+var t; //*   t : number of Julian centuries since J2000.0 t = ((jd - 2415020) + f/24 - 0.5)/36525;  */
 var nakshatra =["Ashvini-Ke","Bharani-Ve","Kritika-Su","Rohini-Mo","Mrigashira-Ma","Ardra-Ra","Punarvasu-Ju","Pushya-Sa","Ashlesha-Me","Magha-Ke","Purva Phalguni-Ve","Uttara Phalguni-Su","Hasta-Mo","Chitra-Ma","Swati-Ra","Vishakha-Ju","Anuradha-Sa","Jyeshtha-Me","Mula-Ke","Purva Ashadha-Ve","Uttara Ashadha-Su","Shravan-Mo","Dhanistha-Ma","Shatabhishaj-Ra","Purva Bhadrapad-Ju","Uttara Bhadrapad-Sa","Revati-Me"];
+var nakshatra_s=["As","Bh","Kr","Ro","Mr","Ar","Pv","Pu","As","Mg","PP","UP","Ha","Ch","Sw","Vi","An","Jy","Mu","UA","PA","Sr","Dh","Sh","PB","UB","Re"];
 var yogas = ["Vishkambha-विष्कम्भ-(Sa)","Priti-प्रीति-(Me)","Ayushman-आयुष्मान-(Ke)","Saubhagya-सौभाग्य-(Ve)","Shobhana-शोभन-(Su)","Atiganda-अतिगण्ड -(Mo)","Sukarman-सुकर्मा -(Ma)","Dhriti-धृति -(Ra)","Shula-शूल -(Ju)","Ganda-गण्ड -(Sa)","Vriddhi-वृद्धि -(Me)","Dhruva-ध्रुव -(Ke)","Vyaghata-व्याघात-(ve)","Harshana-हर्षण-(su)","Vajra-वज्र-(Mo)","Siddhi-सिद्धि-(Ma)","Vyatipata-व्यतिपात-(Ra)","Varigha-वरीयस्-(Ju)","Parigha-परिघ-(Sa)","Shiva-शिव-(Me)","Siddha-सिद्ध-(Ke)","Sadhya-साध्य-(Ve)","Shubha-शुभ-(Su)","Shukla-शुक्ल-(Mo)","Brahma-ब्रह्म-(Ma)","Mahendra-महेन्द्र-(Ra)","Vaidhriti-वैधृति"];
+var yoga_s = ["Viवि","Priप्री","Ayuआ","Sauसौ","Shoशो","Atiअति","Suसु","Dhrधृ","Shuशू","Ganग","Vriवृ","Dhruध्रु","Vyagव्या","Harह","Vajव","Sidhiसिद्धि","Vyatव्यति","Var-व","Paप","Shiशि","Sidhaसिद्ध","Saaसाध्य","Shuशु","Shukशुक्ल","Braब्रह्म","Maheमहेन्द्र","Vaiवैधृति"];
 var tithi = ["Shukla Prathamai 1-Su","Shukla Dwitiya 2-Mo","Shukla Tritiya 3-Ma","Shukla Chaturthi 4-Me","Shukla Panchami 5-Ju","Shukla Shashti 6-Ve","Shukla Saptami 7-Sa","Shukla Ashtami 8-Ra","Shukla Navami 9-Su","Shukla Dasami 10-Mo","Shukla Ekadashi 11-Ma","Shukla Dwadasi 12-Me","Shukla Trayodasi 13-Ju","Shukla Chaturdashi 14-Ve","Poornima Full-Sa","Krishna Prathamai 1-Su","Krishna Dwitiya 2-Mo","Krishna Tritiya 3-Ma","Krishna Chaturthi 4-Me","Krishna Panchami 5-Ju","Krishna Shashti 6-Ve","Krishna Saptami 7-Sa","Krishna Ashtami 8-Ra","Krishna Navami 9-Su","Krishna Dasami 10-Mo","Krishna Ekadashi 11-Ma","Krishna Dwadasi 12-Me","Krishna Trayodasi 13-Ju","Krishna Chaturdashi 14-Sa","Amavasya New-Ra"];
+var tithi_s = ["S1","S2","S3","S4","S4","S6","S7","S8","S9","S10","S11","S12","S13","S14","Pur","K1","K2","K3","K4","K4","K6","K7","K8","K9","K10","K11","K12","K13","K14","Ama"];
 var vara = ["Sun-Sunday","Moon-Monday","Mars-Tuesday","Mercury-Wednesday","Jupiter-Thursday","Venus-Friday","Saturn-Saturday"];
+var vara_s = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var karana = ["Kimstugna-L10/Ke","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Bhava-Su","Bhaalava-Mo","Kaulava-Ma","Taitula-Me","Garija-Ju","Vanija-Ve","Vishti-Sa","Shakuni-L1/Ra","Chatushpada-L4/Ra","Naaga-L7/Ke"];
+var karana_s=["Ki","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Bv","Bl","Ka","Ta","Ga","Va","Vi","Sh","Ch","Na"];
 var graha = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"]; //Normal Graha Sequence (Vara Sequence)
 var caughadiya = ["Udvega-Su","Chara-Ve","Laabha-Me","Amrit-Mo","Kaala-Sa","Shubha-Ju","Roga-Ma"];
 var muhurtha = ["1:Rudra-Ardra --","2:Ahi-Aslesha --","3:Mitra-Anuradha","4:Pitri-Magha --","5:Vasu-Dhanishtha","6:Ambu-Purvashadha","7:Visvadeva-Uttarashadha","8:Abhijit/Vidhi-Abhijit","9:Vidhata/Satamuki-Rohini","10:Puruhuta-Jyeshtha --","11:Indragni/Vahni-Visakha --","12:Nirriti/Naktancara-Mula --","13:Varuna/Udakanatha-Satabhisha","14:Aryaman-Uttaraphalguni","15:Bhaga-Purvaphalguni --","n1:Girisa-Ardra --","n2:Ajapada-Purvabhadrapada","n3:Ahirbudhnya-Uttarabhadrapada","n4:Pushan-Revati","n5:Asvi-Asvini","n6:Yama-Bharani --","n7:Agni-Krittika --","n8:Vidhaatri-Rohini","n9:Chanda-Mrigasira","n10:Aditi-Punarvasu","n11:Jiiva-Pushya","n12:Vishnu-Sravana","n13:Arka-Hasta","n14:Tvashtri-Chitra","n15:Maruta-Svati"];
@@ -128,6 +133,7 @@ var PakshiActivity =[
 ]
 ];
 var months = ["Jan","Feb","Mar","Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov","Dec"];
+
 function handleErr(msg,url,l){
     txt="There was an error on this page.\n\n";
     txt+="Error: " + msg + "\n";
@@ -153,8 +159,7 @@ Date.prototype.setMyTimezoneOffset=function(t){
 	return Date.MyTimezoneOffset=t;
 }
 
-function getLagnaTable(AscData,date_time,longitude,latitude)
-{
+function getLagnaTable(AscData,date_time,longitude,latitude){
 	this.html="<table border=2><tr><th>Lagna</th><th>Ending Time(Local Time)</th>";
 	var previous=Math.floor(AscData.Ascendant/30);
 	var a = new Date(date_time);
@@ -173,6 +178,7 @@ function getLagnaTable(AscData,date_time,longitude,latitude)
 	this.html+="</table>";
 	return this;
 }
+
 /// the getPanchanga function take,
 /// INPUT VALUES: datetime, long and latitude.
 /// RETURN VALUES: It returns an object with all the panchange values.
@@ -276,7 +282,8 @@ function getPanchanga(date_time,longitude,latitude){
             chart[i].bhava=(parseInt(chart[i].long/30)-parseInt(chart[0].long/30)+12)%12+1;
     }
 
-    this.rasiHTML = getChart(chart);
+    this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
+				+","+this.karana_name+","+this.yoga_name+"</small>");
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue) 
     this.html += "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
@@ -334,7 +341,7 @@ function getPanchanga(date_time,longitude,latitude){
     chart.sort(function(a,b){return a.order - b.order;});
     
     this.html+= "<a href=SJPdasa.htm?degrees="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
-                "&datetime="+encodeURIComponent(this.date_time.toString())+"&submit=Calculate>Moon Vimshottari Dasa</a></br>";
+                "&datetime="+encodeURIComponent(this.date_time.toString())+"&antaradasha=1&submit=Calculate>Moon Vimshottari Dasa</a></br>";
      
     this.html =this.html +"</tr></table>"+
                 "\n<br/><b>Maandi Day Time & Position:</b>"+formatTimeSS(this.MaandiDayTime)+ " - " + toSignDeg(this.MaandiDay.Ascendant)+
@@ -347,7 +354,6 @@ function getPanchanga(date_time,longitude,latitude){
                 "\n</p>";
     return this;
 }
-
 //Get and populate Geolcation co-ordinates.
 function getLocation() {//Check for Geolocation and get it.
     if (navigator.geolocation) {
@@ -360,7 +366,8 @@ function getLocation() {//Check for Geolocation and get it.
 function showPosition(position) { // Event capture for GetLocation.
     document.getElementById("longitude").value = -1 * position.coords.longitude;
     document.getElementById("latitude").value = position.coords.latitude;
-    document.getElementById("timezone").value = "UnKnown";
+    document.getElementById("timezone").value = -1* (new Date().getTimezoneOffset()/60);//"UnKnown";
+	alert("Set browser geo location");
 }
 function showError(error) {//Incase of error in Gelocation
     switch(error.code) {
@@ -480,8 +487,6 @@ function calcGeomMeanLongSun(t)    {
         }
         return L0;        // in degrees
     }
-
-
 //***********************************************************************/
 //* Name:    calGeomAnomalySun                            */
 //* Type:    Function                                    */
@@ -509,7 +514,6 @@ function calcEccentricityEarthOrbit(t){
         var e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
         return e;        // unitless
     }
-
 //***********************************************************************/
 //* Name:    calcSunEqOfCenter                            */
 //* Type:    Function                                    */
@@ -530,7 +534,6 @@ function calcSunEqOfCenter(t){
         var C = sinm * (1.914602 - t * (0.004817 + 0.000014 * t)) + sin2m * (0.019993 - 0.000101 * t) + sin3m * 0.000289;
         return C;        // in degrees
     }
-
 //***********************************************************************/
 //* Name:    calcSunTrueLong                                */
 //* Type:    Function                                    */
@@ -700,7 +703,8 @@ function calcSunsetGMT(julDay, latitude, longitude){
     setTimeGMT = 720 + timeDiff - eqTime; // in minutes
     return setTimeGMT;
 }
-function getChart(chart){
+function getChart(chart,center){
+	if(center=== undefined)center="";
     var a="";
     var k=0;
     var i=0;
@@ -720,7 +724,7 @@ function getChart(chart){
     a=a+"    </tr>";
     a=a+"  <tr>";
     a=a+"    <td id=11 align=center>"+s[11]+" </td>";
-    a=a+"    <td border=1 colspan=2 rowspan=2 id=0 align=center> </td>";
+    a=a+"    <td border=1 colspan=2 rowspan=2 id=0 align=center>"+center+"</td>";
     a=a+"    <td  id=4 align=center>"+s[4]+" </td>";
     a=a+"    </tr>";
     a=a+"  <tr>";
@@ -1177,7 +1181,7 @@ function setLatLong(){
  k = k[1].split(/;/);
  document.getElementById("longitude").value=k[0];
  document.getElementById("latitude").value=k[1];
-
+alert("setLatLong");
 }
 function populatePlacesList(p){
     amp = new RegExp(/&/);

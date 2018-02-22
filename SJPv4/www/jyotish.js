@@ -13,21 +13,37 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				[ 2,2,2,2,2, 6,6,6,6,6,6,6, 12,12,12,12,12,12,12,12,  10,10,10,10,10, 8,8,8,8,8  ], //For Even Signs
 				[1,1,1,1,1, 11,11,11,11,11, 9,9,9,9,9,9,9,9, 3,3,3,3,3,3,3, 7,7,7,7,7  ] //For Odd Signs
 				];
+		var d3s = [7,//Index begins from 1, so this is dummy on second cycle i.e 37th Somanatha D3 falls on Tula.
+		   1,2,3,    12,11,10,//Ta
+		   4,5,6,    9,8,7,//Cn
+		   7,8,9,    6,5,4,
+		   10,11,12, 3,2,1,
+			1,2,3,    12,11,10,
+		   4,5,6,    9,8,7
+		   ];
 		switch(division){
 			case "Rashi":
 			case "D1":
-			default: //Assume Rashi on default i.e if not clear.
+			default: {//Assume Rashi on default i.e if not clear.
 				division="Rashi";
 				k=Sign;
-				break;
+			break;}
 			case "Dreshkana":
-			case "D3":
+			case "D3":{
 				AmshaPortion = 10;
 				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
 				k=Sign+(Amsha*4-4);
 				k%=12;
 				if(k==0)k=12;
-				break;
+			break;}
+			case "D3-Somanatha":
+			case "D3-S":{
+				AmshaCycles = 3;//cycles
+				AmshaPortion = 10;//Degrees
+				AmshaPada = parseInt((degrees%360)/AmshaPortion+0.999999999);
+				k=d3s[AmshaPada];
+				console.log(degrees,AmshaPortion,AmshaPada,k);
+				break;}
 			case "Saptamsa":
 			case "D7":
 				AmshaCycles = 7;

@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+
 <HTML>
 <HEAD>
-<TITLE></TITLE>
+<TITLE> SJP Dasa</TITLE>
 </HEAD>	
 <BODY onload="javascript:init()" id=contents>
 <script src="SJP.html" ></script>
@@ -154,6 +154,9 @@ function init(){
 }
 //-----------------------------------------------------------
 function MakeURLParams(fromURL,paramslist,submit){
+// Pass in URL and it will add parameters from 'paramslist' example: paramslist['lat']=12 becomes "lat=12&" appended to URL.
+//always make submit =1 to append.
+// note: previous parameters in 'fromURL' will be not used and removed.
 	var url="";
 	var p=fromURL.split("?");
 	url = p[0]+"?";
@@ -177,7 +180,7 @@ function calculate(){
 }
 
 function getUduDasa(moon,date,dasa,eventdatetime,antaradasha){
-//	debug(moon,date,dasa,eventdatetime,antaradasha);
+	//log.console(moon,date,dasa,eventdatetime,antaradasha);
 	moon%=360;
 	text="";
 	var d= new Date(date);
@@ -191,21 +194,32 @@ function getUduDasa(moon,date,dasa,eventdatetime,antaradasha){
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
 			for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
-			balance = (moon-UduDasaVimshottari[i-1][2])
-				/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
-			balance=(1-balance)*UduDasaVimshottari[i][4];
+			nx_past = (moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			yearsPast=(nx_past)*UduDasaVimshottari[i][4]; //Years past in the 
 			this.html+= "<tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
-			this.html+= "<tr><td>"+UduDasaVimshottari[i][3]+"</td><td>"+d.toLocaleString()+"</td><td>"+balance.toPrecision(4)+"</td></tr>";
-			d.setTime(d.getTime()+balance*365.25*24*60*60*1000);
+			//this.html+= "<tr><td>"+UduDasaVimshottari[i][3]+"</td><td>"+d.toLocaleString()+"</td><td>"+balance.toPrecision(4)+"</td></tr>";
+			d.setTime(d.getTime()-yearsPast*365.25*24*60*60*1000);
+			--i;//Correct NX Index
+			//moon = UduDasaVimshottari[i][2]);
 			for(k=1;k<10;++k){
-				++i;if(i>27)i=1;
+				++i;if(i>27)i=1;//"i" is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1000);
 				dasa_end.setTime(d.getTime()+UduDasaVimshottari[i][4]*365.25*24*60*60*1000);
-				paramslist["antaradasha"]=2;
-				paramslist["eventdatetime"]=eventdatetime.toLocaleString();						
-				this.html+= "<tr><td>"+
+				paramslist['degrees']=UduDasaVimshottari[i][2]);
+				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
+				paramslist["eventdatetime"]=params['eventdatetime'];;	
+				paramslist['timezone']=params['timezone'];
+				paramslist['datetime']=params['datetime'];
+				paramslist['ayush']=UduDasaVimshottari[i][4];
+				paramslist['submit']='Calculate';
+				//click_url=  "SJPdasa.htm?degrees="+escape(moon)+"&timezone="+params['timezone']+"&datetime="+params['datetime']+"&ayush="+UduDasaVimshottari[i][4]+"&submit=Calculate";
+				//click_url=MakeURLParams(click_url,1)
+				//alert(click_url);
+				//URL Command : file://wfsmnsv2nsf24/C_IND_Users/U608394/My%20Documents/SJC/srijagannatha-panchanga-master/SJPv4/www/SJPdasa.htm?degrees=250.80055663603866&timezone=5.5&datetime=Tue%20Nov%2021%202017%2022%3A42%3A13%20GMT%2B0530%20(India%20Standard%20Time)&ayush=120&dasha=Vimshottari&eventdatetime=19%20Jul%201971&antaradasha=1&compression=1&submit=Calculate
+				//console.log(MakeURLParams(window.location.href,paramslist,1));
+  				this.html+= "<tr><td>"+
 							"<a href="+MakeURLParams(window.location.href,paramslist,1)+">"+
 								UduDasaVimshottari[i][3]+"</a></td><td>"+											
 							d.toLocaleString()+"</td><td>"+
