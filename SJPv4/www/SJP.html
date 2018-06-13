@@ -88,6 +88,8 @@
       </TD>
   </tr>
 </table>
+<div id="googleMap" style="width:500px;height:380px;" >Map Area</div>
+
 <pre id="fileDisplayArea"></pre>
 ©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
 To save this file on your local machine or mobile, <br>Go to  
@@ -316,7 +318,7 @@ function calculate(){
 	document.close();
 }
 //Code from https://developers.google.com/maps/documentation/javascript/examples/map-simple-async
-//placeMarker is listner function setup by initialize and listens to click event on map object
+//placeMarker is listner function setup by map_initialize and listens to click event on map object
 console.log("declare placemarker");
 function placeMarker(location) {
 	console.log("place marker enter");
@@ -335,29 +337,39 @@ function placeMarker(location) {
 	  document.getElementById('timezone').value=location.lng()*4/60;
 }
 console.log("end declare placemarker");
-console.log("declare initialize");
-//initialize setup listners etc.
-function initialize() {//Called thru callback for Google maps API
-	console.log("Entered initialize");
+console.log("declare map_initialize");
+//map_initialize setup listners etc.
+function map_initialize() {//Called thru callback for Google maps API
+	console.log("Entered map_initialize");
 	//alert("Please wait a moment while loading Google maps...");
 	latlong={
           center:{lat: 13, lng: 80.135},
           zoom: 8
         };
+ 	console.log(latlong);
+	console.log("map_initialize:Above is  latlong");	
 	m=document.getElementById("googleMap");
 	console.log(m);
-	console.log("entered initialize");
-      map = new google.maps.Map(m, latlong);
-      map.addListener('click',  function(event){
+	console.log("map_initialize:Above is  m");
+    map = new google.maps.Map(m, latlong);
+ 	console.log(map);
+	console.log("map_initialize:Above is  map");
+    var click_listener=map.addListener('click',  function(event){
+	 	console.log("map click listener enter"+event);
+ 
 												placeMarker(event.latLng, map);
 												}	  
 					);
-	  return;
+	console.log(click_listener);
+	console.log("map_initialize:return");
+	return;
 }
-console.log("end declare initialize");
+console.log("end declare map_initialize");
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?callback=initialize"></script>
-<br>PAGE LOADED
+<script src="https://maps.googleapis.com/maps/api/js" async defer>
+
+</script>
+<br/>PAGE LOADED
 <a href="savefile.html">.</a>
 </BODY>
 </HTML>

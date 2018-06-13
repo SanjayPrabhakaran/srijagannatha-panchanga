@@ -207,7 +207,7 @@ function getUduDasa(moon,date,dasa,eventdatetime,antaradasha){
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1000);
 				dasa_end.setTime(d.getTime()+UduDasaVimshottari[i][4]*365.25*24*60*60*1000);
-				paramslist['degrees']=UduDasaVimshottari[i][2]);
+				paramslist['degrees']=UduDasaVimshottari[i][2];
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=params['eventdatetime'];;	
 				paramslist['timezone']=params['timezone'];

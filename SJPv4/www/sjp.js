@@ -713,7 +713,7 @@ function getChart(chart,center){
      k=parseInt((chart[i].long%360)/30+0.999999999);
      s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro;
     }
-    for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp";
+    for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
     a="<style type=\"text/css\">.chart td {width: 4em;height: 4em;}</style>";
     a=a+"<div id=chart class=\"chart\"> <table cellspacing=1 border=1 cellpadding=1 border=0>\n";
     a=a+"  <tr>";

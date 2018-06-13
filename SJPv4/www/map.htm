@@ -45,10 +45,9 @@ function initialize() {//Called thru callback
 	console.log(m);
 	console.log("entered initialize");
       map = new google.maps.Map(m, latlong);
-      map.addListener('click',  function(event){
-												placeMarker(event.latLng, map);
-												}	  
-					);
+      map.addListener('click', 
+			function(event){placeMarker(event.latLng, map);	}	  
+		);
 	  return;
 }
 </script>
