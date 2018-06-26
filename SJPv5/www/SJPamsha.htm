@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<script src=jyotish.js id=loadjyotishscript>
+</script>
+<script language=javascript>
+//------------Globals and Functions---------------------------------
+onerror=handleErr;
+var DEBUG=true;
+var chart =[
+			{'text':'Asc/Lagna   ','long':0.000001,'retro':" - ",'speed':0,'id':0,'bhava':0,'tx':'Lg'},
+			{'text':'Sun/Surya   ','long':0.000001,'retro':"",'speed':0,'id':1,'bhava':0,'tx':'Su'},
+			{'text':'Moon/Chandra','long':0.000001,'retro':"",'speed':0,'id':2,'bhava':0,'tx':'Mo'},
+			{'text':'Mars/Mangal ','long':0.000001,'retro':"",'speed':0,'id':3,'bhava':0,'tx':'Ma'},
+			{'text':'Merc/Buddha ','long':0.000001,'retro':"",'speed':0,'id':4,'bhava':0,'tx':'Me'},
+			{'text':'Jupiter/Guru','long':0.000001,'retro':"",'speed':0,'id':5,'bhava':0,'tx':'Ju'},
+			{'text':'Venus/Shukra','long':0.000001,'retro':"",'speed':0,'id':6,'bhava':0,'tx':'Ve'},
+			{'text':'Saturn/Shani','long':0.000001,'retro':"",'speed':0,'id':7,'bhava':0,'tx':'Sa'},
+			{'text':'Rahu        ','long':0.000001,'retro':"",'speed':0,'id':8,'bhava':0,'tx':'Ra'},
+			{'text':'Ketu        ','long':0.000001,'retro':"",'speed':0,'id':9,'bhava':0,'tx':'Ke'}
+		 ];
+var aDivisionals;
+var params;
+function handleErr(msg,url,l)
+{
+    txt="There was an error on this page.\n\n";
+    txt+="Error: " + msg + "\n";
+    txt+="URL: " + url + "\n";
+    txt+="Line: " + l + "\n\n";
+    txt+="Click OK to continue.\n\n";
+    alert(txt);
+	return true;
+}
+function debug()
+{
+ if(!DEBUG)return;
+ k="";
+ for(i=0;i<arguments.length;++i)k+="--\n"+arguments[i];
+ alert(k);
+ return
+}
+//-----------------------------------------------------------
+</script>
+</HEAD>	
+<BODY id=contents>
+<div id=charts></div>
+<div id=form>
+<form id=forminput  method=get>
+		<table id=formtable cellspacing=0 cellpadding=0 border=0>
+		<tr><td><b>Division</b></td><td><select id=Division name=Division><option selected>Rashi</option>
+			<option>Navamsa</option>
+			<option>Dreshkana</option>
+			<option>D3-Somanatha</option>		
+			<option>Saptamsa</option> 
+			<option>Dasamsa</option>
+			<option>Dwadasamsa</option>
+			<option>Shodashamsa</option>
+			<option>Vimsamsa</option>
+			<option>ChaturVimshamsha</option>
+			<option>Trimshamsha</option>
+			<option>KhaVedamsa</option>
+			<option>AkshaVedamsa</option>
+			<option>Shastiamsha</option>			
+			<option>Dasamsa-EvenReverse</option>
+			<option>ChaturVimshamsha-EvenReverse</option>
+		</select></td>
+		</tr>
+		<tr><td colspan=2 align=center><input type=button id=AddChart name=AddChart value=AddChart onclick=Refresh()></td></tr>
+		<tr><td><br/>  </td></tr>		
+		<tr><td>Lagna</td><td><input id=Lagna name="Lagna" type=text value=138.01></td></tr>
+		<tr><td>Sun</td><td><input id=Sun name="Sun" type=text value=92.38></td></tr>
+		<tr><td>Moon</td><td><input id=Moon name="Moon" type=text value=53></td></tr>
+		<tr><td>Mars</td><td><input id=Mars name="Mars" type=text value=298.1></td></tr>
+		<tr><td>Merc</td><td><input id=Merc name="Merc" type=text value=117.1></td></tr>
+		<tr><td>Jup</td><td><input id=Jup name="Jup" type=text value=213.18></td></tr>
+		<tr><td>Ven</td><td><input id=Ven name="Ven" type=text value=81.51></td></tr>
+		<tr><td>Sat</td><td><input id=Sat name="Sat" type=text value=39.86></td></tr>
+		<tr><td>Rahu</td><td><input id=Rahu name="Rahu" type=text value=291.95></td></tr>
+		<tr><td>Ketu</td><td><input id=Ketu name="Ketu" type=text value=111.95></td></tr>
+
+		<tr><td colspan=2 align=center><input type="submit" id=Submit name="submit" value=Re-Calculate></td></tr>
+	    </table>
+	</form>
+</div>
+<script>
+//Begin Init Block-----------------------------------------------------------
+{
+submit=false;
+submit=LoadURLParams();
+window.status="Set values.";
+if(submit==true)calculate();
+}
+//End init block-----------------------------------------------------------
+//-------------------------Functions-------------------------
+function calculate(){
+	chart[0].long=params['Lagna'];
+	chart[1].long=params['Sun'];
+	chart[2].long=params['Moon'];
+	chart[3].long=params['Mars'];
+	chart[4].long=params['Merc'];
+	chart[5].long=params['Jup'];
+	chart[6].long=params['Ven'];
+	chart[7].long=params['Sat'];
+	chart[8].long=params['Rahu'];
+	chart[9].long=params['Ketu'];
+    var editlink = '<a href='+window.location.href.replace("&submit=Calculate","")+'><strong>Change the Data</strong></a>';
+	document.getElementById("charts").innerHTML=
+			'<div id=charts>'
+			+document.getElementById("charts").innerHTML
+			+editlink
+			+getChart(chart,params['Division'])
+			+'</div>'
+			;
+	document.close();
+}
+/////////////////
+function Refresh()
+{
+	if (document.getElementById("Division").selectedIndex >-1){
+		params['Division']=document.getElementById("Division").options[document.getElementById("Division").selectedIndex].text;
+	}
+	calculate();
+}
+/////////////////
+function LoadURLParams()
+{
+	submit=false;
+	params=window.location.href.split("?");
+	//debug("LoadURLParams",params);
+	if(params[1] != null)
+	{
+	 params=params[1].split("&");
+	 for(var i=0;i<params.length;++i){
+			var p = params[i].split("=");
+			try{
+			if(document.getElementById(p[0])!=null){
+				document.getElementById(p[0]).value =document.getElementById(p[0]).value.replace(/\+/g," ");
+				document.getElementById(p[0]).value=unescape(p[1]);
+				}
+			}catch(err){ alert("Error:"+err.description); debug(p[0],p[1],document.getElementById(p[0]))}
+			p[1]=p[1].replace(/\+/g," ");
+			params[p[0]]=unescape(p[1]);		
+			if(p[0]=="submit" && p[1]=="Calculate")submit=true;
+		}
+	}
+	params['formhtml'] = document.getElementById("form").innerHTML;
+	params['chartshtml'] = document.getElementById("charts").innerHTML;
+	return submit;
+}
+///////////////////////////////////////////////////////////////////
+function getChart(chart,division){
+	var a="";
+	var k=0;
+	var i=0;
+	var s = ["","","","","","","","","","","","",""];
+	for(i=0;i<=9;++i){//For each of the Graha in 'i' find the divisional sign 'k'
+		k=GetDivisionalSign(chart[i].long,division);
+		s[k]=(s[k]?s[k]+", ":"")+chart[i].tx+chart[i].retro;
+	}
+	for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp";
+	a="<style type='text/css'>.chart td {width: 4em;height: 4em;}</style>";
+	a=a+"<div id=chart class='chart'> <table cellspacing=1 border=1 cellpadding=1 border=0>\n";
+	a=a+"  <tr>";
+	a=a+"    <td id=12 align=center>"+s[12]+"</td>";
+	a=a+"    <td id=1 align=center>"+s[1]+" </td>";
+	a=a+"    <td id=2 align=center>"+s[2]+" </td>";
+	a=a+"    <td id=3 align=center>"+s[3]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=11 align=center>"+s[11]+" </td>";
+	a=a+"    <td border=1 colspan=2 rowspan=2 id=0 align=middle>"+division+"</td>";
+	a=a+"    <td  id=4 align=center>"+s[4]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=10 align=center>"+s[10]+" </td>";
+	a=a+"    <td id=5 align=center>"+s[5]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=9 align=center>"+s[9]+" </td>";
+	a=a+"    <td id=8 align=center>"+s[8]+" </td>";
+	a=a+"    <td id=7 align=center>"+s[7]+" </td>";
+	a=a+"    <td id=6 align=center>"+s[6]+" </td>";
+	a=a+"    </tr>";
+	a=a+" </table></div>";
+ return a;
+ }
+///////////////////////////////////////////////////////////////////
+</script>
+
+</BODY>
+
+</HTML>

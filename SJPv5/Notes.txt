@@ -1,0 +1,63 @@
+1) For npm command get http://nodejs.org/
+
+
+2) Swiss Ephemeris binding for node.js
+https://github.com/mivion/swisseph/blob/master/README.md
+
+3) For full PhoneGap installations.
+https://codeload.github.com/phonegap/phonegap/zip/master
+
+4) install Android Studio
+ set ANDROID_HOME=C:\Users\sprabhakara2\AppData\Local\Android\android-studio\sdk
+ PATH=${PATH}:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools
+ 
+  Install sdk 19
+  
+5) install ant 
+
+Installing Ant on Windows
+Enter the URL: http://ant.apache.org/bindownload.cgi.
+On the Apache Ant Project page, find the heading Current Release of Ant.
+Select apache-ant-1.6.5-bin.zip [PGP] [SHA1] [MD5]
+Click Save to unzip the apache-ant-1.6.5-bin.zip [PGP] [SHA1] [MD5] file and save it to your C:\ directory as ant.
+Add the bin directory to your PATH	environment variable.
+Add the ANT_HOME environment variable set to C:\ant.
+Add the ANT_OPTS environment variable set to -Xmx256M.
+
+rem http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html#InAppBrowser
+cordova plugin add org.apache.cordova.inappbrowser
+npm cache clean 
+rem #before do remove "Error: EPERM, operation not permitted"
+cd C:\Users\sprabhakara2\GOOGLE~1\JYOTIS~1\SJPv3 
+rem #note no spaces module.js:340   throw err;	Error: Cannot find module 'C:\Users\sprabhakara2\GOOGLE~1\Jyotish'
+cordova build android
+
+If needed
+cordova platform add android
+
+--------------Configs
+app/AndroidManifest.xml
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	
+---Change all icons if new build with IrfanView.
+
+-------Apache httpd.conf
+LoadModule alias_module modules/mod_alias.so #(verify)
+<IfModule alias_module>
+# ADD THIS LINES FOR YOUR VIRTUAL DIRECTORIES
+Alias /sjp C:/Users/sprabhakara2/Google Drive/Jyotish Tool/SJPv3/www
+Alias /project2 /home/me/web/project2
+Alias /project3 /home/me/web/project3
+</IfModule>
+# SETTING DIRECTORY FOR /home/me/web/project1
+<Directory "C:/Users/sprabhakara2/Google Drive/Jyotish Tool/SJPv3/www">
+Options None
+AllowOverride All
+Order allow,deny
+Allow from all
+</Directory>
+ 
+	
