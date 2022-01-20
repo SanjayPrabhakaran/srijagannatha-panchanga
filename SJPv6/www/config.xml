@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.SriJagannatha.Panchanga" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>SJP</name>
+    <description>
+       Sri Jagannatha Panchanga
+    </description>
+    <author email="sanjaychettiar@gmail.com" href="http://srijagannatha-panchanga.googlecode.com">
+        Sanjay Prabhakaran
+    </author>
+    <content src="SJP.html" />
+    <access origin="*" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+	<feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.InAppBrowser" />
+	</feature>
+</widget>
