@@ -1,4 +1,4 @@
-//Functions for Jyotish 
+﻿//Functions for Jyotish 
 //By : Sanjay Prabhakaran
 //Signs: 1 Aries, 2 Taurus....12/0 Pisces
 function GetDivisionalSign(degrees,division,object)//For a given degree get the division (D1,D2, etc) sign 
@@ -29,13 +29,15 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k=Sign;
 			break;}
 			case "Dreshkana":
-			case "D3":{
+			case "D3":
+				{
 				AmshaPortion = 10;
 				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
 				k=Sign+(Amsha*4-4);
 				k%=12;
 				if(k==0)k=12;
-			break;}
+				break;
+				}
 			case "D3-Somanatha":
 			case "D3-S":{
 				AmshaCycles = 3;//cycles
@@ -44,6 +46,14 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k=d3s[AmshaPada];
 				console.log(degrees,AmshaPortion,AmshaPada,k);
 				break;}
+			case "Chaturtamsa":
+			case "D4":
+				AmshaPortion = 7.5;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=Sign+(Amsha*3-3);
+				k%=12;
+				if(k==0)k=12;
+				break;			
 			case "Saptamsa":
 			case "D7":
 				AmshaCycles = 7;
