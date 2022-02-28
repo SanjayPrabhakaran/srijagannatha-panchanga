@@ -348,8 +348,8 @@ function getPanchanga(date_time,longitude,latitude){
     }
     chart.sort(function(a,b){return a.order - b.order;});
     
-    this.html+= "<a href=SJPdasa.htm?degrees="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
-                "&datetime="+encodeURIComponent(this.date_time.toString())+"&antaradasha=1&submit=Calculate>Moon Vimshottari Dasa</a></br>";
+    this.html+= "<a href=SJPdasa.htm?desc=Dasa%20&degrees="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
+                "&datetime="+encodeURIComponent(this.date_time.toString())+"&antaradasha=1&ayush=120&submit=Calculate>Moon Vimshottari Dasa</a></br>";
      
     this.html =this.html +"</tr></table>"+
                 "\n<br/><b>Maandi Day Time & Position:</b>"+formatTimeSS(this.MaandiDayTime)+ " - " + toSignDeg(this.MaandiDay.Ascendant)+

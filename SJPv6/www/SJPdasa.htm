@@ -1,4 +1,3 @@
-
 <HTML>
 <HEAD>
 <TITLE> SJP Dasa</TITLE>
@@ -6,24 +5,32 @@
 <BODY onload="javascript:init()" id=contents>
 <script src="SJP.html" ></script>
 <form id=forminput  method=get>
-		<table id=formtable cellspacing=0 cellpadding=0 border=0>
-		<tr><td>Dasha Degrees:</td><td><input id="degrees" name="degrees" value="53" type=text></td></tr>
-		<tr><td>Time Zone:</td><td><input id="timezone"  name="timezone" type=text value="+5.5" size=5></td></tr>
+	<table id=formtable cellspacing=0 cellpadding=0 border=0>
+		<tr><td>Desc:</td>
+			<td><input id="desc" name="desc" value="Dasa of:" type=text>
+			</td></tr>
+		<tr><td>Dasha Degrees:</td>
+			<td><input id="degrees" name="degrees" value="53" type=text>
+			</td></tr>
+		<tr><td>Time Zone:</td>
+			<td><input id="timezone"  name="timezone" type=text value="+5.5" size=5></td></tr>
 		<tr><td>Birth Date Time:</td><td><input id="datetime" name="datetime" type=text value="19 Jul 1971" size=15></td></tr>
 		<tr><td>Purna Ayush:</td><td><input id=ayush name="ayush" type=text value="120" size=15></td></tr>
-		<tr><td>Dasha:</td><td><select id=dasha name="dasha">
-									<option selected>Vimshottari</option>
-									<option >Ashtottari-Ardra</option>
-									<option >Vimshottari</option>
-								</select>
+		<tr><td>Dasha:</td>
+			<td><select id=dasha name="dasha">
+			<option selected>Vimshottari</option>
+			<option >Ashtottari-Ardra</option>
+			<option >Vimshottari</option>
+			</select>
+			</td?>
 		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>
 		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text value="19 Jul 1971" size=15></td></tr>
 		<tr><td>Level of Antar Dasha:</td><td><select id=antaradasha name="antaradasha">
-									<option selected value=1>Maha Dasha</option>
-									<option value=2>Antara Dasha</option>
-									<option value=3>Prati Antara Dasha</option>
-									<option value=4>Sookshma Antara Dasha</option>
-									<option value=5>Prana Antara Dasha</option>
+	<option selected value=1>Maha Dasha</option>
+	<option value=2>Antara Dasha</option>
+	<option value=3>Prati Antara Dasha</option>
+	<option value=4>Sookshma Antara Dasha</option>
+	<option value=5>Prana Antara Dasha</option>
 									<option value=6>Deha Antara Dasha</option>
 									<option value=9>All Antara Dashas at event</option>
 								</select>
@@ -169,56 +176,53 @@ function MakeURLParams(fromURL,paramslist,submit){
 	url=url.substring(0,url.length-1);
 	return url;
 }
-function calculate(){
+function calculate(){//Called when 'calculate' button is pressed.
 	document.getElementsByTagName("body")[0].innerHTML="";
     var editlink = '<a href='+window.location.href.replace("&submit=Calculate","")+'><strong>Change the Data</strong></a>';    
 	document.write("<b>URL Command : </b>"+MakeURLParams(window.location.href,paramslist,1)+"<br><br>"+
 					editlink + 
-					getUduDasa(params['degrees'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha']).html + 
+					getUduDasa(params['desc'],params['degrees'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha'],params['ayush']).html + 
 					editlink);
 	document.close();
 }
 
-function getUduDasa(moon,date,dasa,eventdatetime,antaradasha){
+function getUduDasa(desc,degrees,datetime,dasha,eventdatetime,antaradasha,ayush){
 	//log.console(moon,date,dasa,eventdatetime,antaradasha);
-	moon%=360;
+	compress=ayush/120;
+	degrees%=360;
 	text="";
-	var d= new Date(date);
-	d.setTime(Date.parse(date));
-	this.moon = moon;	
+	var d= new Date(datetime);
+	d.setTime(Date.parse(datetime));
+	this.moon = degrees;
 	this.date = d;
 	this.html="<table border=1>";
-	switch(dasa){
+	switch(dasha){
 		default:
 		case "Vimshottari":
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
-			for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
-			nx_past = (moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			//for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
+			nx=this.moon/13.333333
+			i=Math.trunc(nx); //Nx index
+			nx_past = nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
 			yearsPast=(nx_past)*UduDasaVimshottari[i][4]; //Years past in the 
-			this.html+= "<tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
-			//this.html+= "<tr><td>"+UduDasaVimshottari[i][3]+"</td><td>"+d.toLocaleString()+"</td><td>"+balance.toPrecision(4)+"</td></tr>";
-			d.setTime(d.getTime()-yearsPast*365.25*24*60*60*1000);
+			this.html+= "<br>"+desc+"<br><tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
+			d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
 			--i;//Correct NX Index
-			//moon = UduDasaVimshottari[i][2]);
 			for(k=1;k<10;++k){
 				++i;if(i>27)i=1;//"i" is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
-				eventdatetime.setTime(d.getTime()+1000);
-				dasa_end.setTime(d.getTime()+UduDasaVimshottari[i][4]*365.25*24*60*60*1000);
-				paramslist['degrees']=UduDasaVimshottari[i][2];
+				eventdatetime.setTime(d.getTime()+1);
+				dasa_end.setTime(d.getTime()+UduDasaVimshottari[i][4]*compress*365.25*24*60*60*1000);
+				paramslist['desc']= desc+"-"+UduDasaVimshottari[i][3];
+				paramslist['degrees']=UduDasaVimshottari[i][2]+0.00001;
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
-				paramslist["eventdatetime"]=params['eventdatetime'];;	
+				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
-				paramslist['datetime']=params['datetime'];
-				paramslist['ayush']=UduDasaVimshottari[i][4];
+				paramslist['datetime']=d.toLocaleString();params['datetime'];
+				paramslist['ayush']=UduDasaVimshottari[i][4]*compress;
 				paramslist['submit']='Calculate';
-				//click_url=  "SJPdasa.htm?degrees="+escape(moon)+"&timezone="+params['timezone']+"&datetime="+params['datetime']+"&ayush="+UduDasaVimshottari[i][4]+"&submit=Calculate";
-				//click_url=MakeURLParams(click_url,1)
-				//alert(click_url);
-				//URL Command : file://wfsmnsv2nsf24/C_IND_Users/U608394/My%20Documents/SJC/srijagannatha-panchanga-master/SJPv4/www/SJPdasa.htm?degrees=250.80055663603866&timezone=5.5&datetime=Tue%20Nov%2021%202017%2022%3A42%3A13%20GMT%2B0530%20(India%20Standard%20Time)&ayush=120&dasha=Vimshottari&eventdatetime=19%20Jul%201971&antaradasha=1&compression=1&submit=Calculate
-				//console.log(MakeURLParams(window.location.href,paramslist,1));
   				this.html+= "<tr><td>"+
 							"<a href="+MakeURLParams(window.location.href,paramslist,1)+">"+
 								UduDasaVimshottari[i][3]+"</a></td><td>"+											
