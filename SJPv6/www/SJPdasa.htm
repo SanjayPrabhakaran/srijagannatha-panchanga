@@ -9,8 +9,8 @@
 		<tr><td>Desc:</td>
 			<td><input id="desc" name="desc" value="Dasa of:" type=text>
 			</td></tr>
-		<tr><td>Dasha Degrees:</td>
-			<td><input id="degrees" name="degrees" value="53" type=text>
+		<tr><td>Dasha sphuta:</td>
+			<td><input id="sphuta" name="sphuta" value="53" type=text>
 			</td></tr>
 		<tr><td>Time Zone:</td>
 			<td><input id="timezone"  name="timezone" type=text value="+5.5" size=5></td></tr>
@@ -73,7 +73,7 @@ function calcLocalTime(d) {
 //-----------------------------------------------------------
 //Globals
 var UduDasaVimshottari = [
-//		[0 "27Scheme",1 "Nakshatra",2 0/*End Degree*/,2 "Dasa",4 "120"/*Vim Years"*/],
+//		[0 "27Scheme",1 "Nakshatra",2 0/*End sphuta*/,2 "Dasa",4 "120"/*Vim Years"*/],
 		[27,"Revati",0,"Mercury",17],
 		[ 1,"Ashvini",13+1/3,"Ketu",7],
 		[ 2,"Bharani",26+2/3,"Venus",20],
@@ -104,7 +104,7 @@ var UduDasaVimshottari = [
 		[27,"Revati",360,"Mercury",17]
 ];
 var UduDasaAshtottari = [
-//		["27Scheme","Nakshatra",0/*End Degree*/,"Dasa","120"/*Vim Years"*/],
+//		["27Scheme","Nakshatra",0/*End sphuta*/,"Dasa","120"/*Vim Years"*/],
 		[28,"Revati",0,"Mercury",17],
 		[ 1,"Ashvini",13+1/3,"Ketu",7],
 		[ 2,"Bharani",26+2/3,"Venus",20],
@@ -181,19 +181,18 @@ function calculate(){//Called when 'calculate' button is pressed.
     var editlink = '<a href='+window.location.href.replace("&submit=Calculate","")+'><strong>Change the Data</strong></a>';    
 	document.write("<b>URL Command : </b>"+MakeURLParams(window.location.href,paramslist,1)+"<br><br>"+
 					editlink + 
-					getUduDasa(params['desc'],params['degrees'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha'],params['ayush']).html + 
+					getUduDasa(params['desc'],params['sphuta'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha'],params['ayush']).html + 
 					editlink);
 	document.close();
 }
 
-function getUduDasa(desc,degrees,datetime,dasha,eventdatetime,antaradasha,ayush){
-	//log.console(moon,date,dasa,eventdatetime,antaradasha);
+function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
 	compress=ayush/120;
-	degrees%=360;
+	sphuta%=360;
 	text="";
-	var d= new Date(datetime);
+	var d= new Date();
 	d.setTime(Date.parse(datetime));
-	this.moon = degrees;
+	this.moon = sphuta;
 	this.date = d;
 	this.html="<table border=1>";
 	switch(dasha){
@@ -214,20 +213,23 @@ function getUduDasa(desc,degrees,datetime,dasha,eventdatetime,antaradasha,ayush)
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1);
-				dasa_end.setTime(d.getTime()+UduDasaVimshottari[i][4]*compress*365.25*24*60*60*1000);
-				paramslist['desc']= desc+"-"+UduDasaVimshottari[i][3];
-				paramslist['degrees']=UduDasaVimshottari[i][2]+0.00001;
+				duration=UduDasaVimshottari[i][4]*compress;
+				dasa_end.setTime(d.getTime()+duration*365.25*24*60*60*1000);		
+				console.log("Dasa End:"+dasa_end);
+				paramslist['desc']= desc+"<br>"+UduDasaVimshottari[i][3]+" "+d.toLocaleString();
+				paramslist['sphuta']=UduDasaVimshottari[i][2]+0.00001;
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
-				paramslist['datetime']=d.toLocaleString();params['datetime'];
+				paramslist['datetime']=d.toISOString();//params['datetime'];
 				paramslist['ayush']=UduDasaVimshottari[i][4]*compress;
 				paramslist['submit']='Calculate';
   				this.html+= "<tr><td>"+
 							"<a href="+MakeURLParams(window.location.href,paramslist,1)+">"+
 								UduDasaVimshottari[i][3]+"</a></td><td>"+											
 							d.toLocaleString()+"</td><td>"+
-							UduDasaVimshottari[i][4].toPrecision(2)+"</td></tr>";
+							duration.toPrecision(2)+"</td></tr>";
+				console.log("Dasa Start:"+d);
 				d.setTime(dasa_end.getTime());	
 			}
 			break;
