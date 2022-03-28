@@ -1,7 +1,7 @@
 MONTH
 DATE
-YEAR
-HH.MMmmmmmm(where mm is decimals of minutes after .)
+YEAR (digit)
+HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
 -HH.MMmmmmmm(TimeZone -ve is east Hours.MMmmmm)
 -DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
 DD.MMmmmm (Latitude Degrees.MMmmmm)
@@ -9,7 +9,7 @@ MM.mmmmmm (Altitude meters)
 -HH.MMmmmmmm(Winter TimeZone -ve is east)
 -HH.MMmmmmmm(Daylight TimeZone -ve is east)
 0 (Always 0)
-105 (What is this? Changes with charts?)
+105 (What is this? Changes with location selection?)
 Location (Location in Names)
 India (Country in names)
 1 (Always 1)
