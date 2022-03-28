@@ -24,10 +24,10 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 		switch(division){
 			case "Rashi":
 			case "D1":
-			default: {//Assume Rashi on default i.e if not clear.
+			default: {//Assume we need Rashi chart on default i.e if not clear.
 				division="Rashi";
-				k=Sign;
-			break;}
+				k=Sign; //Rashi sign does no change
+				break;}
 			case "Dreshkana":
 			case "D3":
 				{
@@ -54,16 +54,6 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k%=12;
 				if(k==0)k=12;
 				break;			
-			case "Saptamsa":
-			case "D7":
-				AmshaCycles = 7;
-				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
-				break;
-			case "Navamsa":
-			case "D9":
-				AmshaCycles = 9;
-				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
-				break;
 			case "Dasamsa":
 			case "D10":
 				AmshaPortion = 3;
@@ -87,15 +77,6 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k%=12;
 				if(k==0)k=12;
 				break;
-			case "Shodashamsa":
-			case "D16":
-				AmshaCycles = 16;
-				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
-				break;
-			case "Vimsamsa":
-			case "D20":
-				k=parseInt(( (degrees*20)%360)/30+0.999999999);
-				break;
 			case "ChaturVimshamsha":
 			case "D24":
 				AmshaPortion = 30/24;
@@ -111,6 +92,46 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k+=24;k%=12;
 				if(k==0)k=12;
 				break;
+			case "Trimshamsha":
+			case "D30":
+				AmshaPortion = 1;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=ParasharaTrimshamsa[SignOdd][Amsha];
+				break;
+			case "Shastiamsha":
+			case "D60":
+				AmshaPortion = 0.5;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=Sign+Amsha-1;
+				k%=12;
+				if(k==0)k=12;
+				break;
+			//For All Cyclic 
+			case "Saptamsa":
+			case "D7":
+				AmshaCycles = 7;
+				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
+				break;
+			case "Navamsa":
+			case "D9":
+				AmshaCycles = 9;
+				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
+				break;
+			case "Shodashamsa":
+			case "D16":
+				AmshaCycles = 16;
+				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
+				break;
+			case "Vimsamsa":
+			case "D20":
+				AmshaCycles = 20;
+				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
+				break;
+			case "Bhamsa-Nakshatramsa":
+			case "D27":
+				AmshaCycles = 27;
+				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
+				break;
 			case "KhaVedamsa":
 			case "D40":
 				AmshaCycles = 40;
@@ -121,20 +142,8 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				AmshaCycles = 45;
 				k=parseInt(( (degrees*AmshaCycles)%360)/30+0.999999999);
 				break;
-			case "Shastiamsha":
-			case "D60":
-				AmshaPortion = 0.5;
-				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
-				k=Sign+Amsha-1;
-				k%=12;
-				if(k==0)k=12;
-				break;
-			case "Trimshamsha":
-			case "D30":
-				AmshaPortion = 1;
-				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
-				k=ParasharaTrimshamsa[SignOdd][Amsha];
-				break;
+			//For All Cyclic Charts
+
 		}
 	return k;
 }
