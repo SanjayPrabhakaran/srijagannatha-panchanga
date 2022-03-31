@@ -9,13 +9,16 @@ Javascript and HTML has been chosen as the best development platform for this ut
 
 ## How to install the package
 
- * Download SJPV4 folder and open www/SJP.html
- * For Android download and install SJP(1).apk
- * For single file lite version download file SJPL.html
+ * Download SJPV6 folder and open www/SJP.html
+ * For Android create .apk example: download and install SJP(1).apk
+ * Don't use old versions.
+ * Latest uses swiss ephemerisF
 
 Please fee free to raise your issues in Issues Tab
 
 ### Updates History
+*** 2022-03-21 : Use SJP6 folder and create your package using cordova.
+
 ** 1 Jun 2016 ** Updated fixes with Lagna start end time and Bhaava Table.
 
 **15 Apr 2016 :** Uploaded all files to GitHub. Was originally kept at code.google.com
