@@ -201,8 +201,8 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
 			//for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
-			nx=this.moon/13.333333
-			i=Math.trunc(nx); //Nx index
+			nx=this.moon/13.333333;
+			i=Math.trunc(nx)+1; //Nx index
 			nx_past = nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
 			yearsPast=(nx_past)*UduDasaVimshottari[i][4]; //Years past in the 
 			this.html+= "<br>"+desc+"<br><tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
@@ -217,7 +217,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
 				dasa_end.setTime(d.getTime()+duration*365.25*24*60*60*1000);		
 				console.log("Dasa End:"+dasa_end);
 				paramslist['desc']= desc+"<br>"+UduDasaVimshottari[i][3]+" "+d.toLocaleString();
-				paramslist['sphuta']=UduDasaVimshottari[i][2]+0.00001;
+				paramslist['sphuta']=UduDasaVimshottari[i][2]-13.33333331;
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
