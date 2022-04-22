@@ -32,7 +32,8 @@ var order = [0,3,6,2,5,1,4];
 var nakshatra_size = 13+1/3; //Nakshatra Size in degrees.
 
 var samvatsara = ["Prabhava","Vibhava","Shukla","Pramodoota","Prajothpatti","Āngirasa","Shrīmukha","Baāva","Yuva","Dhātru","Īshvara","Bahudhānya","Pramāthi","Vikrama","Vrusha","Chitrabhānu","Svabhānu","Tārana","Pārthiva","Vyaya","Sarvajith","Sarvadhāri","Virodhi","Vikruta","Khara","Nandana","Vijaya","Jaya","Manmatha","Durmukhi","Hevilambi","Vilambi","Vikāri","Shārvari","Plava","Shubhakrutha","Shobhakrutha","Krodhi","Vishvāvasu","Parābhava","Plavanga","Kīlaka","Saumya","Sādhārana","Virodhikrutha","Paridhāvi","Pramādeecha","Ānanda","Rākshasa","Anala","Pingala","Kālayukthi","Siddhārthi","Raudra","Durmathi","Dundubhi","Rudhirodgāri","Raktākshi","Krodhana","Akshaya"];
-var KaliBaseDate = new Date(5070, 7, 19, 5, 30, 0, 0);//2017 = 5117–5118
+//var KaliBaseDate = new Date(5070, 7, 19, 5, 30, 0, 0);//2017 = 5117–5118
+var KaliBaseDate = new Date(-3102, 1, 18, 17, 30, 0, 0);//18 February 3102 BCE 12:00 IST or 17:30 GMT Add this to any date for Kali Dae
 var panchanga;
 var timerID;
 var TimeZoneOffset;
@@ -213,7 +214,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.sun_cur = this.grahas.grahas[0];
     this.sunrise = new Date(date_time);
     this.sunrise_next = new Date(date_time);
-    var adjust = 0;
+    var adjust = 0; // Adjust Time Sun rise/set time if needed.
     if(this.date_time < new Date("1 Jan 1970")) adjust=day; //This adjust is needed for days in -ve it seems
     var sr= calcSunriseGMT(dateToJul(cur_date),latitude,longitude);
     var sr2= calcSunriseGMT(dateToJul(cur_date+day),latitude,longitude);
@@ -280,8 +281,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
 
     this.iSamvatasara = ( (date_time.getFullYear()-1)%60 )+ ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6);
-	KaliYear = new Date(date_time.getTime()+KaliBaseDate.getTime());
-    this.sSamvatsara = samvatsara[this.iSamvatasara]+" <b>Kali Abda:</b>"+KaliYear.getFullYear();
+    this.sSamvatsara = samvatsara[this.iSamvatasara];
     this.iSauraMaasa = parseInt(this.grahas.grahas[0]/30);
     this.sSauraMaasa = asRashi[iSauraMaasa];
 
@@ -335,10 +335,15 @@ function getPanchanga(date_time,longitude,latitude){
     var p = Math.round(this.nakshatra_cur+0.5)+(this.vara_cur+1)+Math.round(this.tithi_cur+0.5)+Math.round(chart[0].long/30+0.5);
     this.html+= "\n<br/><b>Panchaka Nx+Tithi+vara+lagna=</b>"+p+"->"+panchaka[p%9];
     }
+    KaliYear = date_time.getFullYear()+3101;
+    BeforeApr14 = (date_time.getMonth()*31+date_time.getDate())>104?0:1; //Jan to April 14th (31+28+31+14 = 104 days )
+    KaliYear -= BeforeApr14;
+    alert(AfterApr14); 
     this.html+= "\n<br/><br/><b>Samvatsara </b>"+this.sSamvatsara;
+    this.html+= "\n<br/><b>Kali Abda:</b>"+KaliYear;
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
- 
-    this.html+="\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
+    this.html+= "\n<br/><b>Ishta Ghati <b>"+((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes/24).toFixed(4);
+    this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
                 "\n<br/><br/>";
 	
     chart.sort(function(a,b){return a.long - b.long;});
