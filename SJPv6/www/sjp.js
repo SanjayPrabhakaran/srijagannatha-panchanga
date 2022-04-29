@@ -32,6 +32,7 @@ var order = [0,3,6,2,5,1,4];
 var nakshatra_size = 13+1/3; //Nakshatra Size in degrees.
 
 var samvatsara = ["Prabhava","Vibhava","Shukla","Pramodoota","Prajothpatti","Āngirasa","Shrīmukha","Baāva","Yuva","Dhātru","Īshvara","Bahudhānya","Pramāthi","Vikrama","Vrusha","Chitrabhānu","Svabhānu","Tārana","Pārthiva","Vyaya","Sarvajith","Sarvadhāri","Virodhi","Vikruta","Khara","Nandana","Vijaya","Jaya","Manmatha","Durmukhi","Hevilambi","Vilambi","Vikāri","Shārvari","Plava","Shubhakrutha","Shobhakrutha","Krodhi","Vishvāvasu","Parābhava","Plavanga","Kīlaka","Saumya","Sādhārana","Virodhikrutha","Paridhāvi","Pramādeecha","Ānanda","Rākshasa","Anala","Pingala","Kālayukthi","Siddhārthi","Raudra","Durmathi","Dundubhi","Rudhirodgāri","Raktākshi","Krodhana","Akshaya"];
+var aPanchaSamvatsara = ["Idvatsara(Rudra)-5th","Samvatsara(Agni)-1st","Parivatsara(Aditya)-2nd","Idaavatsara(Vaayu)-3rd","Anuvatsara(Indu)-4th","Idvatsara(Rudra)-5th"];
 //var KaliBaseDate = new Date(5070, 7, 19, 5, 30, 0, 0);//2017 = 5117–5118
 var KaliBaseDate = new Date(-3102, 1, 18, 17, 30, 0, 0);//18 February 3102 BCE 12:00 IST or 17:30 GMT Add this to any date for Kali Dae
 var panchanga;
@@ -182,7 +183,7 @@ function getLagnaTable(AscData,date_time,longitude,latitude){
 	var next = Math.floor(l.Ascendant/30)
 	if(next!=previous)
 		{	this.html+="<tr><td>"+asRashi[previous]+"</td><td>"+a.toLocaleString()+"</td></tr>";
-			console.log("gp:"+a+"-"+i+"-"+l.Ascendant);
+			//console.log("gp:"+a+"-"+i+"-"+l.Ascendant);
 			previous=next;
 		}
 	}
@@ -280,8 +281,8 @@ function getPanchanga(date_time,longitude,latitude){
     this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur]);
     this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
 
-    this.iSamvatasara = ( (date_time.getFullYear()-1)%60 )+ ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6);
-    this.sSamvatsara = samvatsara[this.iSamvatasara];
+    this.iSamvatsara = ( (date_time.getFullYear()-1)%60 )+ ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6);
+    this.sSamvatsara = samvatsara[this.iSamvatsara];
     this.iSauraMaasa = parseInt(this.grahas.grahas[0]/30);
     this.sSauraMaasa = asRashi[iSauraMaasa];
 
@@ -337,9 +338,9 @@ function getPanchanga(date_time,longitude,latitude){
     }
     KaliYear = date_time.getFullYear()+3101;
     BeforeApr14 = (date_time.getMonth()*31+date_time.getDate())>104?0:1; //Jan to April 14th (31+28+31+14 = 104 days )
-    KaliYear -= BeforeApr14;
-    alert(AfterApr14); 
-    this.html+= "\n<br/><br/><b>Samvatsara </b>"+this.sSamvatsara;
+    KaliYear = KaliYear-BeforeApr14;
+    this.html+= "\n<br/><br/><b>Samvatsara </b>"+this.sSamvatsara+"("+(this.iSamvatsara+1)+")";
+    this.html+= "\n<br/><b>Pancha Samvatsara </b>"+aPanchaSamvatsara[(this.iSamvatsara+1)%5];
     this.html+= "\n<br/><b>Kali Abda:</b>"+KaliYear;
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
     this.html+= "\n<br/><b>Ishta Ghati <b>"+((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes/24).toFixed(4);
@@ -822,7 +823,7 @@ function getMuhurthaTable(sunrise,sunset,paksha,vaara){
     var i,g;
 	for(PakshiIndex=0;PakshiIndex<25;++PakshiIndex)
 	{
-		console.log("Searching Pakshi>"+PakshiIndex + "@" +PakshiActivity[paksha*1][PakshiIndex][0]+"::"+vaara+"<"+PakshiActivity[paksha*1][PakshiIndex][0].search(vaara));
+		//console.log("Searching Pakshi>"+PakshiIndex + "@" +PakshiActivity[paksha*1][PakshiIndex][0]+"::"+vaara+"<"+PakshiActivity[paksha*1][PakshiIndex][0].search(vaara));
 		if(PakshiActivity[paksha*1][PakshiIndex][0].search(vaara)>=0)break;
 	};
     for(i=0;i<30;++i){
@@ -918,7 +919,7 @@ function calculateAscendant(date_time,latitude,longitude){//Returns Ascendant Ob
 	//Right ascension (abbreviated RA; symbol α) is the angular distance measured eastward along the celestial equator from the vernal equinox to the hour circle of the point in questio
     //ra = (((6.6460656 + 2400.0513 * t + 2.58e-5 * t * t + f) * 15 - ln) % 360) * d2r; // RAMC
     ra = (((6.6460656 + 2400.0512617 * t + 2.581e-5 * t * t + f) * 15 - ln) % 360) * d2r; // RAMC
-	console.log("Calculate Ascendant t="+t);
+	//console.log("Calculate Ascendant t="+t);
 	//Obliquity of the ecliptic is the term used by astronomers for the inclination of Earth's equator with respect to the ecliptic, or of Earth's rotation axis to a perpendicular to the ecliptic. It is about 23.4° and is currently decreasing 0.013 degrees (47 arcseconds) per hundred years due to planetary perturbations.[11] ε epsilon
 	//https://en.wikipedia.org/wiki/Axial_tilt
 	//T is Julian centuries from J2000.0.[17]
