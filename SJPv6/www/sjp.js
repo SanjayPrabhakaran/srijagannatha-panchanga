@@ -336,7 +336,7 @@ function getPanchanga(date_time,longitude,latitude){
     var p = Math.round(this.nakshatra_cur+0.5)+(this.vara_cur+1)+Math.round(this.tithi_cur+0.5)+Math.round(chart[0].long/30+0.5);
     this.html+= "\n<br/><b>Panchaka Nx+Tithi+vara+lagna=</b>"+p+"->"+panchaka[p%9];
     }
-    KaliYear = date_time.getFullYear()+3101;
+    KaliYear = date_time.getFullYear()+3102;
     BeforeApr14 = (date_time.getMonth()*31+date_time.getDate())>104?0:1; //Jan to April 14th (31+28+31+14 = 104 days )
     KaliYear = KaliYear-BeforeApr14;
     this.html+= "\n<br/><br/><b>Samvatsara </b>"+this.sSamvatsara+"("+(this.iSamvatsara+1)+")";
