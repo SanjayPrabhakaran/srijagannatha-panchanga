@@ -178,7 +178,6 @@ function getLagnaTable(AscData,date_time,longitude,latitude){
 	for(var i=0;i<24*60;++i)
 	{
 	a.setMinutes(a.getMinutes()+1);
-	//debugger;
 	l=new calculateAscendant(a,latitude,longitude);
 	var next = Math.floor(l.Ascendant/30)
 	if(next!=previous)
@@ -189,6 +188,10 @@ function getLagnaTable(AscData,date_time,longitude,latitude){
 	}
 	this.html+="</table>";
 	return this;
+}
+function getJHDStringEsc(){
+	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
+	return   '19\n07\n1971\n09.1400\n-5.5' ;
 }
 
 
@@ -291,7 +294,7 @@ function getPanchanga(date_time,longitude,latitude){
     for(i=1;i<9;++i){
         chart[i].long = this.grahas.grahas[i-1];
         chart[i].speed = this.grahas.speed[i-1];
-        chart[i].retro = this.grahas.speed[i-1]<0?"<b>R</b>":"";
+	chart[i].retro = this.grahas.speed[i-1]*day>340?"<b>R</b>":"";
         }
     for(i=0;i<10;++i){
             chart[i].bhava=(parseInt(chart[i].long/30)-parseInt(chart[0].long/30)+12)%12+1;
@@ -301,6 +304,8 @@ function getPanchanga(date_time,longitude,latitude){
 				+","+this.karana_name+","+this.yoga_name+"</small>");
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue) 
+    this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
+    this.html+="<a href=\"javascript:getJHDStringEsc();\" download='test.jhd'>Save JHD</a>";
     this.html += "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
@@ -1273,6 +1278,7 @@ function getGrahasEph(date_time,lat,lon){
 	$const.glat = lat; // latitude
 	$processor.init ();
 
+
 	// sun, mercury, venus, moon, mars, jupiter, saturn, uranus, neptune, pluto, chiron, sirius
 	var body = $moshier.body.sun;
 	$processor.calc (date, body);
@@ -1307,7 +1313,8 @@ function getGrahasEph(date_time,lat,lon){
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[4]=((360+body.position.apparentLongitude-this.grahas[4])%360)/day;
-
+	debugger;
+        
 	body = $moshier.body.venus;
 	$processor.calc (date, body);
 	this.grahas[5]=body.position.apparentLongitude;
