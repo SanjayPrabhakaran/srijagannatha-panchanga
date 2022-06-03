@@ -284,7 +284,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur]);
     this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
 
-    this.iSamvatsara = ( (date_time.getFullYear()-1)%60 )+ ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6);
+    this.iSamvatsara = ( (date_time.getFullYear()-1) + ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6))%60; // -7 or -6 is correction on commonn year for getting samvatsara index ,,,after april the samvatsara starts.
     this.sSamvatsara = samvatsara[this.iSamvatsara];
     this.iSauraMaasa = parseInt(this.grahas.grahas[0]/30);
     this.sSauraMaasa = asRashi[iSauraMaasa];
