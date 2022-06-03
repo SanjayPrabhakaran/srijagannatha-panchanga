@@ -280,7 +280,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.karana_exit = new Date();
     karana_exit.setTime(cur_date+(6-((360+this.moon_cur - this.sun_cur)%360)%6)/(this.grahas.speed[1] - this.grahas.speed[0]));
 
-    this.kaalatable = new getKaalaTable(this.vara_cur,this.sunrise,this.sunset);
+    this.kaalatable = new getKaalaTable(this.vara_cur,this.sunrise,this.sunset,latitude,longitude);
     this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur]);
     this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
 
@@ -768,8 +768,8 @@ function getChart(chart,center){
 function getPanchaPakshiTable(vara_cur,sunrise,sunset){
     return this;
 }
-function getKaalaTable(vara_cur,sunrise,sunset){
-    this.html="<table border=2><tr><th>Start Time</th><th>RahuKaala Chakra</th><th>Gulika Chakra</th><th>Chaughadia Chakra</th></tr>";
+function getKaalaTable(vara_cur,sunrise,sunset, latitude,longitude){
+    this.html="<table border=2><tr><th>Start Time</th><th>RahuKaala Chakra</th><th>Gulika Chakra</th><th>Chaughadia Chakra</th><th>Rising degrees</th></tr>";
     var k=0;
     var kaala = new Date();
     this.kaala_start = new MyArray(16);
@@ -790,7 +790,12 @@ function getKaalaTable(vara_cur,sunrise,sunset){
             this.html+="<tr><td style='color:red;font-weight: bold;'>"+formatTime(this.kaala_start[k]);
         else
             this.html+="<tr><td>"+formatTime(this.kaala_start[k]);
-                this.html+="</td><td>"+this.kaala_name[k]+"</td>"+"<td id=G"+i+">"+(i===7?"--":GulikaChakra[(vara_cur+i)%7])+"</td>"+"<td>"+this.caughadia_name[k]+"</td>"+"</tr>";
+	    l=new calculateAscendant(this.kaala_start[k],latitude,longitude);
+                this.html+="</td><td>"+this.kaala_name[k]+"</td>"
+		    		+"<td id=G"+i+">"+(i===7?"--":GulikaChakra[(vara_cur+i)%7])+"</td>"
+		    		+"<td>"+this.caughadia_name[k]+"</td>"
+	    			+"<td>"+toSignDeg(l.Ascendant)+"</td>"
+		    		+"</tr>";
                 kaala.setTime(kaala.getTime()+kaalaunit);
         ++k;
     }
@@ -808,7 +813,12 @@ function getKaalaTable(vara_cur,sunrise,sunset){
             this.html+="<tr><td style='color:red;font-weight: bold;'>"+formatTime(this.kaala_start[k]);
         else
             this.html+="<tr><td>"+formatTime(this.kaala_start[k]);
-                this.html+="</td><td>"+this.kaala_name[k]+"</td>"+"<td id=G"+(i+8)+">"+(i===7?"--":GulikaChakra[(vara_cur+i+4)%7])+"</td>"+"<td>"+this.caughadia_name[k]+"</td>"+"</tr>";    
+	    l=new calculateAscendant(this.kaala_start[k],latitude,longitude);
+                this.html+="</td><td>"+this.kaala_name[k]+"</td>"
+		    +"<td id=G"+(i+8)+">"+(i===7?"--":GulikaChakra[(vara_cur+i+4)%7])+"</td>"
+		    +"<td>"+this.caughadia_name[k]+"</td>"
+	    			+"<td>"+toSignDeg(l.Ascendant)+"</td>"
+		    +"</tr>";    
                 kaala.setTime(kaala.getTime()+kaalaunit);
         ++k;
     }
@@ -1313,7 +1323,7 @@ function getGrahasEph(date_time,lat,lon){
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[4]=((360+body.position.apparentLongitude-this.grahas[4])%360)/day;
-	debugger;
+	//debugger;
         
 	body = $moshier.body.venus;
 	$processor.calc (date, body);
