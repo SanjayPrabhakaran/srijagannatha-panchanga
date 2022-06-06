@@ -3,6 +3,7 @@ var DEBUG=true;
 var minutes = 1000 * 60; //Milliseconds
 var hours = minutes * 60;//Milliseconds
 var day = hours * 24;//Milliseconds
+var kali2julian = 588466;//Ahargana to subtract from Julian date to get kali ahargana.
 var t; //t : number of Julian centuries since J2000.0 t = ((jd - 2415020) + f/24 - 0.5)/36525;  
 var nakshatra =["Ashvini-Ke","Bharani-Ve","Kritika-Su","Rohini-Mo","Mrigashira-Ma","Ardra-Ra","Punarvasu-Ju","Pushya-Sa","Ashlesha-Me","Magha-Ke","Purva Phalguni-Ve","Uttara Phalguni-Su","Hasta-Mo","Chitra-Ma","Swati-Ra","Vishakha-Ju","Anuradha-Sa","Jyeshtha-Me","Mula-Ke","Purva Ashadha-Ve","Uttara Ashadha-Su","Shravan-Mo","Dhanistha-Ma","Shatabhishaj-Ra","Purva Bhadrapad-Ju","Uttara Bhadrapad-Sa","Revati-Me"];
 var nakshatra_s=["As","Bh","Kr","Ro","Mr","Ar","Pv","Pu","As","Mg","PP","UP","Ha","Ch","Sw","Vi","An","Jy","Mu","UA","PA","Sr","Dh","Sh","PB","UB","Re"];
