@@ -25,15 +25,29 @@
 			</td?>
 		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>
 		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text value="19 Jul 1971" size=15></td></tr>
-		<tr><td>Level of Antar Dasha:</td><td><select id=antaradasha name="antaradasha">
-	<option selected value=1>Maha Dasha</option>
-	<option value=2>Antara Dasha</option>
-	<option value=3>Prati Antara Dasha</option>
-	<option value=4>Sookshma Antara Dasha</option>
-	<option value=5>Prana Antara Dasha</option>
-									<option value=6>Deha Antara Dasha</option>
-									<option value=9>All Antara Dashas at event</option>
-								</select>
+		<tr><td>Level of Antar Dasha:</td><td>
+			<select id=antaradasha name="antaradasha">
+			<option selected value=1>Maha Dasha</option>
+			<option value=2>Antara Dasha</option>
+			<option value=3>Prati Antara Dasha</option>
+			<option value=4>Sookshma Antara Dasha</option>
+			<option value=5>Prana Antara Dasha</option>
+			<option value=6>Deha Antara Dasha</option>
+			<option value=9>All Antara Dashas at event</option>
+			</select>
+		</td></tr>
+		<tr><td>Starting Nakshatra</td><td>
+			<select id=starting name="starting">
+			<option selected value=0>Janma</option>
+			<option value=1>Sampat</option>
+			<option value=2>Vipat</option>
+			<option value=3>Kshema</option>
+			<option value=4>Utpanna(Pratya)</option>
+			<option value=5>Sadhak</option>
+			<option value=6>Vadha</option>
+			<option value=7>Mitra(Aadhana)</option>
+			<option value=8>Param Mitra</option>
+			</select>
 		</td></tr>
 		<tr><td>Compression</td><td><input id=compression name="compression" type=text value="1" size=5></td></tr>
 		<tr><td colspan=2 align=middle><input  type="submit" id="submit" name="submit" value=Calculate></td></tr>
@@ -64,7 +78,7 @@ function debug()
 }
 // function to calculate local time
 // in a different city
-// given the city's UTC offset
+// given the citys UTC offset
 function calcLocalTime(d) {
     utc = d.getTime() + (d.getTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
     nd = new Date(utc + (3600000*TimeZoneOffset));// create new Date object for different city using supplied offset
@@ -179,14 +193,16 @@ function MakeURLParams(fromURL,paramslist,submit){
 function calculate(){//Called when 'calculate' button is pressed.
 	document.getElementsByTagName("body")[0].innerHTML="";
     var editlink = '<a href='+window.location.href.replace("&submit=Calculate","")+'><strong>Change the Data</strong></a>';    
-	document.write("<b>URL Command : </b>"+MakeURLParams(window.location.href,paramslist,1)+"<br><br>"+
+   if(typeof(params['starting'])=='undefined')params['starting']=0;
+   
+    document.write("<b>URL Command : </b>"+MakeURLParams(window.location.href,paramslist,1)+"<br><br>"+
 					editlink + 
-					getUduDasa(params['desc'],params['sphuta'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha'],params['ayush']).html + 
+					getUduDasa(params['desc'],params['sphuta'],params['datetime'],params['dasha'],params['eventdatetime'],params['antaradasha'],params['ayush'],params['starting']).html + 
 					editlink);
 	document.close();
 }
 
-function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
+function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,starting){
 	compress=ayush/120;
 	sphuta%=360;
 	text="";
@@ -200,7 +216,6 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
 		case "Vimshottari":
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
-			//for(var i=1;(i<=28)&&(moon>UduDasaVimshottari[i][2]);++i);//Get the Nakshatra.
 			nx=this.moon/13.333333;
 			i=Math.trunc(nx)+1; //Nx index
 			nx_past = nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
@@ -208,8 +223,9 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush){
 			this.html+= "<br>"+desc+"<br><tr><th>Dasa</th><th>Year</th><th>Duration</th></tr>";
 			d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
 			--i;//Correct NX Index
+			i=i+1*starting;
 			for(k=1;k<10;++k){
-				++i;if(i>27)i=1;//"i" is the dasa index
+				++i;if(i>27)i=1;//i is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1);
