@@ -12,7 +12,7 @@ Javascript and HTML has been chosen as the best development platform for this ut
  * Download SJPV6 folder and open www/SJP.html
  * For Android create .apk example: download and install SJP(1).apk
  * Don't use old versions.
- * Latest uses swiss ephemerisF
+ * Latest uses swiss ephemeris/calculated graha positions
 
 Please fee free to raise your issues in Issues Tab
 
