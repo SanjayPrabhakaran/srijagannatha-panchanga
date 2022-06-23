@@ -739,8 +739,9 @@ function getChart(chart,center){
     var i=0;
     var s = new MyArray(13);
     for(i=0;i<=9;++i){
+	    var deg=chart[i].long%30;
      k=parseInt((chart[i].long%360)/30+0.999999999);
-     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro;
+     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+deg.toFixed(2)+"</sub>";
     }
     for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
     a="<style type=\"text/css\">.chart td {width: 4em;height: 4em;}</style>";
