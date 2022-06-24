@@ -19,4 +19,4 @@ mv /home/tarunaashree/Desktop/sanjay/git_sjp/srijagannatha-panchanga/SJPv6/platf
 git status
 git add ..
 git commit -m"latest package"
-
+git push
