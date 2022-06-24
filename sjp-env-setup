@@ -1,8 +1,3 @@
-
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-# Install Cordova
-# copy www folder to cordova www
 #Install sdk for sdkman https://sdkman.io/install
  curl -s "https://get.sdkman.io" | bash
  source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -10,4 +5,14 @@ export PATH=$PATH:$ANDROID_HOME/tools
  
  ##Install Grade  https://gradle.org/install/
  sdk install gradle 7.4.2
+
+#Install Cordova
+#copy www folder to cordova www
+#Install Git. 
+#get git repository 
  
+ #Commands to build cordova, run this from SJPv6 folder
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+cordova build
+mv /home/tarunaashree/Desktop/sanjay/git_sjp/srijagannatha-panchanga/SJPv6/platforms/android/app/build/outputs/apk/debug/app-debug.apk ..
