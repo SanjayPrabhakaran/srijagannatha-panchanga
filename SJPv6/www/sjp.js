@@ -246,7 +246,7 @@ function getPanchanga(date_time,longitude,latitude){
 	console.log(AscData);
     var temp = new Date(cur_date-this.sunrise%day);
     this.vara_cur = this.sunrise.getDay();
-	alert(vara_cur);
+	//alert(vara_cur);
     this.vara_name = vara[this.vara_cur];
     this.vara_enter = this.sunrise;
     this.vara_exit = this.sunrise_next;
