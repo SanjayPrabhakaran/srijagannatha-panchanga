@@ -197,8 +197,25 @@ function getJHDStringEsc( parray){
 	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
 	//chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
 	var d=new Date(parray['bdate']+" " +decodeURIComponent(parray['btime']));
-	str=''+d.getDate()+'\n'+(d.getMonth()+1)+'\n'+d.getFullYear()+'\n'+d.getHours()+'.'+d.getMinutes()+""+d.getSeconds()+'\n'+parray['timezone']+'\n'+parray['longitude']+'\n'+parray['latitude']+'\n';
-	alert(str);
+	str=''+d.getDate()+'\n'
+		+(d.getMonth()+1)+'\n'
+		+d.getFullYear()+'\n'
+		+d.getHours()+'.'+d.getMinutes()+""+d.getSeconds()+'\n'
+		+parray['timezone']+'\n'
+		+parray['longitude']+'\n'
+		+parray['latitude']+'\n'
+		+"00.000"+"\n" //Altitude
+		+parray['timezone']+'\n'
+		+parray['timezone']+'\n'
+	        +"0\n"	
+	        +"105\n" //sea level?
+	        +parray['placename']+"\n" //place
+	        +parray['placename']+"\n" //country
+	        +"1\n"	
+	        +"88.000000\n"	
+	        +"99.000000\n"	
+	        +"1\n"	
+		;
 	return str;
 }
 
@@ -250,7 +267,6 @@ function getPanchanga(date_time,longitude,latitude){
 	console.log(AscData);
     var temp = new Date(cur_date-this.sunrise%day);
     this.vara_cur = this.sunrise.getDay();
-	//alert(vara_cur);
     this.vara_name = vara[this.vara_cur];
     this.vara_enter = this.sunrise;
     this.vara_exit = this.sunrise_next;
@@ -314,7 +330,7 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue) 
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
-    this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download='test.jhd'>Save JHD</a>";
+    this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download="+params['chartname']+".jhd>Save JHD</a>";
     this.html += "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
@@ -1401,7 +1417,6 @@ function ListenToJHDloader(e) {
 	var fileInput = document.getElementById('fileInput');
 	var file = fileInput.files[0];
 	document.getElementById("chartname").value = file.name;
-	//alert(fileDisplayArea.innerText);
 	var lines = this.result.replace(/\r/g,"").split("\n");
 	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
 	var time=lines[3].split(".");
