@@ -27,5 +27,8 @@
         "ANDROIDX_WEBKIT_VERSION": "1.4.0"
       }
     }
+  },
+  "dependencies": {
+    "shelljs": "^0.8.5"
   }
 }
