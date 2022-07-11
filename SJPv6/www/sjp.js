@@ -193,6 +193,26 @@ function getLagnaTable(AscData,date_time,longitude,latitude){
 	this.html+="</table>";
 	return this;
 }
+
+// Function to download data to a file
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
+
 function getJHDStringEsc( parray){
 	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
 	//chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
@@ -217,6 +237,7 @@ function getJHDStringEsc( parray){
 	        +"99.000000\r\n"
 	        +"1\r\n"
 		;
+	download(str,"my.jhd","text");
 	return str;
 }
 
@@ -331,8 +352,8 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
-    this.html+="<a download href=\"javascript:getJHDStringEsc(params);\" download="+params['chartname']+".jhd>Save JHD</a>";
-    this.html += "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
+    this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download="+params['chartname']+".jhd>Save JHD</a>";
+    this.html+= "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
                 "&Mars="+chart[3].long+"&Merc="+chart[4].long+"&Jup="+chart[5].long+"&Ven="+chart[6].long+
