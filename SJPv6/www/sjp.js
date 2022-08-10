@@ -52,16 +52,16 @@ var places_file = "places.txt";
 var xml_file_opened = false;
 var places_c="Puri#-85.83;19.81&New Delhi#-77.208833;28.613806&Chennai#-80.23;13.5&WashingtonDC#77.0366;38.8977"; //Default Places
 var chart =[
-            {"text":"Asc/Lagna   ","long":0,"retro":" - ","speed":0,"id":0,"bhava":0,"tx":"Lg","order":0},
-            {"text":"Sun/Surya   ","long":0,"retro":"","speed":0,"id":1,"bhava":0,"tx":"Su","order":1},
-            {"text":"Moon/Chandra","long":0,"retro":"","speed":0,"id":2,"bhava":0,"tx":"Mo","order":2},
-            {"text":"Mars/Mangal ","long":0,"retro":"","speed":0,"id":3,"bhava":0,"tx":"Ma","order":3},
-            {"text":"Merc/Buddha ","long":0,"retro":"","speed":0,"id":4,"bhava":0,"tx":"Me","order":4},
-            {"text":"Jupiter/Guru","long":0,"retro":"","speed":0,"id":5,"bhava":0,"tx":"Ju","order":5},
-            {"text":"Venus/Shukra","long":0,"retro":"","speed":0,"id":6,"bhava":0,"tx":"Ve","order":6},
-            {"text":"Saturn/Shani","long":0,"retro":"","speed":0,"id":7,"bhava":0,"tx":"Sa","order":7},
-            {"text":"Rahu        ","long":0,"retro":"","speed":0,"id":8,"bhava":0,"tx":"Ra","order":9},
-            {"text":"Ketu        ","long":0,"retro":"","speed":0,"id":9,"bhava":0,"tx":"Ke","order":9}
+            {"text":"Asc/Lagna   ","long":0,"retro":" - ","speed":0,"id":0,"bhava":0,"tx":"Lg","order":0,"ck":""},
+            {"text":"Sun/Surya   ","long":0,"retro":"","speed":0,"id":1,"bhava":0,"tx":"Su","order":1,"ck":""},
+            {"text":"Moon/Chandra","long":0,"retro":"","speed":0,"id":2,"bhava":0,"tx":"Mo","order":2,"ck":""},
+            {"text":"Mars/Mangal ","long":0,"retro":"","speed":0,"id":3,"bhava":0,"tx":"Ma","order":3,"ck":""},
+            {"text":"Merc/Buddha ","long":0,"retro":"","speed":0,"id":4,"bhava":0,"tx":"Me","order":4,"ck":""},
+            {"text":"Jupiter/Guru","long":0,"retro":"","speed":0,"id":5,"bhava":0,"tx":"Ju","order":5,"ck":""},
+            {"text":"Venus/Shukra","long":0,"retro":"","speed":0,"id":6,"bhava":0,"tx":"Ve","order":6,"ck":""},
+            {"text":"Saturn/Shani","long":0,"retro":"","speed":0,"id":7,"bhava":0,"tx":"Sa","order":7,"ck":""},
+            {"text":"Rahu        ","long":0,"retro":"","speed":0,"id":8,"bhava":0,"tx":"Ra","order":9,"ck":""},
+            {"text":"Ketu        ","long":0,"retro":"","speed":0,"id":9,"bhava":0,"tx":"Ke","order":9,"ck":""}
          ];
 var varga=[["Dx","Surya","Chandra","Mangal","Budha","Guru","Shukra","Shani","Rahu","Ketu","Gulika","Mandi","PranaP","BL","HL","GL"],
            ["Dx","Surya","Chandra","Mangal","Budha","Guru","Shukra","Shani","Rahu","Ketu","Gulika","Mandi","PranaP","BL","HL","GL"],
@@ -399,10 +399,20 @@ function getPanchanga(date_time,longitude,latitude){
     this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
                 "\n<br/><br/>";
 
-    chart.sort(function(a,b){return a.long - b.long;});
-    this.html =this.html + "<table><tr><th><b><small>Graha</small></b></th><th><b><small> sRasi d&deg; mm</small></b></th><th><b><small>Bhava</small></b></th><th><b><small>longitude</small></b></th></tr>";
+   chart.sort(function(a,b){return a.id - b.id;});chart[8].long=360-chart[8].long;//Rahu in reverse for chara kaaraka 
+   chart.sort(function(a,b){return b.long%30 - a.long%30;});
+   var chara_kaaraka=["Ak","Amk","Bk","Mk","Pik","Puk","Gk","Dk"];
+	for(i=0,j=0;i<10;++i){
+             if(chart[i].id==0)continue;
+             if(chart[i].id==9)continue;
+		chart[i].ck=chara_kaaraka[j];++j;
+    }
+   chart.sort(function(a,b){return a.id - b.id;});chart[8].long=360-chart[8].long;//Rahu in reverse for chara kaaraka 
+    //chart.sort(function(a,b){return a.long - b.long;});
+    this.html =this.html + "<table style='border:1px;'><tr><th><b><small>Graha</small></b></th><th><b><small> sRasi d&deg; mm</small></b></th><th><b><small>Bhava</small></b></th><th><b><small>longitude</small></b></th><th><small>ChK</small></th></tr>";
+    //chart.sort(function(a,b){return a.long - b.long;});
     for(i=0;i<10;++i){
-        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+toDeg(chart[i].long)+"</td></tr>";
+        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+toDeg(chart[i].long)+"</td><td>"+chart[i].ck+"</td></tr>";
     }
     chart.sort(function(a,b){return a.order - b.order;});
 
