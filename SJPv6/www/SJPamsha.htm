@@ -3,6 +3,7 @@
 <TITLE></TITLE>
 <script src=jyotish.js id=loadjyotishscript>
 </script>
+<script src=sjp.js></script>
 <script language=javascript>
 //------------Globals and Functions---------------------------------
 onerror=handleErr;
@@ -110,7 +111,7 @@ function calculate(){
 			'<div id=charts>'
 			+document.getElementById("charts").innerHTML
 			+editlink
-			+getChart(chart,params['Division'])
+			+getPlainChart(chart,params['Division'])
 			+'</div>'
 			;
 	document.close();
@@ -150,7 +151,7 @@ function LoadURLParams()
 	return submit;
 }
 ///////////////////////////////////////////////////////////////////
-function getChart(chart,division){
+function getPlainChart(chart,division){
 	var a="";
 	var k=0;
 	var i=0;
