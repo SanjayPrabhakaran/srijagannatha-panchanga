@@ -1,5 +1,11 @@
 //All Globals
 var DEBUG=true;
+
+//Date proto: add day mon year to have BC years.
+Date.prototype.day=1;
+Date.prototype.month=1;
+Date.prototype.year=1;
+
 var minutes = 1000 * 60; //Milliseconds
 var hours = minutes * 60;//Milliseconds
 var day = hours * 24;//Milliseconds
@@ -174,7 +180,13 @@ Date.prototype.getMyTimezoneOffset=function(){
 Date.prototype.setMyTimezoneOffset=function(t){
 	return Date.MyTimezoneOffset=t;
 }
-
+function updateDMY(event){
+	var date= new Date(document.getElementById("bdate").value);
+	//alert("changed"+date);
+	document.getElementById("day").value =date.getDate()
+	document.getElementById("month").value =date.getMonth()
+	document.getElementById("year").value =date.getFullYear()
+}
 function getLagnaTable(AscData,date_time,longitude,latitude){
 	this.html="<table border=2><tr><th>Lagna</th><th>Ending Time(Local Time)</th>";
 	var previous=Math.floor(AscData.Ascendant/30);
@@ -1415,17 +1427,13 @@ function init(){
 	var today = new Date();
 	if(document.getElementById("datetimeplace")===null)return;//Form is not present.
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
-	//Time zone needs to be set before formattimess
+	//Time zone needs to be set before format times
 	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
-	//document.getElementById("bdate").value  = params['bdate']===undefined?String(today).substring(4,15):new Date(params['bdate']);
 	var bdate = params['bdate']===undefined?today:new Date(params['bdate']);
 	document.getElementById("bdate").value  = formatDate(bdate);
-//	debug(bdate,">>>"+document.getElementById("bdate").value,bdate.getFullYear()+"-"+(bdate.getMonth()+1)+"-"+bdate.getDate());
 	var tstring=formatTimeSS(today);
 	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];
-//	document.getElementById("date").value = params['date']===undefined?today.toString():params['date'];
 	var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);;
-//	document.getElementById("date").value = params['date']===undefined?date.toString():params['date'];
 	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
