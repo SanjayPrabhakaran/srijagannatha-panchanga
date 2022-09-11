@@ -1452,8 +1452,8 @@ function init(){
 
 }
 function ListenToJHDloader(e) {
-	var fileDisplayArea = document.getElementById('fileDisplayArea');
-	fileDisplayArea.innerText = this.result; //reader.result;
+	var fileDisplayArea = document.getElementById('inputTextToSave');
+	fileDisplayArea.value = this.result; //reader.result;
 	var fileInput = document.getElementById('fileInput');
 	var file = fileInput.files[0];
 	document.getElementById("chartname").value = file.name;
