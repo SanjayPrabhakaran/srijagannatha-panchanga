@@ -237,6 +237,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
+				paramslist['starting']=params['starting'];
 				paramslist['datetime']=d.toISOString();//params['datetime'];
 				paramslist['ayush']=UduDasaVimshottari[i][4]*compress;
 				paramslist['submit']='Calculate';

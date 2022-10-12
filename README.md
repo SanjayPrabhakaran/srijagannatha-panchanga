@@ -8,7 +8,7 @@ Create a panchanga utililty to run across as many operating systems and devices.
 Javascript and HTML has been chosen as the best development platform for this utility. Effort is made to keep each file at optimal minimal size(Current limit under 1MB) to enable to run on as many mobile devices.
 
 ## How to install the package
-
+ * New GitHub web version https://sanjayprabhakaran.github.io/srijagannatha-panchanga/SJPv6/www/SJP.html
  * Download SJPV6 folder and open www/SJP.html
  * For Android create .apk example: download and install SJP(1).apk
  * Don't use old versions.

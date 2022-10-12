@@ -28,8 +28,11 @@
 	<!--input id=date name=date type=hidden size=50--></td>
   </tr><tr>
    <td>
-	<input id=bdate name=bdate type=date > (Format YYYY-MM-DD)
-	<input id=btime name=btime type=time step=1>
+	<input id=bdate name=bdate type=date onchange="updateDMY(event)" > (Format YYYY-MM-DD)
+	<input id=btime name=btime type=time step=1><br/>
+	Day:<input id=day name=day type=number max=31 style="width:3em"> 
+	Month:<input id=month name=month type=number max=12 style="width:3em"> 
+	Year:<input id=year name=year type=number  style="width:7em"> 
 	</td>
   </tr>
   <tr>
@@ -51,9 +54,19 @@
     </td>
   </tr>
   <tr>
-    <td>Latitude: 
+    <td>
+	Latitude: 
     </td>
-    <td><input id=latitude name=latitude type=text size=5 value=13.5>South -ve/North +ve
+    <td>
+	<input id=latitude name=latitude type=text size=5 value=13.5>South -ve/North +ve
+    </td>
+  </tr>
+  <tr>
+    <td>
+	JHD Text:
+    </td>
+    <td>
+	<textarea id="inputTextToSave" style="width:50%;"></textarea>
     </td>
   </tr>
 </table>
@@ -79,7 +92,7 @@
 </table>
 
 <div id="googleMap" style="width:500px;height:380px;" >Map Area</div>
-
+<br/>
 <pre id="fileDisplayArea"></pre>
 ©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
 To save this file on your local machine or mobile, <br>Go to  
@@ -151,7 +164,7 @@ You can create your own list Places with Latitude and Longitude. By saving this 
 <script>
 {	initSJP();}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?callback=initialize" async defer>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer>
 	</script>
 <br/>PAGE LOADED
 <a href="savefile.html">.</a>
