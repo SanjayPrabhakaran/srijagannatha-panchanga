@@ -365,6 +365,9 @@ function getPanchanga(date_time,longitude,latitude){
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download="+params['chartname']+".jhd>Save JHD</a>";
+
+    this.html+="<a href=\"javascript:navigator.clipboard.writeText(getJHDStringEsc(params));\" download="+params['chartname']+".jhd>Copy JHD</a>";
+	
     this.html+= "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
