@@ -187,6 +187,14 @@ function updateDMY(event){
 	document.getElementById("month").value =date.getMonth()
 	document.getElementById("year").value =date.getFullYear()
 }
+
+function updateTime(event){
+	var time= (document.getElementById("btime").value).split(":");
+	alert("changed"+time);
+	document.getElementById("hours").value =time[0]
+	document.getElementById("mins").value =time[1]
+	document.getElementById("sec").value =time[2]
+}
 function getLagnaTable(AscData,date_time,longitude,latitude){
 	this.html="<table border=2><tr><th>Lagna</th><th>Ending Time(Local Time)</th>";
 	var previous=Math.floor(AscData.Ascendant/30);
