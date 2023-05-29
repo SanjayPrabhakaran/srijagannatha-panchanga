@@ -182,7 +182,7 @@ Date.prototype.setMyTimezoneOffset=function(t){
 }
 function updateDMY(event){
 	var date= new Date(document.getElementById("bdate").value);
-	//alert("changed"+date);
+	alert("changed"+date);
 	document.getElementById("day").value =date.getDate()
 	document.getElementById("month").value =date.getMonth()
 	document.getElementById("year").value =date.getFullYear()
