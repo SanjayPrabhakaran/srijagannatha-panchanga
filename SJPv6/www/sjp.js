@@ -809,7 +809,7 @@ function calcSunsetGMT(julDay, latitude, longitude){
     setTimeGMT = 720 + timeDiff - eqTime; // in minutes
     return setTimeGMT;
 }
-function getChart(chart,center){
+function getChart(chart,center,size=7,degrees=true){
 	if(center=== undefined)center="";
     var a="";
     var k=0;
@@ -818,10 +818,10 @@ function getChart(chart,center){
     for(i=0;i<=9;++i){
 	    var deg=chart[i].long%30;
      k=parseInt((chart[i].long%360)/30+0.999999999);
-     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+deg.toFixed(2)+"</sub>";
+     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+(degrees)?deg.toFixed(2):""+"</sub>";
     }
     for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
-    a="<style type=\"text/css\">.chart td {width: 10em;height: 10em;}</style>";
+    a="<style type=\"text/css\">.chart td {width: "+size+"em;height: "+size+"em;}</style>";
     a=a+"<div id=chart class=\"chart\"> <table cellspacing=1 border=1 cellpadding=1 border=0>\n";
     a=a+"  <tr>";
     a=a+"    <td id=12 align=center>"+s[12]+"</td>";
