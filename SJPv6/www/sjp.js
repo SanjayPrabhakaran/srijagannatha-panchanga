@@ -809,16 +809,19 @@ function calcSunsetGMT(julDay, latitude, longitude){
     setTimeGMT = 720 + timeDiff - eqTime; // in minutes
     return setTimeGMT;
 }
-function getChart(chart,center,size=7,degrees=true){
+function getChart(chart,center,size=6,degrees=true){
 	if(center=== undefined)center="";
     var a="";
     var k=0;
     var i=0;
     var s = new MyArray(13);
+	empty=""
     for(i=0;i<=9;++i){
 	    var deg=chart[i].long%30;
      k=parseInt((chart[i].long%360)/30+0.999999999);
-     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+(degrees)?deg.toFixed(2):""+"</sub>";
+	 sDeg=(degrees)?deg.toFixed(2):empty//deg.toFixed(2)
+	 //alert(sDeg)
+     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+sDeg+"</sub>";
     }
     for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
     a="<style type=\"text/css\">.chart td {width: "+size+"em;height: "+size+"em;}</style>";
