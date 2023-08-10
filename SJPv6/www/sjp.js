@@ -368,7 +368,7 @@ function getPanchanga(date_time,longitude,latitude){
     }
 
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
-				+","+this.karana_name+","+this.yoga_name+"</small>");
+				+","+this.karana_name+","+this.yoga_name+"</small>",8);
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
