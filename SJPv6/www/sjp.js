@@ -183,17 +183,28 @@ Date.prototype.setMyTimezoneOffset=function(t){
 function updateDMY(event){
 	var date= new Date(document.getElementById("bdate").value);
 	alert("changed"+date);
-	document.getElementById("day").value =date.getDate()
-	document.getElementById("month").value =date.getMonth()
-	document.getElementById("year").value =date.getFullYear()
+	document.getElementById("day").value =date.getDate();
+	document.getElementById("month").value =date.getMonth();
+	document.getElementById("year").value =date.getFullYear();
 }
 
 function updateTime(event){
 	var time= (document.getElementById("btime").value).split(":");
 	alert("changed"+time);
-	document.getElementById("hours").value =time[0]
-	document.getElementById("mins").value =time[1]
-	document.getElementById("sec").value =time[2]
+	document.getElementById("hours").value =time[0];
+	document.getElementById("mins").value =time[1];
+	document.getElementById("secs").value =time[2];
+}
+
+function initCurrentHMSDMY(){
+    var d=new Date();
+    document.getElementById("hours").value =d.getHours();
+	document.getElementById("mins").value =d.getMinutes();
+	document.getElementById("secs").value =d.getSeconds();
+	document.getElementById("day").value =d.getDate();
+	document.getElementById("month").value =d.getMonth();
+	document.getElementById("year").value =d.getFullYear();
+    //alert("Setting curret date to"+d)
 }
 function getLagnaTable(AscData,date_time,longitude,latitude){
 	this.html="<table border=2><tr><th>Lagna</th><th>Ending Time(Local Time)</th>";
@@ -1436,6 +1447,10 @@ function showtime(){
  document.getElementById('date').value = (new Date()).toString();
  timerID = setTimeout("showtime()",timeOut);
 }
+function setParams2FormValue(formID){
+    document.getElementById(formID).value= params[formID]===undefined?tstring:params[formID];
+    alert("setting"+formID)
+}
 //Initialization block
 function init(){
 	console.log("enter init");
@@ -1446,7 +1461,13 @@ function init(){
 	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
 	var bdate = params['bdate']===undefined?today:new Date(params['bdate']);
 	document.getElementById("bdate").value  = formatDate(bdate);
+    initCurrentHMSDMY();
 	var tstring=formatTimeSS(today);
+    if(params["day"]!==undefined){
+        formids=["hours","mins","secs","day","month","year"];
+        formids.forEach(setParams2FormValue);
+
+    }
 	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];
 	var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);;
 	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
