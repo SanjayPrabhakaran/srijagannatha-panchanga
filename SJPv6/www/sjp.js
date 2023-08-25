@@ -180,17 +180,43 @@ Date.prototype.getMyTimezoneOffset=function(){
 Date.prototype.setMyTimezoneOffset=function(t){
 	return Date.MyTimezoneOffset=t;
 }
-function updateDMY(event){
+
+
+// Function to check if a year is a leap year
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+  }
+  
+  // Function to get the day of the year for a given date
+function getDayOfYear(fullYear,month,date) {
+    const year = fullYear ;//date.getFullYear();
+    const isLeap = isLeapYear(year);
+    const daysInMonth = [
+      31, 28 + isLeap, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+    ];
+    
+    let dayOfYear = 0;
+    
+    for (let m = 0; m < month; m++) {
+      dayOfYear += daysInMonth[m];
+    }
+    
+    dayOfYear += date;
+    
+    return dayOfYear;
+  }
+  
+function updateDMY(){
 	var date= new Date(document.getElementById("bdate").value);
-	alert("changed"+date);
+	//alert("changed"+date);
 	document.getElementById("day").value =date.getDate();
-	document.getElementById("month").value =date.getMonth();
+	document.getElementById("month").value =date.getMonth()+1;
 	document.getElementById("year").value =date.getFullYear();
 }
 
-function updateTime(event){
+function updateTime(){
 	var time= (document.getElementById("btime").value).split(":");
-	alert("changed"+time);
+	//alert("changed"+time);
 	document.getElementById("hours").value =time[0];
 	document.getElementById("mins").value =time[1];
 	document.getElementById("secs").value =time[2];
@@ -202,7 +228,7 @@ function initCurrentHMSDMY(){
 	document.getElementById("mins").value =d.getMinutes();
 	document.getElementById("secs").value =d.getSeconds();
 	document.getElementById("day").value =d.getDate();
-	document.getElementById("month").value =d.getMonth();
+	document.getElementById("month").value =d.getMonth()+1;
 	document.getElementById("year").value =d.getFullYear();
     //alert("Setting curret date to"+d)
 }
@@ -245,29 +271,47 @@ function download(data, filename, type) {
 }
 
 function getJHDStringEsc( parray){
-	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
-	//chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
+    //Create JHD file as below
+    //Line1:MONTH
+    //Line2:DATE
+    //Line3:YEAR (digit)
+    //Line4:HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
+    //Line5:-HH.MMmmmmmm(TimeZone -ve is east Hours.MMmmmm)
+    //Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
+    //Line7:DD.MMmmmm (Latitude Degrees.MMmmmm)
+    //Line8:MM.mmmmmm (Altitude meters)
+    //Line9:-HH.dddddd(Winter TimeZone -ve is east, but here is in decimals)
+    //Line10:-HH.dddddd(Daylight TimeZone -ve is east,but here is in decimals)
+    //Line11:0 ( 1 is time in 24Hours format 0 is AM/PM)
+    //Line12:105 (Is this Mean Sea level? What is this? Changes with location selection?)
+    //Line13:Location (Location in Names)
+    //Line14:India (Country in names)
+    //Line15:1 (If  1 to use atmospheric pressure)
+    //Line16:88.000000 (Atmospheric pressure)
+    //Line17:99.000000 (temperature)
+    //Line18:1 (If 1 use temperature for calculations)
+    //chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
 	var d=new Date(parray['bdate']+" " +decodeURIComponent(parray['btime']));
-	str=''+d.getDate()+'\r\n'
+	str=''
+        +d.getDate()+'\r\n'
 		+(d.getMonth()+1)+'\r\n'
 		+d.getFullYear()+'\r\n'
-		//+d.getHours()+'.'+d.getMinutes()+""+d.getSeconds()+'\n'
-    +(d.getHours()*1+d.getMinutes()/100+d.getSeconds()/10000).toFixed(6)+'\r\n'
-    +parray['timezone']+'\r\n'
+        +(d.getHours()*1+d.getMinutes()/100+d.getSeconds()/10000).toFixed(6)+'\r\n' //HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
+        +parray['timezone']+'\r\n'
 		+parray['longitude']+'\r\n'
 		+parray['latitude']+'\r\n'
 		+"00.000"+"\n" //Altitude
 		+parray['timezone']+'\r\n'
 		+parray['timezone']+'\r\n'
-	        +"0\r\n"
-	        +"105\r\n" //sea level?
-	        +parray['placename']+"\r\n" //place
-	        +parray['placename']+"\r\n" //country
-	        +"1\r\n"
-	        +"88.000000\r\n"
-	        +"99.000000\r\n"
-	        +"1\r\n"
-		;
+        +"1\r\n" //Line11:0 ( 1 is time in 24Hours format 0 is AM/PM)
+        +"105\r\n" //sea level?
+        +parray['placename']+"\r\n" //place
+        +parray['placename']+"\r\n" //country
+        +"0\r\n"   //Line15:1 (If  1 to use atmospheric pressure)
+        +"88.000000\r\n"
+        +"99.000000\r\n"
+        +"0\r\n"//Line18:1 (If 1 use temperature for calculations)
+    ;
 	download(str,"my.jhd","text");
 	return str;
 }
@@ -379,7 +423,7 @@ function getPanchanga(date_time,longitude,latitude){
     }
 
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
-				+","+this.karana_name+","+this.yoga_name+"</small>",8);
+				+","+this.karana_name+","+this.yoga_name+"</small>",6);
 
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
@@ -535,6 +579,8 @@ function dateToJul(date_time){ ///Gets the Day count of the year
     d.setMonth(0);
     d.setDate(1);
     var n=date_time/day-d.getTime()/day+1;
+    //alert(date_time)
+    //alert(n)
     return n;
 }
 function radToDeg(angleRad){//    Convert radian angle to degrees
@@ -835,7 +881,7 @@ function getChart(chart,center,size=6,degrees=true){
      s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+sDeg+"</sub>";
     }
     for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
-    a="<style type=\"text/css\">.chart td {width: "+size+"em;height: "+size+"em;}</style>";
+    a="<style type=\"text/css\">.chart  td {width: "+size+"em;height: "+size+"em; font-weight: normal;}</style>";
     a=a+"<div id=chart class=\"chart\"> <table cellspacing=1 border=1 cellpadding=1 border=0>\n";
     a=a+"  <tr>";
     a=a+"    <td id=12 align=center>"+s[12]+"</td>";
