@@ -293,23 +293,23 @@ function getJHDStringEsc( parray){
     //chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
 	var d=new Date(parray['bdate']+" " +decodeURIComponent(parray['btime']));
 	str=''
-        +d.getDate()+'\r\n'
-		+(d.getMonth()+1)+'\r\n'
-		+d.getFullYear()+'\r\n'
+        +(d.getMonth()+1)+'\r\n'  //Line1:MONTH
+        +d.getDate()+'\r\n' //Line2:DATE
+		+d.getFullYear()+'\r\n'  //Line3:YEAR (digit)
         +(d.getHours()*1+d.getMinutes()/100+d.getSeconds()/10000).toFixed(6)+'\r\n' //HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
-        +parray['timezone']+'\r\n'
-		+parray['longitude']+'\r\n'
-		+parray['latitude']+'\r\n'
-		+"00.000"+"\n" //Altitude
-		+parray['timezone']+'\r\n'
-		+parray['timezone']+'\r\n'
+        +parray['timezone']+'\r\n' //Line5:-HH.MMmmmmmm(TimeZone -ve is east Hours.MMmmmm)
+		+parray['longitude']+'\r\n'  //Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
+		+parray['latitude']+'\r\n' //Line7:DD.MMmmmm (Latitude Degrees.MMmmmm)
+		+"00.000"+"\n" //Altitude //Line8:MM.mmmmmm (Altitude meters)
+		+parray['timezone']+'\r\n' //Line9:-HH.dddddd(Winter TimeZone -ve is east, but here is in decimals)
+		+parray['timezone']+'\r\n' //Line10:-HH.dddddd(Daylight TimeZone -ve is east,but here is in decimals)
         +"1\r\n" //Line11:0 ( 1 is time in 24Hours format 0 is AM/PM)
-        +"105\r\n" //sea level?
-        +parray['placename']+"\r\n" //place
-        +parray['placename']+"\r\n" //country
+        +"105\r\n" //sea level? //Line12:105 (Is this Mean Sea level? What is this? Changes with location selection?)
+        +parray['placename']+"\r\n" //place //Line13:Location (Location in Names)
+        +parray['placename']+"\r\n" //country //Line14:India (Country in names)
         +"0\r\n"   //Line15:1 (If  1 to use atmospheric pressure)
-        +"88.000000\r\n"
-        +"99.000000\r\n"
+        +"88.000000\r\n" //Line16:88.000000 (Atmospheric pressure)
+        +"99.000000\r\n" //Line17:99.000000 (temperature)
         +"0\r\n"//Line18:1 (If 1 use temperature for calculations)
     ;
 	download(str,"my.jhd","text");
@@ -1549,15 +1549,22 @@ function ListenToJHDloader(e) {
 	var d=new Date(datetime);
 	document.getElementById("bdate").value  = formatDate(d); //4:23 PM 10/30/2017 Added toLocaleDateString() since it was not working on US time zone. on IE?
 	document.getElementById("btime").value  = formatTimeSS(d);
-	var tzone = lines[4].split(".");
-	tzone[0] = tzone[0] * -1;
-	tzone[1] = tzone[1]/60;
-	document.getElementById("timezone").value = tzone[0]+"."+tzone[1];
+    document.getElementById("month").value=lines[0];
+    document.getElementById("day").value=lines[1];
+    document.getElementById("year").value=lines[2];
+    document.getElementById("hours").value=time[0];
+    document.getElementById("mins").value=time[1].slice(0,2);
+    document.getElementById("secs").value=Math.round(time[1].slice(2,5)*60/1000);
+    
+	//var tzone = lines[4].split(".");
+	//tzone[0] = lines[4]*-1//tzone[0] * -1;
+	//tzone[1] = tzone[1]/60;
+	document.getElementById("timezone").value = lines[4]*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");
-	tzone[1] = tzone[1]/60;
+	//tzone[1] = tzone[1]/60;
 	document.getElementById('longitude').value = l[0]+"."+l[1];
 	l = lines[6].split(".");
-	tzone[1] = tzone[1]/60;
+	//tzone[1] = tzone[1]/60;
 	document.getElementById('latitude').value = l[0]+"."+l[1];
 	if(lines.length>11)	document.getElementById('placename').value=lines[12]+","+lines[13];
 }
