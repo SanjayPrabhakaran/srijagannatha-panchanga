@@ -1495,7 +1495,7 @@ function showtime(){
 }
 function setParams2FormValue(formID){
     document.getElementById(formID).value= params[formID]===undefined?tstring:params[formID];
-    alert("setting"+formID)
+    console.log("setting"+formID)
 }
 //Initialization block
 function init(){
