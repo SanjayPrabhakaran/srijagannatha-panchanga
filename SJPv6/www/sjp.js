@@ -312,7 +312,7 @@ function getJHDStringEsc( parray){
         +"99.000000\r\n" //Line17:99.000000 (temperature)
         +"0\r\n"//Line18:1 (If 1 use temperature for calculations)
     ;
-	download(str,"my.jhd","text");
+	download(str,parray['chartname']+".jhd","text");
 	return str;
 }
 
@@ -428,7 +428,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     
-    this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download="+params['chartname']+".jhd>Save JHD</a>";
+    this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download=\""+params['chartname']+".jhd\">Save JHD</a>";
 
     this.html+="<a href=\"javascript:navigator.clipboard.writeText(getJHDStringEsc(params));\" > Copy JHD text</a>";
 	
