@@ -1311,7 +1311,9 @@ function doForm(){//Checked
     panchanga=getPanchanga(d,lon,lat);
     s =    panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
-    document.write("<HTML><HEAD><TITLE> "+params["chartname"]+" - Sri Jagannatha Panchanga - JavaScript</TITLE></HEAD><BODY>"
+    document.write("<HTML><HEAD>"
+                    +"<meta http-equiv='content-type' content='text/html; charset=utf-8' />"
+                    +"<TITLE> तज"+params["chartname"]+" - Sri Jagannatha Panchanga - JavaScript</TITLE></HEAD><BODY>"
                     +""
                     + editlink +s +editlink +"</body></html>");
     document.title = params["chartname"]+"-"+document.title;
