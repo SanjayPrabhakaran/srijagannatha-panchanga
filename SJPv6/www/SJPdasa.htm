@@ -226,7 +226,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			i=(antaradasha==1)?i+1*starting:i;
 			//alert(i);
 			for(k=1;k<10;++k){
-				++i;if(i>27)i=1;//i is the dasa index
+				++i;if(i>27)i=i-27//1;//i is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1);
