@@ -1283,7 +1283,7 @@ function GetXmlHttpObject(){
 function doForm(){//Checked
     var d= new Date(params["bdate"]);
     var t= new Date("January 1, 1970 "+params["btime"]);
-    TimeZoneOffset =params["timezone"].split(".")[0]+"."+(params["timezone"]%1*100/60).toFixed(6).split(".")[1];// parseFloat(params["timezone"]);
+    TimeZoneOffset = parseFloat(params["timezone"]);//params["timezone"].split(".")[0]+"."+(params["timezone"]%1*100/60).toFixed(6).split(".")[1];// parseFloat(params["timezone"]);
 	if(isNaN(TimeZoneOffset))
 	   {
 		   TimeZoneOffset=-1 * d.getTimezoneOffset()/60;
@@ -1568,7 +1568,8 @@ function ListenToJHDloader(e) {
     else{
         tz="-"+tz;
     }
-
+    tz=tz.split(".")
+    tz=tz[0]+"."+tz[1]/100/60;
 	document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");
 	//tzone[1] = tzone[1]/60;
