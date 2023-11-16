@@ -1535,6 +1535,21 @@ function init(){
 	window.status="Intialised Form";
 
 }
+function JHDtz2Dec(zone)
+{   
+    tz=zone;
+    if(tz[0]=="-") {
+        tz=tz.replace("-","");
+    }
+    else{
+        tz="-"+tz;
+    }
+    tz=tz.split(".")
+    decMin=(parseFloat("0."+tz[1])).toPrecision(6);
+    decMin=100*decMin;
+    decTZ=tz[0]+"."+(decMin/60).toPrecision(6).split(".")[1];
+    return decTZ;
+}
 function ListenToJHDloader(e) {
 	var fileDisplayArea = document.getElementById('inputTextToSave');
 	fileDisplayArea.value = this.result; //reader.result;
@@ -1561,15 +1576,15 @@ function ListenToJHDloader(e) {
 	//var tzone = lines[4].split(".");
 	//tzone[0] = lines[4]*-1//tzone[0] * -1;
 	//tzone[1] = tzone[1]/60;
-    tz=lines[4];
-    if(tz[0]=="-") {
-        tz=tz.replace("-","");
-    }
-    else{
-        tz="-"+tz;
-    }
-    tz=tz.split(".")
-    tz=tz[0]+"."+tz[1]/100/60;
+    tz=JHDtz2Dec(lines[4]);
+    // if(tz[0]=="-") {
+    //     tz=tz.replace("-","");
+    // }
+    // else{
+    //     tz="-"+tz;
+    // }
+    // tz=tz.split(".")
+    // tz=tz[0]+"."+(tz[1]/60).toPrecision(6).split(".")[1];
 	document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");
 	//tzone[1] = tzone[1]/60;
