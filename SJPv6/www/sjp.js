@@ -1309,7 +1309,14 @@ function doForm(){//Checked
     for (x in places )z=z+x+"#"+places[x]+"&";
     setCookie("placeslist",z,1000);
     panchanga=getPanchanga(d,lon,lat);
-    s =  "\n<p><b>Panchanga at </b> "+d+ "<br/><br/>"+ panchanga.html;
+    s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
+    "&emsp;<b>Name:</b>"+params["chartname"]+"<br/>"+
+    "&emsp;<b>Date:</b>"+params["day"]+" <b>Month:</b>"+params["month"]+" <b>Year:</b>"+params["year"]+"<br/>"+
+    "&emsp;<b>Hours:</b>"+params["hours"]+" <b>Minutes:</b>"+params["mins"]+" <b>Seconds:</b>"+params["secs"]+"<br/>"+
+    "&emsp;<b>Longitude:</b>"+params["longitude"]+"<br/>"+
+    "&emsp;<b>Latitude:</b>"+params["latitude"]+"<br/>"+
+    "&emsp;<b>Timezone:</b>"+params["timezone"]+"<br/>"+
+    "<br/><br/>"+ panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
     document.write("<HTML><HEAD>"
                     +"<meta http-equiv='content-type' content='text/html; charset=utf-8' />"
