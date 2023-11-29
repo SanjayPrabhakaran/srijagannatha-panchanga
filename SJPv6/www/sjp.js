@@ -425,7 +425,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
 				+","+this.karana_name+","+this.yoga_name+"</small>",6);
 
-    this.html = "\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
+    this.html = "";//"\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     
     this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download=\""+params['chartname']+".jhd\">Save JHD</a>";
@@ -1309,7 +1309,7 @@ function doForm(){//Checked
     for (x in places )z=z+x+"#"+places[x]+"&";
     setCookie("placeslist",z,1000);
     panchanga=getPanchanga(d,lon,lat);
-    s =    panchanga.html;
+    s =  "\n<p><b>Panchanga at </b> "+d+ "<br/><br/>"+ panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
     document.write("<HTML><HEAD>"
                     +"<meta http-equiv='content-type' content='text/html; charset=utf-8' />"
