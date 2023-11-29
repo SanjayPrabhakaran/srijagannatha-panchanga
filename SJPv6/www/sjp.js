@@ -1311,8 +1311,8 @@ function doForm(){//Checked
     panchanga=getPanchanga(d,lon,lat);
     s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
     "&emsp;<b>Name:</b>"+params["chartname"]+"<br/>"+
-    "&emsp;<b>Date:</b>"+params["day"]+" <b>Month:</b>"+params["month"]+" <b>Year:</b>"+params["year"]+"<br/>"+
-    "&emsp;<b>Hours:</b>"+params["hours"]+" <b>Minutes:</b>"+params["mins"]+" <b>Seconds:</b>"+params["secs"]+"<br/>"+
+    "&emsp;<b>Date DD/MM/YYYY:</b>"+params["day"]+"<b>/</b>"+params["month"]+"<b>/</b>"+params["year"]+"<br/>"+
+    "&emsp;<b>Time:</b>"+params["hours"]+"<b>:</b>"+params["mins"]+"<b>:</b>"+params["secs"]+"<br/>"+
     "&emsp;<b>Longitude:</b>"+params["longitude"]+"<br/>"+
     "&emsp;<b>Latitude:</b>"+params["latitude"]+"<br/>"+
     "&emsp;<b>Timezone:</b>"+params["timezone"]+"<br/>"+
