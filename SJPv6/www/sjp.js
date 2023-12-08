@@ -1310,12 +1310,14 @@ function doForm(){//Checked
     setCookie("placeslist",z,1000);
     panchanga=getPanchanga(d,lon,lat);
     s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
+        "<br/>"+
         "&emsp;Name: <b>"+params["chartname"]+"</b><br/>"+
-        "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+" "+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
+        "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+"&emsp;"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
         //"&emsp;Time: <b>"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
+        "&emsp;Timezone: <b>"+params["timezone"]+"</b><br/>"+
         "&emsp;Latitude, Longitude: <b>"+parseFloat(params["latitude"]).toFixed(6)+","+parseFloat(-1*params["longitude"]).toFixed(6)+"</b><br/>"+
         //"&emsp;Latitude: <b>"+"</b><br/>"+
-        "&emsp;Timezone: <b>"+params["timezone"]+"</b><br/>"+
+        "<br/>"+
         panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
     document.write("<HTML><HEAD>"
