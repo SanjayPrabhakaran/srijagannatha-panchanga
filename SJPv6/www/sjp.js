@@ -1311,10 +1311,10 @@ function doForm(){//Checked
     panchanga=getPanchanga(d,lon,lat);
     s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
         "&emsp;Name: <b>"+params["chartname"]+"</b><br/>"+
-        "&emsp;Date dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+"</b><br/>"+
-        "&emsp;Time: <b>"+params["hours"]+":"+params["mins"]+":"+params["secs"]+"</b><br/>"+
-        "&emsp;Longitude: <b>"+parseFloat(params["longitude"]).toFixed(4)+"</b><br/>"+
-        "&emsp;Latitude: <b>"+parseFloat(params["latitude"]).toFixed(4)+"</b><br/>"+
+        "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+" "+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
+        //"&emsp;Time: <b>"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
+        "&emsp;Latitude, Longitude: <b>"+parseFloat(params["latitude"]).toFixed(6)+","+parseFloat(-1*params["longitude"]).toFixed(6)+"</b><br/>"+
+        //"&emsp;Latitude: <b>"+"</b><br/>"+
         "&emsp;Timezone: <b>"+params["timezone"]+"</b><br/>"+
         panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
