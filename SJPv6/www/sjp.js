@@ -1498,6 +1498,7 @@ function getGrahasEph(date_time,lat,lon){
 	this.grahas[8]=body.position.apparentLongitude;
 	console.log(body.position);
     console.log("***********Debug****************\ndate:",date,"\ndate2",date2,"\ndate_time",date_time,"\ngrahas:",this.grahas)
+    alert("***********Debug****************\ndate:"+JSON.stringify(date)+"\ndate2"+JSON.stringify(date2)+"\ndate_time"+date_time+"\ngrahas:"+JSON.stringify(this.grahas))
 }
 
 ///
