@@ -1423,20 +1423,23 @@ function getGrahasEph(date_time,lat,lon){
 	this.grahas = new MyArray(9);
 	this.speed = new MyArray(7);
 	date_time.setMyTimezoneOffset(-TimeZoneOffset*60);
-	var date = {year: date_time.getUTCFullYear(),
-				month: date_time.getUTCMonth()+1,
-				day: date_time.getUTCDate(),
-				hours: date_time.getUTCHours(),
-				minutes: date_time.getUTCMinutes(),
-				seconds: date_time.getUTCSeconds()};
-	var date_time2= new Date(date_time);
+	tz_date=new Date(date_time);
+    tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset())
+    //date_time=tz_date;
+    var date = {year: tz_date.getFullYear(),
+				month: tz_date.getMonth()+1,
+				day: tz_date.getDate(),
+				hours: tz_date.getHours(),
+				minutes: tz_date.getMinutes(),
+				seconds: tz_date.getSeconds()};
+	var date_time2= new Date(tz_date);
 	date_time2.setDate(date_time2.getDate()+1);
-	var date2 = {year: 	date_time2.getUTCFullYear(),
-				month: 	date_time2.getUTCMonth()+1,
-				day: 	date_time2.getUTCDate(),
-				hours: 	date_time2.getUTCHours(),
-				minutes:date_time2.getUTCMinutes(),
-				seconds:date_time2.getUTCSeconds()};
+	var date2 = {year: 	date_time2.getFullYear(),
+				month: 	date_time2.getMonth()+1,
+				day: 	date_time2.getDate(),
+				hours: 	date_time2.getHours(),
+				minutes:date_time2.getMinutes(),
+				seconds:date_time2.getSeconds()};
 	$const.tlong = -lon; // longitude
 	$const.glat = lat; // latitude
 	$processor.init ();
@@ -1498,7 +1501,7 @@ function getGrahasEph(date_time,lat,lon){
 	this.grahas[8]=body.position.apparentLongitude;
 	console.log(body.position);
     console.log("***********Debug****************\ndate:",date,"\ndate2",date2,"\ndate_time",date_time,"\ngrahas:",this.grahas)
-    alert("***********Debug****************\ndate:"+JSON.stringify(date)+"\ndate2"+JSON.stringify(date2)+"\ndate_time"+date_time+"\ngrahas:"+JSON.stringify(this.grahas))
+  //  alert("***********Debug****************\ndate:"+JSON.stringify(date)+"\ndate2"+JSON.stringify(date2)+"\ndate_time"+date_time+"\ngrahas:"+JSON.stringify(this.grahas))
 }
 
 ///
