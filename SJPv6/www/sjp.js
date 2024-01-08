@@ -269,6 +269,16 @@ function download(data, filename, type) {
         }, 0); 
     }
 }
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 
 function getJHDStringEsc( parray){
     //Create JHD file as below
@@ -1337,7 +1347,7 @@ function setLatLong(){
  k = k[1].split(/;/);
  document.getElementById("longitude").value=k[0];
  document.getElementById("latitude").value=k[1];
-alert("setLatLong");
+//alert("setLatLong");
 }
 function populatePlacesList(p){
     amp = new RegExp(/&/);
