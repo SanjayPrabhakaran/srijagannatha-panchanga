@@ -177,7 +177,7 @@ Date.prototype.getMyTimezoneOffset=function(){
 	}
 	return Date.MyTimezoneOffset;
 }
-Date.prototype.setMyTimezoneOffset=function(t){
+Date.prototype.setMyTimezoneOffset=function(t){//In Minutes -ve for east
 	return Date.MyTimezoneOffset=t;
 }
 
@@ -583,7 +583,9 @@ function toSignDeg(deg){ //Show in 0s dd*mm"ss"
 ///////////////////////////////////////////////////////////////////
 //*****    This section contains the specific code required in the sunrise/sunset
 //*****    calculation.
-function dateToJul(date_time){ ///Gets the Day count of the year
+function dateToJul(date_time){ 
+    ///parameter in milliseconds Gets the Day count of the year
+    //Returns the number of days since Jan 1 of the year.
     var d = new Date();
     d.setTime(date_time);
     d.setMonth(0);
@@ -1299,14 +1301,15 @@ function doForm(){//Checked
 		   TimeZoneOffset=-1 * d.getTimezoneOffset()/60;
 		   alert("Corrected Invalid Time Zone Offset to Local Time Zone:"+params["timezone"]+" to "+TimeZoneOffset);
 	   }
-	d.setMyTimezoneOffset(TimeZoneOffset*60);
-	d.setUTCDate(d.getDate());
-	d.setUTCFullYear(d.getFullYear());
-	d.setUTCMonth(d.getMonth());
-	d.setUTCHours(t.getHours());
-	d.setUTCMinutes(t.getMinutes()-TimeZoneOffset*60);
-	d.setUTCSeconds(t.getSeconds());
-	d.setUTCMilliseconds(t.getMilliseconds());
+	d.setMyTimezoneOffset(-TimeZoneOffset*60);
+	d.setDate(d.getDate());
+	d.setFullYear(d.getFullYear());
+	d.setMonth(d.getMonth());
+	d.setHours(t.getHours());
+	d.setMinutes(t.getMinutes());//-TimeZoneOffset*60);
+	d.setSeconds(t.getSeconds());
+	d.setMilliseconds(t.getMilliseconds());
+    
     if(isNaN(d)){
         alert("Invalid Date Time:"+params["bdate"]+" "+params["btime"]+"\n Using Current date time");
         d=new Date();
@@ -1432,7 +1435,7 @@ function LoadFile(p){
 function getGrahasEph(date_time,lat,lon){
 	this.grahas = new MyArray(9);
 	this.speed = new MyArray(7);
-	date_time.setMyTimezoneOffset(-TimeZoneOffset*60);
+	
 	tz_date=new Date(date_time);
     tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset())
     //date_time=tz_date;
