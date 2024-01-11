@@ -426,7 +426,7 @@ function getPanchanga(date_time,longitude,latitude){
     for(i=1;i<9;++i){
         chart[i].long = this.grahas.grahas[i-1];
         chart[i].speed = this.grahas.speed[i-1];
-	chart[i].retro = this.grahas.speed[i-1]*day>340?"<b>R</b>":"";
+	    chart[i].retro = this.grahas.speed[i-1]*day>340?"<b>R</b>":"";
         }
     for(i=0;i<10;++i){
             chart[i].bhava=(parseInt(chart[i].long/30)-parseInt(chart[0].long/30)+12)%12+1;
@@ -552,7 +552,7 @@ function showError(error) {//Incase of error in Gelocation
     }
 }
 function calcLocalTime(d) {// function to calculate local time in a different city given the city"s UTC offset
-    utc = d.getTime() + (d.getTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
+    utc = d.getTime() + (d.getMyTimezoneOffset() * 60000);    // convert to msec , add local time zone offset , get UTC time in msec
     nd = new Date(utc + (3600000*TimeZoneOffset));// create new Date object for different city using supplied offset
     return nd;//nd.toLocaleString();
 }
@@ -1072,7 +1072,7 @@ function calculateAscendant(date_time,latitude,longitude){//Returns Ascendant Ob
 	var year= date_time.getFullYear();
 	var hr= date_time.getHours();
 	hr    += date_time.getMinutes()/60;
-	var tz= date_time.getTimezoneOffset()/60;
+	var tz= date_time.getMyTimezoneOffset()/60;
 	var ln= longitude;
 	var la= latitude;
    // }
@@ -1293,7 +1293,7 @@ function GetXmlHttpObject(){
 }
 
 function doForm(){//Checked
-    var d= new Date(params["bdate"]);
+    var d= new Date(params["bdate"]+"T00:00:00");
     var t= new Date("January 1, 1970 "+params["btime"]);
     TimeZoneOffset = parseFloat(params["timezone"]);//params["timezone"].split(".")[0]+"."+(params["timezone"]%1*100/60).toFixed(6).split(".")[1];// parseFloat(params["timezone"]);
 	if(isNaN(TimeZoneOffset))
