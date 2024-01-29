@@ -10,12 +10,6 @@
             "request": "launch",
             "type": "chrome",
             "file": "${workspaceFolder}/SJPv6/www/SJP.html",
-        },
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Open SJP.html",
-            "file": "/home/sanjay/tarunaashree/Desktop/sanjay/sjp_git/srijagannatha-panchanga-1/SJPv6/www/SJP.html"
         }
     ]
 }
