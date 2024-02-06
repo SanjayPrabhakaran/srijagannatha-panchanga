@@ -1,4 +1,13 @@
 CACHE MANIFEST
+*
+css/*
+ephemeris/*
+ephemeris/astronomy/*
+ephemeris/build/*
+ephemeris/astronomy/moshier/*
+ephemeris/astronomy/moshier/plan404/*
+img/*
+js/*
 # 2014-09-08 SJP v4.0.0
 ephemeris29031987.js
 ephemeris30121929.js
@@ -12,3 +21,4 @@ SJPamsha.htm
 SJPashtakavarga.htm
 SJPdasa.htm
 img/logo.png
+sjp.js
