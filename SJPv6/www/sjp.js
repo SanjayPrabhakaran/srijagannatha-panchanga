@@ -440,7 +440,7 @@ function getPanchanga(date_time,longitude,latitude){
     
     this.html+="<a href=\"javascript:getJHDStringEsc(params);\" download=\""+params['chartname']+".jhd\">Save JHD</a>";
 
-    this.html+="<a href=\"javascript:navigator.clipboard.writeText(getJHDStringEsc(params));\" > Copy JHD text</a>";
+    //this.html+="<a href=\"javascript:navigator.clipboard.writeText(getJHDStringEsc(params));\" > Copy JHD text</a>";
 	
     this.html+= "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
