@@ -205,8 +205,61 @@ function getDayOfYear(fullYear,month,date) {
     
     return dayOfYear;
   }
+
+function ParseLatLong(s){
   
-function updateDMY(){
+/*
+"Various Types
+Decimal degrees: 41.40338, 2.17403
+Degrees, minutes, and seconds: 41°24'12.2"N 2°10'26.5"E
+lat,long = 39n17, 76w37; 
+
+*/
+    let text= s.toUpperCase();
+    let location=[null,null];
+    let latitude = /(\d+)([nNsS])([\d\.]+)/gi;
+    let longitude = /(\d+)([eEwW])([\d\.]+)/gi;
+    result = latitude.exec(text);
+    if(result != null ){
+        lat=result[1]*1+result[3]/60;
+        if(result[2]=="W")long*=-1;
+    }    
+    result = longitude.exec(text);
+    if(result != null ){
+        long=result[1]*1+result[3]/60;
+        if(result[2]=="W")long*=-1;
+    }
+    latitude = /(\d+)\s*°\s*(\d+)\s*\'\s*([\d\.]+)\s*\"\s*([NnSs])/gi;
+    longitude = /(\d+)\s*°\s*(\d+)\s*\'\s*([\d\.]+)\s*\"\s*([EeWw])/gi;
+    result = latitude.exec(text);
+    if(result != null){
+        lat=result[1]*1+result[2]/60+result[3]/60/60;
+        if(result[4]=="S")lat*=-1;
+    }
+    result = longitude.exec(text);
+    if(result != null){
+        long=result[1]*1+result[2]/60+result[3]/60/60;
+        if(result[4]=="W")lat*=-1;
+    }
+    latlong=/([\+\-\d]+\.\d+)\s*\,\s*([\+\-\d]+\.\d+)/gi;
+    result = latlong.exec(text);
+    if(result != null && result.length==3){
+        lat=result[1]*1;
+        long=result[2]*1;
+    }
+    if(typeof(lat)!='undefined')location[0]=lat;
+    if(typeof(long)!='undefined')location[1]=long;
+    return location;
+  }
+
+  function UpdatePlaceLatLong(){
+    p=ParseLatLong(document.getElementById("placename").value);
+    console.log(p);
+    if(p[0]!=0)document.getElementById("latitude").value=-1*p[0];
+    if(p[1]!=0)document.getElementById("longitude").value=p[1];
+  }
+
+  function updateDMY(){
 	var date= new Date(document.getElementById("bdate").value);
 	//alert("changed"+date);
 	document.getElementById("day").value =date.getDate();
