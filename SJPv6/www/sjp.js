@@ -1630,13 +1630,9 @@ function JHDtz2Dec(zone)
     decTZ=tz[0]+"."+(decMin/60).toPrecision(6).split(".")[1];
     return decTZ;
 }
-function ListenToJHDloader(e) {
+function ParseJHD(){
 	var fileDisplayArea = document.getElementById('inputTextToSave');
-	fileDisplayArea.value = this.result; //reader.result;
-	var fileInput = document.getElementById('fileInput');
-	var file = fileInput.files[0];
-	document.getElementById("chartname").value = file.name;
-	var lines = this.result.replace(/\r/g,"").split("\n");
+	var lines = fileDisplayArea.value.replace(/\r/g,"").split("\n");
 	//Line0 Date 	//L1 Month	//L2 Year	//L3 Time hh.mmss	//L4 Time zone -5.mmss	//L5 Long deg.mm	//L6 Lat deg.mm
 	var time=lines[3].split(".");
 	var datetime = months[lines[0]-1]+" "+lines[1]+" "+lines[2]+" "+
@@ -1652,27 +1648,21 @@ function ListenToJHDloader(e) {
     document.getElementById("hours").value=time[0];
     document.getElementById("mins").value=time[1].slice(0,2);
     document.getElementById("secs").value=Math.round(time[1].slice(2,5)*60/1000);
-    
-	//var tzone = lines[4].split(".");
-	//tzone[0] = lines[4]*-1//tzone[0] * -1;
-	//tzone[1] = tzone[1]/60;
     tz=JHDtz2Dec(lines[4]);
-    // if(tz[0]=="-") {
-    //     tz=tz.replace("-","");
-    // }
-    // else{
-    //     tz="-"+tz;
-    // }
-    // tz=tz.split(".")
-    // tz=tz[0]+"."+(tz[1]/60).toPrecision(6).split(".")[1];
 	document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");
-	//tzone[1] = tzone[1]/60;
 	document.getElementById('longitude').value = l[0]+"."+l[1];
 	l = lines[6].split(".");
-	//tzone[1] = tzone[1]/60;
 	document.getElementById('latitude').value = l[0]+"."+l[1];
-	if(lines.length>11)	document.getElementById('placename').value=lines[12]+","+lines[13];
+	if(lines.length>11)	document.getElementById('placename').value=lines[12]+","+lines[13];    
+}
+function ListenToJHDloader(e) {
+	var fileDisplayArea = document.getElementById('inputTextToSave');
+	fileDisplayArea.value = this.result; //reader.result;
+	var fileInput = document.getElementById('fileInput');
+	var file = fileInput.files[0];
+	document.getElementById("chartname").value = file.name;
+    ParseJHD();
 }
 function ListenToFileLoad(e){
 	var reader = new FileReader();
