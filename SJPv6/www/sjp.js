@@ -487,7 +487,7 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
 				+","+this.karana_name+","+this.yoga_name+"</small>",6);
-
+    this.navamsaHTML = getPlainChart(chart,"Navamsa");
     this.html = "";//"\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     
@@ -497,10 +497,11 @@ function getPanchanga(date_time,longitude,latitude){
 	
     this.html+= "<style scoped type=\"text/css\"> body{background-color:#ffcc33;} input,select{background-color:#ffff99;} </style>";
     this.html+= this.rasiHTML;
+    this.html+= "\n<br/>"+this.navamsaHTML;
     this.html+= "<a href=SJPamsha.htm?Lagna="+chart[0].long+"&Sun="+chart[1].long+"&Moon="+chart[2].long+
                 "&Mars="+chart[3].long+"&Merc="+chart[4].long+"&Jup="+chart[5].long+"&Ven="+chart[6].long+
                 "&Sat="+chart[7].long+"&Rahu="+chart[8].long+"&Ketu="+chart[9].long+
-                "&Division=Navamsa&submit=Calculate>Navamsa</a></br>";
+                "&Division=Navamsa&submit=Calculate>Amsha Chakra</a></br>";
     this.html+= "\n<br/><b>Vaara </b>" + this.vara_name +
                 "\n<br/><b>&nbsp;&nbsp; from:</b>" + week_days[this.sunrise.getDay()]+"-"+formatTime(this.sunrise) +
                 "\n<b> to:</b>" + week_days[this.sunrise_next.getDay()]+ "-"+formatTime(this.sunrise_next) +
