@@ -213,6 +213,7 @@ function ParseLatLong(s){
 Decimal degrees: 41.40338, 2.17403
 Degrees, minutes, and seconds: 41°24'12.2"N 2°10'26.5"E
 lat,long = 39n17, 76w37; 
+13.0838N 80.2826E
 
 */
     let text= s.toUpperCase();
@@ -239,13 +240,21 @@ lat,long = 39n17, 76w37;
     result = longitude.exec(text);
     if(result != null){
         long=result[1]*1+result[2]/60+result[3]/60/60;
-        if(result[4]=="W")lat*=-1;
+        if(result[4]=="W")long*=-1;
     }
     latlong=/([\+\-\d]+\.\d+)\s*\,\s*([\+\-\d]+\.\d+)/gi;
     result = latlong.exec(text);
     if(result != null && result.length==3){
         lat=result[1]*1;
         long=result[2]*1;
+    }
+    latlong=/([\d]+\.\d+)\s*([nNsS])[\,\s]+([\+\-\d]+\.\d+)\s*([eEwW])/gi;
+    result = latlong.exec(text);
+    if(result != null ){
+        lat=result[1]*1;
+        if(result[2]=="S")lat*=-1;
+        long=result[3]*1;
+        if(result[4]=="W")long*=-1;
     }
     if(typeof(lat)!='undefined')location[0]=lat;
     if(typeof(long)!='undefined')location[1]=long;
@@ -255,8 +264,8 @@ lat,long = 39n17, 76w37;
   function UpdatePlaceLatLong(){
     p=ParseLatLong(document.getElementById("placename").value);
     console.log(p);
-    if(p[0]!=0)document.getElementById("latitude").value=-1*p[0];
-    if(p[1]!=0)document.getElementById("longitude").value=p[1];
+    if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=-1*p[0];
+    if(p[1]!=0 && p[1]!= null) document.getElementById("longitude").value=1*p[1];
   }
 
   function updateDMY(){

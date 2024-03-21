@@ -19,13 +19,13 @@
         <h1>Search for a Location based on an Address</h1>
         <input type="text" id="location" name="location" required minlength="3" maxlength="40" size="10" />
         <button onclick="javascript:searchLocation()">Search Location</button>
+        <div id="panel"></div>
         <p>Request a location using a free-form text input and display it on the map.</p>
     </div>
     <p>This example makes a geocoding request and retrieves the latitude, longitude and
       complete address details of <b>given address</b> based on a free-form
       text input. A clickable marker is placed on the location found.</p>
     <div id="map"></div>
-    <div id="panel"></div>
     <h3>Code</h3>
     <p>Access to the geocoding service is obtained from the <code>H.service.Platform</code>
        by calling <code>getSearchService()</code>. The <code>geocode()</code> method is used

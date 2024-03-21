@@ -138,7 +138,7 @@ function addLocationsToPanel(locations){
 
       nodeOL.appendChild(li);
   }
-
+  locationsContainer.innerHTML="";
   locationsContainer.appendChild(nodeOL);
 }
 
