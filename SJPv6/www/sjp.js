@@ -495,8 +495,8 @@ function getPanchanga(date_time,longitude,latitude){
     }
 
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
-				+","+this.karana_name+","+this.yoga_name+"</small>",6);
-    this.navamsaHTML = getPlainChart(chart,"Navamsa");
+				+","+this.karana_name+","+this.yoga_name+"</small>");
+    this.navamsaHTML =getChart(chart,"Navamsa",6,false);// getPlainChart(chart,"Navamsa");
     this.html = "";//"\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     
@@ -1379,8 +1379,9 @@ function doForm(){//Checked
     }
     lon = parseFloat(setCookie("latitude",params["longitude"],1000));
     lat = parseFloat(setCookie("latitude",params["latitude"],1000));
+    tz = parseFloat(setCookie("timezone",params["timezone"],1000));
     c=params["placename"];
-    places[c]= lat+";"+lon;
+    places[c]= lat+";"+lon+";"+tz;
     z=getCookie("placeslist");
     for (x in places )z=z+x+"#"+places[x]+"&";
     setCookie("placeslist",z,1000);
@@ -1413,6 +1414,7 @@ function setLatLong(){
  k = k[1].split(/;/);
  document.getElementById("longitude").value=k[0];
  document.getElementById("latitude").value=k[1];
+ document.getElementById("timezone").value=k[2];
 //alert("setLatLong");
 }
 function populatePlacesList(p){
@@ -1619,7 +1621,7 @@ function init(){
 
         places_c = getCookie('placeslist');
 		if(places_c===""){
-		places_c="Puri#-85.83;19.81&New Delhi#-77.208833;28.613806&Chennai#-80.23;13.5&WashingtonDC#77.0366;38.8977";
+		places_c="Puri#-85.83;19.81;5.5&New Delhi#-77.208833;28.613806;5.5&Chennai#-80.23;13.5;5.5&WashingtonDC#77.0366;38.8977;-5.0";
 	   }
 	populatePlacesList(places_c);
 	window.status="Intialised Form";
