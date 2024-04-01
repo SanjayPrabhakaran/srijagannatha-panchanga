@@ -496,7 +496,7 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.rasiHTML = getChart(chart,"<small>"+this.vara_name+","+this.nakshatra_name+","+this.tithi_name
 				+","+this.karana_name+","+this.yoga_name+"</small>");
-    this.navamsaHTML =getChart(chart,"Navamsa",6,false);// getPlainChart(chart,"Navamsa");
+    this.navamsaHTML =getChart(chart,"Navamsa","Navamsa",5,false);//Not Used getPlainChart(chart,"Navamsa");
     this.html = "";//"\n<p><b>Panchanga on </b> "+this.date_time+ "<br/><br/>";//calcLocalTime(this.date_time).toLocaleString() (TZ Issue)
     this.html+="<script type='text/javascript' src= 'sjp.js'></script>";
     
@@ -941,7 +941,45 @@ function calcSunsetGMT(julDay, latitude, longitude){
     setTimeGMT = 720 + timeDiff - eqTime; // in minutes
     return setTimeGMT;
 }
-function getChart(chart,center,size=6,degrees=true){
+///////////////////////////////////////////////////////////////////
+function getPlainChartOLD(chart,division){//No Used
+	var a="";
+	var k=0;
+	var i=0;
+	var s = ["","","","","","","","","","","","",""];
+	for(i=0;i<=9;++i){//For each of the Graha in 'i' find the divisional sign 'k'
+		k=GetDivisionalSign(chart[i].long,division);
+		s[k]=(s[k]?s[k]+", ":"")+chart[i].tx+chart[i].retro;
+	}
+	for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp";
+	a="<style type='text/css'>.chart td {width: 4em;height: 4em;}</style>";
+	a=a+"<div id=chart class='chart'> <table cellspacing=1 border=1 cellpadding=1 border=0>\n";
+	a=a+"  <tr>";
+	a=a+"    <td id=12 align=center>"+s[12]+"</td>";
+	a=a+"    <td id=1 align=center>"+s[1]+" </td>";
+	a=a+"    <td id=2 align=center>"+s[2]+" </td>";
+	a=a+"    <td id=3 align=center>"+s[3]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=11 align=center>"+s[11]+" </td>";
+	a=a+"    <td border=1 colspan=2 rowspan=2 id=0 align=middle>"+division+"</td>";
+	a=a+"    <td  id=4 align=center>"+s[4]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=10 align=center>"+s[10]+" </td>";
+	a=a+"    <td id=5 align=center>"+s[5]+" </td>";
+	a=a+"    </tr>";
+	a=a+"  <tr>";
+	a=a+"    <td id=9 align=center>"+s[9]+" </td>";
+	a=a+"    <td id=8 align=center>"+s[8]+" </td>";
+	a=a+"    <td id=7 align=center>"+s[7]+" </td>";
+	a=a+"    <td id=6 align=center>"+s[6]+" </td>";
+	a=a+"    </tr>";
+	a=a+" </table></div>";
+ return a;
+ }
+ ///////////////////////////////////////////
+function getChart(chart,center,division,size=6,degrees=true){
 	if(center=== undefined)center="";
     var a="";
     var k=0;
@@ -950,10 +988,11 @@ function getChart(chart,center,size=6,degrees=true){
 	empty=""
     for(i=0;i<=9;++i){
 	    var deg=chart[i].long%30;
-     k=parseInt((chart[i].long%360)/30+0.999999999);
-	 sDeg=(degrees)?deg.toFixed(2):empty//deg.toFixed(2)
-	 //alert(sDeg)
-     s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+sDeg+"</sub>";
+        //k=parseInt((chart[i].long%360)/30+0.999999999);
+        k=GetDivisionalSign(chart[i].long,division);
+        sDeg=(degrees)?deg.toFixed(2):empty//deg.toFixed(2)
+        //alert(sDeg)
+        s[k]=(s[k]===""?"":s[k]+", ")+chart[i].tx+chart[i].retro+"<sub style='font-size: 10px'>"+sDeg+"</sub>";
     }
     for(i=0;i<=12;++i) s[i]=s[i]+"&nbsp;";
     a="<style type=\"text/css\">.chart  td {width: "+size+"em;height: "+size+"em; font-weight: normal;}</style>";
