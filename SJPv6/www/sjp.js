@@ -275,7 +275,20 @@ lat,long = 39n17, 76w37;
 	document.getElementById("month").value =date.getMonth()+1;
 	document.getElementById("year").value =date.getFullYear();
 }
+function updateDateTimeWidget(){
 
+	var date= new Date(document.getElementById("bdate").value);
+	date.setDate(document.getElementById("day").value);
+	date.setMonth(document.getElementById("month").value -1);
+    date.setFullYear(document.getElementById("year").value);
+    document.getElementById("bdate").value=date.toISOString().slice(0,10)
+    //var time= (document.getElementById("btime").value).split(":");
+    //date.setHours(time[0]*1,time[1]*1,time[2]*1)
+    document.getElementById("btime").value=(document.getElementById("hours").value+"").padStart(2,"0")+":"
+                                    +(document.getElementById("mins").value+"").padStart(2,"0")+":"
+                                    +(document.getElementById("secs").value+"").padStart(2,"0");
+    
+}
 function updateTime(){
 	var time= (document.getElementById("btime").value).split(":");
 	//alert("changed"+time);
@@ -283,6 +296,7 @@ function updateTime(){
 	document.getElementById("mins").value =time[1];
 	document.getElementById("secs").value =time[2];
 }
+
 
 function initCurrentHMSDMY(){
     var d=new Date();
