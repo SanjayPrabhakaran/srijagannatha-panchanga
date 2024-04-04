@@ -1674,7 +1674,7 @@ function init(){
 
         places_c = getCookie('placeslist');
 		if(places_c===""){
-		places_c="Puri#-85.83;19.81;5.5&New Delhi#-77.208833;28.613806;5.5&Chennai#-80.23;13.5;5.5&WashingtonDC#77.0366;38.8977;-5.0";
+		places_c="Ujjain#-75.769;23.1833;5.5&Puri#-85.83;19.81;5.5&New Delhi#-77.208833;28.613806;5.5&Chennai#-80.23;13.5;5.5&WashingtonDC#77.0366;38.8977;-5.0";
 	   }
 	populatePlacesList(places_c);
 	window.status="Intialised Form";
