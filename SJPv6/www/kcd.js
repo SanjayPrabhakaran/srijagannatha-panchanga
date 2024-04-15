@@ -36,20 +36,67 @@ function getKCDdasa(nax,d,fraction=false)
  kcd.pada%=108;
  kcd.i= kcd.pada%24
  kcd.seq=kcd_tbl[kcd.i];
- kcd.dates=[];
+ //kcd.dates=[];
  kcd.dasa=[];
- kcd.duration=[];
- kcd.dates[0]=new Date(d);
- kcd.dasa[0]=kcd.seq[5];
- kcd.duration[0]=kcd_years[kcd.dasa[0]];
+ //kcd.duration=[];
+ kcd.dasa[0]={};
+ kcd.dasa[0].name 	=kcd.seq[5];
+ kcd.dasa[0].duration =kcd_years[kcd.dasa[0].name];
+ kcd.dasa[0].startdate = new Date(d);
  if(fraction){
-	kcd.duration[0] *= (1-(kcd.nak*4)%1);
+	kcd.dasa[0].duration *= (1-(kcd.nak*4)%1);
  }
  for (j=1;j<9;++j){
-	kcd.dasa[j]=kcd.seq[j+5];
-	kcd.duration[j]=kcd_years[kcd.dasa[j]];
-	kcd.dates[j]=new Date(kcd.dates[j-1]);
-	kcd.dates[j].setDate(kcd.dates[j].getDate()+365.2425*kcd.duration[j-1]);
+	kcd.dasa[j]={};
+	kcd.dasa[j].name=kcd.seq[j+5];
+	kcd.dasa[j].duration = kcd_years[kcd.dasa[j].name];
+	kcd.dasa[j].startdate =new Date(kcd.dasa[j-1].startdate);
+	kcd.dasa[j].startdate.setDate(kcd.dasa[j].startdate.getDate()+365.2425*kcd.dasa[j-1].duration);
  }
  return kcd;
 }
+
+
+
+/// Create Table from array elements
+
+function createTable(data) {
+
+// Usage
+//const table = createTable(data);
+//document.body.appendChild(table);
+
+	// Create a table element.
+	const table = document.createElement("table");
+  
+	// Create a table header row.
+	const headerRow = document.createElement("tr");
+  
+	// Create a table header cell for each column.
+	for (const key in data[0]) {
+	  const headerCell = document.createElement("th");
+	  headerCell.textContent = key;
+	  headerRow.appendChild(headerCell);
+	}
+  
+	// Append the header row to the table.
+	table.appendChild(headerRow);
+  
+	// Create a table body row for each data object.
+	for (const object of data) {
+	  const bodyRow = document.createElement("tr");
+  
+	  // Create a table body cell for each property of the data object.
+	  for (const key in object) {
+		const bodyCell = document.createElement("td");
+		bodyCell.textContent = object[key];
+		bodyRow.appendChild(bodyCell);
+	  }
+  
+	  // Append the body row to the table.
+	  table.appendChild(bodyRow);
+	}
+  
+	// Return the table element.
+	return table;
+  }
