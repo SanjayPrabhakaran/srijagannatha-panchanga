@@ -592,7 +592,7 @@ function getPanchanga(date_time,longitude,latitude){
                 "\n<br/><br/>"+this.kaalatable.html+
                 "\n<br/>"+this.horatable.html+
                 "\n<br/>"+this.muhurthatable.html+
-                "\n<br/>"+this.BhaavaTable+
+//                "\n<br/>"+this.BhaavaTable+
                 "\n</p>";
     return this;
 }
