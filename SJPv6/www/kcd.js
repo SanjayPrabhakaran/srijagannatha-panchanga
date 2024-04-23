@@ -56,10 +56,7 @@ function getKCDdasa(nax,d,fraction=false)
  return kcd;
 }
 
-
-
 /// Create Table from array elements
-
 function createTable(data) {
 
 // Usage
@@ -89,11 +86,19 @@ function createTable(data) {
 	  // Create a table body cell for each property of the data object.
 	  for (const key in object) {
 		const bodyCell = document.createElement("td");
-		bodyCell.textContent = object[key];
+		switch(typeof object[key]){
+			case "number":
+				bodyCell.textContent = object[key].toFixed(2);
+				break;
+			case "object":
+				if(object[key] instanceof Date) bodyCell.textContent=object[key].toLocaleString();
+				break;
+			default:
+				bodyCell.textContent = object[key];
+		}
 		bodyRow.appendChild(bodyCell);
 	  }
-  
-	  // Append the body row to the table.
+  	  // Append the body row to the table.
 	  table.appendChild(bodyRow);
 	}
   

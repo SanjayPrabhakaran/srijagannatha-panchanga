@@ -1450,11 +1450,14 @@ function doForm(){//Checked
         "<br/>"+
         panchanga.html;
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
+    //var kcdlink = "<div id=kcddiv></div><a href=javascript:document.getElementById('kcddiv').innerHTML=createTable(getKCDdasa(panchanga.nakshatra_cur-1,panchanga.date_time,true).dasa).outerHTML><strong>KCD Dasa</strong></a>";
+    
+    var kcdlink = "<div id=kcddiv><a href=javascript:document.getElementById('kcddiv').appendChild(createTable(getKCDdasa(panchanga.nakshatra_cur-1,panchanga.date_time,true).dasa))><strong>KCD Dasa</strong></a></div>";    
     document.write("<HTML><HEAD>"
                     +"<meta http-equiv='content-type' content='text/html; charset=utf-8' />"
                     +"<TITLE>"+params["chartname"]+" - Sri Jagannatha Panchanga - JavaScript</TITLE></HEAD><BODY>"
                     +""
-                    + editlink +s +editlink +"</body></html>");
+                    + editlink +s +"<br>"+kcdlink+"<br>"+editlink +"</body></html>");
     document.title = params["chartname"]+"-"+document.title;
 //    window.status="Computed Panchanga";
     document.close();
@@ -1782,6 +1785,7 @@ function initMap() {//Called thru callback
 		);
 	  return;
 }
+/*
 function initialize_old() {//Called thru callback
 	console.log("Entered initialize");
 	//alert("Please wait a moment while loading Google maps...");
@@ -1804,6 +1808,7 @@ function initialize_old() {//Called thru callback
 		);
 	  return;
 }
+*/
 function initSJP(){
 	//alert("entered initSJP");
 	submit=false;
