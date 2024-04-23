@@ -1452,7 +1452,7 @@ function doForm(){//Checked
     var editlink = "<a href="+window.location.href.replace("&submit=Calculate","")+"><strong>Change the Data</strong></a>";
     //var kcdlink = "<div id=kcddiv></div><a href=javascript:document.getElementById('kcddiv').innerHTML=createTable(getKCDdasa(panchanga.nakshatra_cur-1,panchanga.date_time,true).dasa).outerHTML><strong>KCD Dasa</strong></a>";
     
-    var kcdlink = "<div id=kcddiv><a href=javascript:document.getElementById('kcddiv').appendChild(createTable(getKCDdasa(panchanga.nakshatra_cur-1,panchanga.date_time,true).dasa))><strong>KCD Dasa</strong></a></div>";    
+    var kcdlink = "<div id=kcddiv><a href=javascript:document.getElementById('kcddiv').appendChild(createTable(getKCDdasa(panchanga.nakshatra_cur,panchanga.date_time,true).dasa))><strong>KCD Dasa</strong></a></div>";    
     document.write("<HTML><HEAD>"
                     +"<meta http-equiv='content-type' content='text/html; charset=utf-8' />"
                     +"<TITLE>"+params["chartname"]+" - Sri Jagannatha Panchanga - JavaScript</TITLE></HEAD><BODY>"
