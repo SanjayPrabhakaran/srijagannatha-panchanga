@@ -261,10 +261,10 @@ lat,long = 39n17, 76w37;
     return location;
   }
 
-  function UpdatePlaceLatLong(){
+  function UpdatePlaceLatLong(){ //Even of Lat Long Change
     p=ParseLatLong(document.getElementById("placename").value);
     console.log(p);
-    if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=-1*p[0];
+    //if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=-1*p[0];
     if(p[1]!=0 && p[1]!= null) document.getElementById("longitude").value=1*p[1];
   }
 
