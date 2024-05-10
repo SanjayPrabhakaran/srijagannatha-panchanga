@@ -216,8 +216,8 @@ lat,long = 39n17, 76w37;
 13.0838N 80.2826E
 
 */
+    let location=[null,null]; //Function return object
     let text= s.toUpperCase();
-    let location=[null,null];
     let latitude = /(\d+)([nNsS])([\d\.]+)/gi;
     let longitude = /(\d+)([eEwW])([\d\.]+)/gi;
     result = latitude.exec(text);
@@ -264,10 +264,27 @@ lat,long = 39n17, 76w37;
   function UpdatePlaceLatLong(){ //Even of Lat Long Change
     p=ParseLatLong(document.getElementById("placename").value);
     console.log(p);
-    //if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=-1*p[0];
+    if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=1*p[0];
     if(p[1]!=0 && p[1]!= null) document.getElementById("longitude").value=1*p[1];
   }
-
+function parseDate(str){
+    const datestr = /(\d\d*)\s*(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\w*\s*(\d\d\d\d)/;
+    let upperstr= str.toUpperCase();
+    result = datestr.exec(upperstr);
+    if(result != null ){
+        return new Date(result[1]+" "+result[2]+" "+result[3]);
+    }
+    return null;//If no dates found.
+}
+function UpdateChartName(){//Event on Chartname change
+    date=parseDate(document.getElementById("chartname").value);
+    if(date!=null){
+        document.getElementById("day").value =date.getDate();
+        document.getElementById("month").value =date.getMonth()+1;
+        document.getElementById("year").value =date.getFullYear();
+        document.getElementById("bdate").value =(new Date(date.setMinutes(date.getMinutes()-date.getTimezoneOffset()))).toISOString().slice(0,10)    
+    }
+  }
   function updateDMY(){
 	var date= new Date(document.getElementById("bdate").value);
 	//alert("changed"+date);
@@ -610,7 +627,8 @@ function showPosition(position) { // Event capture for GetLocation.
     document.getElementById("longitude").value = -1 * position.coords.longitude;
     document.getElementById("latitude").value = position.coords.latitude;
     document.getElementById("timezone").value = -1* (new Date().getTimezoneOffset()/60);//"UnKnown";
-	alert("Set browser geo location");
+    document.getElementById("placename").value="BrowserLocation"
+    alert("Set browser geo location");
 }
 function showError(error) {//Incase of error in Gelocation
     switch(error.code) {
