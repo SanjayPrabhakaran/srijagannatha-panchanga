@@ -56,7 +56,8 @@ var params; //The URL Parameters passed to this page.
 var places=new MyArray();
 var places_file = "places.txt";
 var xml_file_opened = false;
-var places_c="Puri#-85.83;19.81&New Delhi#-77.208833;28.613806&Chennai#-80.23;13.5&WashingtonDC#77.0366;38.8977"; //Default Places
+const places_const="Ujjain#75.769;23.1833;5.5&Puri#85.83;19.81;5.5&New Delhi#77.208833;28.613806;5.5&Chennai#80.23;13.5;5.5&WashingtonDC#-77.0366;38.8977;-5.0";; //Default Places
+var places_c=places_const;
 var chart =[
             {"text":"Asc/Lagna   ","long":0,"retro":" - ","speed":0,"id":0,"bhava":0,"tx":"Lg","order":0,"ck":""},
             {"text":"Sun/Surya   ","long":0,"retro":"","speed":0,"id":1,"bhava":0,"tx":"Su","order":1,"ck":""},
@@ -1207,7 +1208,7 @@ function calculateAscendant(date_time,latitude,longitude){//Returns Ascendant Ob
 	var hr= date_time.getHours();
 	hr    += date_time.getMinutes()/60;
 	var tz= date_time.getMyTimezoneOffset()/60;
-	var ln= longitude;
+	var ln= -1*longitude;
 	var la= latitude;
    // }
     jd = mdy2julian(mon,day,year);
@@ -1463,7 +1464,7 @@ function doForm(){//Checked
         "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+"&emsp;"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
         //"&emsp;Time: <b>"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
         "&emsp;Timezone: <b>"+params["timezone"]+"</b><br/>"+
-        "&emsp;Latitude, Longitude: <b>"+parseFloat(params["latitude"]).toFixed(6)+","+parseFloat(-1*params["longitude"]).toFixed(6)+"</b><br/>"+
+        "&emsp;Latitude, Longitude: <b>"+parseFloat(params["latitude"]).toFixed(6)+","+parseFloat(params["longitude"]).toFixed(6)+"</b><br/>"+
         //"&emsp;Latitude: <b>"+"</b><br/>"+
         "<br/>"+
         panchanga.html;
@@ -1592,7 +1593,7 @@ function getGrahasEph(date_time,lat,lon){
 				hours: 	date_time2.getHours(),
 				minutes:date_time2.getMinutes(),
 				seconds:date_time2.getSeconds()};
-	$const.tlong = -lon; // longitude
+	$const.tlong = lon; // longitude
 	$const.glat = lat; // latitude
 	$processor.init ();
 
@@ -1689,13 +1690,13 @@ function init(){
 	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
 	document.getElementById('latitude').value = params["latitude"]===undefined?getCookie('latitude'):params["latitude"];
 	document.getElementById('placename').value = params["placename"]===undefined?getCookie('placename'):params["placename"];
-	if(document.getElementById('longitude').value==="") document.getElementById('longitude').value = "-80.23";
-	if(document.getElementById('latitude').value==="") document.getElementById('latitude').value = "13.5";
+	if(document.getElementById('longitude').value==="") document.getElementById('longitude').value = "80.2705";
+	if(document.getElementById('latitude').value==="") document.getElementById('latitude').value = "13.0843";
 	if(document.getElementById('placename').value==="") document.getElementById('placename').value = "Chennai";
 
         places_c = getCookie('placeslist');
 		if(places_c===""){
-		places_c="Ujjain#-75.769;23.1833;5.5&Puri#-85.83;19.81;5.5&New Delhi#-77.208833;28.613806;5.5&Chennai#-80.23;13.5;5.5&WashingtonDC#77.0366;38.8977;-5.0";
+		places_c=places_const;
 	   }
 	populatePlacesList(places_c);
 	window.status="Intialised Form";
@@ -1737,7 +1738,7 @@ function ParseJHD(){
     tz=JHDtz2Dec(lines[4]);
 	document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");
-	document.getElementById('longitude').value = l[0]+"."+l[1];
+	document.getElementById('longitude').value = -1*(l[0]+"."+l[1]);
 	l = lines[6].split(".");
 	document.getElementById('latitude').value = l[0]+"."+l[1];
 	if(lines.length>11)	document.getElementById('placename').value=lines[12]+","+lines[13];    
@@ -1780,7 +1781,7 @@ function placeMarker(location) {
 		content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
 	  });
 	  infowindow.open(map,marker);
-	  document.getElementById('longitude').value=-1*location.lng();
+	  document.getElementById('longitude').value=location.lng();
 	  document.getElementById('latitude').value=location.lat();
 	  document.getElementById('placename').value="MapLocation";
 	  document.getElementById('timezone').value=location.lng()*4/60;
