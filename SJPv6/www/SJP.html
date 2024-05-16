@@ -30,7 +30,7 @@
 	<!--input id=date name=date type=hidden size=50--></td>
   </tr><tr>
    <td>
-	<!--input id=bdate1 name=bdate type=date onchange="updateDMY(event)" -->
+	<input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" >
 	Day:<input id=day name=day type=number max=31 style="width:7em" onchange="updateDateTimeWidget()"> ;
 	Month:<input id=month name=month type=number max=12 style="width:7em"onchange="updateDateTimeWidget()"> 
 	Year:<input id=year name=year type=number  style="width:10em" onchange="updateDateTimeWidget()"> <br/>
