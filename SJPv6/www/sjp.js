@@ -57,7 +57,7 @@ var places=new MyArray();
 var places_file = "places.txt";
 var xml_file_opened = false;
 var places_const="Ujjain#75.769;23.1833;5.5&Puri#85.83;19.81;5.5&New Delhi#77.208833;28.613806;5.5&Chennai#80.23;13.5;5.5&WashingtonDC#-77.0366;38.8977;-5.0"; //Default Places
-var places_c=places_const;
+//var places_c=places_const;
 var chart =[
             {"text":"Asc/Lagna   ","long":0,"retro":" - ","speed":0,"id":0,"bhava":0,"tx":"Lg","order":0,"ck":""},
             {"text":"Sun/Surya   ","long":0,"retro":"","speed":0,"id":1,"bhava":0,"tx":"Su","order":1,"ck":""},
@@ -1428,7 +1428,7 @@ function GetXmlHttpObject(){
 }
 
 function doForm(){//Checked
-    var d= new Date(params["bdate"]+"T00:00:00");
+    var d= new Date(params["year"],params["month"]-1,params["day"]);//new Date(params["bdate"]+"T00:00:00");
     var t= new Date("January 1, 1970 "+params["btime"]);
     TimeZoneOffset = parseFloat(params["timezone"]);//params["timezone"].split(".")[0]+"."+(params["timezone"]%1*100/60).toFixed(6).split(".")[1];// parseFloat(params["timezone"]);
 	if(isNaN(TimeZoneOffset))
@@ -1670,12 +1670,18 @@ function setParams2FormValue(formID){
 function init(){
 	console.log("enter init");
 	var today = new Date();
-	if(document.getElementById("datetimeplace")===null)return;//Form is not present.
+	
+    if(document.getElementById("datetimeplace")===null)return;//Form is not present. Parameters are passed by URL.
+
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	//Time zone needs to be set before format times
 	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
 	var bdate = params['bdate']===undefined?today:new Date(params['bdate']);
-	document.getElementById("bdate").value  = formatDate(bdate);
+	//document.getElementById("bdate").value  = formatDate(bdate);
+    if(params["day"]!==undefined) bdate= new Date(params["year"],params["month"]-2,params["day"]);
+    document.getElementById("day").value=bdate.getDate();
+    document.getElementById("month").value=bdate.getMonth()+1;
+    document.getElementById("year").value=bdate.getFullYear();
     initCurrentHMSDMY();
 	var tstring=formatTimeSS(today);
     if(params["day"]!==undefined){
@@ -1684,7 +1690,14 @@ function init(){
 
     }
 	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];
-	var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);;
+    if(params["day"]!==undefined){
+        bdate.setHours(document.getElementById("hours").value);
+        bdate.setMinutes(document.getElementById("mins").value);
+        bdate.setSeconds(document.getElementById("secs").value);
+        var date= bdate;   
+    }else{
+    //var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);
+    }
 	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
@@ -1727,8 +1740,17 @@ function ParseJHD(){
 	//document.getElementById("date").value = datetime;
 	datetime=datetime.replace("\r","");
 	var d=new Date(datetime);
-	document.getElementById("bdate").value  = formatDate(d); //4:23 PM 10/30/2017 Added toLocaleDateString() since it was not working on US time zone. on IE?
-	document.getElementById("btime").value  = formatTimeSS(d);
+  	//document.getElementById("bdate").value  = formatDate(d); //4:23 PM 10/30/2017 Added toLocaleDateString() since it was not working on US time zone. on IE?
+	//document.getElementById("year").value=d.getFullYear();
+    //document.getElementById("month").value=d.getMonth()+1;
+    //document.getElementById("day").value=d.getDay();
+    if(isNaN(d.valueOf())){
+        d=new Date();
+        d.setHours(time[0]);
+        d.setMinutes(time[1].slice(0,2));
+        d.setSeconds(Math.round(time[1].slice(2,5)*60/1000));
+    }
+    document.getElementById("btime").value  = formatTimeSS(d);
     document.getElementById("month").value=lines[0];
     document.getElementById("day").value=lines[1];
     document.getElementById("year").value=lines[2];
