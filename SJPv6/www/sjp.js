@@ -293,34 +293,36 @@ function UpdateChartName(){//Event on Chartname change
 	document.getElementById("month").value =date.getMonth()+1;
 	document.getElementById("year").value =date.getFullYear();
 }
-function updateDateTimeWidget(){
+/*
+function updateDateTimeWidget() {
 
-	var date= new Date(document.getElementById("bdate").value);
-	date.setDate(document.getElementById("day").value);
-	date.setMonth(document.getElementById("month").value -1);
+    var date = new Date(document.getElementById("bdate").value);
+    date.setDate(document.getElementById("day").value);
+    date.setMonth(document.getElementById("month").value - 1);
     date.setFullYear(document.getElementById("year").value);
-    document.getElementById("bdate").value=date.toISOString().slice(0,10)
+    document.getElementById("bdate").value = date.toISOString().slice(0, 10)
     //var time= (document.getElementById("btime").value).split(":");
     //date.setHours(time[0]*1,time[1]*1,time[2]*1)
-    document.getElementById("btime").value=(document.getElementById("hours").value+"").padStart(2,"0")+":"
-                                    +(document.getElementById("mins").value+"").padStart(2,"0")+":"
-                                    +(document.getElementById("secs").value+"").padStart(2,"0");
-    
-}
-function updateTime(){
-	var time= (document.getElementById("btime").value).split(":");
-	//alert("changed"+time);
-	document.getElementById("hours").value =time[0];
-	document.getElementById("mins").value =time[1];
-	document.getElementById("secs").value =time[2];
-}
+    document.getElementById("btime").value = (document.getElementById("hours").value + "").padStart(2, "0") + ":"
+        + (document.getElementById("mins").value + "").padStart(2, "0") + ":"
+        + (document.getElementById("secs").value + "").padStart(2, "0");
 
+}
+function updateTime() {
+    var time = (document.getElementById("btime").value).split(":");
+    //alert("changed"+time);
+    document.getElementById("hours").value = time[0];
+    document.getElementById("mins").value = time[1];
+    document.getElementById("secs").value = time[2];
+}
+*/
 
 function initCurrentHMSDMY(){
     var d=new Date();
-    document.getElementById("hours").value =d.getHours();
-	document.getElementById("mins").value =d.getMinutes();
-	document.getElementById("secs").value =d.getSeconds();
+    document.getElementById("btime").value=formatTimeSS(d)
+    //document.getElementById("hours").value =d.getHours();
+    //document.getElementById("mins").value =d.getMinutes();
+	//document.getElementById("secs").value =d.getSeconds();
 	document.getElementById("day").value =d.getDate();
 	document.getElementById("month").value =d.getMonth()+1;
 	document.getElementById("year").value =d.getFullYear();
@@ -1461,7 +1463,7 @@ function doForm(){//Checked
     s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
         "<br/>"+
         "&emsp;Name: <b>"+params["chartname"]+"</b><br/>"+
-        "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+"&emsp;"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
+        "&emsp;DateTime dd/mm/yyyy: <b>"+params["day"]+"/"+params["month"]+"/"+params["year"]+"&emsp;"+params["btime"]+"</b><br/>"+
         //"&emsp;Time: <b>"+params["hours"]+":"+("0"+params["mins"]).slice(-2)+":"+("0"+params["secs"]).slice(-2)+"</b><br/>"+
         "&emsp;Timezone: <b>"+params["timezone"]+"</b><br/>"+
         "&emsp;Latitude, Longitude: <b>"+parseFloat(params["latitude"]).toFixed(6)+","+parseFloat(params["longitude"]).toFixed(6)+"</b><br/>"+
@@ -1685,19 +1687,19 @@ function init(){
     initCurrentHMSDMY();
 	var tstring=formatTimeSS(today);
     if(params["day"]!==undefined){
-        formids=["hours","mins","secs","day","month","year"];
+        formids=["day","month","year"];
         formids.forEach(setParams2FormValue);
 
     }
 	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];
-    if(params["day"]!==undefined){
-        bdate.setHours(document.getElementById("hours").value);
-        bdate.setMinutes(document.getElementById("mins").value);
-        bdate.setSeconds(document.getElementById("secs").value);
-        var date= bdate;   
-    }else{
+    //if(params["day"]!==undefined){
+      //  bdate.setHours(document.getElementById("hours").value);
+       // bdate.setMinutes(document.getElementById("mins").value);
+        //bdate.setSeconds(document.getElementById("secs").value);
+        //var date= bdate;   
+    //}else{
     //var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);
-    }
+    //}
 	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
@@ -1754,9 +1756,9 @@ function ParseJHD(){
     document.getElementById("month").value=lines[0];
     document.getElementById("day").value=lines[1];
     document.getElementById("year").value=lines[2];
-    document.getElementById("hours").value=time[0];
-    document.getElementById("mins").value=time[1].slice(0,2);
-    document.getElementById("secs").value=Math.round(time[1].slice(2,5)*60/1000);
+    //document.getElementById("hours").value=time[0];
+    //document.getElementById("mins").value=time[1].slice(0,2);
+    //document.getElementById("secs").value=Math.round(time[1].slice(2,5)*60/1000);
     tz=JHDtz2Dec(lines[4]);
 	document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
 	var l = lines[5].split(".");

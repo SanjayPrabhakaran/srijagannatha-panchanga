@@ -30,14 +30,14 @@
 	<!--input id=date name=date type=hidden size=50--></td>
   </tr><tr>
    <td>
-	<input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" >
-	Day:<input id=day name=day type=number max=31 style="width:7em" onchange="updateDateTimeWidget()"> ;
-	Month:<input id=month name=month type=number max=12 style="width:7em"onchange="updateDateTimeWidget()"> 
-	Year:<input id=year name=year type=number  style="width:10em" onchange="updateDateTimeWidget()"> <br/>
-	Time:<input id=btime name=btime type=time step=1 onchange="updateTime(event)">				     
-	:<input hidden id=hours name=hours type=number max=24 style="width:5em" onchange="updateDateTimeWidget()"> 
-	:<input hidden id=mins name=mins type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"> 
-	:<input hidden id=secs name=secs type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"> 
+	<!--input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" -->
+	Day:<input id=day name=day type=number max=31 style="width:7em" > 
+	Month:<input id=month name=month type=number max=12 style="width:7em"> 
+	Year:<input id=year name=year type=number  style="width:10em" > <br/>
+	Time:<input id=btime name=btime type=time step=1 >				     
+	<!--input hidden id=hours name=hours type=number max=24 style="width:5em" onchange="updateDateTimeWidget()"> 
+	<input hidden id=mins name=mins type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"> 
+	<input hidden id=secs name=secs type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"--> 
 
 	</td>
   </tr>
