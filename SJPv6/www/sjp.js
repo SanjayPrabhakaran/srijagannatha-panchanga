@@ -625,7 +625,7 @@ function getLocation() {//Check for Geolocation and get it.
     }
 }
 function showPosition(position) { // Event capture for GetLocation.
-    document.getElementById("longitude").value = -1 * position.coords.longitude;
+    document.getElementById("longitude").value = position.coords.longitude;
     document.getElementById("latitude").value = position.coords.latitude;
     document.getElementById("timezone").value = -1* (new Date().getTimezoneOffset()/60);//"UnKnown";
     document.getElementById("placename").value="BrowserLocation"
