@@ -432,7 +432,7 @@ function getPanchanga(date_time,longitude,latitude){
 
     this.date_time = date_time = new Date(date_time);
     var cur_date=Date.parse(date_time);  //In Milliseconds.
-    this.grahas = new getGrahasEph(date_time);
+    this.grahas = new getGrahasEph(date_time,latitude,longitude);
     this.AscData = new calculateAscendant(date_time,latitude,longitude);
 	this.lagnatable= new getLagnaTable(AscData,date_time,longitude,latitude);
 	var a=date_time;
@@ -508,9 +508,9 @@ function getPanchanga(date_time,longitude,latitude){
     this.karana_exit = new Date();
     karana_exit.setTime(cur_date+(6-((360+this.moon_cur - this.sun_cur)%360)%6)/(this.grahas.speed[1] - this.grahas.speed[0]));
 
-    this.kaalatable = new getKaalaTable(this.vara_cur,this.sunrise,this.sunset,latitude,longitude);
-    this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur]);
-    this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next);
+    this.kaalatable = new getKaalaTable(this.vara_cur,this.sunrise,this.sunset,latitude,longitude,cur_date);
+    this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur],cur_date);
+    this.horatable = new getHoraTable(this.vara_cur,this.sunrise,this.sunrise_next,cur_date);
 
     this.iSamvatsara = ( (date_time.getFullYear()-1) + ( (this.grahas.grahas[0]>240 && date_time.getMonth()<5) ? -7 : -6))%60; // -7 or -6 is correction on commonn year for getting samvatsara index ,,,after april the samvatsara starts.
     this.sSamvatsara = samvatsara[this.iSamvatsara];
@@ -920,6 +920,7 @@ function calcDayLength(hourAngle){
 }
 function calcSunriseGMT(julDay, latitude, longitude){
     // *** First pass to approximate sunrise
+    longitude=-longitude;
     var gamma = calcGamma(julDay);
     var eqTime = calcEqofTime(gamma);
     var solarDec = calcSolarDec(gamma);
@@ -939,6 +940,7 @@ function calcSunriseGMT(julDay, latitude, longitude){
 }
 function calcRiseTime(degree,latitude,longitude){
 	console.log("calcRiseTime"+degree+","+latitude+","+longitude+">"+degree/360*Math.PI);
+    longitude=-longitude;
     var gamma = calcGamma(degree/360*365.25);
     var eqTime = calcEqofTime(gamma);
 	var solarDec = calcSolarDec(gamma);
@@ -951,6 +953,7 @@ function calcRiseTime(degree,latitude,longitude){
 }
 function calcSolNoonGMT(julDay, longitude){
     // Adds approximate fractional day to julday before calc gamma
+    longitude=-longitude;
     var gamma_solnoon = calcGamma2(julDay, 12 + (longitude/15));
     var eqTime = calcEqofTime(gamma_solnoon);
     var solarNoonDec = calcSolarDec(gamma_solnoon);
@@ -959,6 +962,7 @@ function calcSolNoonGMT(julDay, longitude){
 }
 function calcSunsetGMT(julDay, latitude, longitude){
     // First calculates sunrise and approx length of day
+    longitude=-longitude;
     var gamma = calcGamma(julDay + 1);
     var eqTime = calcEqofTime(gamma);
     var solarDec = calcSolarDec(gamma);
@@ -1059,14 +1063,14 @@ function getChart(chart,center,division,size=6,degrees=true){
 function getPanchaPakshiTable(vara_cur,sunrise,sunset){
     return this;
 }
-function getKaalaTable(vara_cur,sunrise,sunset, latitude,longitude){
+function getKaalaTable(vara_cur,sunrise,sunset, latitude,longitude,cur_time){
     this.html="<table border=2><tr><th>Start Time</th><th>RahuKaala Chakra</th><th>Gulika Chakra</th><th>Chaughadia Chakra</th><th>Rising degrees</th></tr>";
     var k=0;
     var kaala = new Date();
     this.kaala_start = new MyArray(16);
     this.kaala_name= new MyArray(16);
     this.caughadia_name = new MyArray(16);
-    var cur_time=new Date(params["bdate"]+" "+params["btime"]);
+    //var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     kaala.setTime(sunrise.getTime());
     var kaalaunit= (sunset.getTime()-sunrise.getTime())/8;
     var i,g,c;
@@ -1117,11 +1121,11 @@ function getKaalaTable(vara_cur,sunrise,sunset, latitude,longitude){
     this.html+="</table>";
     return this;
 }
-function getMuhurthaTable(sunrise,sunset,paksha,vaara){
+function getMuhurthaTable(sunrise,sunset,paksha,vaara,cur_time){
     this.html="<table border=2><tr><th>Muhurtha Nakshatra</th><th>Start Time</th><th>Eagle</th><th>Owl</th><th>Crow</th><th>Cock</th><th>Peacock</th></tr>";
     var k=0;
     var m = new Date();
-    var cur_time=new Date(params["bdate"]+" "+params["btime"]);
+   // var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     this.muhurtha_start = new MyArray(30);
     this.muhurtha_name= new MyArray(30);
     m.setTime(sunrise.getTime());
@@ -1167,11 +1171,11 @@ function getMuhurthaTable(sunrise,sunset,paksha,vaara){
     return this;
 }
 
-function getHoraTable(vara_cur,sunrise,sunrise_next){
+function getHoraTable(vara_cur,sunrise,sunrise_next,cur_time){
     this.html="<table border=2><tr><th>Hora</th><th>Start Time</th></tr>";
     var k=0;
     var m = new Date();
-    var cur_time=new Date(params["bdate"]+" "+params["btime"]);
+    //var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     this.hora_start = new MyArray(24);
     this.hora_name= new MyArray(24);
     m.setTime(sunrise.getTime());
@@ -1210,7 +1214,7 @@ function calculateAscendant(date_time,latitude,longitude){//Returns Ascendant Ob
 	var hr= date_time.getHours();
 	hr    += date_time.getMinutes()/60;
 	var tz= date_time.getMyTimezoneOffset()/60;
-	var ln= -1*longitude;
+	var ln= -longitude;
 	var la= latitude;
    // }
     jd = mdy2julian(mon,day,year);
@@ -1448,7 +1452,7 @@ function doForm(){//Checked
 	d.setMilliseconds(t.getMilliseconds());
     
     if(isNaN(d)){
-        alert("Invalid Date Time:"+params["bdate"]+" "+params["btime"]+"\n Using Current date time");
+        alert("Invalid Date Time yyyy/mm/dd:"+params["year"]+"/"+params["month"]+"/"+params["day"]+" "+params["btime"]+"\n Using Current date time");
         d=new Date();
     }
     lon = parseFloat(setCookie("latitude",params["longitude"],1000));
