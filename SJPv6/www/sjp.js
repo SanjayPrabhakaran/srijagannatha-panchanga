@@ -6,9 +6,9 @@ Date.prototype.day=1;
 Date.prototype.month=1;
 Date.prototype.year=1;
 
-var minutes = 1000 * 60; //Milliseconds
-var hours = minutes * 60;//Milliseconds
-var day = hours * 24;//Milliseconds
+var  minutes = 1000 * 60; //Milliseconds
+var  hours = minutes * 60;//Milliseconds
+var  day = hours * 24;//Milliseconds
 var kali2julian = 588466;//Ahargana to subtract from Julian date to get kali ahargana.
 var t; //t : number of Julian centuries since J2000.0 t = ((jd - 2415020) + f/24 - 0.5)/36525;
 var nakshatra =["Ashvini-Ke","Bharani-Ve","Kritika-Su","Rohini-Mo","Mrigashira-Ma","Ardra-Ra","Punarvasu-Ju","Pushya-Sa","Ashlesha-Me","Magha-Ke","Purva Phalguni-Ve","Uttara Phalguni-Su","Hasta-Mo","Chitra-Ma","Swati-Ra","Vishakha-Ju","Anuradha-Sa","Jyeshtha-Me","Mula-Ke","Purva Ashadha-Ve","Uttara Ashadha-Su","Shravan-Mo","Dhanistha-Ma","Shatabhishaj-Ra","Purva Bhadrapad-Ju","Uttara Bhadrapad-Sa","Revati-Me"];
@@ -180,6 +180,18 @@ Date.prototype.getKaliAbda=function(){
     return KaliYear;
 }
 
+Date.prototype.setLocalHMS0=function(){
+    this.setHours(0);
+    this.setMinutes(0);
+    this.setSeconds(0);
+    this.setMilliseconds(0);
+}
+Date.prototype.setUtcHMS0=function(){
+    this.setUTCHours(0);
+    this.setUTCMinutes(0);
+    this.setUTCSeconds(0);
+    this.setUTCMilliseconds(0);
+}
 Date.prototype.getMyTimezoneOffset=function(){
 	if(Date.MyTimezoneOffset == null){
 		var t=new Date();
@@ -453,22 +465,27 @@ function getPanchanga(date_time,longitude,latitude){
         }
     this.moon_cur = this.grahas.grahas[1];
     this.sun_cur = this.grahas.grahas[0];
-    this.sunrise = new Date(date_time);
-    this.sunrise_next = new Date(date_time);
+    this.sunrise = new Date(cur_date);
+    this.sunrise_next = new Date(cur_date+day);
+    this.sunrise.setLocalHMS0();
+    this.sunrise_next.setLocalHMS0();
     var adjust = 0; // Adjust Time Sun rise/set time if needed.
-    if(this.date_time < new Date("1 Jan 1970")) adjust=day; //This adjust is needed for days in -ve it seems
+   // if(this.date_time < new Date("1 Jan 1970")) adjust=day; //This adjust is needed for days in -ve it seems
     var sr= calcSunriseGMT(dateToJul(cur_date),latitude,longitude);
     var sr2= calcSunriseGMT(dateToJul(cur_date+day),latitude,longitude);
-    this.sunrise.setTime(parseInt(cur_date/day)*day -adjust + sr*minutes);
-    this.sunrise_next.setTime(parseInt(cur_date/day)*day+day -adjust+ sr2*minutes);
-    this.sunset = new Date(date_time);
+    this.sunrise.setMinutes(-adjust + sr-date_time.getMyTimezoneOffset());//this.sunrise.setTime(parseInt(cur_date/day)*day -adjust + sr*minutes);
+    this.sunrise_next.setMinutes(-adjust+ sr2-date_time.getMyTimezoneOffset());//this.sunrise_next.setTime(parseInt(cur_date/day)*day+day -adjust+ sr2*minutes);
+    this.sunset = new Date(cur_date);
+    this.sunset.setLocalHMS0();
     var ss= calcSunsetGMT(dateToJul(cur_date),latitude,longitude);
-    this.sunset.setTime(parseInt(cur_date/day)*day -adjust+ ss*minutes);
-    this.noon = new Date(date_time);
-    this.midnight = new Date(date_time);
+    this.sunset.setMinutes(-adjust + ss-date_time.getMyTimezoneOffset());//.setTime(parseInt(cur_date/day)*day -adjust+ ss*minutes);
+    this.noon = new Date(cur_date);
+    this.noon.setLocalHMS0();
+    this.midnight = new Date(cur_date);
+    this.midnight.setLocalHMS0();
     var n= calcSolNoonGMT(dateToJul(cur_date),longitude);
-    this.noon.setTime(parseInt(cur_date/day)*day -adjust+ n*minutes);
-    this.midnight.setTime(parseInt(cur_date/day)*day -adjust+ (n+12*60)*minutes);
+    this.noon.setMinutes(-adjust + n-date_time.getMyTimezoneOffset());//.setTime(parseInt(cur_date/day)*day -adjust+ n*minutes);
+    this.midnight.setMinutes(-adjust + (n+12*60)-date_time.getMyTimezoneOffset());//.setTime(parseInt(cur_date/day)*day -adjust+ (n+12*60)*minutes);
     this.AscData2 = new calculateAscendant(this.sunrise,latitude,longitude);
     this.AscData3 = new calculateAscendant(this.sunrise_next,latitude,longitude);
     this.sun_begin = this.AscData2.Ascendant+1.151008333;
@@ -591,7 +608,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.html+= "\n<br/><b>Kali Abda:</b>"+date_time.getKaliAbda();
     this.html+= "\n<br/><b>Ahargana:</b>"+date_time.getAhargana();
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
-    this.html+= "\n<br/><b>Ishta Ghati <b>"+((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes/24).toFixed(4);
+    this.html+= "\n<br/><b>Ishta Ghati <b>"+(((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes)/24).toFixed(4);
     this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
                 "\n<br/><br/>";
 
@@ -1591,6 +1608,7 @@ function LoadFile(p){
 function getGrahasEph(date_time,lat,lon){
 	this.grahas = new MyArray(9);
 	this.speed = new MyArray(7);
+	this.body = new MyArray(9);
 	
 	tz_date=new Date(date_time);
     tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset())
@@ -1618,6 +1636,7 @@ function getGrahasEph(date_time,lat,lon){
 	var body = $moshier.body.sun;
 	$processor.calc (date, body);
 	this.grahas[0]=body.position.apparentLongitude;
+    this.body[0]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[0]=((360+body.position.apparentLongitude-this.grahas[0])%360)/day;
@@ -1625,6 +1644,7 @@ function getGrahasEph(date_time,lat,lon){
 	body = $moshier.body.moon;
 	$processor.calc (date, body);
 	this.grahas[1]=body.position.apparentLongitude;
+	this.body[1]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[1]=((360+body.position.apparentLongitude-this.grahas[1])%360)/day;
@@ -1632,6 +1652,7 @@ function getGrahasEph(date_time,lat,lon){
 	body = $moshier.body.mars;
 	$processor.calc (date, body);
 	this.grahas[2]=body.position.apparentLongitude;
+	this.body[2]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[2]=((360+body.position.apparentLongitude-this.grahas[2])%360)/day;
@@ -1639,12 +1660,14 @@ function getGrahasEph(date_time,lat,lon){
 	body = $moshier.body.mercury;
 	$processor.calc (date, body);
 	this.grahas[3]=body.position.apparentLongitude;
+	this.body[3]=body;
 	$processor.calc (date2, body);
 	this.speed[3]=((360+body.position.apparentLongitude-this.grahas[3])%360)/day;
 
 	body = $moshier.body.jupiter;
 	$processor.calc (date, body);
 	this.grahas[4]=body.position.apparentLongitude;
+	this.body[4]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[4]=((360+body.position.apparentLongitude-this.grahas[4])%360)/day;
@@ -1653,6 +1676,7 @@ function getGrahasEph(date_time,lat,lon){
 	body = $moshier.body.venus;
 	$processor.calc (date, body);
 	this.grahas[5]=body.position.apparentLongitude;
+	this.body[5]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[5]=((360+body.position.apparentLongitude-this.grahas[5])%360)/day;
@@ -1660,6 +1684,7 @@ function getGrahasEph(date_time,lat,lon){
 	body = $moshier.body.saturn;
 	$processor.calc (date, body);
 	this.grahas[6]=body.position.apparentLongitude;
+	this.body[6]=body;
 	console.log(body.position);
 	$processor.calc (date2, body);
 	this.speed[6]=((360+body.position.apparentLongitude-this.grahas[6])%360)/day;

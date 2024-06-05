@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.myDiv {
+  border: 5px outset red;
+  background-color: lightblue;    
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<script>
+class ClickExpand{
+	 static count=0;
+	 secname="";
+	 constructor(short_txt,exp_txt,childof=null){
+		alert(123);
+		 this.short_txt=short_txt;
+		 this.exp_txt=exp_txt;
+		 alert(short_txt);
+		 try {this.secname="ClkExp"+ClickExpand.count; }catch(err) { alert(err.message);}
+		 
+		 alert(this.secname);
+		 
+		 alert(ClickExpand.count);
+		 ClickExpand.count++;
+		 this.htm=`<section 
+		 id=${this.secname}>
+		 <a href="javascript:e=document.createElement('section');e.innerHTML='${exp_txt}';document.getElementById('${this.secname}').appendChild(e);alert(e);">${short_txt}</a></section>`;
+			if(childof != null)
+			{
+			 this.Addto(childof);
+			}
+		alert(this.htm);
+		}
+	 SetText(short_text,exp_text){
+	 }
+	 Addto(element_id){
+		var element = document.getElementById(element_id);
+		//s=element.createElement("section");
+		element.innerHTML=this.htm;
+	 }
+ }
+
+</script>
+
+<div id="kcddiv"><a href="javascript:document.getElementById('kcddiv').appendChild(document.createTextNode('<strong>asd</strong>'))"><strong>KCD Dasa</strong></a></div>
+
+<div id="kcddiv2">
+two
+<a href="javascript:e=document.createElement('p');e.setAttribute('ID','kcddiv2text');e.innerHTML='<strong>asd</strong>';document.getElementById('kcddiv2').appendChild(e);alert(e);"><strong>KCD Dasa</strong></a></div>
+
+<section id="test">section</section>
+<script>
+	var x;
+	x= new ClickExpand("short text","<strong>innter text in bold</strong>"); 
+	x.Addto('test');
+</script>
+<p>This is some text outside the div element.</p>
+
+</body>
+</html>
