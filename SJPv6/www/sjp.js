@@ -240,8 +240,8 @@ lat,long = 39n17, 76w37;
 */
     let location=[null,null]; //Function return object
     let text= s.toUpperCase();
-    let latitude = /(\d+)([nNsS])([\d\.]+)/gi;
-    let longitude = /(\d+)([eEwW])([\d\.]+)/gi;
+    let latitude = /(\d+)\s*([nNsS])\s*([\d\.]+)/gi;
+    let longitude = /(\d+)\s*([eEwW])\s*([\d\.]+)/gi;
     result = latitude.exec(text);
     if(result != null ){
         lat=result[1]*1+result[3]/60;

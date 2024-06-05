@@ -10,7 +10,7 @@
 <style scoped type="text/css">	body{background-color:#ffcc33;} input,select{background-color:#ffff99;}
 </style>
 <form id=datetimeplace method=get>
-<table id=inputtable >
+<table id=inputtable style="border:1px solid black;">
   <tr>
     <td colspan=2 >
       Chart Name:<input id=chartname name="chartname" size=20 type=text onchange="UpdateChartName()" value=Prashna>
@@ -29,7 +29,7 @@
     <td colspan=2>
 	<!--input id=date name=date type=hidden size=50--></td>
   </tr><tr>
-   <td>
+   <td style="font-weight:bold">
 	<!--input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" -->
 	Day:<input id=day name=day type=number max=31 style="width:7em" > 
 	Month:<input id=month name=month type=number max=12 style="width:7em"> 
@@ -42,40 +42,40 @@
 	</td>
   </tr>
   <tr>
-	<td>Time Zone: (In Decimals. Use -ve value for west of UT)
+	<td >Time Zone:<small>In Decimals. Use -ve value for west of UT</small> 
 	</td>
     <td>
 	<input id=timezone	name=timezone patter="\d+[\.]*\d*" type=text size=5 value="+5.5"><br/>
 	</td>
   </tr>
   <tr>
-    <td>Place Name:</td>
+    <td >Place Name:</td>
     <td><input id=placename name=placename onchange="UpdatePlaceLatLong()" type=text size=15
       title="Ex: PlaceName, Latitude,Longitude= 41.40338, 2.17403 or 41°24'12.2&quot;N 2°10'26.5&quot;E or  41n24, 2e17"> 
         </td>
   </tr>
   <tr >
-    <td>Latitude:
+    <td >Latitude:<small>South -ve/North +ve</small>
     </td>
     <td>
-      <input id=latitude name=latitude type=text size=5>South -ve/North +ve
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Longitude: 
-    </td>
-    <td>
-	    <input id=longitude name=longitude type=text size=5>East +ve/West -ve   
+      <input id=latitude name=latitude type=text size=5>
     </td>
   </tr>
   <tr>
+    <td >
+      Longitude:<small>East +ve/West -ve</small> 
+    </td>
     <td>
-	JHD Text:
+	    <input id=longitude name=longitude type=text size=5>   
+    </td>
+  </tr>
+  <tr>
+    <td >
+	JHD File Text:
     </td>
     <td>
 	<textarea title="You can also paste the JHD text here" onchange="ParseJHD()" id="inputTextToSave" style="width:50%;"></textarea>
-  <small><br/>(Note JHD file has longitude signs reversed)</small>
+  
     </td>
   </tr>
 </table>
