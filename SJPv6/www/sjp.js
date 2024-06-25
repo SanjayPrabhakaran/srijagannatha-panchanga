@@ -1695,7 +1695,8 @@ function init(){
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	//Time zone needs to be set before format times
 	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
-	if(params["day"]!==undefined) b_date= new Date(params["year"],params["month"]-2,params["day"]);
+    b_date=new Date();
+    if(params["day"]!==undefined) b_date= new Date(params["year"],params["month"]-2,params["day"]);
     document.getElementById("day").value=b_date.getDate();
     document.getElementById("month").value=b_date.getMonth()+1;
     document.getElementById("year").value=b_date.getFullYear();
