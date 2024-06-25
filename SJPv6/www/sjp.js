@@ -406,7 +406,7 @@ function getJHDStringEsc( parray){
 		+parray['year']+'\r\n'  //Line3:YEAR (digit)
         +(d.getHours()*1+d.getMinutes()/100+d.getSeconds()/10000).toFixed(6)+'\r\n' //HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
         +parseFloat((-parseInt(parray['timezone']))+"."+(parray['timezone']%1*60).toFixed(0)).toFixed(6)+'\r\n' //Line5:-HH.MMmmmm(TimeZone -ve is east Hours.MMmmmm)
-		+parray['longitude']+'\r\n'  //Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
+		+-1*parray['longitude']+'\r\n'  //Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
 		+parray['latitude']+'\r\n' //Line7:DD.MMmmmm (Latitude Degrees.MMmmmm)
 		+"00.000"+"\n" //Altitude //Line8:MM.mmmmmm (Altitude meters)
 		+(-parray['timezone'])+'\r\n' //Line9:-HH.dddddd(Winter TimeZone -ve is east, but here is in decimals)
