@@ -298,45 +298,26 @@ function parseDate(str){
     }
     return null;//If no dates found.
 }
+function parseHours(str){
+    const datestr = /(\d\d*):(\d\d*)/;
+    let upperstr= str.toUpperCase();
+    result = datestr.exec(upperstr);
+    d=new Date();
+    d.setHours(results[1]);
+    d.setMinutes(results[2]);
+    return d;
+}
+
 function UpdateChartName(){//Event on Chartname change
     date=parseDate(document.getElementById("chartname").value);
-    if(date!=null){
-        document.getElementById("day").value =date.getDate();
-        document.getElementById("month").value =date.getMonth()+1;
-        document.getElementById("year").value =date.getFullYear();
-        document.getElementById("bdate").value =(new Date(date.setMinutes(date.getMinutes()-date.getTimezoneOffset()))).toISOString().slice(0,10)    
-    }
+    if(date!=null)updateDMY(date);
   }
-  function updateDMY(){
-	var date= new Date(document.getElementById("bdate").value);
-	//alert("changed"+date);
+  
+  function updateDMY(date){
 	document.getElementById("day").value =date.getDate();
 	document.getElementById("month").value =date.getMonth()+1;
 	document.getElementById("year").value =date.getFullYear();
 }
-/*
-function updateDateTimeWidget() {
-
-    var date = new Date(document.getElementById("bdate").value);
-    date.setDate(document.getElementById("day").value);
-    date.setMonth(document.getElementById("month").value - 1);
-    date.setFullYear(document.getElementById("year").value);
-    document.getElementById("bdate").value = date.toISOString().slice(0, 10)
-    //var time= (document.getElementById("btime").value).split(":");
-    //date.setHours(time[0]*1,time[1]*1,time[2]*1)
-    document.getElementById("btime").value = (document.getElementById("hours").value + "").padStart(2, "0") + ":"
-        + (document.getElementById("mins").value + "").padStart(2, "0") + ":"
-        + (document.getElementById("secs").value + "").padStart(2, "0");
-
-}
-function updateTime() {
-    var time = (document.getElementById("btime").value).split(":");
-    //alert("changed"+time);
-    document.getElementById("hours").value = time[0];
-    document.getElementById("mins").value = time[1];
-    document.getElementById("secs").value = time[2];
-}
-*/
 
 function initCurrentHMSDMY(){
     var d=new Date();
@@ -417,12 +398,12 @@ function getJHDStringEsc( parray){
     //Line16:88.000000 (Atmospheric pressure)
     //Line17:99.000000 (temperature)
     //Line18:1 (If 1 use temperature for calculations)
-    //chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,bdate=1971-07-19,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
-	var d=new Date(parray['bdate']+" " +decodeURIComponent(parray['btime']));
+    //chartname=Sanjay+Prabhakaran.jhd,submit=Calculate,&day=25&month=6&year=2024,btime=09%3A15%3A20,timezone=5.5000,placename=Karur%5ECIM%5EStore%2CIndia,longitude=-78.050949,latitude=10.577872
+	var d=new Date("1/1/1970"+" " +decodeURIComponent(parray['btime']));
 	str=''
-        +(d.getMonth()+1)+'\r\n'  //Line1:MONTH
-        +d.getDate()+'\r\n' //Line2:DATE
-		+d.getFullYear()+'\r\n'  //Line3:YEAR (digit)
+        +parray['month']+'\r\n'  //Line1:MONTH
+        +parray['day']+'\r\n' //Line2:DATE
+		+parray['year']+'\r\n'  //Line3:YEAR (digit)
         +(d.getHours()*1+d.getMinutes()/100+d.getSeconds()/10000).toFixed(6)+'\r\n' //HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
         +parseFloat((-parseInt(parray['timezone']))+"."+(parray['timezone']%1*60).toFixed(0)).toFixed(6)+'\r\n' //Line5:-HH.MMmmmm(TimeZone -ve is east Hours.MMmmmm)
 		+parray['longitude']+'\r\n'  //Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
@@ -1097,7 +1078,6 @@ function getKaalaTable(vara_cur,sunrise,sunset, latitude,longitude,cur_time){
     this.kaala_start = new MyArray(16);
     this.kaala_name= new MyArray(16);
     this.caughadia_name = new MyArray(16);
-    //var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     kaala.setTime(sunrise.getTime());
     var kaalaunit= (sunset.getTime()-sunrise.getTime())/8;
     var i,g,c;
@@ -1152,7 +1132,6 @@ function getMuhurthaTable(sunrise,sunset,paksha,vaara,cur_time){
     this.html="<table border=2><tr><th>Muhurtha Nakshatra</th><th>Start Time</th><th>Eagle</th><th>Owl</th><th>Crow</th><th>Cock</th><th>Peacock</th></tr>";
     var k=0;
     var m = new Date();
-   // var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     this.muhurtha_start = new MyArray(30);
     this.muhurtha_name= new MyArray(30);
     m.setTime(sunrise.getTime());
@@ -1202,7 +1181,6 @@ function getHoraTable(vara_cur,sunrise,sunrise_next,cur_time){
     this.html="<table border=2><tr><th>Hora</th><th>Start Time</th></tr>";
     var k=0;
     var m = new Date();
-    //var cur_time=new Date(params["bdate"]+" "+params["btime"]);
     this.hora_start = new MyArray(24);
     this.hora_name= new MyArray(24);
     m.setTime(sunrise.getTime());
@@ -1221,7 +1199,7 @@ function getHoraTable(vara_cur,sunrise,sunrise_next,cur_time){
     this.html+="</table>";
     return this;
 }
-function BinarySearch(startval,endval,tofind,diff,func){
+function BinarySearch(startX,endX,findY,marginY,functionX){
   if(Math.abs(startval-endval)<=diff)return startval;
   var mid=(startval-endval)/2;
   if(func(startval)>tofind && tofind<func(startval+mid))return BinarySearch(startval,mid,tofind,diff,func);
@@ -1461,7 +1439,7 @@ function GetXmlHttpObject(){
 }
 
 function doForm(){//Checked
-    var d= new Date(params["year"],params["month"]-1,params["day"]);//new Date(params["bdate"]+"T00:00:00");
+    var d= new Date(params["year"],params["month"]-1,params["day"]);
     var t= new Date("January 1, 1970 "+params["btime"]);
     TimeZoneOffset = parseFloat(params["timezone"]);//params["timezone"].split(".")[0]+"."+(params["timezone"]%1*100/60).toFixed(6).split(".")[1];// parseFloat(params["timezone"]);
 	if(isNaN(TimeZoneOffset))
@@ -1717,12 +1695,10 @@ function init(){
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	//Time zone needs to be set before format times
 	TimeZoneOffset = parseFloat(document.getElementById("timezone").value);
-	var bdate = params['bdate']===undefined?today:new Date(params['bdate']);
-	//document.getElementById("bdate").value  = formatDate(bdate);
-    if(params["day"]!==undefined) bdate= new Date(params["year"],params["month"]-2,params["day"]);
-    document.getElementById("day").value=bdate.getDate();
-    document.getElementById("month").value=bdate.getMonth()+1;
-    document.getElementById("year").value=bdate.getFullYear();
+	if(params["day"]!==undefined) b_date= new Date(params["year"],params["month"]-2,params["day"]);
+    document.getElementById("day").value=b_date.getDate();
+    document.getElementById("month").value=b_date.getMonth()+1;
+    document.getElementById("year").value=b_date.getFullYear();
     initCurrentHMSDMY();
 	var tstring=formatTimeSS(today);
     if(params["day"]!==undefined){
@@ -1731,14 +1707,6 @@ function init(){
 
     }
 	document.getElementById("btime").value= params['btime']===undefined?tstring:params['btime'];
-    //if(params["day"]!==undefined){
-      //  bdate.setHours(document.getElementById("hours").value);
-       // bdate.setMinutes(document.getElementById("mins").value);
-        //bdate.setSeconds(document.getElementById("secs").value);
-        //var date= bdate;   
-    //}else{
-    //var date= new Date(document.getElementById("bdate").value+" "+document.getElementById("btime").value);
-    //}
 	document.getElementById("chartname").value = params['chartname']===undefined?"Prashna":params['chartname'];
 	document.getElementById("timezone").value = params['chartname']===undefined?-1*today.getTimezoneOffset()/60:params['timezone'];
 	document.getElementById('longitude').value = params["longitude"]===undefined?getCookie('longitude'):params["longitude"];
@@ -1781,10 +1749,6 @@ function ParseJHD(){
 	//document.getElementById("date").value = datetime;
 	datetime=datetime.replace("\r","");
 	var d=new Date(datetime);
-  	//document.getElementById("bdate").value  = formatDate(d); //4:23 PM 10/30/2017 Added toLocaleDateString() since it was not working on US time zone. on IE?
-	//document.getElementById("year").value=d.getFullYear();
-    //document.getElementById("month").value=d.getMonth()+1;
-    //document.getElementById("day").value=d.getDay();
     if(isNaN(d.valueOf())){
         d=new Date();
         d.setHours(time[0]);
