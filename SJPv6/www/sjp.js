@@ -288,6 +288,8 @@ lat,long = 39n17, 76w37;
     console.log(p);
     if(p[0]!=0 && p[0]!= null) document.getElementById("latitude").value=1*p[0];
     if(p[1]!=0 && p[1]!= null) document.getElementById("longitude").value=1*p[1];
+    h=parseTZ(document.getElementById("placename").value);
+    if (h!=null)document.getElementById("timezone").value=h; 
   }
 function parseDate(str){
     const datestr = /(\d\d*)\s*(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\w*\s*(\d\d\d\d)/;
@@ -298,22 +300,52 @@ function parseDate(str){
     }
     return null;//If no dates found.
 }
-function parseHours(str){
+function parseTime(str){
     const datestr = /(\d\d*):(\d\d*)/;
     let upperstr= str.toUpperCase();
     result = datestr.exec(upperstr);
-    d=new Date();
-    d.setHours(results[1]);
-    d.setMinutes(results[2]);
+    d=null;
+    if(result!=null)
+        {
+            d=new Date();
+            d.setHours(result[1]);
+            d.setMinutes(result[2]);
+            d.setSeconds(0);
+            if(upperstr.search("PM")>-1){
+                if(d.getHours()<12)d.setHours(1*result[1]+12);
+            }               
+        }
     return d;
 }
-
+function parseTZ(str){
+    const datestr = /H(\d+)[EW](\d*)/;
+    let upperstr= str.toUpperCase();
+    result = datestr.exec(upperstr);
+    d=null;
+    if(result!=null)
+        {
+            d=result[1]*1;
+            if(result.index>=2) d+=result[2]/60;
+            if(upperstr.search("W")>-1)d*=-1;
+        }
+    const tz2 = /UTC[+-](\d+)[:]*(\d*)/;
+    result = tz2.exec(upperstr);
+    if(result!=null)
+        {
+            d=result[1]*1;
+            if(result.index>=2) d+=result[2]/60;
+            if(upperstr.search("-")>-1)d*=-1;
+        }
+    return d; 
+}
 function UpdateChartName(){//Event on Chartname change
     date=parseDate(document.getElementById("chartname").value);
     if(date!=null)updateDMY(date);
+    date=parseTime(document.getElementById("chartname").value);
+    if(date!=null)document.getElementById("btime").value=formatTimeSS(date);
   }
-  
-  function updateDMY(date){
+
+function updateDMY(date){
 	document.getElementById("day").value =date.getDate();
 	document.getElementById("month").value =date.getMonth()+1;
 	document.getElementById("year").value =date.getFullYear();
