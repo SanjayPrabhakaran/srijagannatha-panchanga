@@ -638,7 +638,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.html =this.html + "<table style='border:1px;'><tr><th><b><small>Graha</small></b></th><th><b><small> sRasi d&deg; mm</small></b></th><th><b><small>Bhava</small></b></th><th><b><small>longitude</small></b></th><th><small>ChK</small></th></tr>";
     //chart.sort(function(a,b){return a.long - b.long;});
     for(i=0;i<10;++i){
-        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+toDeg(chart[i].long)+"</td><td>"+chart[i].ck+"</td></tr>";
+        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+chart[i].long.toFixed(3)+"</td><td>"+chart[i].ck+"</td></tr>";
     }
     chart.sort(function(a,b){return a.order - b.order;});
 
