@@ -219,12 +219,12 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			nx=this.moon/13.333333;
 			i=Math.trunc(nx)+1; //Nx index
 			nx_past = nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			i=(antaradasha==1)?i+1*starting:i;
 			yearsPast=(nx_past)*UduDasaVimshottari[i][4]; //Years past in the 
 			this.html+= "<br>"+desc+"<br>Vimshottari<br><tr><th>Dasa</th><th>Start Year</th><th>Duration</th></tr>";
 			d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
-			--i;//Correct NX Index
-			i=(antaradasha==1)?i+1*starting:i;
 			//alert(i);
+			--i;//Correct NX Index after calculating the 1st dasa balance, to start sequence.
 			for(k=1;k<10;++k){
 				++i;if(i>27)i=i-27//1;//i is the dasa index
 				var dasa_end = new Date();
