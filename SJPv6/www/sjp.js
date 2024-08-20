@@ -1400,11 +1400,17 @@ function MyArray(len){
 
 
 ////////////////////////////////////////////////////////////////////////
-function setCookie(c_name,value,expiredays){
-     var exdate=new Date();
+function setCookie(cname,cvalue,expiredays){
+/*      var exdate=new Date();
     exdate.setDate(exdate.getDate()+expiredays);
     document.cookie=c_name+ "=" +escape(value)+((expiredays===null) ? "" : ";expires="+exdate.toGMTString());
-    return value;
+ */    
+    const d = new Date();
+    d.setTime(d.getTime() + (expiredays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires ;//+ ";path=/";
+    alert(document.cookie)
+    //return value;
 }
 ////////////////////////////////////////////////////////////////////////
 function getCookie(c_name){
@@ -1492,10 +1498,16 @@ function doForm(){//Checked
         alert("Invalid Date Time yyyy/mm/dd:"+params["year"]+"/"+params["month"]+"/"+params["day"]+" "+params["btime"]+"\n Using Current date time");
         d=new Date();
     }
-    lon = parseFloat(setCookie("latitude",params["longitude"],1000));
+/*     lon = parseFloat(setCookie("latitude",params["longitude"],1000));
     lat = parseFloat(setCookie("latitude",params["latitude"],1000));
     tz = parseFloat(setCookie("timezone",params["timezone"],1000));
+    c=params["placename"]; */
+
+    lon = parseFloat(params["longitude"]);
+    lat = parseFloat(params["latitude"]);
+    tz = parseFloat(params["timezone"]);
     c=params["placename"];
+
     places[c]= lat+";"+lon+";"+tz;
     z=getCookie("placeslist");
     for (x in places )z=z+x+"#"+places[x]+"&";
@@ -1756,6 +1768,12 @@ function init(){
 	populatePlacesList(places_c);
 	window.status="Intialised Form";
 
+}
+function setDefaults(){
+    setCookie("longitude",document.getElementById('longitude').value,9999999);
+    setCookie("latitude",document.getElementById('latitude').value,9999999);
+    setCookie("placename",document.getElementById('placename').value,9999999);
+    alert("Set Current Location as default");
 }
 function JHDtz2Dec(zone)
 {   
