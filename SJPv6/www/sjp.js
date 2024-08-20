@@ -1409,7 +1409,6 @@ function setCookie(cname,cvalue,expiredays){
     d.setTime(d.getTime() + (expiredays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires ;//+ ";path=/";
-    alert(document.cookie)
     //return value;
 }
 ////////////////////////////////////////////////////////////////////////
@@ -1773,7 +1772,7 @@ function setDefaults(){
     setCookie("longitude",document.getElementById('longitude').value,9999999);
     setCookie("latitude",document.getElementById('latitude').value,9999999);
     setCookie("placename",document.getElementById('placename').value,9999999);
-    alert("Set Current Location as default");
+    alert("Set Current Location as default\n"+document.cookie);
 }
 function JHDtz2Dec(zone)
 {   
