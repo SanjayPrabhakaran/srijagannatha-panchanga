@@ -187,3 +187,23 @@ function searchLocation(){
       onError
     );
   }
+
+
+
+function OnChange(id) {
+/*
+<label for="myCheck">Checkbox:</label> 
+<input type="checkbox" id="myCheck" onchange="OnChange('myCheck')">
+
+<p id="text" style="display:none">Checkbox is CHECKED!</p>
+
+*/
+  var checkBox = document.getElementById(id);
+  var text = document.getElementById("text");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+
