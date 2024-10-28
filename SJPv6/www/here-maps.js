@@ -116,11 +116,10 @@ function addLocationsToPanel(locations){
    for (i = 0;  i < locations.length; i += 1) {
      let location = locations[i];
      var li = document.createElement('li'),
-          divLabel = document.createElement('div'),
-          address = location.address,
-          content =  '<strong style="font-size: large;">' + address.label  + '</strong></br>';
-          position = location.position;
-
+         divLabel = document.createElement('div'),
+         address = location.address,
+         content =  '<strong style="font-size: large;">' + address.label  + '</strong></br>';
+      position = location.position;
       content += '<strong>houseNumber:</strong> ' + address.houseNumber + '<br/>';
       content += '<strong>street:</strong> '  + address.street + '<br/>';
       content += '<strong>district:</strong> '  + address.district + '<br/>';
