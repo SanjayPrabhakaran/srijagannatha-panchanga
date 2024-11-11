@@ -38,6 +38,26 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				if(k==0)k=12;
 				break;
 				}
+			case "Dreshkana":
+			case "D3":
+				{
+				AmshaPortion = 10;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=Sign+(Amsha*4-4);
+				k%=12;
+				if(k==0)k=12;
+				break;
+				}
+			case "D3-Jagannatha":
+			case "D3-J":
+				{
+				AmshaPortion = 10;
+				Amsha = parseInt(SignDeg/AmshaPortion+0.999999999);
+				k=(13-3*(Sign%4)+3)%12+(Amsha*4-4);
+				k%=12;
+				if(k==0)k=12;
+				break;
+				}
 			case "D3-Somanatha":
 			case "D3-S":{
 				AmshaCycles = 3;//cycles
