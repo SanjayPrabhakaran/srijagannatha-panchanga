@@ -56,6 +56,7 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 				k=(13-3*(Sign%4)+3)%12+(Amsha*4-4);
 				k%=12;
 				if(k==0)k=12;
+				console.log(degrees,AmshaPortion,Amsha,k);
 				break;
 				}
 			case "D3-Somanatha":

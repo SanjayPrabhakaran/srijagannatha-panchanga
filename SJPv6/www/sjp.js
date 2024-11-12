@@ -1507,10 +1507,10 @@ function doForm(){//Checked
     tz = parseFloat(params["timezone"]);
     c=params["placename"];
 
-    places[c]= lat+";"+lon+";"+tz;
-    z=getCookie("placeslist");
-    for (x in places )z=z+x+"#"+places[x]+"&";
-    setCookie("placeslist",z,1000);
+ //   places[c]= lat+";"+lon+";"+tz;
+ //   z=getCookie("placeslist");
+ //   for (x in places )z=z+x+"#"+places[x]+"&";
+//    setCookie("placeslist",z,1000);
     panchanga=getPanchanga(d,lon,lat);
     s =  "\n<p><b>Panchanga and Chart for </b> <br/>"+
         "<br/>"+
