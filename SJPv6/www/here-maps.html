@@ -19,7 +19,7 @@
         <h1>Search for a Location based on an Address</h1>
         <input type="text" id="location" name="location" required minlength="3" maxlength="40" size="10" />
         <button onclick="javascript:searchLocation()">Search Location</button>
-        <div id="panel"></div>
+        <div id="panel" style="overflow-y: scroll; height:400px;"></div>
         <p>Request a location using a free-form text input and display it on the map.</p>
     </div>
     <p>This example makes a geocoding request and retrieves the latitude, longitude and
