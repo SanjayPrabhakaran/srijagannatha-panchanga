@@ -174,7 +174,7 @@ Date.prototype.getAhargana = function(){
     return Math.ceil(this / 86400000+1852121);
 }
 Date.prototype.getKaliAbda=function(){
-    KaliYear = this.getFullYear()+3102;
+    KaliYear = this.getFullYear()+3101;
     BeforeApr14 = (this.getMonth()*31+this.getDate())>104?0:1; //Jan to April 14th (31+28+31+14 = 104 days )
     KaliYear = KaliYear-BeforeApr14;
     return KaliYear;
