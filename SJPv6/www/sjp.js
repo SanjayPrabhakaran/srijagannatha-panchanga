@@ -292,9 +292,17 @@ lat,long = 39n17, 76w37;
     if (h!=null)document.getElementById("timezone").value=h; 
   }
 function parseDate(str){
+    // dd mmmMMMMMM yyyy
     const datestr = /(\d\d*)\s*(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\w*\s*(\d\d\d\d)/;
     let upperstr= str.toUpperCase();
     result = datestr.exec(upperstr);
+    if(result != null ){
+        return new Date(result[1]+" "+result[2]+" "+result[3]);
+    }
+    //Aug 18, 1959
+    const dateRegEx2 = /(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\w*\s*(\d\d*)\s*\,\s*(\d\d\d\d)/;
+    upperstr= str.toUpperCase();
+    result = dateRegEx2.exec(upperstr);
     if(result != null ){
         return new Date(result[1]+" "+result[2]+" "+result[3]);
     }
