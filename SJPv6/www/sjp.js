@@ -390,7 +390,7 @@ function getLagnaTable(AscData,date_time,longitude,latitude){
 }
 
 // Function to download data to a file
-function download(data, filename, type) {
+function download_old(data, filename, type) {
     var file = new Blob([data], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
@@ -406,6 +406,17 @@ function download(data, filename, type) {
             window.URL.revokeObjectURL(url);  
         }, 0); 
     }
+}
+function download(data, filename, type) {
+    var blob = new Blob([data], { type: 'application/octet-stream' });
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+
+    // Append to the body, click and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 function deleteAllCookies() {
     const cookies = document.cookie.split(";");
@@ -461,7 +472,7 @@ function getJHDStringEsc( parray){
         +"0\r\n"//Line18:1 (If 1 use temperature for calculations)
     ;
 	download(str,parray['chartname']+".jhd","text");
-	return str;
+	//return str;
 }
 
 
