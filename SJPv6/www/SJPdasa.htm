@@ -225,7 +225,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
 			//alert(i);
 			--i;//Correct NX Index after calculating the 1st dasa balance, to start sequence.
-			for(k=1;k<10;++k){
+			for(k=1;k<30;++k){
 				++i;if(i>27)i=i-27//1;//i is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
