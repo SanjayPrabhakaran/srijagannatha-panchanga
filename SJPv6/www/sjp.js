@@ -1563,6 +1563,8 @@ function setLatLong(){
  document.getElementById("longitude").value=k[0];
  document.getElementById("latitude").value=k[1];
  document.getElementById("timezone").value=k[2];
+ o.options.length = 6;//Truncate the list
+ alert("truncated list items");
 //alert("setLatLong");
 }
 function populatePlacesList(p){
@@ -1590,15 +1592,25 @@ function populatePlacesList(p){
     }
         return;
 }
+function removePlaces() {
+    o = document.getElementById("placeslist");
+    var i, L = o.options.length - 1;
+    for(i = L; i >= 0; i--) {
+       o.remove(i);
+    }
+    o.options.length = 0;//Truncate the list
+ }
 function LoadPlacesListener(e) {
         var file = PlacesInput.files[0];
         var textType = /text.+/;
         var reader = new FileReader();
         reader.onload = function(e) {
             t = reader.result;
+            removePlaces();
             t=t.replace(RegExp("[\n\r]","g"),""); //replace new line
             places_c = places_c+"&"+t;
             populatePlacesList(places_c);
+            alert("Loaded places.."+PlacesInput.files[0]);
             };
         reader.readAsText(file);
 }
