@@ -20,11 +20,10 @@
 			<td><select id=dasha name="dasha">
 			<option selected>Vimshottari</option>
 			<option >Ashtottari-Ardra</option>
-			<option >Vimshottari</option>
 			</select>
 			</td?>
 		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>
-		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text value="19 Jul 1971" size=15></td></tr>
+		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text size=15></td></tr>
 		<tr><td>Level of Antar Dasha:</td><td>
 			<select id=antaradasha name="antaradasha">
 			<option selected value=1>Maha Dasha</option>
@@ -85,7 +84,6 @@ function calcLocalTime(d) {
     return nd;//nd.toLocaleString();
 }
 //-----------------------------------------------------------
-//Globals
 var UduDasaVimshottari = [
 //		[0 "27Scheme",1 "Nakshatra",2 0/*End sphuta*/,2 "Dasa",4 "120"/*Vim Years"*/],
 		[27,"Revati",0,"Mercury",17],
@@ -117,40 +115,111 @@ var UduDasaVimshottari = [
 		[26,"Uttara Bhadrapad",346+2/3,"Saturn",19],
 		[27,"Revati",360,"Mercury",17]
 ];
-var UduDasaAshtottari = [
-//		["27Scheme","Nakshatra",0/*End sphuta*/,"Dasa","120"/*Vim Years"*/],
-		[28,"Revati",0,"Mercury",17],
-		[ 1,"Ashvini",13+1/3,"Ketu",7],
-		[ 2,"Bharani",26+2/3,"Venus",20],
-		[ 3,"Kritika",40,"Sun",6],
-		[ 4,"Rohini",53+1/3,"Moon",10],
-		[ 5,"Mrigashira",66+2/3,"Mars",7],
-		[ 6,"Ardra",80,"Rahu",18],
-		[ 7,"Punarvasu",93+1/3,"Jupiter",16],
-		[ 8,"Pushya",106+2/3,"Saturn",19],
-		[ 9,"Ashlesha",120,"Mercury",17],
-		[10,"Magha",133+1/3,"Ketu",7],
-		[11,"Purva Phalguni",146+2/3,"Venus",20],
-		[12,"Uttara Phalguni",160,"Sun",6],
-		[13,"Hasta",173+1/3,"Moon",10],
-		[14,"Chitra",186+2/3,"Mars",7],
-		[15,"Swati",200,"Rahu",18],
-		[16,"Vishakha",213+1/3,"Jupiter",16],
-		[17,"Anuradha",226+2/3,"Saturn",19],
-		[18,"Jyeshtha",240,"Mercury",17],
-		[19,"Mula",253+1/3,"Ketu",7],
-		[20,"Purva Ashadha",266+2/3,"Venus",20],
-		[21,"Uttara Ashadha",280,"Sun",6],
-		[22,"Abhijit",290,"Sun",6],
-		[23,"Shravan",294+2/9,"Moon",10],
-		[24,"Dhanistha",306+2/3,"Mars",7],
-		[25,"Shatabhishaj",320,"Rahu",18],
-		[26,"Purva Bhadrapad",333+1/3,"Jupiter",16],
-		[27,"Uttara Bhadrapad",346+2/3,"Saturn",19],
-		[28,"Revati",360,"Mercury",17]
+var nax28 = [//28 Nakshatra begininng degrees and index number
+	[28,"Revati",346.67], //i=0 28th nax, revati
+	[1,"Aswini",0.00],
+	[2,"Bharani",13.33],
+	[3,"Krittika",26.67],
+	[4,"Rohini",40.00],
+	[5,"Mriga",53.33],
+	[6,"Ardra",66.67],
+	[7,"Punarvasu",80.00],
+	[8,"Pushya",93.33],
+	[9,"Ashlesha",106.67],
+	[10,"Magha",120.00],
+	[11,"Purva P",133.33],
+	[12,"Uttara P",146.67],
+	[13,"Hasta",160.00],
+	[14,"Chitra",173.33],
+	[15,"Swati",186.67],
+	[16,"Vishaka",200.00],
+	[17,"Anuradha",213.33],
+	[18,"Jyeshta",226.67],
+	[19,"Moola",240.00],
+	[20,"P. Ashada",253.33],
+	[21,"U. Ashada",266.67],
+	[22,"Abhijit",276.67],
+	[23,"Shravana",280.89],
+	[24,"Dhanishta",293.33],
+	[25,"Shatabhishaj",306.67],
+	[26,"P. Bhadra",320.00],
+	[27,"U. Bhadra",333.33],
+	[28,"Revati",346.67]
 ];
+const Ashtottari= [
+  { name: 'Rahu', value: 3 },
+  { name: 'Rahu', value: 3 },
+  { name: 'Venus', value: 7 },
+  { name: 'Venus', value: 7 },
+  { name: 'Venus', value: 7 },
+  { name: 'Sun', value: 1.5 },
+  { name: 'Sun', value: 1.5 },
+  { name: 'Sun', value: 1.5 },
+  { name: 'Sun', value: 1.5 },
+  { name: 'Moon', value: 5 },
+  { name: 'Moon', value: 5 },
+  { name: 'Moon', value: 5 },
+  { name: 'Mars', value: 2 },
+  { name: 'Mars', value: 2 },
+  { name: 'Mars', value: 2 },
+  { name: 'Mars', value: 2 },
+  { name: 'Mercury', value: 17/3 },
+  { name: 'Mercury', value: 17/3 },
+  { name: 'Mercury', value: 17/3 },
+  { name: 'Saturn', value: 10/4 },
+  { name: 'Saturn', value: 10/4 },
+  { name: 'Saturn', value: 10/4 },
+  { name: 'Saturn', value: 10/4 },
+  { name: 'Jupiter', value: 19/3 },
+  { name: 'Jupiter', value: 19/3 },
+  { name: 'Jupiter', value: 19/3 },
+  { name: 'Rahu', value: 3 },
+  { name: 'Rahu', value: 3 }
+];
+
 var params; //from the URL
 var paramslist=[];
+
+function subtractFractionalDays(date, fractionalDays) {
+    // Calculate milliseconds in the fractional days
+    const millisecondsToSubtract = fractionalDays * 24 * 60 * 60 * 1000;
+    
+    // Subtract the milliseconds from the date
+    const newDate = new Date(date.getTime() - millisecondsToSubtract);
+    
+    return newDate;
+}
+function dasaNxStartdate(naxamsha,dasakaala,ishtadate){
+	//d=new Date();
+	//i=new Date(ishtadate);
+	fdays=dasakaala*365.256363004*(1-(naxamsha%1));
+	d=structuredClone(ishtadate);
+	d=subtractFractionalDays(d,fdays);
+	return d;
+}
+function find28nax(moondeg){
+	moondeg%=360;
+	i=0;
+	bhukt=0;
+	search=true;
+	do{
+		console.log(nax28[i+1]);
+		if(moondeg<nax28[i+1][2]){
+			//Found 
+			span=nax28[i+1][2]-nax28[i][2];
+			past=moondeg-nax28[i][2];
+			bhukt=past/span;
+			search=false;
+			break;
+		}
+		i++;
+		if(i==28){
+			alert("nx not found ");
+			break;
+		}
+	}while(search);
+	return i+bhukt;
+}
 ///script script
 //------------------Init block-------------------------
 function init(){
@@ -164,8 +233,8 @@ function init(){
 			document.getElementById(p[0]).value =document.getElementById(p[0]).value.replace(/\+/g," ");
 			document.getElementById(p[0]).value=unescape(p[1]);
 			p[1]=p[1].replace(/\+/g," ");
-			params[p[0]]=unescape(p[1]);
-			paramslist[p[0]]=unescape(p[1]);
+			params[p[0]]=unescape(p[1]).replaceAll("+"," ");
+			paramslist[p[0]]=unescape(p[1]).replaceAll("+"," ");
 			if(p[0]=="submit" && p[1]=="Calculate")submit=true;
 		}
 	}
@@ -213,6 +282,8 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 	this.html="<table border=1>";
 	switch(dasha){
 		default:
+			alert("Not Implemented "+dasha);
+		case undefined:
 		case "Vimshottari":
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
@@ -252,6 +323,15 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 				d.setTime(dasa_end.getTime());	
 			}
 			break;
+		case "Ashtottari-Ardra":
+			d=new Date();
+			d.setTime(Date.parse(datetime));
+			naxa=find28nax(sphuta);
+			naxi=parseInt(naxa);
+			dasastart=dasaNxStartdate(naxa,Ashtottari[naxi].value,d);
+			alert(naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].name+"\n"+Ashtottari[naxi].value);
+			break;
+			
 	}
 	this.html+= "</table>";
 	return this;
