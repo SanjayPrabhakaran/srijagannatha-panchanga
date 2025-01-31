@@ -661,7 +661,7 @@ function getPanchanga(date_time,longitude,latitude){
     }
     chart.sort(function(a,b){return a.order - b.order;});
 
-    this.html+= "<a href=SJPdasa.htm?desc=VimshottariDasa%20&sphuta="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
+    this.html+= "<a href=SJPdasa.htm?desc=Vimshottari Dasa%20&sphuta="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
                 "&datetime="+encodeURIComponent(this.date_time.toString())+"&antaradasha=1&ayush=120&submit=Calculate>Moon Vimshottari Dasa</a></br>";
 
     this.html =this.html +"</tr></table>"+
