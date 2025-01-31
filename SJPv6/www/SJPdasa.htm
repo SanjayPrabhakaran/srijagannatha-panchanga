@@ -21,7 +21,7 @@
 			<option selected>Vimshottari</option>
 			<option >Ashtottari-Ardra</option>
 			</select>
-			</td?>
+			</td>
 		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>
 		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text size=15></td></tr>
 		<tr><td>Level of Antar Dasha:</td><td>
@@ -147,7 +147,7 @@ var nax28 = [//28 Nakshatra begininng degrees and index number
 	[28,"Revati",346.67]
 ];
 const Ashtottari= [
-  { graha: 'Rahu', years: 3 },
+  { graha: 'Rahu', years: 3 },//Same as i=28
   { graha: 'Rahu', years: 3 },
   { graha: 'Venus', years: 7 },
   { graha: 'Venus', years: 7 },
@@ -174,8 +174,9 @@ const Ashtottari= [
   { graha: 'Jupiter', years: 19/3 },
   { graha: 'Jupiter', years: 19/3 },
   { graha: 'Rahu', years: 3 },
-  { graha: 'Rahu', years: 3 }
-];
+  { graha: 'Rahu', years: 3 },
+  { graha: 'Rahu', years: 3 }//Same as i=28,i=0
+  ];
 
 var params; //from the URL
 var paramslist=[];
@@ -277,7 +278,6 @@ function calculate(){//Called when 'calculate' button is pressed.
 }
 
 function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,starting){
-	compress=ayush/120;
 	sphuta%=360;
 	text="";
 	var d= new Date();
@@ -290,6 +290,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			alert("Not Implemented "+dasha);
 		case undefined:
 		case "Vimshottari":
+			compress=ayush/120;
 			this.dasa="VIMSHOTTARI";
 			var dasayear = new Array();
 			nx=this.moon/13.333333;
@@ -333,45 +334,48 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			d.setTime(Date.parse(datetime));
 			naxa=find28nax(sphuta);
 			naxi=parseInt(naxa);
-			dasastart=dasaNxStartdate(naxa,Ashtottari[naxi].value,d);
-			alert(naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].name+"\n"+Ashtottari[naxi].value);
-
+			dasastart=dasaNxStartdate(naxa,Ashtottari[naxi].years,d);
+			alert("dasa params\n"+naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].graha+"\n"+Ashtottari[naxi].years);
+			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].graha+"\n"+Ashtottari[naxi].years);
 			///changes to Vismhottari code below
 			{
-				this.dasa="ASHTOTTARI";
+			
+			compress=1;//Compression ratio for non vimshottari dasa.
+			this.dasa="ASHTOTTARI";
 
 //			var dasayear = new Array();
 //			nx=this.moon/13.333333; replace with naxa from above.
 			//i=Math.trunc(nx)+1; //Nx index, use naxi
 
-			//using naxa nx_past = nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			nx_past = naxa-naxi;//nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
 			i=(antaradasha==1)?i+1*starting:i;
-			yearsPast=(nx_past)*UduDasaVimshottari[i][4]; //Years past in the 
-			this.html+= "<br>"+desc+"<br>Vimshottari<br><tr><th>Dasa</th><th>Start Year</th><th>Duration</th></tr>";
-			d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
+			desc=(antaradasha==1)?"":i;
+			yearsPast=(nx_past)*Ashtottari[naxi].years;//UduDasaVimshottari[i][4]; //Years past in the 
+			this.html+= "<br>"+desc+"<br>Ashtottari<br><tr><th>Dasa</th><th>Start Year</th><th>Duration</th></tr>";
+			d=dasastart;//d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
 			//alert(i);
 			--i;//Correct NX Index after calculating the 1st dasa balance, to start sequence.
-			cycles=(antaradasha==1)?30:10;
+			cycles=29;//Only eight grahas //(antaradasha==1)?30:10;
 			for(k=1;k<cycles;++k){
-				++i;if(i>27)i=i-27//1;//i is the dasa index
+				++i;if(i>28)i=i-28//1;//i is the dasa index
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1);
-				duration=UduDasaVimshottari[i][4]*compress;
+				duration=Ashtottari[i].years*compress;//UduDasaVimshottari[i][4]*compress;
 				dasa_end.setTime(d.getTime()+duration*365.25*24*60*60*1000);		
 				console.log("Dasa End:"+dasa_end);
-				paramslist['desc']= desc+" : "+UduDasaVimshottari[i][3]+" "+d.toLocaleString();
-				paramslist['sphuta']=UduDasaVimshottari[i][2]-13.33333331;
+				paramslist['desc']= desc+" : "+Ashtottari[i].graha+" "+d.toLocaleString();
+				paramslist['sphuta']=nax28[i];//UduDasaVimshottari[i][2]-13.33333331;
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
 				paramslist['starting']=params['starting'];
 				paramslist['datetime']=d.toISOString();//params['datetime'];
-				paramslist['ayush']=UduDasaVimshottari[i][4]*compress;
+				paramslist['ayush']=Ashtottari[i].years*compress;//UduDasaVimshottari[i][4]*compress;
 				paramslist['submit']='Calculate';
   				this.html+= "<tr><td>"+
 							"<a href="+MakeURLParams(window.location.href,paramslist,1)+">"+
-								UduDasaVimshottari[i][3]+"</a></td><td>"+											
+								Ashtottari[i].graha+"</a></td><td>"+											
 							d.toLocaleString()+"</td><td>"+
 							duration.toPrecision(2)+"</td></tr>";
 				console.log("Dasa Start:"+d);
