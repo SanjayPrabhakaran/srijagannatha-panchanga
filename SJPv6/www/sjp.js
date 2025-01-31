@@ -661,7 +661,7 @@ function getPanchanga(date_time,longitude,latitude){
     }
     chart.sort(function(a,b){return a.order - b.order;});
 
-    this.html+= "<a href=SJPdasa.htm?desc=Vimshottari Dasa%20&sphuta="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
+    this.html+= "<a href=SJPdasa.htm?desc=Vimshottari%20Dasa&sphuta="+escape(chart[2].long)+"&timezone="+encodeURIComponent(TimeZoneOffset)+
                 "&datetime="+encodeURIComponent(this.date_time.toString())+"&antaradasha=1&ayush=120&submit=Calculate>Moon Vimshottari Dasa</a></br>";
 
     this.html =this.html +"</tr></table>"+
@@ -1774,7 +1774,8 @@ function init(){
     document.getElementById("day").value=b_date.getDate();
     document.getElementById("month").value=b_date.getMonth()+1;
     document.getElementById("year").value=b_date.getFullYear();
-    initCurrentHMSDMY();
+    console.log("enter init:initCurrentHMSDMY");
+	initCurrentHMSDMY();
 	var tstring=formatTimeSS(today);
     if(params["day"]!==undefined){
         formids=["day","month","year"];
