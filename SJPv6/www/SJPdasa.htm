@@ -147,36 +147,36 @@ var nax28 = [//28 Nakshatra begininng degrees and index number
 	[28,"Revati",346.67]
 ];
 const Ashtottari= [
-  { graha: 'Rahu', years: 3 },//Same as i=28
-  { graha: 'Rahu', years: 3 },
-  { graha: 'Venus', years: 7 },
-  { graha: 'Venus', years: 7 },
-  { graha: 'Venus', years: 7 },
-  { graha: 'Sun', years: 1.5 },
-  { graha: 'Sun', years: 1.5 },
-  { graha: 'Sun', years: 1.5 },
-  { graha: 'Sun', years: 1.5 },
-  { graha: 'Moon', years: 5 },
-  { graha: 'Moon', years: 5 },
-  { graha: 'Moon', years: 5 },
-  { graha: 'Mars', years: 2 },
-  { graha: 'Mars', years: 2 },
-  { graha: 'Mars', years: 2 },
-  { graha: 'Mars', years: 2 },
-  { graha: 'Mercury', years: 17/3 },
-  { graha: 'Mercury', years: 17/3 },
-  { graha: 'Mercury', years: 17/3 },
-  { graha: 'Saturn', years: 10/4 },
-  { graha: 'Saturn', years: 10/4 },
-  { graha: 'Saturn', years: 10/4 },
-  { graha: 'Saturn', years: 10/4 },
-  { graha: 'Jupiter', years: 19/3 },
-  { graha: 'Jupiter', years: 19/3 },
-  { graha: 'Jupiter', years: 19/3 },
-  { graha: 'Rahu', years: 3 },
-  { graha: 'Rahu', years: 3 },
-  { graha: 'Rahu', years: 3 }//Same as i=28,i=0
-  ];
+{nax:'Revati',graha:'Rahu',years:'3.000'},
+{nax:'Aswini',graha:'Rahu',years:'3.000'},
+{nax:'Bharani',graha:'Rahu',years:'3.000'},
+{nax:'Krittika',graha:'Venus',years:'7.000'},
+{nax:'Rohini',graha:'Venus',years:'7.000'},
+{nax:'Mriga',graha:'Venus',years:'7.000'},
+{nax:'Ardra',graha:'Sun',years:'1.500'},
+{nax:'Punarvasu',graha:'Sun',years:'1.500'},
+{nax:'Pushya',graha:'Sun',years:'1.500'},
+{nax:'Ashlesha',graha:'Sun',years:'1.500'},
+{nax:'Magha',graha:'Moon',years:'5.000'},
+{nax:'Purva P',graha:'Moon',years:'5.000'},
+{nax:'Uttara P',graha:'Moon',years:'5.000'},
+{nax:'Hasta',graha:'Mars',years:'2.000'},
+{nax:'Chitra',graha:'Mars',years:'2.000'},
+{nax:'Swati',graha:'Mars',years:'2.000'},
+{nax:'Vishaka',graha:'Mars',years:'2.000'},
+{nax:'Anuradha',graha:'Mercury',years:'5.667'},
+{nax:'Jyeshta',graha:'Mercury',years:'5.667'},
+{nax:'Moola',graha:'Mercury',years:'5.667'},
+{nax:'P. Ashada',graha:'Saturn',years:'2.500'},
+{nax:'U. Ashada',graha:'Saturn',years:'2.500'},
+{nax:'Abhijit',graha:'Saturn',years:'1.974'},
+{nax:'Shravana',graha:'Saturn',years:'2.500'},
+{nax:'Dhanishta',graha:'Jupiter',years:'6.333'},
+{nax:'Shatabhishaj',graha:'Jupiter',years:'6.333'},
+{nax:'P. Bhadra',graha:'Jupiter',years:'6.333'},
+{nax:'U. Bhadra',graha:'Rahu',years:'3.000'},
+{nax:'Revati',graha:'Rahu',years:'3.000'}
+ ];
 
 var params; //from the URL
 var paramslist=[];
@@ -193,7 +193,7 @@ function subtractFractionalDays(date, fractionalDays) {
 function dasaNxStartdate(naxamsha,dasakaala,ishtadate){
 	//d=new Date();
 	//i=new Date(ishtadate);
-	fdays=dasakaala*365.256363004*(1-(naxamsha%1));
+	fdays=dasakaala*365.256363004*(naxamsha%1);
 	d=structuredClone(ishtadate);
 	d=subtractFractionalDays(d,fdays);
 	return d;
@@ -219,7 +219,7 @@ function find28nax(moondeg){
 			break;
 		}
 	}while(search);
-	return i+bhukt;
+	return i+bhukt-1;
 }
 ///script script
 //------------------Init block-------------------------
@@ -333,7 +333,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			d=new Date();
 			d.setTime(Date.parse(datetime));
 			naxa=find28nax(sphuta);
-			naxi=parseInt(naxa);
+			naxi=parseInt(naxa+0.99999);
 			dasastart=dasaNxStartdate(naxa,Ashtottari[naxi].years,d);
 			alert("dasa params\n"+naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].graha+"\n"+Ashtottari[naxi].years);
 			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+Ashtottari[naxi].graha+"\n"+Ashtottari[naxi].years);
@@ -347,7 +347,7 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 //			nx=this.moon/13.333333; replace with naxa from above.
 			//i=Math.trunc(nx)+1; //Nx index, use naxi
 
-			nx_past = naxa-naxi;//nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			nx_past = 1-(naxi-naxa);//nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
 			i=(antaradasha==1)?i+1*starting:i;
 			desc=(antaradasha==1)?"":i;
 			yearsPast=(nx_past)*Ashtottari[naxi].years;//UduDasaVimshottari[i][4]; //Years past in the 

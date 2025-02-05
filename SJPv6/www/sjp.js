@@ -56,7 +56,7 @@ var params; //The URL Parameters passed to this page.
 var places=new MyArray();
 var places_file = "places.txt";
 var xml_file_opened = false;
-var places_const="Ujjain#75.769;23.1833;5.5&Puri#85.83;19.81;5.5&New Delhi#77.208833;28.613806;5.5&Chennai#80.23;13.5;5.5&WashingtonDC#-77.0366;38.8977;-5.0"; //Default Places
+var places_const="Ujjain#75.769;23.1833;5.5&Puri#85.83;19.81;5.5&New Delhi#77.208833;28.613806;5.5&Chennai#80.2826;13.0838;5.5&WashingtonDC#-77.0366;38.8977;-5.0"; //Default Places
 //var places_c=places_const;
 var chart =[
             {"text":"Asc/Lagna   ","long":0,"retro":" - ","speed":0,"id":0,"bhava":0,"tx":"Lg","order":0,"ck":""},
