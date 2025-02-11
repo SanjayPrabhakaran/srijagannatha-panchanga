@@ -641,8 +641,9 @@ function getPanchanga(date_time,longitude,latitude){
     this.html+= "\n<br/><b>Ahargana:</b>"+date_time.getAhargana();
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
     this.html+= "\n<br/><b>Ishta Ghati <b>"+(((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes)/24).toFixed(4);
-    this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa)+
-                "\n<br/><br/>";
+    this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa);
+    this.html+= "\n<br/><b> Uttarayana:</b>" +  toSignDeg(300+this.AscData.Ayanamsa);
+    this.html+=  "\n<br/><br/>";
 
    chart.sort(function(a,b){return a.id - b.id;});chart[8].long=360-chart[8].long;//Rahu in reverse for chara kaaraka 
    chart.sort(function(a,b){return b.long%30 - a.long%30;});
