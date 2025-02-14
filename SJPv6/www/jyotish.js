@@ -168,5 +168,29 @@ function GetDivisionalSign(degrees,division,object)//For a given degree get the 
 		}
 	return k;
 }
-
+const Ujjain={
+	//23.1833N 75.7697E
+	lat:23.1833,
+	lon:75.7697
+};
+Date.prototype.addHours = function(h) {
+	this.setTime(this.getTime() + (h*60*60*1000));
+	return this;
+  }
+function getTithi(at_date){
+	this.at_date=at_date;
+	eph=new getGrahasEph(date_time,Ujjain.lat,Ujjain.lon);
+	this.moon_cur = eph.grahas[1];
+	this.moon_speed=eph.speed[1]*day;//Degrees per day
+    this.sun_cur = eph.grahas[0];
+	this.sun_speed=eph.speed[0]*day;//Degrees per day
+	this.tithi = ((360+this.moon_cur - this.sun_cur)%360)/12;
+	this.tithi_speed=this.moon_speed-this.sun_speed;
+}
+function getPreviousAmantaTime(at_date){
+	amanta_dt=new Date(at_date);
+	current_tithi=new getTithi(at_date);
+	amanta_dt.addHours(-24*(current_tithi.tithi*12/current_tithi.tithi_speed*24));
+	return amavasya_dt;
+}
 ///////////////////////////////////////////////////////////////////

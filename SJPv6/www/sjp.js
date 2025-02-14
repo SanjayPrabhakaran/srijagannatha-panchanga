@@ -48,7 +48,6 @@ var KaliBaseDate = new Date(-3102, 1, 18, 17, 30, 0, 0);//18 February 3102 BCE 1
 var panchanga;
 var timerID;
 var TimeZoneOffset;
-var timeOut=1000;
 //onerror=handleErr;
 var txt="";
 var doc;
@@ -486,15 +485,15 @@ function getPanchanga(date_time,longitude,latitude){
     this.date_time = date_time = new Date(date_time);
     var cur_date=Date.parse(date_time);  //In Milliseconds.
     this.grahas = new getGrahasEph(date_time,latitude,longitude);
-    this.AscData = new calculateAscendant(date_time,latitude,longitude);
+    this.AscData = this.grahas.AscData;//new calculateAscendant(date_time,latitude,longitude);
 	this.lagnatable= new getLagnaTable(AscData,date_time,longitude,latitude);
 	var a=date_time;
-    this.grahas.grahas[7] = (this.AscData.node+360)%360; //Nodes are coming as -ve values sometime so correcting.
-    this.grahas.grahas[8] = this.AscData.Ascendant;
+    // this.grahas.grahas[7] = (this.AscData.node+360)%360; //Nodes are coming as -ve values sometime so correcting.
+    // this.grahas.grahas[8] = this.AscData.Ascendant;
 
-    for(i=0;i<7;++i){
-            this.grahas.grahas[i]=(360+this.grahas.grahas[i]+this.AscData.Ayanamsa)%360;
-        }
+    // for(i=0;i<7;++i){
+    //         this.grahas.grahas[i]=(360+this.grahas.grahas[i]+this.AscData.Ayanamsa)%360;
+    //     }
     this.moon_cur = this.grahas.grahas[1];
     this.sun_cur = this.grahas.grahas[0];
     this.sunrise = new Date(cur_date);
@@ -1742,16 +1741,26 @@ function getGrahasEph(date_time,lat,lon){
 	$processor.calc (date2, body);
 	this.speed[6]=((360+body.position.apparentLongitude-this.grahas[6])%360)/day;
 
-	this.grahas[7]=body.position.apparentLongitude;
-	console.log(body.position);
+	//this.grahas[7]=body.position.apparentLongitude;
+	//console.log(body.position);
 
-	this.grahas[8]=body.position.apparentLongitude;
-	console.log(body.position);
-    console.log("***********Debug****************\ndate:",date,"\ndate2",date2,"\ndate_time",date_time,"\ngrahas:",this.grahas)
+	//this.grahas[8]=body.position.apparentLongitude;
+
+    this.AscData = new calculateAscendant(date_time,lat,lon);
+    this.grahas[7] = (this.AscData.node+360)%360; //Nodes are coming as -ve values sometime so correcting.
+    this.grahas[8] = this.AscData.Ascendant;
+
+    for(i=0;i<7;++i){
+            this.grahas[i]=(360+this.grahas[i]+this.AscData.Ayanamsa)%360;
+        }	
+
+    //	console.log(body.position);
+ //   console.log("***********Debug****************\ndate:",date,"\ndate2",date2,"\ndate_time",date_time,"\ngrahas:",this.grahas)
   //  alert("***********Debug****************\ndate:"+JSON.stringify(date)+"\ndate2"+JSON.stringify(date2)+"\ndate_time"+date_time+"\ngrahas:"+JSON.stringify(this.grahas))
 }
 
 ///
+var timeOut=1000;//In milliseconds used by showtime to update time widget.
 function showtime(){
  document.getElementById('date').value = (new Date()).toString();
  timerID = setTimeout("showtime()",timeOut);
