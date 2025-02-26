@@ -4,6 +4,8 @@
 </HEAD>	
 <BODY onload="javascript:init()" id=contents>
 <script src="dasa.js" ></script>
+<script type="text/javascript" src= "sjcformatter.js"></script>
+
 <form id=forminput  method=get>
 	<table id=formtable cellspacing=0 cellpadding=0 border=0>
 		<tr><td>Desc:</td>
@@ -19,7 +21,10 @@
 		<tr><td>Dasha:</td>
 			<td><select id=dasha name="dasha" onchange="formChanged(this)">
 			<option selected>Vimshottari</option>
-			<option >Ashtottari-Ardra</option>
+			<option onfocus="alert(123)">Ashtottari-Ardra</option>
+			<option onclick="alert(105)" onselect="alert(105)">Panchottari</option>
+			<option >Shatabdika</option>
+			<option >Chaturashiti</option>
 			</select>
 			</td>
 		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>

@@ -4,7 +4,13 @@ function formChanged(element){
 	console.log("Element Changed="+element.id+"\nValue="+element.value);
 	switch(element.id){
 		case 'dasha':
-			if(element.value=="Ashtottari-Ardra")document.getElementById('ayush').value=108;
+			switch(element.value){
+				case "Ashtottari-Ardra":document.getElementById('ayush').value=108;break;
+				case "Chaturashiti":document.getElementById('ayush').value=84;break;
+				case "Shatabdika":document.getElementById('ayush').value=100;break;
+				case "Panchottari":document.getElementById('ayush').value=105;break;
+				default:document.getElementById('ayush').value=120
+			}
 			break;
 	}
 }
@@ -98,8 +104,65 @@ var nax28 = [//28 Nakshatra begininng degrees and index number
 	[27,"U. Bhadra",333.33],
 	[28,"Revati",346.67]
 ];
+function convertString2Num(s){
+	var num;
+	s=s.toLowerCase();
+	switch(s){
+		case "lagna": case "lg": case "asc": case "ascendant": num=0;break;
+		case "sun":case "su":case "surya": num=1;break;
+		case "moon":case "mo":case "chandra":num=2;break;
+		case "mars":case "ma":case "mangal":num=3;break;
+		case "mercury":case "merc":case "me":case "buddha":case "budha":num=4;break;
+		case "jupiter":case "jup":case "ju":case "guru":case "gu":num=5;break;
+		case "venus":case "ve":case "shukra": num=6;break;
+		case "saturn": case"sat": case "sa": case "shani": num=7;break;
+		case "rahu":case "ra":num=8;break;
+		case "ketu": case "ke": num=9; break;
+		default : num=-1;
+	}
+	return num;
+}
 
+/*
+Panchottari	105	Anuradha	28	7	Order	Sun	Mercury	Saturn	Mars	Venus	Moon	Jupiter			अर्कांश कर्कलग्ने पञ्चोत्तरी मता।
+-Nodes	SeqSum(12..)	Aïgiras		Hora+2	Duration	12	13	14	15	16	17	18			मित्रर्क्षाज्जन्मभं यावत्‌ संख्या सप्तविभाजिता॥ २९॥
+*/
+const Panchottari =[
+	{dasa:"Surya",samaa:12,bhaadi:17,ayush:105,name:"Panchottari"},//0: is Anuradha and 7th  etc
+	{dasa:"Buddha",samaa:13},
+	{dasa:"Shani",samaa:14},
+	{dasa:"Mangal",samaa:15},
+	{dasa:"Shukra",samaa:16},
+	{dasa:"Chandra",samaa:17},
+	{dasa:"Guru",samaa:18}
+];
+/*
+Shatabdika	100	Revati	28	7	Order	Sun	Moon	Venus	Mercury	Jupiter	Mars	Saturn			Vargottamma lagna
+-Nodes	FiveSeries(5,5..)	Kratu		Leo+2 and Cn+2	Duration	5	5	10	10	20	20	30			
+*/
+const Shatabdika =[
+	{dasa:"Surya",samaa:5,bhaadi:28,ayush:100,name:"Shatabdika"},//0: is revati and 7 Punarvasu etc
+	{dasa:"Chandra",samaa:5},
+	{dasa:"Shukra",samaa:10}, //Shukra and Mangal exchange
+	{dasa:"Budha",samaa:10},
+	{dasa:"Guru",samaa:20},
+	{dasa:"Mangal",samaa:20},
+	{dasa:"Shani",samaa:30}
+];
 
+/*
+Chaturashiti	84	Swati	28	7	Order	Sun	Moon	Mars	Mercury	Jupiter	Venus	Saturn
+-Nodes	12x7	Marichi		Weekday Order	Duration	12	12	12	12	12	12	12
+*/
+const Chaturashiti =[
+	{dasa:"Surya",samaa:12,bhaadi:15,ayush:84,name:"Charturshiti"},//0: is Swati and 7 th etc
+	{dasa:"Chandra",samaa:12},
+	{dasa:"Mangal",samaa:12},
+	{dasa:"Budha",samaa:12},
+	{dasa:"Guru",samaa:12},
+	{dasa:"Shukra",samaa:12},
+	{dasa:"Shani",samaa:12}
+];
 
 //Though below is const it's properties can be changed.
 const DasaNx28= [ 
@@ -139,11 +202,9 @@ var paramslist=[];
 
 function subtractFractionalDays(date, fractionalDays) {
     // Calculate milliseconds in the fractional days
-    const millisecondsToSubtract = fractionalDays * 24 * 60 * 60 * 1000;
-    
+    const millisecondsToSubtract = fractionalDays * 24 * 60 * 60 * 1000;    
     // Subtract the milliseconds from the date
     const newDate = new Date(date.getTime() - millisecondsToSubtract);
-    
     return newDate;
 }
 function dasaNxStartdate(naxamsha,dasakaala,ishtadate){
@@ -154,7 +215,7 @@ function dasaNxStartdate(naxamsha,dasakaala,ishtadate){
 	d=subtractFractionalDays(d,fdays);
 	return d;
 }
-function find28nax(moondeg){
+function find28nax(moondeg){//Finds the fraction in 28 Nax 
 	moondeg%=360;
 	i=0;
 	bhukt=0;
@@ -291,18 +352,9 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			naxa=find28nax(sphuta);
 			naxi=parseInt(naxa+0.99999);
 			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);
-			//alert("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
-			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
-			///changes to Vismhottari code below
-			{
-			
+//			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
 			compress=ayush/108;
 			this.dasa="ASHTOTTARI";
-
-//			var dasayear = new Array();
-//			nx=this.moon/13.333333; replace with naxa from above.
-			//i=Math.trunc(nx)+1; //Nx index, use naxi
-
 			nx_past = 1-(naxi-naxa);//nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
 			i=(antaradasha==1)?i+1*starting:i;
 			desc=(antaradasha==1)?"":i;
@@ -337,11 +389,80 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 				console.log("Dasa Start:"+d);
 				d.setTime(dasa_end.getTime());	
 			}
-
-			}
 			break;
+		case "Chaturashiti":
+			/*d=new Date();
+			d.setTime(Date.parse(datetime));
+			naxa=find28nax(sphuta);
+			naxi=parseInt(naxa+0.99999);
+			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
+			calcDasa28sama(datetime,sphuta,Chaturashiti,ayush,antaradasha,starting);
+			break;
+		case "Panchottari":
+/*			d=new Date();
+			d.setTime(Date.parse(datetime));
+			naxa=find28nax(sphuta);
+			naxi=parseInt(naxa+0.99999);
+			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
+			calcDasa28sama(datetime,sphuta,Panchottari,ayush,antaradasha,starting);
+			break;
+		case "Shatabdika":
+			/*d=new Date();
+			d.setTime(Date.parse(datetime));
+			naxa=find28nax(sphuta);
+			naxi=parseInt(naxa+0.99999);
+			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
+			calcDasa28sama(datetime,sphuta,Shatabdika,ayush,antaradasha,starting);
+			break;
+			
 			
 	}
 	this.html+= "</table>";
 	return this;
+}
+
+function calcDasa28sama(datetime,sphuta,dasatbl,ayush,antaradasha,starting){
+	d=new Date();
+	d.setTime(Date.parse(datetime));
+	naxa=find28nax(sphuta);
+	naxi=parseInt(naxa+0.99999);
+	dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);
+//			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
+	compress=ayush/dasatbl[0].ayush;
+	this.dasa=dasatbl[0].name;
+	nx_past = 1-(naxi-naxa);
+	i=(antaradasha==1)?i+1*starting:i;
+	desc=(antaradasha==1)?"":i;
+	dasaindex=(28+naxi-dasatbl[0].bhaadi)%28%7;
+	yearsPast=(nx_past)*dasatbl[dasaindex].years;
+	this.html+= "<br>"+desc+"<br>"+dasatbl[0].name+"<br><tr><th>Dasa</th><th>Start Year</th><th>Duration</th></tr>";
+	d=dasastart;
+	--i;
+	cycles=7;//Only 7 grahas 
+	for(k=1;k<=cycles;++k){
+		++i;if(i>28)i=i-28//1;//i is the dasa index
+		var dasa_end = new Date();
+		var eventdatetime = new Date();
+		eventdatetime.setTime(d.getTime()+1);
+		dasaindex=(28+i-dasatbl[0].bhaadi)%28%7;
+		duration=dasatbl[dasaindex].samaa*compress;//UduDasaVimshottari[i][4]*compress;
+		dasa_end.setTime(d.getTime()+duration*365.25*24*60*60*1000);		
+		console.log("Dasa End:"+dasa_end);
+		paramslist['desc']= desc+" : "+dasatbl[dasaindex].dasa+" "+d.toLocaleString();
+		paramslist['sphuta']=nax28[(28+i+dasatbl[0].bhaadi-1)%28][2];//UduDasaVimshottari[i][2]-13.33333331;
+		paramslist["antaradasha"]=1*(params['antaradasha'])+1;
+		paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
+		paramslist['timezone']=params['timezone'];
+		paramslist['starting']=params['starting'];
+		paramslist['datetime']=d.toISOString();//params['datetime'];
+		paramslist['ayush']=dasatbl[dasaindex].samaa*compress;//Udu]DasaVimshottari[i][4]*compress;
+		paramslist['submit']='Calculate';
+		  this.html+= "<tr><td>"+
+					"<a href="+MakeURLParams(window.location.href,paramslist,1)+">"+
+					dasatbl[dasaindex].dasa+"</a></td><td>"+											
+					d.toLocaleString()+"</td><td>"+
+					duration.toPrecision(2)+"</td></tr>";
+		console.log("Dasa Start:"+d);
+		d.setTime(dasa_end.getTime());	
+	}
 }

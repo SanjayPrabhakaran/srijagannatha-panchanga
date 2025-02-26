@@ -1564,7 +1564,7 @@ function setLatLong(){
  document.getElementById("latitude").value=k[1];
  document.getElementById("timezone").value=k[2];
  o.options.length = 6;//Truncate the list
- alert("truncated list items");
+ //alert("truncated list items");
 //alert("setLatLong");
 }
 function populatePlacesList(p){

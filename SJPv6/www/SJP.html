@@ -37,16 +37,15 @@
 	Time:<input id=btime name=btime type=time step=1 >				     
 	<!--input hidden id=hours name=hours type=number max=24 style="width:5em" onchange="updateDateTimeWidget()"> 
 	<input hidden id=mins name=mins type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"> 
-	<input hidden id=secs name=secs type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"--> 
-
+	<input hidden id=secs name=secs type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"-->
 	</td>
   </tr>
   <tr>
 	<td >Time Zone:<small>In Decimals. Use -ve value for west of UT</small> 
 	</td>
     <td>
-	<input id=timezone	name=timezone patter="\d+[\.]*\d*" type=text size=5 value="+5.5"><br/>
-	</td>
+	<input id=timezone	name=timezone patter="\d+[\.]*\d*" type=text size=5 value="+5.5">
+  </td>
   </tr>
   <tr>
     <td >Place Name:</td>
@@ -67,6 +66,7 @@
     </td>
     <td>
 	    <input id=longitude name=longitude type=text size=5>   
+      <input id=LMT type="checkbox" onchange="document.getElementById('timezone').value =document.getElementById('longitude').value*4/60"> <small>Convert to LMT</small><br/>
     </td>
   </tr>
   <tr>
@@ -128,6 +128,8 @@ You can create your own list Places with Latitude and Longitude. By saving this 
 <script type="text/javascript" src= "sjp.js"></script>
 <script type="text/javascript" src= "jyotish.js"></script>
 <script type="text/javascript" src= "kcd.js"></script>
+<script type="text/javascript" src= "sjcformatter.js"></script>
+
 <script type='text/javascript' src='ephemeris/index.js' charset='utf-8'></script>
 <script type='text/javascript' src='ephemeris/common.js' charset='utf-8'></script>
 <script type='text/javascript' src='ephemeris/load.js' charset='utf-8'></script>
