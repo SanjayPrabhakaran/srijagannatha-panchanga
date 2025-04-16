@@ -123,6 +123,18 @@ function convertString2Num(s){
 	return num;
 }
 
+/* All Dasa table
+Vimshottari	120	Kritika	27	9	Order	Sun	Moon	Mars	Rahu	Jupiter	Saturn	Mercury	Ketu	Venus		Jupiter/Moon
+	120	Aïgiras	9x3		Duration	6	10	7	18	16	19	17	7	20		
+Ashtottari	108	Ardra	28	8	Order	Sun	Moon	Mars	Mercury	Saturn	Jupiter	Rahu	Venus		4Nax-3Nax Grouping चतुष्कं त्रितयं तस्मात्‌ चतुष्कं त्रितयं पुनः 	Venus
+-Ketu	EvenSum(6..)Odd(15..)	Pulaha	(4,3)x4	Hora+3,-Vim	Duration	6	15	8	17	10	19	12	21		Vimshottari+Reverse Vimshottari Order	 
+Shodashottari	116	Pushya	28	8	Order	Sun	Mars	Jupiter	Saturn	Ketu	Moon	Mercury	Venus		Reverse Hora Order चन्द्रहोरागते कृष्णे सूर्यहोरागते सिते।	Rahu 
+-Rahu	SeqSum(11...)	Marichi		RHora	Duration	11	12	13	14	15	16	17	18		11(Rudra)+1 duration	 
+Dwadashottari	112	Revati	28	8	Order	Sun	Jupiter	Ketu	Mercury	Rahu	Mars	Saturn	Moon		शुक्रांशके प्रजातस्य विचिन्त्या द्वादशोत्तरी।	Venus
+-Venus	OddSum(7...)	Kratu		Hora??-2	Duration	7	9	11	13	15	17	19	21		"जन्मभात्‌ पौष्णभं यावत्‌ संख्या हि वसुतष्टिता॥ २७॥
+Pregnancy Order"	 
+*/
+
 /*
 Panchottari	105	Anuradha	28	7	Order	Sun	Mercury	Saturn	Mars	Venus	Moon	Jupiter			अर्कांश कर्कलग्ने पञ्चोत्तरी मता।
 -Nodes	SeqSum(12..)	Aïgiras		Hora+2	Duration	12	13	14	15	16	17	18			मित्रर्क्षाज्जन्मभं यावत्‌ संख्या सप्तविभाजिता॥ २९॥
@@ -136,6 +148,7 @@ const Panchottari =[
 	{dasa:"Chandra",samaa:17},
 	{dasa:"Guru",samaa:18}
 ];
+
 /*
 Shatabdika	100	Revati	28	7	Order	Sun	Moon	Venus	Mercury	Jupiter	Mars	Saturn			Vargottamma lagna
 -Nodes	FiveSeries(5,5..)	Kratu		Leo+2 and Cn+2	Duration	5	5	10	10	20	20	30			
@@ -164,37 +177,74 @@ const Chaturashiti =[
 	{dasa:"Shani",samaa:12}
 ];
 
+/*Dwisaptati	72	Mula	28	8	Order	Sun	Moon	Mars	Mercury	Jupiter	Venus	Saturn	Rahu		लग्नेशे सप्तमे यस्य लग्ने वा सप्तमाधिपे॥ ३८॥	Moon
+-Ketu	9x8	Pulastya		Weekday Order	Duration	9	Sun	9	9	9	9	9	9		मूलाज्जन्मर्क्षपर्यन्तं गणयेदष्टभिर्भजेत्‌।	 
+
+*/
+
+/*Shastihayani	60	Ashvini	28	8	Order	Jupiter	Sun	Mars	Moon	Mercury	Venus	Saturn	Rahu		यदार्को लग्नराशिस्थश्चिन्त्या षष्टिसमा तदा।	Sun
+-Ketu	10 for friends rest 6	Marichi	(3,4)x4	Pāchakādi for Sun?	Duration	10	10	10	6	6	6	6	6		दास्रात्‌ त्रयं चतुष्कं च त्रयं चेति पुनः पुनः॥ ४०॥	 
+*/
+const Shastihayani=[
+	{dasa:"Guru",samaa:10,bhaadi:1,ayush:60,name:"Shastihayani"},//1: is Ashwini 3x4x3 patter
+	{dasa:"Surya",samaa:10},
+	{dasa:"Mangal",samaa:10},
+	{dasa:"Chandra",samaa:6},
+	{dasa:"Budha",samaa:6},
+	{dasa:"Shukra",samaa:6},
+	{dasa:"Shani",samaa:6},
+	{dasa:"Rahu",samaa:6}
+];
+/*
+Shattrimsha	36	Shravan	28	8	Order	Moon	Sun	Jupiter	Mars	Mercury	Saturn	Venus	Rahu		lagne dine.arkahorAyAM chandrahorAgate nishi 	Mercury?
+-Ketu	SeqSum(1…	Vashishtha		Friends of Jup?	Duration	1	2	3	4	5	6	7	8			
+Yogini	36	Ardra	28	8	Order	Moon	Sun	Jupiter	Mars	Mercury	Saturn	Venus	Rahu			
+Yogini	36	Ardra	28		Order	Mangala	Pingala	Dhanya	Bhramari	Bhadrika	Ulka	Siddha	Sankata			
+-Ketu	SeqSum(1…	Pulaha	(4,3)x4		Duration	1	2	3	4	5	6	7	8			
+*/
+
+
+
+
 //Though below is const it's properties can be changed.
 const DasaNx28= [ 
-{nax:'Revati',graha:'Rahu',years:'3.000',dashasamaa:12},
-{nax:'Aswini',graha:'Rahu',years:'3.000',dashasamaa:12},
-{nax:'Bharani',graha:'Rahu',years:'3.000',dashasamaa:12},
-{nax:'Krittika',graha:'Venus',years:'7.000',dashasamaa:21},
-{nax:'Rohini',graha:'Venus',years:'7.000',dashasamaa:21},
-{nax:'Mriga',graha:'Venus',years:'7.000',dashasamaa:21},
-{nax:'Ardra',graha:'Sun',years:'1.500',dashasamaa:6},
-{nax:'Punarvasu',graha:'Sun',years:'1.500',dashasamaa:6},
-{nax:'Pushya',graha:'Sun',years:'1.500',dashasamaa:6},
-{nax:'Ashlesha',graha:'Sun',years:'1.500',dashasamaa:6},
-{nax:'Magha',graha:'Moon',years:'5.000',dashasamaa:15},
-{nax:'Purva P',graha:'Moon',years:'5.000',dashasamaa:15},
-{nax:'Uttara P',graha:'Moon',years:'5.000',dashasamaa:15},
-{nax:'Hasta',graha:'Mars',years:'2.000',dashasamaa:8},
-{nax:'Chitra',graha:'Mars',years:'2.000',dashasamaa:8},
-{nax:'Swati',graha:'Mars',years:'2.000',dashasamaa:8},
-{nax:'Vishaka',graha:'Mars',years:'2.000',dashasamaa:8},
-{nax:'Anuradha',graha:'Mercury',years:'5.667',dashasamaa:17},
-{nax:'Jyeshta',graha:'Mercury',years:'5.667',dashasamaa:17},
-{nax:'Moola',graha:'Mercury',years:'5.667',dashasamaa:17},
-{nax:'P. Ashada',graha:'Saturn',years:'2.500',dashasamaa:10},
-{nax:'U. Ashada',graha:'Saturn',years:'2.500',dashasamaa:10},
-{nax:'Abhijit',graha:'Saturn',years:'2.500',dashasamaa:10},
-{nax:'Shravana',graha:'Saturn',years:'2.500',dashasamaa:10},
-{nax:'Dhanishta',graha:'Jupiter',years:'6.333',dashasamaa:19},
-{nax:'Shatabhishaj',graha:'Jupiter',years:'6.333',dashasamaa:19},
-{nax:'P. Bhadra',graha:'Jupiter',years:'6.333',dashasamaa:19},
-{nax:'U. Bhadra',graha:'Rahu',years:'3.000',dashasamaa:12},
-{nax:'Revati',graha:'Rahu',years:'3.000',dashasamaa:12}
+	{nax:'Revati',graha:'Rahu',years:'3.000',dashasamaa:12,ArdraBhukta:6+1/4,AshwinBhukta:7+3/4},
+
+	{nax:'Aswini',graha:'Rahu',years:'3.000',dashasamaa:12,ArdraBhukta:6+2/4,AshwinBhukta:0},
+	{nax:'Bharani',graha:'Rahu',years:'3.000',dashasamaa:12,ArdraBhukta:6+3/4,AshwinBhukta:1/3},
+	{nax:'Krittika',graha:'Venus',years:'7.000',dashasamaa:21,ArdraBhukta:7,AshwinBhukta:2/3},
+
+	{nax:'Rohini',graha:'Venus',years:'7.000',dashasamaa:21,ArdraBhukta:7+1/3,AshwinBhukta:1},
+	{nax:'Mriga',graha:'Venus',years:'7.000',dashasamaa:21,ArdraBhukta:7+2/3,AshwinBhukta:1+1/4},
+	{nax:'Ardra',graha:'Sun',years:'1.500',dashasamaa:6,ArdraBhukta:0,AshwinBhukta:1+2/4},
+	{nax:'Punarvasu',graha:'Sun',years:'1.500',dashasamaa:6,ArdraBhukta:1/4,AshwinBhukta:1+3/4},
+
+	{nax:'Pushya',graha:'Sun',years:'1.500',dashasamaa:6,ArdraBhukta:2/4,AshwinBhukta:2},
+	{nax:'Ashlesha',graha:'Sun',years:'1.500',dashasamaa:6,ArdraBhukta:3/4,AshwinBhukta:2+1/3},
+	{nax:'Magha',graha:'Moon',years:'5.000',dashasamaa:15,ArdraBhukta:1,AshwinBhukta:2+2/3},
+
+	{nax:'Purva P',graha:'Moon',years:'5.000',dashasamaa:15,ArdraBhukta:1+1/3,AshwinBhukta:3},
+	{nax:'Uttara P',graha:'Moon',years:'5.000',dashasamaa:15,ArdraBhukta:1+2/3,AshwinBhukta:3+1/4},
+	{nax:'Hasta',graha:'Mars',years:'2.000',dashasamaa:8,ArdraBhukta:2,AshwinBhukta:3+2/4},
+	{nax:'Chitra',graha:'Mars',years:'2.000',dashasamaa:8,ArdraBhukta:2+1/4,AshwinBhukta:3+3/4},
+
+	{nax:'Swati',graha:'Mars',years:'2.000',dashasamaa:8,ArdraBhukta:2+2/4,AshwinBhukta:4},
+	{nax:'Vishaka',graha:'Mars',years:'2.000',dashasamaa:8,ArdraBhukta:2+3/4,AshwinBhukta:4+1/3},
+	{nax:'Anuradha',graha:'Mercury',years:'5.667',dashasamaa:17,ArdraBhukta:3,AshwinBhukta:4+2/3},
+
+	{nax:'Jyeshta',graha:'Mercury',years:'5.667',dashasamaa:17,ArdraBhukta:3+1/3,AshwinBhukta:5},
+	{nax:'Moola',graha:'Mercury',years:'5.667',dashasamaa:17,ArdraBhukta:3+2/3,AshwinBhukta:5+1/4},
+	{nax:'P. Ashada',graha:'Saturn',years:'2.500',dashasamaa:10,ArdraBhukta:4,AshwinBhukta:5+2/4},
+	{nax:'U. Ashada',graha:'Saturn',years:'2.500',dashasamaa:10,ArdraBhukta:4+1/4,AshwinBhukta:5+3/4},
+
+	{nax:'Abhijit',graha:'Saturn',years:'2.500',dashasamaa:10,ArdraBhukta:4+2/4,AshwinBhukta:6},
+	{nax:'Shravana',graha:'Saturn',years:'2.500',dashasamaa:10,ArdraBhukta:4+3/4,AshwinBhukta:6+1/3},
+	{nax:'Dhanishta',graha:'Jupiter',years:'6.333',dashasamaa:19,ArdraBhukta:5,AshwinBhukta:6+2/3},
+
+	{nax:'Shatabhishaj',graha:'Jupiter',years:'6.333',dashasamaa:19,ArdraBhukta:5+1/3,AshwinBhukta:7},
+	{nax:'P. Bhadra',graha:'Jupiter',years:'6.333',dashasamaa:19,ArdraBhukta:5+2/3,AshwinBhukta:7+1/4},
+	{nax:'U. Bhadra',graha:'Rahu',years:'3.000',dashasamaa:12,ArdraBhukta:6,AshwinBhukta:7+2/4},
+	{nax:'Revati',graha:'Rahu',years:'3.000',dashasamaa:12,ArdraBhukta:6+1/4,AshwinBhukta:7+3/4}
  ];
 
 var params; //from the URL
@@ -352,16 +402,14 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			naxa=find28nax(sphuta);
 			naxi=parseInt(naxa+0.99999);
 			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);
-//			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
 			compress=ayush/108;
 			this.dasa="ASHTOTTARI";
-			nx_past = 1-(naxi-naxa);//nx-Math.trunc(nx);////(moon-UduDasaVimshottari[i-1][2])/(UduDasaVimshottari[i][2]-UduDasaVimshottari[i-1][2]);
+			nx_past = 1-(naxi-naxa);
 			i=(antaradasha==1)?i+1*starting:i;
 			desc=(antaradasha==1)?"":i;
-			yearsPast=(nx_past)*DasaNx28[naxi].years;//UduDasaVimshottari[i][4]; //Years past in the 
+			yearsPast=(nx_past)*DasaNx28[naxi].years;
 			this.html+= "<br>"+desc+"<br>Ashtottari<br><tr><th>Dasa</th><th>Start Year</th><th>Duration</th></tr>";
-			d=dasastart;//d.setTime(d.getTime()-yearsPast*365.25*compress*24*60*60*1000);
-			//alert(i);
+			d=dasastart;
 			--i;//Correct NX Index after calculating the 1st dasa balance, to start sequence.
 			cycles=29;//Only eight grahas //(antaradasha==1)?30:10;
 			for(k=1;k<cycles;++k){
@@ -369,11 +417,11 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 				var dasa_end = new Date();
 				var eventdatetime = new Date();
 				eventdatetime.setTime(d.getTime()+1);
-				duration=DasaNx28[i].years*compress;//UduDasaVimshottari[i][4]*compress;
+				duration=DasaNx28[i].years*compress;
 				dasa_end.setTime(d.getTime()+duration*365.25*24*60*60*1000);		
 				console.log("Dasa End:"+dasa_end);
 				paramslist['desc']= desc+" : "+DasaNx28[i].graha+" "+d.toLocaleString();
-				paramslist['sphuta']=nax28[i][2];//UduDasaVimshottari[i][2]-13.33333331;
+				paramslist['sphuta']=nax28[i][2];
 				paramslist["antaradasha"]=1*(params['antaradasha'])+1;
 				paramslist["eventdatetime"]=eventdatetime.toLocaleString();//params['datetime'];;	
 				paramslist['timezone']=params['timezone'];
@@ -391,43 +439,36 @@ function getUduDasa(desc,sphuta,datetime,dasha,eventdatetime,antaradasha,ayush,s
 			}
 			break;
 		case "Chaturashiti":
-			/*d=new Date();
-			d.setTime(Date.parse(datetime));
-			naxa=find28nax(sphuta);
-			naxi=parseInt(naxa+0.99999);
-			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
 			calcDasa28sama(datetime,sphuta,Chaturashiti,ayush,antaradasha,starting);
 			break;
 		case "Panchottari":
-/*			d=new Date();
-			d.setTime(Date.parse(datetime));
-			naxa=find28nax(sphuta);
-			naxi=parseInt(naxa+0.99999);
-			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
 			calcDasa28sama(datetime,sphuta,Panchottari,ayush,antaradasha,starting);
 			break;
 		case "Shatabdika":
-			/*d=new Date();
-			d.setTime(Date.parse(datetime));
-			naxa=find28nax(sphuta);
-			naxi=parseInt(naxa+0.99999);
-			dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);*/
 			calcDasa28sama(datetime,sphuta,Shatabdika,ayush,antaradasha,starting);
 			break;
-			
-			
+		case "Shastihayani":
+			calcShashtiTypeDasa(datetime,sphuta,Shastihayani,ayush,antaradasha,starting);
+			break;
 	}
 	this.html+= "</table>";
 	return this;
 }
-
+function calcShashtiTypeDasa(datetime,sphuta,dasatbl,ayush,antaradasha,starting){
+	d=new Date();
+	d.setTime(Date.parse(datetime));
+	naxa=find28nax(sphuta);
+	naxi=parseInt(naxa+0.99999);
+	dasabhukta=DasaNx28[naxi].AshwinBhukta+(DasaNx28[naxi+1].AshwinBhukta-DasaNx28[naxi].AshwinBhukta)*(naxa%1);
+	dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);
+	
+}
 function calcDasa28sama(datetime,sphuta,dasatbl,ayush,antaradasha,starting){
 	d=new Date();
 	d.setTime(Date.parse(datetime));
 	naxa=find28nax(sphuta);
 	naxi=parseInt(naxa+0.99999);
 	dasastart=dasaNxStartdate(naxa,DasaNx28[naxi].years,d);
-//			console.log("dasa params\n"+naxa+"\n"+dasastart+"\n"+DasaNx28[naxi].graha+"\n"+DasaNx28[naxi].years);
 	compress=ayush/dasatbl[0].ayush;
 	this.dasa=dasatbl[0].name;
 	nx_past = 1-(naxi-naxa);

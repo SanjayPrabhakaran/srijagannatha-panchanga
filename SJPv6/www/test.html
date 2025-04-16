@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HERE Maps API Example</title>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+</head>
+<body>
+    <h1>Place Search Using HERE Maps API</h1>
+    <label for="placeInput">Enter Place Name:</label>
+    <input type="text" id="placeInput" placeholder="Type a place name">
+    <button id="searchButton">Search</button>
+
+    <h2>Matching Places</h2>
+    <select id="placesList" size="5"></select>
+
+    <h2>Selected Place Details</h2>
+    <label for="latitude">Latitude:</label>
+    <input type="text" id="latitude" readonly>
+    <br>
+    <label for="longitude">Longitude:</label>
+    <input type="text" id="longitude" readonly>
+    <br>
+    <label for="timezone">Time Zone:</label>
+    <input type="text" id="timezone" readonly>
+
+    <script>
+        // Initialize HERE API credentials
+        const platform = new H.service.Platform({
+            apikey: 'faufZS2XOMIwlELktKbKASVY6kexKiMmH5VxPsyAwmg' // Replace with your HERE API key
+        });
+
+        const searchService = platform.getSearchService();
+
+        document.getElementById('searchButton').addEventListener('click', () => {
+            const placeName = document.getElementById('placeInput').value;
+
+            if (!placeName) {
+                alert('Please enter a place name.');
+                return;
+            }
+
+            // Search for places using HERE API
+            searchService.geocode({
+                q: placeName
+            }, (result) => {
+                const placesList = document.getElementById('placesList');
+                placesList.innerHTML = ''; // Clear previous results
+
+                result.items.forEach((item) => {
+                    const option = document.createElement('option');
+                    option.textContent = item.title;
+                    option.dataset.latitude = item.position.lat;
+                    option.dataset.longitude = item.position.lng;
+                    option.dataset.timezone = item.timezone;// 'Unknown'; // Use 'Unknown' if timezone is not available
+                    placesList.appendChild(option);
+                });
+            }, (error) => {
+                console.error('Error fetching places:', error);
+                alert('An error occurred while searching for places.');
+            });
+        });
+
+        document.getElementById('placesList').addEventListener('change', (event) => {
+            const selectedOption = event.target.options[event.target.selectedIndex];
+            document.getElementById('latitude').value = selectedOption.dataset.latitude;
+            document.getElementById('longitude').value = selectedOption.dataset.longitude;
+            document.getElementById('timezone').value = selectedOption.dataset.timezone;
+        });
+    </script>
+</body>
+</html>

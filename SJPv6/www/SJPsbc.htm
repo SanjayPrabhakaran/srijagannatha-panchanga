@@ -185,6 +185,34 @@ function getPlainChart(chart,division){
  return a;
  }
 ///////////////////////////////////////////////////////////////////
+function createTable() {
+    // Create a table element
+    const table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.width = "100%";
+    table.style.height = "100%";
+
+    // Loop through rows and columns to create an 8x8 grid
+    for (let row = 1; row <= 8; row++) {
+        const tableRow = document.createElement("tr");
+        for (let col = 1; col <= 8; col++) {
+            const cell = document.createElement("td");
+            cell.id = `cell-${row}-${col}`; // Unique name for each cell
+            cell.style.border = "1px solid black";
+            cell.style.width = "50px"; // Set square dimensions
+            cell.style.height = "50px";
+            tableRow.appendChild(cell);
+        }
+        table.appendChild(tableRow);
+    }
+
+    // Append the table to the body or a specific container
+    document.body.appendChild(table);
+}
+
+// Call the function to create the table
+createTable();
+
 </script>
 
 </BODY>

@@ -174,7 +174,7 @@ function addLocationsToMap(locations){
 // Now use the map as required...
 geocode(platform);
 function searchLocation(){
-    var geocoder = platform.getSearchService(),
+    var geocoder = platform.getSearchService();
         geocodingParameters = {
           q: document.getElementById("location").value,
           show: "tz"//'Chennai'//'200 S Mathilda Sunnyvale CA'
