@@ -98,6 +98,12 @@ function openBubble(position, text){
   }
 }
 
+function convertOffsetToDecimal(offsetString) {
+  const sign = offsetString[0] === '-' ? -1 : 1;
+  const [hours, minutes] = offsetString.slice(1).split(':').map(Number);
+  return sign * (hours + minutes / 60);
+}
+
 /**
  * Creates a series of list items for each location found, and adds it to the panel.
  * @param {Object[]} locations An array of locations as received from the
@@ -118,21 +124,24 @@ function addLocationsToPanel(locations){
      var li = document.createElement('li'),
          divLabel = document.createElement('div'),
          address = location.address,
+         position = location.position;
          content =  '<strong style="font-size: large;">' + address.label  + '</strong></br>';
-      position = location.position;
-      content += '<strong>houseNumber:</strong> ' + address.houseNumber + '<br/>';
-      content += '<strong>street:</strong> '  + address.street + '<br/>';
-      content += '<strong>district:</strong> '  + address.district + '<br/>';
-      content += '<strong>city:</strong> ' + address.city + '<br/>';
-      content += '<strong>postalCode:</strong> ' + address.postalCode + '<br/>';
-      content += '<strong>county:</strong> ' + address.county + '<br/>';
-      content += '<strong>country:</strong> ' + address.countryName + '<br/>';
-      content += '<strong>TimeZone:</strong> ' + JSON.stringify(location.timeZone) + '<br/>';
-      content += '<strong>position:</strong> ' +
-        Math.abs(position.lat.toFixed(4)) + ((position.lat > 0) ? 'N' : 'S') +
-        ' ' + Math.abs(position.lng.toFixed(4)) + ((position.lng > 0) ? 'E' : 'W') + '<br/>';
+      //content += '<strong>houseNumber:</strong> ' + address.houseNumber + '<br/>';
+      //content += '<strong>street:</strong> '  + address.street + '<br/>';
+      //content += '<strong>district:</strong> '  + address.district + '<br/>';
+//      content += '<strong>city:</strong> ' + address.city + ',';
+  //    content += '<strong>postalCode:</strong> ' + address.postalCode + ',';
+      //content += '<strong>county:</strong> ' + address.county + '<br/>';
+    //  content += '<strong>country:</strong> ' + address.countryName + ',';
+      content += '<strong>TimeZone:</strong> ' + JSON.stringify(location.timeZone) + ' '+ location.timeZone==undefined?0:convertOffsetToDecimal(location.timeZone.utcOffset)+',';
+      geopos=  Math.abs(position.lat.toFixed(4)) + ((position.lat > 0) ? 'N' : 'S') +' ' + Math.abs(position.lng.toFixed(4)) + ((position.lng > 0) ? 'E' : 'W') ;
+      content += '<strong>position:</strong> ' + geopos + '<br/>';
 
       divLabel.innerHTML = content;
+      if(i==0){
+        document.getElementById("placename").value= geopos+ " "+location.timeZone.utcOffset;
+        document.getElementById("placename").dispatchEvent(new Event('change'))
+      }
       li.appendChild(divLabel);
 
       nodeOL.appendChild(li);

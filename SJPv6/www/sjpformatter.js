@@ -1,3 +1,6 @@
+scriptname="sjpformatter.js";
+console.log(scriptname+"........");
+
 function objectArrayToTable(objArray) {
     if (objArray.length === 0) {
         return "<table><tr><td>No data available</td></tr></table>";
@@ -43,3 +46,4 @@ const data = [
 ];
 
 console.log(objectArrayToTable(data));
+console.log(scriptname+"........LOADED");

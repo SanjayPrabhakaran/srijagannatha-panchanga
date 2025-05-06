@@ -1,4 +1,6 @@
-﻿//Functions for Jyotish 
+﻿scriptname="jyotish.js";
+console.log(scriptname+"........");
+//Functions for Jyotish 
 //By : Sanjay Prabhakaran
 //Signs: 1 Aries, 2 Taurus....12/0 Pisces
 function GetDivisionalSign(degrees,division,object)//For a given degree get the division (D1,D2, etc) sign 
@@ -199,3 +201,4 @@ function getPreviousAmantaTime(at_date){
 	return amavasya_dt;
 }
 ///////////////////////////////////////////////////////////////////
+console.log(scriptname+"........LOADED");

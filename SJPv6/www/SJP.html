@@ -1,10 +1,24 @@
 <HTML lang="en" manifest="sjp.appcache">
 <HEAD>
   <meta http-equiv="Cache-control" content="public">
- <meta http-equiv="content-type" content="text/html; charset=utf-8" />
- <meta charset="UTF-8">
+  <meta charset="UTF-8">
 	<title>Sri Jagannatha Panchanga</title>
-	<link rel="icon" type="image/x-icon" href="img/logo.png">
+	<link rel="icon" type="image/x-icon" href="img/logo.png" />
+  <script src= "sjp.js"></script>
+  <script src= "jyotish.js"></script>
+  <script src= "kcd.js"></script>
+  <!--script type="text/javascript" src= "sjcformatter.js"></script-->
+    
+
+  <!---For Here Maps https://www.here.com/docs/bundle/maps-api-for-javascript-developer-guide/page/topics/quick-start.html-->
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"  type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" /> 
+
+  
 </HEAD>
 <BODY id=contents onload="javascript:init()" style="background-color:#ffcc33;">
 <style scoped type="text/css">	body{background-color:#ffcc33;} input,select{background-color:#ffff99;}
@@ -101,6 +115,15 @@
       </TD>
   </tr>
 </table>
+<div class="page-header">
+      <h1>Search for a Location based on an Address</h1>
+      <input type="text" id="location" name="location" required minlength="3" maxlength="40" size="10" />
+      <button onclick="javascript:searchLocation()">Search Location</button>
+      <div id="panel" style="overflow-y: scroll; height:100px;border:thin"></div>
+      <p>Request a location using a free-form text input and display it on the map.</p>
+  </div>
+  <div id="map" width="75%"></div>
+  <script type="text/javascript" src='here-maps.js'></script>
 
 <!--div id="googleMap" style="width:500px;height:380px;" >Map Area</div-->
 <br/>
@@ -109,6 +132,8 @@
   <a href="#" onclick="window.open('places-world.txt', '_system')">places-world.txt 
 <br/>
 <a href="here-maps.html">Use Here Maps to get Latitude Longitude and Time Zone</a>.<br>
+
+
 <pre id="fileDisplayArea"></pre>
 ©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
 By Sanjay Prabhakaran Chettiar
@@ -125,10 +150,6 @@ You can create your own list Places with Latitude and Longitude. By saving this 
 <a href="#" onclick="window.open('places-india.txt', '_system')">places.txt 
 </a> <b><br>
 <br><em>WAIT PAGE LOADING.....</em></b>
-<script type="text/javascript" src= "sjp.js"></script>
-<script type="text/javascript" src= "jyotish.js"></script>
-<script type="text/javascript" src= "kcd.js"></script>
-<script type="text/javascript" src= "sjcformatter.js"></script>
 
 <script type='text/javascript' src='ephemeris/index.js' charset='utf-8'></script>
 <script type='text/javascript' src='ephemeris/common.js' charset='utf-8'></script>
@@ -174,6 +195,8 @@ You can create your own list Places with Latitude and Longitude. By saving this 
 <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/mars.js' charset='utf-8'></script>
 <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/jupiter.js' charset='utf-8'></script>
 <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/saturn.js' charset='utf-8'></script>
+
+
 
 <script type='text/javascript' src='ephemeris/shortcut.js' charset='utf-8'></script>
 

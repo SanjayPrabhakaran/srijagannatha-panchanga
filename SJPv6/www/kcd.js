@@ -1,3 +1,5 @@
+scriptname="kcd.js";
+console.log(scriptname+"........");
 //	["Cyc","Pada","Paramayus","Deha","Jeeva","R1","R2","R3","R4","R5","R6","R7","R8","R9","Amshi","Years"],
 const kcd_desc = `[
 	["S1","1","100","Aries","Sagittarius","Ar","Ta","Ge","Cn","Le","Vi","Li","Sc","Sg","Ar","7"],
@@ -105,3 +107,4 @@ function createTable(data) {
 	// Return the table element.
 	return table;
   }
+  console.log(scriptname+"........LOADED");

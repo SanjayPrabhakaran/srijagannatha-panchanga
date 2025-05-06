@@ -1,3 +1,5 @@
+scriptname="dasa.js";
+console.log(scriptname+"........");
 //-----------------------------------------------------------
 onerror=handleErr;
 function formChanged(element){
@@ -507,3 +509,4 @@ function calcDasa28sama(datetime,sphuta,dasatbl,ayush,antaradasha,starting){
 		d.setTime(dasa_end.getTime());	
 	}
 }
+console.log(scriptname+"........Loaded");

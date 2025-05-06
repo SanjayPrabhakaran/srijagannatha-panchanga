@@ -1,3 +1,4 @@
+console.log("sjp.js.............");
 //All Globals
 var DEBUG=true;
 
@@ -343,6 +344,17 @@ function parseTZ(str){
             if(result.index>=2) d+=result[2]/60;
             if(upperstr.search("-")>-1)d*=-1;
         }
+    const tz3 = /[+-](\d\d)[:](\d\d)/;
+    result = tz3.exec(upperstr);
+    if(result!=null)
+        {
+            d=result[1]*1;
+            if(result.index>=2) d+=result[2]/60;
+            if(upperstr.search("-")>-1)d*=-1;
+        }
+    const tz4 = /\d+(Z)/;
+    result = tz4.exec(upperstr);
+    if(result!=null)d=0;// "Z" after digits is universal timezone 00:00:
     return d; 
 }
 function UpdateChartName(){//Event on Chartname change
@@ -1888,7 +1900,7 @@ function calculate(){
 //var map;
 //var myCenter=new google.maps.LatLng(13.042020847922622,80.26611328125);
 //Code from https://developers.google.com/maps/documentation/javascript/examples/map-simple-async
-console.log("declare placemarker");
+//console.log("declare placemarker");
 function placeMarker(location) {
 	console.log("place marker enter");
 
@@ -1905,8 +1917,8 @@ function placeMarker(location) {
 	  document.getElementById('placename').value="MapLocation";
 	  document.getElementById('timezone').value=location.lng()*4/60;
 }
-console.log("end declare placemarker");
-console.log("declare initialize");
+//console.log("end declare placemarker");
+//console.log("declare initialize");
 function initMap() {//Called thru callback
 	console.log("Entered initialize");
 	//alert("Please wait a moment while loading Google maps...");
@@ -1977,3 +1989,4 @@ function initSJP(){
 	if(submit===true)calculate();
 
 }
+console.log("sjp.js Loaded.............");
