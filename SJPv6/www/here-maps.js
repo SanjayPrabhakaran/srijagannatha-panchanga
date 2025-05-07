@@ -133,13 +133,12 @@ function addLocationsToPanel(locations){
   //    content += '<strong>postalCode:</strong> ' + address.postalCode + ',';
       //content += '<strong>county:</strong> ' + address.county + '<br/>';
     //  content += '<strong>country:</strong> ' + address.countryName + ',';
-      content += '<strong>TimeZone:</strong> ' + JSON.stringify(location.timeZone) + ' '+ location.timeZone==undefined?0:convertOffsetToDecimal(location.timeZone.utcOffset)+',';
+      if(location.timeZone!=undefined)content += '<strong>TimeZone:</strong> ' + JSON.stringify(location.timeZone) + ' '+ location.timeZone==undefined?0:convertOffsetToDecimal(location.timeZone.utcOffset)+',';
       geopos=  Math.abs(position.lat.toFixed(4)) + ((position.lat > 0) ? 'N' : 'S') +' ' + Math.abs(position.lng.toFixed(4)) + ((position.lng > 0) ? 'E' : 'W') ;
       content += '<strong>position:</strong> ' + geopos + '<br/>';
-
       divLabel.innerHTML = content;
       if(i==0){
-        document.getElementById("placename").value= geopos+ " "+location.timeZone.utcOffset;
+        if(location.timeZone!=undefined)document.getElementById("placename").value= geopos+ " "+location.timeZone.utcOffset;
         document.getElementById("placename").dispatchEvent(new Event('change'))
       }
       li.appendChild(divLabel);
