@@ -188,8 +188,9 @@ jd = swe.julday(year, month, day, hour)
 #swe.set_sid_mode(swe.SIDM_LAHIRI)#"SIDM_LAHIRI)  # Chitra Paksha Ayanamsha (Lahiri)
 #print("swe.SIDM_LAHIRI",swe.get_ayanamsa_ut(jd))
 swe.set_sid_mode(swe.SIDM_TRUE_CITRA)#"SIDM_LAHIRI)  # Chitra Paksha Ayanamsha (Lahiri)
-print("Ayanamsha swe.SIDM_TRUE_CITRA",swe.get_ayanamsa_ut(jd))
-print ("lat, longitude, timezone",glatitude,glongitude,timezone,sys.argv)
+print (f"usage: {sys.argv[0]} lat, longitude, timezone \n Defaults: >>",glatitude,glongitude,timezone,sys.argv)
+print("Ayanamsha used swe.SIDM_TRUE_CITRA",swe.get_ayanamsa_ut(jd))
+
 # Calculate and store the longitudes in an array
 longitudes = []
 for planet, name in planets:
