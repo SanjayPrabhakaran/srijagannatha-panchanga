@@ -1919,7 +1919,7 @@ function placeMarker(location) {
 }
 //console.log("end declare placemarker");
 //console.log("declare initialize");
-function initMap() {//Called thru callback
+function initGoogleMap() {//Called thru callback
 	console.log("Entered initialize");
 	//alert("Please wait a moment while loading Google maps...");
 	latlong={
