@@ -1,7 +1,6 @@
 import swisseph as swe
 import datetime
 
-
 def merge_continuous_periods(periods):
     merged_periods = []
     for period in periods:
