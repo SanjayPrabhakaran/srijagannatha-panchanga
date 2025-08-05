@@ -493,7 +493,7 @@ function getJHDStringEsc( parray){
 /// .html         : formatted html with all the values. for other values please read the function below with all "this."
 
 function getPanchanga(date_time,longitude,latitude){
-
+    panchanga_obj={};
     this.date_time = date_time = new Date(date_time);
     var cur_date=Date.parse(date_time);  //In Milliseconds.
     this.grahas = new getGrahasEph(date_time,latitude,longitude);
@@ -1667,7 +1667,20 @@ function LoadFile(p){
 
 
 //Now using ephemeris calculations
-
+function eph_date(date_obj){
+    var date = {year: date_obj.getFullYear(),
+                month: date_obj.getMonth()+1,
+                day: date_obj.getDate(),
+                hours: date_obj.getHours(),
+                minutes: date_obj.getMinutes(),
+                seconds: date_obj.getSeconds()};
+    return date;
+}
+function eph_date_add(ep_date,seconds){
+    var date = new Date(ep_date.year,ep_date.month-1,ep_date.day,ep_date.hours,ep_date.minutes,ep_date.seconds);
+    date.setSeconds(date.getSeconds()+seconds);
+    return eph_date(date);
+}
 ///New getGrahasEph(date_time)
 function getGrahasEph(date_time,lat,lon){
 	this.grahas = new MyArray(9);
@@ -1677,13 +1690,14 @@ function getGrahasEph(date_time,lat,lon){
 	tz_date=new Date(date_time);
     tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset())
     //date_time=tz_date;
-    var date = {year: tz_date.getFullYear(),
-				month: tz_date.getMonth()+1,
-				day: tz_date.getDate(),
-				hours: tz_date.getHours(),
-				minutes: tz_date.getMinutes(),
-				seconds: tz_date.getSeconds()};
-	var date_time2= new Date(tz_date);
+    var date=eph_date(tz_date);
+   // var date = {year: tz_date.getFullYear(),
+	//			month: tz_date.getMonth()+1,
+	//			day: tz_date.getDate(),
+	//			hours: tz_date.getHours(),
+	//			minutes: tz_date.getMinutes(),
+	//			seconds: tz_date.getSeconds()};
+	/*var date_time2= new Date(tz_date);
 	date_time2.setDate(date_time2.getDate()+1);
 	var date2 = {year: 	date_time2.getFullYear(),
 				month: 	date_time2.getMonth()+1,
@@ -1691,6 +1705,8 @@ function getGrahasEph(date_time,lat,lon){
 				hours: 	date_time2.getHours(),
 				minutes:date_time2.getMinutes(),
 				seconds:date_time2.getSeconds()};
+    date2= eph_date(date_time2);*/
+    date2= eph_date_add(date,24*60*60);//Add 24 hours to date
 	$const.tlong = lon; // longitude
 	$const.glat = lat; // latitude
 	$processor.init ();

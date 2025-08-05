@@ -1,5 +1,8 @@
 # Python
-import swisseph as swe
+import sys
+#c:\users\2000091298\appdata\roaming\python\python312\site-packages
+sys.path.insert(0, 'D:\\pymod')
+import swisseph #as swe
 from datetime import datetime, timedelta
 import retro
 import sys
