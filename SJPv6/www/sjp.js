@@ -591,7 +591,53 @@ function getPanchanga(date_time,longitude,latitude){
     for(i=1;i<9;++i){
         chart[i].long = this.grahas.grahas[i-1];
         chart[i].speed = this.grahas.speed[i-1];
-	    chart[i].retro = this.grahas.speed[i-1]*day>340?"<b>R</b>":"";
+	    chart[i].retro = this.grahas.speed[i-1]<0?"<b>R</b>":"";
+        var forward_combust=12;
+        var retro_combust=12;
+        var sun_long=chart[1].long;
+        chart[i].combust=""; //Reset combust status
+        switch(i){//find if combust or not  
+            case 1://Sun is not combust
+                break;//
+            case 2://Moon
+                if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[2].combust="C";
+                break;
+            case 3://Mars
+                forward_combust=17;
+                if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[3].combust="C";
+                break;
+            case 4://Mercury
+                forward_combust=14;
+                retro_combust=12;
+                if(chart[4].speed>0){//Forward
+                    if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[4].combust="C";
+                }else{//Retro
+                    if(Math.abs((360+chart[i].long-sun_long)%360)<retro_combust)chart[4].combust="C";
+                }
+                break;
+            case 5://Jupiter
+                forward_combust=12;
+                //no retro combust
+                if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[5].combust="C";
+                break;
+            case 6://Venus
+                forward_combust=10;
+                retro_combust=8;
+                if(chart[6].speed>0){//Forward
+                    if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[6].combust="C";
+                }else{//Retro
+                    if(Math.abs((360+chart[i].long-sun_long)%360)<retro_combust)chart[6].combust="C";
+                }
+                break;
+            case 7://Saturn
+                forward_combust=15;
+                //no retro combust
+                if(Math.abs((360+chart[i].long-sun_long)%360)<forward_combust)chart[7].combust="C";
+                break;
+            default://nothing else is combust 
+                break;            
+
+            }
         }
     for(i=0;i<10;++i){
             chart[i].bhava=(parseInt(chart[i].long/30)-parseInt(chart[0].long/30)+12)%12+1;
@@ -669,7 +715,7 @@ function getPanchanga(date_time,longitude,latitude){
     this.html =this.html + "<table style='border:1px;'><tr><th><b><small>Graha</small></b></th><th><b><small> sRasi d&deg; mm</small></b></th><th><b><small>Bhava</small></b></th><th><b><small>longitude</small></b></th><th><small>ChK</small></th></tr>";
     //chart.sort(function(a,b){return a.long - b.long;});
     for(i=0;i<10;++i){
-        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+chart[i].long.toFixed(3)+"</td><td>"+chart[i].ck+"</td></tr>";
+        this.html =this.html + "<tr><td><b>"+chart[i].text+chart[i].retro+chart[i].combust+"</b></td><td>" +toSignDeg(chart[i].long)+ "</td><td> ("+(chart[i].bhava)+")</td><td>"+chart[i].long.toFixed(3)+"</td><td>"+chart[i].ck+"</td></tr>";
     }
     chart.sort(function(a,b){return a.order - b.order;});
 
@@ -1667,7 +1713,7 @@ function LoadFile(p){
 
 
 //Now using ephemeris calculations
-function eph_date(date_obj){
+function eph_date(date_obj){//converst to ephemeris date object
     var date = {year: date_obj.getFullYear(),
                 month: date_obj.getMonth()+1,
                 day: date_obj.getDate(),
@@ -1676,16 +1722,83 @@ function eph_date(date_obj){
                 seconds: date_obj.getSeconds()};
     return date;
 }
-function eph_date_add(ep_date,seconds){
+function eph_date_add(ep_date,seconds){//add seconds to ephemeris date object
     var date = new Date(ep_date.year,ep_date.month-1,ep_date.day,ep_date.hours,ep_date.minutes,ep_date.seconds);
     date.setSeconds(date.getSeconds()+seconds);
     return eph_date(date);
+}
+
+function get_GrahasSpeedPosition(body,eph_date_obj){ //lat long etc from globals inits
+//	$const.tlong = lon; // longitude
+//	$const.glat = lat; // latitude
+//	$processor.init ();
+   // var tz_date=new Date(date_time);
+    //tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset());
+    //date_time=tz_date;
+    var date=eph_date_obj;//eph_date(tz_date);
+    var date2= eph_date_add(date,24*60*60);//Add 24 hours to date
+	$processor.calc (date, body);
+	position=body.position.apparentLongitude;
+    //this.body[0]=body;
+	//console.log(body.position);
+	$processor.calc (date2, body);
+    speed=((360+body.position.apparentLongitude-position)%360); //speed in degrees per day
+    if(speed>340)speed=(speed-360); //If speed is more than 340 degrees per day, then it is a retrograde motion
+	return [speed, position];
+}
+
+function find_DirectionChange(body,eph_date_obj,inc,iter){ //incre is in seconds, default is 24 hours
+    //This function finds the next direction change of the graha
+    //It returns the date time of the direction change
+    var date = eph_date_obj;
+    var date2 = eph_date_obj;
+    var speed = get_GrahasSpeedPosition(body,date);
+    var speed2 = get_GrahasSpeedPosition(body,date);
+    var nextinc= inc/60; //Next increment is 1/60th of current increment
+    for(var i=1;i<iter;++i){// check for next 365 days
+        date=date2; //Set the date to the last date
+        date2= eph_date_add(date,inc);//Add i days to date
+        speed2= get_GrahasSpeedPosition(body,date2);
+        if(speed2[0]*speed[0]<0){//If the speed changes sign, then it is a direction change
+           // console.log("Found ! Speed2:"+speed2+" Speed:"+speed,date2,body.key,inc,nextinc);
+            if(nextinc<25)
+                return [date2,speed2]; //If increment is less than 1 minute, return the date
+            return find_DirectionChange(body,date,nextinc,60); //Check for next 60 minutes
+            {/* Comment Blockfor(var j=1;j<24;++j){//Check for next 24 hours
+                var date3= eph_date_add(date2,60*60*j); //Add j hours to date2
+                var speed3= get_GrahasSpeedPosition(body,date3);
+                if(speed3[0]*speed2[0]<0){//If the speed changes sign, then it is a direction change
+                   for(var k=1;k<60;++k){//Check for next 60 minutes
+                        var date4= eph_date_add(date3,60*k);    //Add k minutes to date3        
+                        var speed4= get_GrahasSpeedPosition(body,date4);
+                        if(speed4[0]*speed3[0]<0){//If the speed changes sign, then it is a direction change
+                            for(var l=1;l<60;++l){//Check for next 60 seconds  
+                                var date5= eph_date_add(date4,1*l); //Add l seconds to date4
+                                var speed5= get_GrahasSpeedPosition(body,date5);
+                                if(speed5[0]*speed4[0]<0){//If the speed changes sign, then it is a direction change
+                                    return date5; //Return the date time of the direction change
+                                }
+                                speed4=speed5; //Set the speed to the last speed
+                            }
+                        }
+                        speed3=speed4; //Set the speed to the last speed
+                    }
+                }
+                speed2=speed3; //Set the speed to the last speed
+            }*/}
+        }
+       // speed=speed2; //Set the speed to the last speed
+    }
+    return [null,null]; //If no direction change found, return null
+    
 }
 ///New getGrahasEph(date_time)
 function getGrahasEph(date_time,lat,lon){
 	this.grahas = new MyArray(9);
 	this.speed = new MyArray(7);
 	this.body = new MyArray(9);
+    this.gati_eDate = new MyArray(9);
+    
 	
 	tz_date=new Date(date_time);
     tz_date.setMinutes(tz_date.getMinutes()+tz_date.getMyTimezoneOffset())
@@ -1714,60 +1827,108 @@ function getGrahasEph(date_time,lat,lon){
 
 	// sun, mercury, venus, moon, mars, jupiter, saturn, uranus, neptune, pluto, chiron, sirius
 	var body = $moshier.body.sun;
-	$processor.calc (date, body);
-	this.grahas[0]=body.position.apparentLongitude;
-    this.body[0]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[0]=((360+body.position.apparentLongitude-this.grahas[0])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index=0;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+
+    // $processor.calc (date, body);
+	// this.grahas[0]=body.position.apparentLongitude;
+    // this.body[0]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[0]=((360+body.position.apparentLongitude-this.grahas[0])%360)/day;
 
 	body = $moshier.body.moon;
-	$processor.calc (date, body);
-	this.grahas[1]=body.position.apparentLongitude;
-	this.body[1]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[1]=((360+body.position.apparentLongitude-this.grahas[1])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+
+    // $processor.calc (date, body);
+	// this.grahas[1]=body.position.apparentLongitude;
+	// this.body[1]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[1]=((360+body.position.apparentLongitude-this.grahas[1])%360)/day;
 
 	body = $moshier.body.mars;
-	$processor.calc (date, body);
-	this.grahas[2]=body.position.apparentLongitude;
-	this.body[2]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[2]=((360+body.position.apparentLongitude-this.grahas[2])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+    this.gati_eDate[index]= find_DirectionChange(body,date,24*60*60,365);
+    console.log(body.key,this.gati_eDate[index]);
+    
+    // $processor.calc (date, body);
+	// this.grahas[2]=body.position.apparentLongitude;
+	// this.body[2]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[2]=((360+body.position.apparentLongitude-this.grahas[2])%360)/day;
 
 	body = $moshier.body.mercury;
-	$processor.calc (date, body);
-	this.grahas[3]=body.position.apparentLongitude;
-	this.body[3]=body;
-	$processor.calc (date2, body);
-	this.speed[3]=((360+body.position.apparentLongitude-this.grahas[3])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+    this.gati_eDate[index]= find_DirectionChange(body,date,24*60*60,365);
+    console.log(body.key,this.gati_eDate[index]);
+	// $processor.calc (date, body);
+	// this.grahas[3]=body.position.apparentLongitude;
+	// this.body[3]=body;
+	// $processor.calc (date2, body);
+	// this.speed[3]=((360+body.position.apparentLongitude-this.grahas[3])%360)/day;
 
 	body = $moshier.body.jupiter;
-	$processor.calc (date, body);
-	this.grahas[4]=body.position.apparentLongitude;
-	this.body[4]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[4]=((360+body.position.apparentLongitude-this.grahas[4])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+    this.gati_eDate[index]= find_DirectionChange(body,date,24*60*60,365);
+    console.log(body.key,this.gati_eDate[index]);
+	// $processor.calc (date, body);
+	// this.grahas[4]=body.position.apparentLongitude;
+	// this.body[4]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[4]=((360+body.position.apparentLongitude-this.grahas[4])%360)/day;
 	//debugger;
 
 	body = $moshier.body.venus;
-	$processor.calc (date, body);
-	this.grahas[5]=body.position.apparentLongitude;
-	this.body[5]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[5]=((360+body.position.apparentLongitude-this.grahas[5])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+    this.gati_eDate[index]= find_DirectionChange(body,date,24*60*60,365);
+    console.log(body.key,this.gati_eDate[index]);
+	// $processor.calc (date, body);
+	// this.grahas[5]=body.position.apparentLongitude;
+	// this.body[5]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[5]=((360+body.position.apparentLongitude-this.grahas[5])%360)/day;
 
 	body = $moshier.body.saturn;
-	$processor.calc (date, body);
-	this.grahas[6]=body.position.apparentLongitude;
-	this.body[6]=body;
-	console.log(body.position);
-	$processor.calc (date2, body);
-	this.speed[6]=((360+body.position.apparentLongitude-this.grahas[6])%360)/day;
+    g= get_GrahasSpeedPosition(body,date);
+    index++;
+    this.grahas[index]=g[1];
+    this.body[index]=body;
+    this.speed[index]=g[0];     
+    this.gati_eDate[index]= find_DirectionChange(body,date,24*60*60,365);
+    console.log(body.key,this.gati_eDate[index]);
+	// $processor.calc (date, body);
+	// this.grahas[6]=body.position.apparentLongitude;
+	// this.body[6]=body;
+	// console.log(body.position);
+	// $processor.calc (date2, body);
+	// this.speed[6]=((360+body.position.apparentLongitude-this.grahas[6])%360)/day;
 
 	//this.grahas[7]=body.position.apparentLongitude;
 	//console.log(body.position);

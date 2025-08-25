@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^10.1.2",
-    "cordova-browser": "^6.0.0",
+    "cordova-browser": "^7.0.0",
     "cordova-plugin-file": "^7.0.0"
   },
   "cordova": {
@@ -29,6 +29,8 @@
     }
   },
   "dependencies": {
+    "@capacitor/cli": "^7.4.2",
+    "@capacitor/core": "^7.4.2",
     "shelljs": "^0.8.5"
   }
 }
