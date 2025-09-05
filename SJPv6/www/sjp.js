@@ -587,7 +587,9 @@ function getPanchanga(date_time,longitude,latitude){
     this.sSauraMaasa = asRashi[iSauraMaasa];
 
     chart[0].long=this.grahas.grahas[8];
+    chart[0].combust="";
     chart[9].long=(this.grahas.grahas[7]+180)%360;
+    chart[9].combust="";
     for(i=1;i<9;++i){
         chart[i].long = this.grahas.grahas[i-1];
         chart[i].speed = this.grahas.speed[i-1];
