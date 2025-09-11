@@ -487,6 +487,15 @@ function getJHDStringEsc( parray){
 }
 
 
+//lambda function to convert ishta ghati to ghati,pala,vipala
+const convertIshtaToGPV = (ishta) => {
+    const totalPala = parseInt(ishta);
+    const totalVipala = (ishta - totalPala) * 60;
+    const totalGhati = parseInt(totalVipala);  
+    const totalVipalaFinal = (totalVipala - totalGhati) * 60;
+    return { ghati: totalGhati, pala: totalPala, vipala: totalVipalaFinal,str: totalPala+"-"+totalGhati+"-"+totalVipalaFinal.toFixed(2) };
+}  
+
 /// the getPanchanga function take,
 /// INPUT VALUES: datetime, long and latitude.
 /// RETURN VALUES: It returns an object with all the panchange values.
@@ -699,6 +708,9 @@ function getPanchanga(date_time,longitude,latitude){
     this.html+= "\n<br/><b>Kali Abda:</b>"+date_time.getKaliAbda();
     this.html+= "\n<br/><b>Ahargana:</b>"+date_time.getAhargana();
     this.html+= "\n<br/><b>Saura Maasa </b>"+this.sSauraMaasa;
+    this.ishta_ghati = ((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes)/24;
+    gpv=convertIshtaToGPV(this.ishta_ghati);
+    this.html+= "\n<br/><b>Ishta Ghati:</b>" + gpv.str+" (Ghati-Pala-Vipala)";
     this.html+= "\n<br/><b>Ishta Ghati <b>"+(((Date.parse(this.date_time)-Date.parse(this.sunrise))/minutes)/24).toFixed(4);
     this.html+= "\n<br/><b> Ayanamsha:</b>" + toDeg(this.AscData.Ayanamsa);
     this.html+= "\n<br/><b> Uttarayana:</b>" +  toSignDeg(300+this.AscData.Ayanamsa);
