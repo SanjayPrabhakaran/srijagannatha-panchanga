@@ -56,6 +56,24 @@ jataka.chart.ketu = bha_sphuta(jataka.chart.rahu+180)
 
 
 if __name__ == "__main__" :
-    print("Direct Run")
-    print(jataka,"D20 Lagna=",d20rashi(jataka.chart.lagna),"\nPP",PranaPada(jataka.ishta,jataka.chart.surya))
+    #Madam's chart
+    jataka2=Jataka()
+    jataka2.chart.lagna = 30+23+59/60+54/3600
+    jataka2.ishta = 3.4631
+    jataka2.chart.surya = 30+4+1/60+26.49/3600
 
+    #example ankur chart
+    jataka3=Jataka()
+    jataka3.chart.lagna = 60+1+30/60+16.58/3600
+    jataka3.ishta = 30.7119
+    jataka3.chart.surya = 6*30+25+31/60+36.44/3600
+
+
+    jataka=jataka3
+    print(jataka)
+    print("D20 Lagna=",d20rashi(jataka.chart.lagna),"\nPP",PranaPada(jataka.ishta,jataka.chart.surya))
+    print("D20 Surya=",d20rashi(jataka.chart.surya),jataka.chart.surya/1.5%12)
+    print(jataka.ishta*60/15%12)
+    print(jataka.chart.surya/1.5%12+jataka.ishta*60/15%12)
+    print(yoga_rashi(jataka.chart.surya/1.5%12,jataka.ishta*60/15%12))
+    
