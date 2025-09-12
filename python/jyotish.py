@@ -44,6 +44,7 @@ rashikala = lambda x : (rashi(x), int(bha_sphuta(x)%30), int((bha_sphuta(x)*60)%
 PranaPada = lambda ishta,surya : rashi_sesha((ishta*60/15)+d20rashi(surya))
 yoga_rashi = lambda r1,r2 : int(int(r1+0.99999)+int(r2+0.999999)-1)
 PPkshepaka = lambda ishta : (ishta*60/15)%12
+PPkshepakaRashi = lambda ishta : int(PPkshepaka(ishta)+0.99999)
 
 #my chart
 jataka=Jataka()
@@ -77,12 +78,19 @@ if __name__ == "__main__" :
     jataka3.ishta = 30.7119
     jataka3.chart.surya = 6*30+25+31/60+36.44/3600
 
+    #example Kavya chart
+    jataka4=Jataka()
+    jataka4.naama="Kavya"
+    jataka4.ishta=2.3030
+    jataka4.chart.surya=sphuta(8,5,49,47)
+    
 
-    #jataka=jataka3
+    jataka=jataka2
     print(jataka)
-    print("D20 Lagna=",d20rashi(jataka.chart.lagna),"\nPP",PranaPada(jataka.ishta,jataka.chart.surya))
+    print("D20 Lagna=",d20rashi(jataka.chart.lagna))
+    print("PP",PranaPada(jataka.ishta,jataka.chart.surya))
     print("D20 Surya=",d20rashi(jataka.chart.surya),jataka.chart.surya/1.5%12)
-    print("PPkshepaka",PPkshepaka(jataka.ishta)),PPkshepaka(jataka.ishta))
+    print("PPkshepaka",PPkshepaka(jataka.ishta))
     print("Raw Calc PP",jataka.chart.surya/1.5%12+jataka.ishta*60/15%12)
     print(yoga_rashi(jataka.chart.surya/1.5%12,jataka.ishta*60/15%12))
     
