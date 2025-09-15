@@ -561,30 +561,30 @@ function getPanchanga(date_time,longitude,latitude){
     this.nakshatra_cur = this.moon_cur/nakshatra_size;
     this.nakshatra_name=nakshatra[parseInt(this.nakshatra_cur)];
     this.nakshatra_enter = new Date();
-    nakshatra_enter.setTime(cur_date-(this.moon_cur%nakshatra_size)/this.grahas.speed[1]);
+    nakshatra_enter.setTime(cur_date-(this.moon_cur%nakshatra_size)/(this.grahas.speed[1]/day));
     this.nakshatra_exit = new Date();
-    nakshatra_exit.setTime(cur_date+(nakshatra_size-this.moon_cur%nakshatra_size)/this.grahas.speed[1]);
+    nakshatra_exit.setTime(cur_date+(nakshatra_size-this.moon_cur%nakshatra_size)/(this.grahas.speed[1]/day));
 
     this.yoga_cur = (this.moon_cur +this.sun_cur)%360/nakshatra_size;
     this.yoga_name = yogas[parseInt(this.yoga_cur)];
     this.yoga_enter = new Date();
-    yoga_enter.setTime(cur_date-((this.moon_cur + this.sun_cur)%nakshatra_size)/(this.grahas.speed[1]+this.grahas.speed[0]));
+    yoga_enter.setTime(cur_date-((this.moon_cur + this.sun_cur)%nakshatra_size)/((this.grahas.speed[1]/day)+(this.grahas.speed[0]/day)));
     this.yoga_exit = new Date();
-    yoga_exit.setTime(cur_date+(nakshatra_size-(this.moon_cur + this.sun_cur)%nakshatra_size)/(this.grahas.speed[1]+this.grahas.speed[0]));
+    yoga_exit.setTime(cur_date+(nakshatra_size-(this.moon_cur + this.sun_cur)%nakshatra_size)/((this.grahas.speed[1]/day)+(this.grahas.speed[0]/day)));
 
     this.tithi_cur = ((360+this.moon_cur - this.sun_cur)%360)/12;
     this.tithi_name = tithi[parseInt(this.tithi_cur)];
     this.tithi_enter = new Date();
-    tithi_enter.setTime(cur_date-(((360+this.moon_cur - this.sun_cur)%360)%12)/(this.grahas.speed[1] - this.grahas.speed[0]));
+    tithi_enter.setTime(cur_date-(((360+this.moon_cur - this.sun_cur)%360)%12)/((this.grahas.speed[1]/day) - (this.grahas.speed[0]/day)));
     this.tithi_exit = new Date();
-    tithi_exit.setTime(cur_date+(12-((360+this.moon_cur - this.sun_cur)%360)%12)/(this.grahas.speed[1] - this.grahas.speed[0]));
+    tithi_exit.setTime(cur_date+(12-((360+this.moon_cur - this.sun_cur)%360)%12)/((this.grahas.speed[1]/day) - (this.grahas.speed[0]/day)));
 
     this.karana_cur = this.tithi_cur * 2;
     this.karana_name = karana[parseInt(this.karana_cur)];
     this.karana_enter = new Date();
-    karana_enter.setTime(cur_date-(((360+this.moon_cur - this.sun_cur)%360)%6)/(this.grahas.speed[1] - this.grahas.speed[0]));
+    karana_enter.setTime(cur_date-(((360+this.moon_cur - this.sun_cur)%360)%6)/((this.grahas.speed[1]/day) - (this.grahas.speed[0]/day)));
     this.karana_exit = new Date();
-    karana_exit.setTime(cur_date+(6-((360+this.moon_cur - this.sun_cur)%360)%6)/(this.grahas.speed[1] - this.grahas.speed[0]));
+    karana_exit.setTime(cur_date+(6-((360+this.moon_cur - this.sun_cur)%360)%6)/((this.grahas.speed[1]/day) - (this.grahas.speed[0]/day)));
 
     this.kaalatable = new getKaalaTable(this.vara_cur,this.sunrise,this.sunset,latitude,longitude,cur_date);
     this.muhurthatable = new getMuhurthaTable(this.sunrise,this.sunset,parseInt(this.tithi_cur)>14,week_days[this.vara_cur],cur_date);
