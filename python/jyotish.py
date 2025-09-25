@@ -31,6 +31,36 @@ class Jataka:
     deshamsha: float =0
     # Add more fields as needed
 
+nakshatras = [
+    "Asv",  # Ashvini
+    "Bha",  # Bharani
+    "Kri",  # Krittika
+    "Roh",  # Rohini
+    "Mrg",  # Mrigashira
+    "Ard",  # Ardra
+    "Pun",  # Punarvasu
+    "Pus",  # Pushya
+    "Asl",  # Ashlesha
+    "Mag",  # Magha
+    "Pph",  # Purva Phalguni
+    "Uph",  # Uttara Phalguni
+    "Has",  # Hasta
+    "Chi",  # Chitra
+    "Sva",  # Swati
+    "Vis",  # Vishakha
+    "Anu",  # Anuradha
+    "Jye",  # Jyeshtha
+    "Mul",  # Mula
+    "Pad",  # Purva Ashadha
+    "Uad",  # Uttara Ashadha
+    "Shr",  # Shravana
+    "Dha",  # Dhanishta
+    "Sha",  # Shatabhisha
+    "Pba",  # Purva Bhadrapada
+    "Uba",  # Uttara Bhadrapada
+    "Rev"   # Revati
+]
+
 bha_sphuta = lambda x : (x+720)%360 #normalize to 0-360
 thithi_sphuta = lambda sun, moon : bha_sphuta(moon-sun) #thithi calculation
 rashi = lambda x : int(bha_sphuta(x)/30)+1 #rashi calculation returns an integer 1-12
