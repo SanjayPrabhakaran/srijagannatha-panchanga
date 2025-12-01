@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "Launch Firefox on SJP.html",
+            "url": "file:///home/sanjay/github/srijagannatha-panchanga/SJPv6/www/SJP.html",
+            "webRoot": "${workspaceFolder}",
+            "reAttach": true,
+            "firefoxExecutable": "/snap/firefox/7423/usr/lib/firefox/firefox"
+        }
+    ]
+}
