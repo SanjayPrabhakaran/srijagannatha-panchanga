@@ -1,114 +1,132 @@
 <HTML lang="en" manifest="sjp.appcache">
+
 <HEAD>
   <meta http-equiv="Cache-control" content="public">
   <meta charset="UTF-8">
-	<title>Sri Jagannatha Panchanga</title>
-	<link rel="icon" type="image/x-icon" href="img/logo.png" />
-  <script src= "sjp.js"></script>
-  <script src= "jyotish.js"></script>
-  <script src= "kcd.js"></script>
+  <title>Sri Jagannatha Panchanga</title>
+  <link rel="icon" type="image/x-icon" href="img/logo.png" />
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="sjp.js"></script>
+  <script src="jyotish.js"></script>
+  <script src="kcd.js"></script>
   <!--script type="text/javascript" src= "sjcformatter.js"></script-->
-    
+
 
   <!---For Here Maps https://www.here.com/docs/bundle/maps-api-for-javascript-developer-guide/page/topics/quick-start.html-->
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"  type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript"
+    charset="utf-8"></script>
   <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, maximum-scale=5.0" /> 
+  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, maximum-scale=5.0" />
 
-  
+
 </HEAD>
+
 <BODY id=contents onload="javascript:init()" style="background-color:#ffcc33;">
-<style scoped type="text/css">	body{background-color:#ffcc33;} input,select{background-color:#ffff99;}
-</style>
-<form id=datetimeplace method=get>
-<table id=inputtable style="border:1px solid black;">
-  <tr>
-    <td colspan=2 >
-      Chart Name:<input id=chartname name="chartname" size=20 type=text onchange="UpdateChartName()" value=Prashna>
-        <div><br/>
+  <style scoped type="text/css">
+    body {
+      background-color: #ffcc33;
+    }
+
+    input,
+    select {
+      background-color: #ffff99;
+    }
+  </style>
+  <form id=datetimeplace method=get>
+    <table id=inputtable style="border:1px solid black;">
+      <tr>
+        <td colspan=2>
+          Chart Name:<input id=chartname name="chartname" size=20 type=text onchange="UpdateChartName()" value=Prashna>
+          <div><br />
             Load a .JHD file:
-            <input type="file" accept=".jhd" title=".jhd file name" id="fileInput" >
-        </div>
-        <input id=submit name=submit type=submit value=Calculate>
-    </td>
-  </tr>
-  <tr>
-    <td  colspan=2>OR Provide Date, Time, Time Zone, Location, Latitude and Longitude.
-	</td>
-  </tr>
-  <tr>
-    <td colspan=2>
-	<!--input id=date name=date type=hidden size=50--></td>
-  </tr><tr>
-   <td style="font-weight:bold">
-	<!--input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" -->
-	Day:<input id=day name=day type=number max=31 style="width:7em" > 
-	Month:<input id=month name=month type=number max=12 style="width:7em"> 
-	Year:<input id=year name=year type=number  style="width:10em" > <br/>
-	Time:<input id=btime name=btime type=time step=1 >				     
-	<!--input hidden id=hours name=hours type=number max=24 style="width:5em" onchange="updateDateTimeWidget()"> 
+            <input type="file" accept=".jhd" title=".jhd file name" id="fileInput">
+          </div>
+          <input id=submit name=submit type=submit value=Calculate>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2>OR Provide Date, Time, Time Zone, Location, Latitude and Longitude.
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <!--input id=date name=date type=hidden size=50-->
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold">
+          <!--input hidden id=bdate name=bdate type=date onchange="updateDMY(event)" -->
+          Day:<input id=day name=day type=number max=31 style="width:7em">
+          Month:<input id=month name=month type=number max=12 style="width:7em">
+          Year:<input id=year name=year type=number style="width:10em"> <br />
+          Time:<input id=btime name=btime type=time step=1>
+          <!--input hidden id=hours name=hours type=number max=24 style="width:5em" onchange="updateDateTimeWidget()"> 
 	<input hidden id=mins name=mins type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"> 
 	<input hidden id=secs name=secs type=number max=59 style="width:5em" onchange="updateDateTimeWidget()"-->
-	</td>
-  </tr>
-  <tr>
-	<td >Time Zone:<small>In Decimals. Use -ve value for west of UT</small> 
-	</td>
-    <td>
-	<input id=timezone	name=timezone patter="\d+[\.]*\d*" type=text size=5 value="+5.5">
-  </td>
-  </tr>
-  <tr>
-    <td >Place Name:</td>
-    <td><input id=placename name=placename onchange="UpdatePlaceLatLong()" type=text size=15
-      title="Ex: PlaceName, Latitude,Longitude= 41.40338, 2.17403 or 41°24'12.2&quot;N 2°10'26.5&quot;E or  41n24, 2e17"> 
         </td>
-  </tr>
-  <tr >
-    <td >Latitude:<small>South -ve/North +ve</small>
-    </td>
-    <td>
-      <input id=latitude name=latitude type=text size=5>
-    </td>
-  </tr>
-  <tr>
-    <td >
-      Longitude:<small>East +ve/West -ve</small> 
-    </td>
-    <td>
-	    <input id=longitude name=longitude type=text size=5>   
-      <input id=LMT type="checkbox" onchange="document.getElementById('timezone').value =document.getElementById('longitude').value*4/60"> <small>Convert to LMT</small><br/>
-    </td>
-  </tr>
-  <tr>
-    <td >
-	JHD File Text:
-    </td>
-    <td>
-	<textarea title="You can also paste the JHD text here" onchange="ParseJHD()" id="inputTextToSave" style="width:50%;"></textarea>
-  
-    </td>
-  </tr>
-</table>
-</form>
-<table>
-  <tr>
+      </tr>
+      <tr>
+        <td>Time Zone:<small>In Decimals. Use -ve value for west of UT</small>
+        </td>
+        <td>
+          <input id=timezone name=timezone patter="\d+[\.]*\d*" type=text size=5 value="+5.5">
+        </td>
+      </tr>
+      <tr>
+        <td>Place Name:</td>
+        <td><input id=placename name=placename onchange="UpdatePlaceLatLong()" type=text size=15
+            title="Ex: PlaceName, Latitude,Longitude= 41.40338, 2.17403 or 41°24'12.2&quot;N 2°10'26.5&quot;E or  41n24, 2e17">
+        </td>
+      </tr>
+      <tr>
+        <td>Latitude:<small>South -ve/North +ve</small>
+        </td>
+        <td>
+          <input id=latitude name=latitude type=text size=5>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Longitude:<small>East +ve/West -ve</small>
+        </td>
+        <td>
+          <input id=longitude name=longitude type=text size=5>
+          <input id=LMT type="checkbox"
+            onchange="document.getElementById('timezone').value =document.getElementById('longitude').value*4/60">
+          <small>Convert to LMT</small><br />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          JHD File Text:
+        </td>
+        <td>
+          <textarea title="You can also paste the JHD text here" onchange="ParseJHD()" id="inputTextToSave"
+            style="width:50%;"></textarea>
+
+        </td>
+      </tr>
+    </table>
+  </form>
+  <table>
+    <tr>
       <td>
-		  <button onclick="getLocation()">Use Current Position</button>
-      <button onClick="deleteAllCookies()">Delete Old Location Cookies</button>
-      <button onClick="setDefaults()">Set as Defaults</button>
+        <button onclick="getLocation()">Use Current Position</button>
+        <button onClick="deleteAllCookies()">Delete Old Location Cookies</button>
+        <button onClick="setDefaults()">Set as Defaults</button>
       </td>
-  </tr>
-  <tr>
-	  <td>
-		 
+    </tr>
+    <tr>
+      <td>
+
       </td>
-  </tr>
-</table>
-<!--div class="page-header">
+    </tr>
+  </table>
+  <!--div class="page-header">
       <h1>Search for a Location based on an Address</h1>
       <table>
         <tr>
@@ -124,103 +142,105 @@
   </div-->
   <style>
     div.mapdiv {
-      width:500px;
+      width: 500px;
       resize: both;
       border-style: dotted;
       border-radius: 25px;
       padding: 20px;
     }
-    </style>
+  </style>
   <!--div id="map" class="mapdiv" width="75vw"></div-->
   <!--script src='here-maps.js'></script-->
 
   <table>
     <tr>
       <TD>OR Load Places File
-        <select id=placeslist name=placeslist onchange=setLatLong() > 
-		<option selected>Chennai#-80.23;13.5;05.5</option>
-	</select>
-        <input type="file"  name="LoadPlaces" id="PlacesInput">
+        <select id=placeslist name=placeslist onchange=setLatLong()>
+          <option selected>Chennai#-80.23;13.5;05.5</option>
+        </select>
+        <input type="file" name="LoadPlaces" id="PlacesInput">
       </TD>
-  </tr>
+    </tr>
   </table>
-<!--div id="googleMap" style="width:500px;height:380px;" >Map Area</div-->
-<br/>
-<a href="#" onclick="window.open('places-india.txt', '_system')">places-india.txt 
-  <br/>
-  <a href="#" onclick="window.open('places-world.txt', '_system')">places-world.txt 
-<br/>
-<pre id="fileDisplayArea"></pre>
-©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
-By Sanjay Prabhakaran Chettiar
-<br>To save this file on your local machine or mobile, <br>Go to  
-<a href="#" onclick="window.open('https://github.com/SanjayPrabhakaran/srijagannatha-panchanga/', '_system');">https://github.com/SanjayPrabhakaran/srijagannatha-panchanga/</a>
+  <!--div id="googleMap" style="width:500px;height:380px;" >Map Area</div-->
+  <br />
+  <a href="#" onclick="window.open('places-india.txt', '_system')">places-india.txt
+    <br />
+    <a href="#" onclick="window.open('places-world.txt', '_system')">places-world.txt
+      <br />
+      <pre id="fileDisplayArea"></pre>
+      ©Made for <a href="http://www.srijagannath.org">Sri Jagannatha Center</a>.<br>
+      By Sanjay Prabhakaran Chettiar
+      <br>To save this file on your local machine or mobile, <br>Go to
+      <a href="#"
+        onclick="window.open('https://github.com/SanjayPrabhakaran/srijagannatha-panchanga/', '_system');">https://github.com/SanjayPrabhakaran/srijagannatha-panchanga/</a>
 
-<br> Feel Free to edit this program.
-<i>For Credits do View,Source in menu.</i> <br>
-<br>
-Chennai(-80.23E 13.5N),India location is default as example.<br>
-NOTE: ACCURACY warning: Calculations are approximate upto few minutes. <br>
-This panchanga is for approximate reference only. <br>
-You can create your own list Places with Latitude and Longitude. By saving this example to your disk 
-<a href="#" onclick="window.open('places-india.txt', '_system')">places.txt 
-</a> <b><br>
-<br><em>WAIT PAGE LOADING.....</em></b>
+      <br> Feel Free to edit this program.
+      <i>For Credits do View,Source in menu.</i> <br>
+      <br>
+      Chennai(-80.23E 13.5N),India location is default as example.<br>
+      NOTE: ACCURACY warning: Calculations are approximate upto few minutes. <br>
+      This panchanga is for approximate reference only. <br>
+      You can create your own list Places with Latitude and Longitude. By saving this example to your disk
+      <a href="#" onclick="window.open('places-india.txt', '_system')">places.txt
+      </a> <b><br>
+        <br><em>WAIT PAGE LOADING.....</em></b>
 
-<script type='text/javascript' src='ephemeris/index.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/common.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/load.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/index.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/common.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/load.js' charset='utf-8'></script>
 
-<script type='text/javascript' src='ephemeris/astronomy/index.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/index.js' charset='utf-8'></script>
 
-<script type='text/javascript' src='ephemeris/astronomy/moshier/index.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/constant.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/julian.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/delta.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/epsilon.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/lonlat.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/gplan.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/precess.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/util.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/kepler.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/body.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/sun.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/aberration.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/altaz.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/constellation.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/deflection.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/diurnal.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/fk4fk5.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/light.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/moon.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/nutation.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/planet.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/refraction.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/siderial.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/star.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/transit.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/vearth.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/processor.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/index.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/constant.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/julian.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/delta.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/epsilon.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/lonlat.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/gplan.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/precess.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/util.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/kepler.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/body.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/sun.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/aberration.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/altaz.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/constellation.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/deflection.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/diurnal.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/fk4fk5.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/light.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/moon.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/nutation.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/planet.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/refraction.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/siderial.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/star.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/transit.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/vearth.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/processor.js' charset='utf-8'></script>
 
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/index.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/mercury.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/venus.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/earth.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/moonlr.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/moonlat.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/mars.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/jupiter.js' charset='utf-8'></script>
-<script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/saturn.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/index.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/mercury.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/venus.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/earth.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/moonlr.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/moonlat.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/mars.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/jupiter.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/astronomy/moshier/plan404/saturn.js' charset='utf-8'></script>
 
 
 
-<script type='text/javascript' src='ephemeris/shortcut.js' charset='utf-8'></script>
+      <script type='text/javascript' src='ephemeris/shortcut.js' charset='utf-8'></script>
 
-<script>
-{	initSJP();}
-</script>
-<!--script src="https://maps.googleapis.com/maps/api/js?callback=initMap" ></script-->
-<br/>PAGE LOADED
-<a href="savefile.html">.</a>
+      <script>
+        { initSJP(); }
+      </script>
+      <!--script src="https://maps.googleapis.com/maps/api/js?callback=initMap" ></script-->
+      <br />PAGE LOADED
+      <a href="savefile.html">.</a>
 </BODY>
+
 </HTML>

@@ -422,15 +422,33 @@ function download_old(data, filename, type) {
     }
 }
 function download(data, filename, type) {
-    var blob = new Blob([data], { type: 'application/octet-stream' });
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
+    if (typeof cordova !== 'undefined' && cordova.file) {
+        // Cordova Android implementation
+        window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function (dirEntry) {
+            dirEntry.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
+                fileEntry.createWriter(function (fileWriter) {
+                    fileWriter.onwriteend = function () {
+                        alert("File saved successfully to:\n" + fileEntry.nativeURL + "\n\n(You can find it in Android/data/com.sanjay.sjp/files)");
+                    };
+                    fileWriter.onerror = function (e) {
+                        alert("Failed to save file: " + e.toString());
+                    };
+                    var blob = new Blob([data], { type: type });
+                    fileWriter.write(blob);
+                });
+            }, function (err) { alert("Error creating file: " + JSON.stringify(err)); });
+        }, function (err) { alert("Error resolving fs: " + JSON.stringify(err)); });
+    } else {
+        // Original Browser implementation
+        var blob = new Blob([data], { type: 'application/octet-stream' });
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = filename;
 
-    // Append to the body, click and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 }
 function deleteAllCookies() {
     const cookies = document.cookie.split(";");
