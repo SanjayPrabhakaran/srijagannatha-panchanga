@@ -1,74 +1,107 @@
 <HTML>
-<HEAD>
-<TITLE> SJP Dasa</TITLE>
-</HEAD>	
-<BODY onload="javascript:init()" id=contents>
-<script src="dasa.js" ></script>
-<script type="text/javascript" src= "sjcformatter.js"></script>
 
-<form id=forminput  method=get>
-	<table id=formtable cellspacing=0 cellpadding=0 border=0>
-		<tr><td>Desc:</td>
-			<td><input id="desc" name="desc" value="Dasa of:" type=text>
-			</td></tr>
-		<tr><td>Dasha sphuta:</td>
-			<td><input id="sphuta" name="sphuta" value="53" type=text>
-			</td></tr>
-		<tr><td>Time Zone:</td>
-			<td><input id="timezone"  name="timezone" type=text value="+5.5" size=5></td></tr>
-		<tr><td>Birth Date Time:</td><td><input id="datetime" name="datetime" type=text value="19 Jul 1971" size=15></td></tr>
-		<tr><td>Purna Ayush:</td><td><input id=ayush name="ayush" type=text value="120" size=15></td></tr>
-		<tr><td>Dasha:</td>
-			<td><select id=dasha name="dasha" onchange="formChanged(this)">
-			<option selected>Vimshottari</option>
-			<option onfocus="alert(123)">Ashtottari-Ardra</option>
-			<option onclick="alert(105)" onselect="alert(105)">Panchottari</option>
-			<option >Shatabdika</option>
-			<option >Chaturashiti</option>
-			<option>Shastihayani</option>
-			</select>
-			</td>
-		<tr><td colspan=2>Below Section for Antara Dasha levels</td></tr>
-		<tr><td>Antara Dasha Date Time:</td><td><input id=eventdatetime name="eventdatetime" type=text size=15></td></tr>
-		<tr><td>Level of Antar Dasha:</td><td>
-			<select id=antaradasha name="antaradasha">
-			<option selected value=1>Maha Dasha</option>
-			<option value=2>Antara Dasha</option>
-			<option value=3>Prati Antara Dasha</option>
-			<option value=4>Sookshma Antara Dasha</option>
-			<option value=5>Prana Antara Dasha</option>
-			<option value=6>Deha Antara Dasha</option>
-			<option value=9>All Antara Dashas at event</option>
-			</select>
-		</td></tr>
-		<tr>
-			<td>
-				Antar dasha order
-			</td>
-			<td>
-				<select id="antardasha_order" name="antardasha_order">
-					<option selected value="0">Normal Vimshottari type</option>
-					<option value="-1">Previous Reverse-Ashtottari type</option>
-				</select>
-			</td>
-		</tr>
-		<tr><td>Starting Nakshatra</td><td>
-			<select id=starting name="starting">
-			<option selected value=0>Janma</option>
-			<option value=1>Sampat</option>
-			<option value=2>Vipat</option>
-			<option value=3>Kshema</option>
-			<option value=4>Utpanna(Pratya)</option>
-			<option value=5>Sadhak</option>
-			<option value=6>Vadha</option>
-			<option value=7>Mitra(Aadhana)</option>
-			<option value=8>Param Mitra</option>
-			</select>
-		</td></tr>
-		<tr><td>Compression</td><td><input id=compression name="compression" type=text value="1" size=5></td></tr>
-		<tr><td colspan=2 align=middle><input  type="submit" id="submit" name="submit" value=Calculate></td></tr>
-		
+<HEAD>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, maximum-scale=5.0" />
+	<TITLE> SJP Dasa</TITLE>
+</HEAD>
+
+<BODY onload="javascript:init()" id=contents>
+	<script src="dasa.js"></script>
+	<script type="text/javascript" src="sjcformatter.js"></script>
+
+	<form id=forminput method=get>
+		<table id=formtable cellspacing=0 cellpadding=0 border=0>
+			<tr>
+				<td>Desc:</td>
+				<td><input id="desc" name="desc" value="Dasa of:" type=text>
+				</td>
+			</tr>
+			<tr>
+				<td>Dasha sphuta:</td>
+				<td><input id="sphuta" name="sphuta" value="53" type=text>
+				</td>
+			</tr>
+			<tr>
+				<td>Time Zone:</td>
+				<td><input id="timezone" name="timezone" type=text value="+5.5" size=5></td>
+			</tr>
+			<tr>
+				<td>Birth Date Time:</td>
+				<td><input id="datetime" name="datetime" type=text value="19 Jul 1971" size=15></td>
+			</tr>
+			<tr>
+				<td>Purna Ayush:</td>
+				<td><input id=ayush name="ayush" type=text value="120" size=15></td>
+			</tr>
+			<tr>
+				<td>Dasha:</td>
+				<td><select id=dasha name="dasha" onchange="formChanged(this)">
+						<option selected>Vimshottari</option>
+						<option onfocus="alert(123)">Ashtottari-Ardra</option>
+						<option onclick="alert(105)" onselect="alert(105)">Panchottari</option>
+						<option>Shatabdika</option>
+						<option>Chaturashiti</option>
+						<option>Shastihayani</option>
+					</select>
+				</td>
+			<tr>
+				<td colspan=2>Below Section for Antara Dasha levels</td>
+			</tr>
+			<tr>
+				<td>Antara Dasha Date Time:</td>
+				<td><input id=eventdatetime name="eventdatetime" type=text size=15></td>
+			</tr>
+			<tr>
+				<td>Level of Antar Dasha:</td>
+				<td>
+					<select id=antaradasha name="antaradasha">
+						<option selected value=1>Maha Dasha</option>
+						<option value=2>Antara Dasha</option>
+						<option value=3>Prati Antara Dasha</option>
+						<option value=4>Sookshma Antara Dasha</option>
+						<option value=5>Prana Antara Dasha</option>
+						<option value=6>Deha Antara Dasha</option>
+						<option value=9>All Antara Dashas at event</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Antar dasha order
+				</td>
+				<td>
+					<select id="antardasha_order" name="antardasha_order">
+						<option selected value="0">Normal Vimshottari type</option>
+						<option value="-1">Previous Reverse-Ashtottari type</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Starting Nakshatra</td>
+				<td>
+					<select id=starting name="starting">
+						<option selected value=0>Janma</option>
+						<option value=1>Sampat</option>
+						<option value=2>Vipat</option>
+						<option value=3>Kshema</option>
+						<option value=4>Utpanna(Pratya)</option>
+						<option value=5>Sadhak</option>
+						<option value=6>Vadha</option>
+						<option value=7>Mitra(Aadhana)</option>
+						<option value=8>Param Mitra</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Compression</td>
+				<td><input id=compression name="compression" type=text value="1" size=5></td>
+			</tr>
+			<tr>
+				<td colspan=2 align=middle><input type="submit" id="submit" name="submit" value=Calculate></td>
+			</tr>
+
 		</table>
 	</form>
 </BODY>
+
 </HTML>

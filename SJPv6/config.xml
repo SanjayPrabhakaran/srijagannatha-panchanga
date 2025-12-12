@@ -9,4 +9,5 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <icon src="www/img/logo.png" />
+    <preference name="EnableViewportScale" value="true" />
 </widget>
