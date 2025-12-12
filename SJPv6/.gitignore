@@ -27,3 +27,8 @@ node_modules/
 
 # all lcok files.
 **/*-lock*
+
+# Security / Signing
+*.jks
+*.keystore
+build.json
