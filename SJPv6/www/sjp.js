@@ -710,7 +710,7 @@ function getPanchanga(date_time, longitude, latitude) {
     this.html += "\n<br/><b>Pancha Samvatsara </b>" + aPanchaSamvatsara[(this.iSamvatsara + 1) % 5];
     this.html += "\n<br/><b>Kali Abda:</b>" + date_time.getKaliAbda();
     this.html += "\n<br/><b>Vikrama Samvatsara:</b>" + date_time.getVikramaSamvatsara();
-    this.html += "\n<br/><b>Ahargana:</b>" + date_time.getAhargana();
+    this.html += "\n<br/><b>Kali Ahargana:</b>" + date_time.getAhargana();
     this.html += "\n<br/><b>Saura Maasa </b>" + this.sSauraMaasa;
     this.ishta_ghati = ((Date.parse(this.date_time) - Date.parse(this.sunrise)) / minutes) / 24;
     gpv = convertIshtaToGPV(this.ishta_ghati);

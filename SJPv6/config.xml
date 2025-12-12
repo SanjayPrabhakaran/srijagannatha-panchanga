@@ -8,5 +8,5 @@
     <content src="SJP.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <icon src="www/img/jagannatha.png" />
+    <icon src="www/img/logo.png" />
 </widget>
