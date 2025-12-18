@@ -498,7 +498,7 @@ function getJHDStringEsc(parray) {
         + "105\r\n" //sea level? //Line12:105 (Is this Mean Sea level? What is this? Changes with location selection?)
         + parray['placename'] + "\r\n" //place //Line13:Location (Location in Names)
         + parray['placename'] + "\r\n" //country //Line14:India (Country in names)
-        + "0\r\n"   //Line15:1 (If  1 to use atmospheric pressure)
+        + "1\r\n"   //Line15:1 (0-Julian Date 1 Gregorian date)
         + "88.000000\r\n" //Line16:88.000000 (Atmospheric pressure)
         + "99.000000\r\n" //Line17:99.000000 (temperature)
         + "0\r\n"//Line18:1 (If 1 use temperature for calculations)
