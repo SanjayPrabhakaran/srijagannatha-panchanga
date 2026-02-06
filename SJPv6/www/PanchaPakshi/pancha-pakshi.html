@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pancha Pakshi Activities - Location Based Time Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .location-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .location-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tab.active {
+            background-color: white;
+            color: #667eea;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #4CAF50;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result.error {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left-color: #f44336;
+        }
+
+        .result h3 {
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+
+        .result.error h3 {
+            color: #c62828;
+        }
+
+        .result-detail {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: 16px;
+        }
+
+        .result-detail strong {
+            color: #555;
+        }
+
+        .time-info {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #2196F3;
+        }
+
+        .time-info h4 {
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+
+        .yama-times {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .yama-time-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .yama-time-card.current {
+            background: #fff59d;
+            border-color: #f57f17;
+            box-shadow: 0 4px 10px rgba(245, 127, 23, 0.3);
+        }
+
+        .yama-time-card h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .yama-time-card.current h5 {
+            color: #f57f17;
+        }
+
+        .yama-time-card .time {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .activity-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .activity-card {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-card.day {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border: 3px solid #fbc02d;
+        }
+
+        .activity-card.night {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            border: 3px solid #8e24aa;
+        }
+
+        .activity-card h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .activity-card .activity {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .activity-card.day .activity {
+            color: #f57f17;
+        }
+
+        .activity-card.night .activity {
+            color: #6a1b9a;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .info-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #1976d2;
+            margin-left: 10px;
+        }
+
+        .current-time-display {
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid #4CAF50;
+        }
+
+        .current-time-display h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .current-time-display .time {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        .lookup-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .lookup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .lookup-btn:active {
+            transform: translateY(0);
+        }
+
+        .lookup-btn: {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .location-status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+            text-align: center;
+        }
+
+        .location-status.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #4CAF50;
+        }
+
+        .location-status.error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 2px solid #f44336;
+        }
+
+        .location-input-group {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .location-input-group .form-group {
+            margin-bottom: 0;
+        }
+
+        .location-input-group input {
+            font-size: 17px;
+            padding: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .location-input-group {
+                grid-template-columns: 1fr;
+            }
+
+            .lookup-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .form-row,
+            .activity-box,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>🦅 Pancha Pakshi Activities 🦚</h1>
+        <p class="subtitle">Ancient Vedic Bird-Based Time Calculator with Location Intelligence</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span
+                style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; color: white; font-size: 14px;">
+                ✨ Auto-detects Moon Phase & Current Yama Period
+            </span>
+        </div>
+
+        <!-- Five Birds Display -->
+        <div
+            style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 20px;">The Five Pancha Pakshi Birds</h2>
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🦅</div>
+                    <div style="font-weight: bold; color: #333;">Eagle</div>
+                    <div style="font-size: 12px; color: #666;">Garuda</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🦉</div>
+                    <div style="font-weight: bold; color: #333;">Owl</div>
+                    <div style="font-size: 12px; color: #666;">Uluka</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🐦</div>
+                    <div style="font-weight: bold; color: #333;">Crow</div>
+                    <div style="font-size: 12px; color: #666;">Kaka</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🐓</div>
+                    <div style="font-weight: bold; color: #333;">Cock</div>
+                    <div style="font-size: 12px; color: #666;">Kukkuta</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 60px; margin-bottom: 10px;">🦚</div>
+                    <div style="font-weight: bold; color: #333;">Peacock</div>
+                    <div style="font-size: 12px; color: #666;">Mayura</div>
+                </div>
+            </div>
+
+            <!-- Nakshatra Guide -->
+            <div
+                style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 15px; border-radius: 10px; border: 2px solid #2196F3;">
+                <h3 style="color: #1565c0; margin-bottom: 15px; text-align: center;">🌟 Find Your Bird by Birth
+                    Nakshatra</h3>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; font-size: 13px;">
+                    <div style="background: white; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🦅 Eagle</div>
+                        <div style="line-height: 1.6; color: #555;">
+                            Ashwini<br>
+                            Bharani<br>
+                            Krittika<br>
+                            Rohini<br>
+                            Mrigashira
+                        </div>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">(5 Nakshatras)</div>
+                    </div>
+                    <div style="background: white; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🦉 Owl</div>
+                        <div style="line-height: 1.6; color: #555;">
+                            Ardra<br>
+                            Punarvasu<br>
+                            Pushya<br>
+                            Ashlesha<br>
+                            Magha<br>
+                            Purva Phalguni
+                        </div>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">(6 Nakshatras)</div>
+                    </div>
+                    <div style="background: white; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🐦 Crow</div>
+                        <div style="line-height: 1.6; color: #555;">
+                            Uttara Phalguni<br>
+                            Hasta<br>
+                            Chitra<br>
+                            Swati<br>
+                            Vishakha
+                        </div>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">(5 Nakshatras)</div>
+                    </div>
+                    <div style="background: white; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🐓 Cock</div>
+                        <div style="line-height: 1.6; color: #555;">
+                            Anuradha<br>
+                            Jyeshtha<br>
+                            Mula<br>
+                            Purva Ashadha<br>
+                            Uttara Ashadha
+                        </div>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">(5 Nakshatras)</div>
+                    </div>
+                    <div style="background: white; padding: 10px; border-radius: 8px; text-align: center;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 8px;">🦚 Peacock</div>
+                        <div style="line-height: 1.6; color: #555;">
+                            Shravana<br>
+                            Dhanishta<br>
+                            Shatabhisha<br>
+                            Purva Bhadrapada<br>
+                            Uttara Bhadrapada<br>
+                            Revati
+                        </div>
+                        <div style="font-size: 11px; color: #999; margin-top: 5px;">(6 Nakshatras)</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 15px; color: #1565c0; font-weight: bold;">
+                    📝 Select your bird based on your birth Nakshatra, then let the app auto-fill the rest!
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="location-section">
+            <h2>📍 Location & Time Settings</h2>
+
+            <div class="location-input-group">
+                <div class="form-group">
+                    <label for="locationName">Location Name:</label>
+                    <input type="text" id="locationName" placeholder="Enter city name (e.g., Chennai, New York, London)"
+                        value="Chennai">
+                </div>
+                <button class="lookup-btn" onclick="lookupLocation()">🔍 Lookup Location</button>
+            </div>
+
+            <div id="locationStatus" class="location-status"></div>
+
+            <div class="form-row-3" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label for="latitude">Latitude:</label>
+                    <input type="number" id="latitude" step="0.0001" placeholder="e.g., 13.0827" value="13.0827">
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude:</label>
+                    <input type="number" id="longitude" step="0.0001" placeholder="e.g., 80.2707" value="80.2707">
+                </div>
+                <div class="form-group">
+                    <label for="timezone">Timezone Offset (hours):</label>
+                    <input type="number" id="timezone" step="0.5" placeholder="e.g., 5.5 for IST" value="5.5">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="selectedDate">Date:</label>
+                <input type="date" id="selectedDate">
+            </div>
+
+            <!-- Auto-detected Information Display -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                <div id="moonPhaseInfo"
+                    style="display: none; padding: 12px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 8px; text-align: center; border: 2px solid #2196F3;">
+                </div>
+                <div id="currentYamaInfo"
+                    style="display: none; padding: 12px; background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border-radius: 8px; text-align: center; border: 2px solid #fbc02d;">
+                </div>
+            </div>
+
+            <button onclick="calculateSunTimes()">🌅 Calculate Sun Times & Yama Periods</button>
+            <div id="sunTimesResult" class="result"></div>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" onclick="switchTab('activity')">🎯 Activity Lookup</button>
+            <button class="tab" onclick="switchTab('complete')">🔍 Complete Lookup</button>
+            <button class="tab" onclick="switchTab('currentYama')">⏰ Current Yama</button>
+        </div>
+
+        <!-- Tab 1: Activity Lookup -->
+        <div id="activity-tab" class="tab-content active">
+            <div class="container">
+                <h2>🎯 Activity Lookup <span class="info-badge">Select Your Bird</span></h2>
+
+                <div class="form-group" style="max-width: 400px; margin: 0 auto 20px auto;">
+                    <label for="bird0" style="font-size: 18px; text-align: center; color: #667eea;">Select Your Bird
+                        (Based on Birth Nakshatra):</label>
+                    <select id="bird0" style="font-size: 17px; padding: 15px; text-align: center;">
+                        <option value="">-- Choose Your Bird --</option>
+                        <option value="Eagle">🦅 Eagle (Garuda) - Ashwini to Mrigashira</option>
+                        <option value="Owl">🦉 Owl (Uluka) - Ardra to Purva Phalguni</option>
+                        <option value="Crow">🐦 Crow (Kaka) - Uttara Phalguni to Vishakha</option>
+                        <option value="Cock">🐓 Cock (Kukkuta) - Anuradha to Uttara Ashadha</option>
+                        <option value="Peacock">🦚 Peacock (Mayura) - Shravana to Revati</option>
+                    </select>
+                </div>
+
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #666; margin-bottom: 10px; text-align: center;">Auto-Selected Parameters:</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="paksha0">Paksha (Auto-detected):</label>
+                            <select id="paksha0" style="background: #e0e0e0;">
+                                <option value="Shukla">Shukla (Waxing Moon)</option>
+                                <option value="Krishna">Krishna (Waning Moon)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="yamaNum0">Yama Number (Auto-detected):</label>
+                            <select id="yamaNum0" style="background: #e0e0e0;">
+                                <option value="1">Yama 1</option>
+                                <option value="2">Yama 2</option>
+                                <option value="3">Yama 3</option>
+                                <option value="4">Yama 4</option>
+                                <option value="5">Yama 5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weekday0">Weekday (Auto-detected):</label>
+                        <select id="weekday0" style="background: #e0e0e0;">
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="activityLookup()">🔎 Get Activity with Time Periods</button>
+                <div id="result0" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Complete Lookup -->
+        <div id="complete-tab" class="tab-content">
+            <div class="container">
+                <h2>🔍 Complete Lookup <span class="info-badge">Select Your Bird</span></h2>
+
+                <div class="form-group" style="max-width: 400px; margin: 0 auto 20px auto;">
+                    <label for="bird1" style="font-size: 18px; text-align: center; color: #667eea;">Select Your Bird
+                        (Based on Birth Nakshatra):</label>
+                    <select id="bird1" style="font-size: 17px; padding: 15px; text-align: center;">
+                        <option value="">-- Choose Your Bird --</option>
+                        <option value="Eagle">🦅 Eagle (Garuda) - Ashwini to Mrigashira</option>
+                        <option value="Owl">🦉 Owl (Uluka) - Ardra to Purva Phalguni</option>
+                        <option value="Crow">🐦 Crow (Kaka) - Uttara Phalguni to Vishakha</option>
+                        <option value="Cock">🐓 Cock (Kukkuta) - Anuradha to Uttara Ashadha</option>
+                        <option value="Peacock">🦚 Peacock (Mayura) - Shravana to Revati</option>
+                    </select>
+                </div>
+
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #666; margin-bottom: 10px; text-align: center;">Auto-Selected Parameters:</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="day1">Weekday (Auto-detected):</label>
+                            <select id="day1" style="background: #e0e0e0;">
+                                <option value="Sunday">Sunday</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paksha1">Paksha (Auto-detected):</label>
+                            <select id="paksha1" style="background: #e0e0e0;">
+                                <option value="Shukla">Shukla</option>
+                                <option value="Krishna">Krishna</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="daynight1">Day/Night (Auto-detected):</label>
+                            <select id="daynight1" style="background: #e0e0e0;">
+                                <option value="Day">☀️ Day</option>
+                                <option value="Night">🌙 Night</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="yamaNum1">Yama Number (Auto-detected):</label>
+                            <select id="yamaNum1" style="background: #e0e0e0;">
+                                <option value="1">Yama 1</option>
+                                <option value="2">Yama 2</option>
+                                <option value="3">Yama 3</option>
+                                <option value="4">Yama 4</option>
+                                <option value="5">Yama 5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="completeLookup()">🔎 Get Yama Element with Times</button>
+                <div id="result1" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Current Yama -->
+        <div id="currentYama-tab" class="tab-content">
+            <div class="container">
+                <h2>⏰ Current Yama Period <span class="info-badge">Real-Time</span></h2>
+
+                <div class="current-time-display">
+                    <h3>Current Time</h3>
+                    <div class="time" id="currentTimeDisplay">--:--:--</div>
+                </div>
+
+                <div class="form-group" style="max-width: 400px; margin: 0 auto 20px auto;">
+                    <label for="bird2" style="font-size: 18px; text-align: center; color: #667eea;">Select Your Bird
+                        (Based on Birth Nakshatra):</label>
+                    <select id="bird2" style="font-size: 17px; padding: 15px; text-align: center;">
+                        <option value="">-- Choose Your Bird --</option>
+                        <option value="Eagle">🦅 Eagle (Garuda) - Ashwini to Mrigashira</option>
+                        <option value="Owl">🦉 Owl (Uluka) - Ardra to Purva Phalguni</option>
+                        <option value="Crow">🐦 Crow (Kaka) - Uttara Phalguni to Vishakha</option>
+                        <option value="Cock">🐓 Cock (Kukkuta) - Anuradha to Uttara Ashadha</option>
+                        <option value="Peacock">🦚 Peacock (Mayura) - Shravana to Revati</option>
+                    </select>
+                </div>
+
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #666; margin-bottom: 10px; text-align: center;">Auto-Selected Parameter:</h4>
+                    <div class="form-group">
+                        <label for="paksha2">Paksha (Auto-detected):</label>
+                        <select id="paksha2" style="background: #e0e0e0;">
+                            <option value="Shukla">Shukla (Waxing Moon)</option>
+                            <option value="Krishna">Krishna (Waning Moon)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="getCurrentYama()">🔎 Find Current Yama Period</button>
+                <div id="result2" class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="pancha-pakshi.js"></script>
+</body>
+
+</html>

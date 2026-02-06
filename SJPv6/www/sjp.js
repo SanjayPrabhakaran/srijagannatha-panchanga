@@ -1,3 +1,5 @@
+//const { getYamaElement } = require("./panchapakshi");
+
 console.log("sjp.js.............");
 //All Globals
 var DEBUG = true;
@@ -84,7 +86,7 @@ var varga = [["Dx", "Surya", "Chandra", "Mangal", "Budha", "Guru", "Shukra", "Sh
 ["Dx", "Surya", "Chandra", "Mangal", "Budha", "Guru", "Shukra", "Shani", "Rahu", "Ketu", "Gulika", "Mandi", "PranaP", "BL", "HL", "GL"],
 ["Dx", "Surya", "Chandra", "Mangal", "Budha", "Guru", "Shukra", "Shani", "Rahu", "Ketu", "Gulika", "Mandi", "PranaP", "BL", "HL", "GL"],
 ];
-var PakshiActivity = [
+var PakshiActivityOld = [
     [//Shukla Paksha
         ["Sunday Tuesday", "Eagle", "Eat", "Walk", "Rule", "Sleep", "Death", "Death", "Rule", "Eat", "Sleep", "Walk"],
         ["Sunday Tuesday", "Owl", "Walk", "Rule", "Sleep", "Death", "Eat", "Walk", "Death", "Rule", "Eat", "Sleep"],
@@ -867,24 +869,25 @@ function calcGamma2(julianDay, hour) {
 function calcEqofTime(gamma) {
     //Below line was commented lets see if uncommented apr 2017
     return (229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma) - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma)));
-    var epsilon = calcObliquityCorrection(t);
-    var l0 = calcGeomMeanLongSun(t);
-    var e = calcEccentricityEarthOrbit(t);
-    var m = calcGeomMeanAnomalySun(t);
+    // The below lines are the old code for the equation of time
+    // var epsilon = calcObliquityCorrection(t);
+    // var l0 = calcGeomMeanLongSun(t);
+    // var e = calcEccentricityEarthOrbit(t);
+    // var m = calcGeomMeanAnomalySun(t);
 
-    var y = Math.tan(degToRad(epsilon) / 2.0);
-    y *= y;
+    // var y = Math.tan(degToRad(epsilon) / 2.0);
+    // y *= y;
 
-    var sin2l0 = Math.sin(2.0 * degToRad(l0));
-    var sinm = Math.sin(degToRad(m));
-    var cos2l0 = Math.cos(2.0 * degToRad(l0));
-    var sin4l0 = Math.sin(4.0 * degToRad(l0));
-    var sin2m = Math.sin(2.0 * degToRad(m));
+    // var sin2l0 = Math.sin(2.0 * degToRad(l0));
+    // var sinm = Math.sin(degToRad(m));
+    // var cos2l0 = Math.cos(2.0 * degToRad(l0));
+    // var sin4l0 = Math.sin(4.0 * degToRad(l0));
+    // var sin2m = Math.sin(2.0 * degToRad(m));
 
-    var Etime = y * sin2l0 - 2.0 * e * sinm + 4.0 * e * y * sinm * cos2l0
-        - 0.5 * y * y * sin4l0 - 1.25 * e * e * sin2m;
+    // var Etime = y * sin2l0 - 2.0 * e * sinm + 4.0 * e * y * sinm * cos2l0
+    //     - 0.5 * y * y * sin4l0 - 1.25 * e * e * sin2m;
 
-    return radToDeg(Etime) * 4.0;    // in minutes of time
+    // return radToDeg(Etime) * 4.0;    // in minutes of time
 
 }
 
@@ -1271,7 +1274,7 @@ function getKaalaTable(vara_cur, sunrise, sunset, latitude, longitude, cur_time)
     this.html += "</table>";
     return this;
 }
-function getMuhurthaTable(sunrise, sunset, paksha, vaara, cur_time) {
+function getMuhurthaTable(sunrise, sunset, isKrishnaPaksha, vaara, cur_time) {
     this.html = "<table border=2><tr><th>Muhurtha Nakshatra</th><th>Start Time</th><th>Eagle</th><th>Owl</th><th>Crow</th><th>Cock</th><th>Peacock</th></tr>";
     var k = 0;
     var m = new Date();
@@ -1280,15 +1283,18 @@ function getMuhurthaTable(sunrise, sunset, paksha, vaara, cur_time) {
     m.setTime(sunrise.getTime());
     var muhurtha_unit = (sunset.getTime() - sunrise.getTime()) / 15;
     var i, g;
-    for (PakshiIndex = 0; PakshiIndex < 25; ++PakshiIndex) {
-        //console.log("Searching Pakshi>"+PakshiIndex + "@" +PakshiActivity[paksha*1][PakshiIndex][0]+"::"+vaara+"<"+PakshiActivity[paksha*1][PakshiIndex][0].search(vaara));
-        if (PakshiActivity[paksha * 1][PakshiIndex][0].search(vaara) >= 0) break;
-    };
-    for (i = 0; i < 30; ++i) {
+    // for (PakshiIndex = 0; PakshiIndex < 25; ++PakshiIndex) {
+    //     //console.log("Searching Pakshi>"+PakshiIndex + "@" +PakshiActivity[paksha*1][PakshiIndex][0]+"::"+vaara+"<"+PakshiActivity[paksha*1][PakshiIndex][0].search(vaara));
+    //     if (PakshiActivity[paksha * 1][PakshiIndex][0].search(vaara) >= 0) break;
+    // };
+    var DayNight = "Day";
+    var paksha = isKrishnaPaksha ? "Krishna" : "Shukla";
+    for (i = 0; i < 30; ++i) { //List all the 30 Muhurtha's for the day
         if (i == 15) {
             m.setTime(sunset.getTime());
             muhurtha_unit = (24 * hours - sunset.getTime() + sunrise.getTime()) / 15;
             this.html += "<tr><td colspan=100% align=center><b>Night Time</b></td></tr>";
+            DayNight = "Night";
         }
         this.muhurtha_start[k] = new Date();
         this.muhurtha_start[k].setTime(m.getTime());
@@ -1298,18 +1304,19 @@ function getMuhurthaTable(sunrise, sunset, paksha, vaara, cur_time) {
             this.html += "</td><td style='color:red;font-weight: bold;'>" + formatTime(this.muhurtha_start[k]);
         else
             this.html += "</td><td>" + formatTime(this.muhurtha_start[k]);
-        if (!(i % 3)) {
-            console.log(PakshiIndex);
+        if (!(i % 3)) {//Every 0,3.... print the bird activity
+            //console.log(PakshiIndex);
+            console.log("vaara,paksha,DayNight", i, vaara, paksha, DayNight);
             this.html = this.html + "<td rowspan=3>" +
-                PakshiActivity[paksha * 1][PakshiIndex][(i / 3) + 2] +
+                getYamaElement(getSequenceId(vaara, paksha, "Eagle", DayNight), (parseInt(i / 3) % 5) + 1) +//PakshiActivity[paksha * 1][PakshiIndex][(i / 3) + 2] +
                 "</td><td rowspan=3>" +
-                PakshiActivity[paksha * 1][PakshiIndex + 1][(i / 3) + 2] +
+                getYamaElement(getSequenceId(vaara, paksha, "Owl", DayNight), (parseInt(i / 3) % 5) + 1) +//PakshiActivity[paksha * 1][PakshiIndex + 1][(i / 3) + 2] +
                 "</td><td rowspan=3>" +
-                PakshiActivity[paksha * 1][PakshiIndex + 2][(i / 3) + 2] +
+                getYamaElement(getSequenceId(vaara, paksha, "Crow", DayNight), (parseInt(i / 3) % 5) + 1) +//PakshiActivity[paksha * 1][PakshiIndex + 2][(i / 3) + 2] +
                 "</td><td rowspan=3>" +
-                PakshiActivity[paksha * 1][PakshiIndex + 3][(i / 3) + 2] +
+                getYamaElement(getSequenceId(vaara, paksha, "Cock", DayNight), (parseInt(i / 3) % 5) + 1) +//PakshiActivity[paksha * 1][PakshiIndex + 3][(i / 3) + 2] +
                 "</td><td rowspan=3>" +
-                PakshiActivity[paksha * 1][PakshiIndex + 4][(i / 3) + 2];
+                getYamaElement(getSequenceId(vaara, paksha, "Peacock", DayNight), (parseInt(i / 3) % 5) + 1);//PakshiActivity[paksha * 1][PakshiIndex + 4][(i / 3) + 2];
         }
         this.html += "</td></tr>";
         m.setTime(m.getTime() + muhurtha_unit);
