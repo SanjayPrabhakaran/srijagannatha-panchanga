@@ -1,21 +1,4 @@
-function getExecutingFileName() {
-    const err = new Error();
-    // In some browsers (like Firefox), the stack might not populate 
-    // until the error is actually thrown.
-    const stack = err.stack || "";
-    const lines = stack.split('\n');
-
-    // We look at index 2 (the caller). If index 2 is empty, we check index 1.
-    const callerLine = lines[2] || lines[1] || "";
-
-    // Regex breakdown:
-    // 1. Look for a forward slash /
-    // 2. Capture everything that isn't a slash, colon, or space
-    // 3. Stop once we hit .js
-    const match = /([^\/\s]+\.js)/.exec(callerLine);
-
-    return match ? match[1] : "Unknown";
-}
+console.log(getExecutingFileName() + ".............");
 
 /**
  * Finds the Pakshi (Bird) based on the Nakshatra Number (1-27)
@@ -52,8 +35,7 @@ function findPakshi(nakshatraNumber) { //Nakshatra Number for 1 to 27
 }
 
 // --- Example Usage ---
-const myNakshatra = 13; // Example: Hasta
-console.log(`Nakshatra ${myNakshatra} belongs to: ${findPakshi(myNakshatra)}`);
+console.log(`Nakshatra ${myNakshatra = 13} belongs to: ${findPakshi(myNakshatra)}`);
 
 // Example: If this is called in 'app.js'
 console.log("Executed fromxxx:", getExecutingFileName());
@@ -131,8 +113,8 @@ function getScheduleByDay(day) {
 
 // Example usage:
 const tuesdaySchedule = getScheduleByDay("Tue");
-console.log(JSON.stringify(tuesdaySchedule, null, 2));
-console.log(scriptname + "........LOADED");
+//console.log(JSON.stringify(tuesdaySchedule, null, 2));
+//console.log(scriptname + "........LOADED");
 
 // Data structure containing all sequences
 const sequenceData = [
@@ -416,3 +398,5 @@ if (typeof module !== 'undefined' && module.exports) {
         yamaData
     };
 }
+
+console.log(getExecutingFileName() + ".............LOADED");

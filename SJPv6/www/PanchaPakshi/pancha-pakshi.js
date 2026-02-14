@@ -5,100 +5,6 @@
 // DATA STRUCTURES
 // ============================================================================
 
-const sequenceData = [
-    { day: "Sunday", bird: "Eagle", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Sunday", bird: "Owl", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Sunday", bird: "Crow", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Sunday", bird: "Cock", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Sunday", bird: "Peacock", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Tuesday", bird: "Eagle", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Tuesday", bird: "Owl", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Tuesday", bird: "Crow", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Tuesday", bird: "Cock", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Tuesday", bird: "Peacock", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Monday", bird: "Owl", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Monday", bird: "Crow", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Monday", bird: "Cock", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Monday", bird: "Peacock", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Monday", bird: "Eagle", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Wednesday", bird: "Owl", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Wednesday", bird: "Crow", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Wednesday", bird: "Cock", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Wednesday", bird: "Peacock", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Wednesday", bird: "Eagle", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Thursday", bird: "Crow", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Thursday", bird: "Owl", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Thursday", bird: "Peacock", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Thursday", bird: "Eagle", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Friday", bird: "Cock", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Friday", bird: "Peacock", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Friday", bird: "Eagle", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Friday", bird: "Owl", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Friday", bird: "Crow", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Saturday", bird: "Peacock", seqDay: "SD2", seqNight: "SN2", paksha: "Shukla" },
-    { day: "Saturday", bird: "Eagle", seqDay: "SD3", seqNight: "SN3", paksha: "Shukla" },
-    { day: "Saturday", bird: "Owl", seqDay: "SD4", seqNight: "SN4", paksha: "Shukla" },
-    { day: "Saturday", bird: "Crow", seqDay: "SD5", seqNight: "SN5", paksha: "Shukla" },
-    { day: "Saturday", bird: "Cock", seqDay: "SD1", seqNight: "SN1", paksha: "Shukla" },
-    { day: "Sunday", bird: "Cock", seqDay: "KD1", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Sunday", bird: "Eagle", seqDay: "KD2", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Sunday", bird: "Owl", seqDay: "KD3", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Sunday", bird: "Peacock", seqDay: "KD4", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Sunday", bird: "Crow", seqDay: "KD5", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Tuesday", bird: "Cock", seqDay: "KD1", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Tuesday", bird: "Eagle", seqDay: "KD2", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Tuesday", bird: "Owl", seqDay: "KD3", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Tuesday", bird: "Peacock", seqDay: "KD4", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Tuesday", bird: "Crow", seqDay: "KD5", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Monday", bird: "Cock", seqDay: "KD5", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Monday", bird: "Eagle", seqDay: "KD4", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Monday", bird: "Owl", seqDay: "KD2", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Monday", bird: "Peacock", seqDay: "KD1", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Monday", bird: "Crow", seqDay: "KD3", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Saturday", bird: "Cock", seqDay: "KD5", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Saturday", bird: "Eagle", seqDay: "KD4", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Saturday", bird: "Owl", seqDay: "KD2", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Saturday", bird: "Peacock", seqDay: "KD1", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Saturday", bird: "Crow", seqDay: "KD3", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Wednesday", bird: "Cock", seqDay: "KD4", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Wednesday", bird: "Eagle", seqDay: "KD3", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Wednesday", bird: "Owl", seqDay: "KD5", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Wednesday", bird: "Peacock", seqDay: "KD2", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Wednesday", bird: "Crow", seqDay: "KD1", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Thursday", bird: "Cock", seqDay: "KD2", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Thursday", bird: "Eagle", seqDay: "KD5", seqNight: "KN1", paksha: "Krishna" },
-    { day: "Thursday", bird: "Owl", seqDay: "KD1", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Thursday", bird: "Peacock", seqDay: "KD3", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Thursday", bird: "Crow", seqDay: "KD4", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Friday", bird: "Cock", seqDay: "KD3", seqNight: "KN4", paksha: "Krishna" },
-    { day: "Friday", bird: "Eagle", seqDay: "KD1", seqNight: "KN3", paksha: "Krishna" },
-    { day: "Friday", bird: "Owl", seqDay: "KD4", seqNight: "KN5", paksha: "Krishna" },
-    { day: "Friday", bird: "Peacock", seqDay: "KD5", seqNight: "KN2", paksha: "Krishna" },
-    { day: "Friday", bird: "Crow", seqDay: "KD2", seqNight: "KN1", paksha: "Krishna" }
-];
-
-const yamaData = {
-    "SD1": { yama1: "Eat", yama2: "Walk", yama3: "Rule", yama4: "Sleep", yama5: "Death" },
-    "SD2": { yama1: "Walk", yama2: "Rule", yama3: "Sleep", yama4: "Death", yama5: "Eat" },
-    "SD3": { yama1: "Rule", yama2: "Sleep", yama3: "Death", yama4: "Eat", yama5: "Walk" },
-    "SD4": { yama1: "Sleep", yama2: "Death", yama3: "Eat", yama4: "Walk", yama5: "Rule" },
-    "SD5": { yama1: "Death", yama2: "Eat", yama3: "Walk", yama4: "Rule", yama5: "Sleep" },
-    "SN1": { yama1: "Death", yama2: "Walk", yama3: "Sleep", yama4: "Eat", yama5: "Rule" },
-    "SN2": { yama1: "Rule", yama2: "Death", yama3: "Walk", yama4: "Sleep", yama5: "Eat" },
-    "SN3": { yama1: "Eat", yama2: "Rule", yama3: "Death", yama4: "Walk", yama5: "Sleep" },
-    "SN4": { yama1: "Sleep", yama2: "Eat", yama3: "Rule", yama4: "Death", yama5: "Walk" },
-    "SN5": { yama1: "Walk", yama2: "Sleep", yama3: "Eat", yama4: "Rule", yama5: "Death" },
-    "KD1": { yama1: "Eat", yama2: "Death", yama3: "Sleep", yama4: "Rule", yama5: "Walk" },
-    "KD2": { yama1: "Walk", yama2: "Eat", yama3: "Death", yama4: "Sleep", yama5: "Rule" },
-    "KD3": { yama1: "Death", yama2: "Sleep", yama3: "Rule", yama4: "Walk", yama5: "Eat" },
-    "KD4": { yama1: "Sleep", yama2: "Rule", yama3: "Walk", yama4: "Eat", yama5: "Death" },
-    "KD5": { yama1: "Rule", yama2: "Walk", yama3: "Eat", yama4: "Death", yama5: "Sleep" },
-    "KN1": { yama1: "Walk", yama2: "Death", yama3: "Rule", yama4: "Eat", yama5: "Sleep" },
-    "KN2": { yama1: "Eat", yama2: "Sleep", yama3: "Walk", yama4: "Death", yama5: "Rule" },
-    "KN3": { yama1: "Rule", yama2: "Eat", yama3: "Sleep", yama4: "Walk", yama5: "Death" },
-    "KN4": { yama1: "Sleep", yama2: "Walk", yama3: "Death", yama4: "Rule", yama5: "Eat" },
-    "KN5": { yama1: "Death", yama2: "Rule", yama3: "Eat", yama4: "Sleep", yama5: "Walk" }
-};
 
 // Global variables for sun times
 let sunriseTime, sunsetTime, dayDuration, nightDuration, yamaDayDuration, yamaNightDuration;
@@ -112,28 +18,28 @@ function calculateMoonPhase(date) {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    
+
     // Convert to Julian date
     let jd;
     if (month <= 2) {
         year -= 1;
         month += 12;
     }
-    
+
     const a = Math.floor(year / 100);
     const b = 2 - a + Math.floor(a / 4);
-    
-    jd = Math.floor(365.25 * (year + 4716)) + 
-         Math.floor(30.6001 * (month + 1)) + 
-         day + b - 1524.5;
-    
+
+    jd = Math.floor(365.25 * (year + 4716)) +
+        Math.floor(30.6001 * (month + 1)) +
+        day + b - 1524.5;
+
     // Calculate days since known new moon (Jan 6, 2000)
     const daysSinceNew = jd - 2451549.5;
-    
+
     // Moon cycle is approximately 29.53 days
     const newMoons = daysSinceNew / 29.53058867;
     const phase = (newMoons - Math.floor(newMoons));
-    
+
     // Phase: 0-0.5 is waxing (Shukla), 0.5-1.0 is waning (Krishna)
     if (phase < 0.5) {
         return {
@@ -153,7 +59,7 @@ function calculateMoonPhase(date) {
 function updateMoonPhase() {
     const selectedDate = new Date(document.getElementById('selectedDate').value);
     const moonPhase = calculateMoonPhase(selectedDate);
-    
+
     // Update all paksha dropdowns - enable, set value, then disable
     const pakshaSelects = ['paksha0', 'paksha1', 'paksha2'];
     pakshaSelects.forEach(id => {
@@ -164,7 +70,7 @@ function updateMoonPhase() {
             select.disabled = true;
         }
     });
-    
+
     // Display moon phase info
     const moonInfoDiv = document.getElementById('moonPhaseInfo');
     if (moonInfoDiv) {
@@ -185,12 +91,12 @@ function getCurrentYamaPeriod() {
     if (!sunriseTime || !sunsetTime) {
         return null;
     }
-    
+
     const now = new Date();
     const currentHour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
-    
+
     let isDayTime, currentYamaNum;
-    
+
     if (currentHour >= sunriseTime && currentHour < sunsetTime) {
         // Day time
         isDayTime = true;
@@ -203,13 +109,13 @@ function getCurrentYamaPeriod() {
         isDayTime = false;
         let adjustedCurrent = currentHour;
         if (currentHour < sunriseTime) adjustedCurrent += 24;
-        
+
         const elapsedTime = adjustedCurrent - sunsetTime;
         currentYamaNum = Math.floor(elapsedTime / yamaNightDuration) + 1;
         if (currentYamaNum > 5) currentYamaNum = 5;
         if (currentYamaNum < 1) currentYamaNum = 1;
     }
-    
+
     return {
         isDayTime: isDayTime,
         yamaNumber: currentYamaNum,
@@ -219,15 +125,15 @@ function getCurrentYamaPeriod() {
 
 function autoSelectCurrentYama() {
     const currentYama = getCurrentYamaPeriod();
-    
+
     if (!currentYama) {
         return;
     }
-    
+
     // Get current weekday
     const selectedDate = new Date(document.getElementById('selectedDate').value);
     const weekday = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
-    
+
     // Update weekday dropdowns - enable, set value, then disable
     const weekdaySelects = ['weekday0', 'day1'];
     weekdaySelects.forEach(id => {
@@ -238,7 +144,7 @@ function autoSelectCurrentYama() {
             select.disabled = true;
         }
     });
-    
+
     // Update Yama number dropdowns - enable, set value, then disable
     const yamaSelects = ['yamaNum0', 'yamaNum1'];
     yamaSelects.forEach(id => {
@@ -249,7 +155,7 @@ function autoSelectCurrentYama() {
             select.disabled = true;
         }
     });
-    
+
     // Update day/night selector in complete lookup - enable, set value, then disable
     const dayNightSelect = document.getElementById('daynight1');
     if (dayNightSelect) {
@@ -257,7 +163,7 @@ function autoSelectCurrentYama() {
         dayNightSelect.value = currentYama.timeOfDay;
         dayNightSelect.disabled = true;
     }
-    
+
     // Update current yama info display
     const yamaInfoDiv = document.getElementById('currentYamaInfo');
     if (yamaInfoDiv) {
@@ -279,7 +185,7 @@ async function lookupLocation() {
     const locationName = document.getElementById('locationName').value.trim();
     const lookupBtn = document.querySelector('.lookup-btn');
     const statusDiv = document.getElementById('locationStatus');
-    
+
     if (!locationName) {
         if (statusDiv) {
             statusDiv.className = 'location-status error';
@@ -288,7 +194,7 @@ async function lookupLocation() {
         }
         return;
     }
-    
+
     // Show loading state
     if (lookupBtn) {
         lookupBtn.disabled = true;
@@ -299,7 +205,7 @@ async function lookupLocation() {
         statusDiv.style.display = 'block';
         statusDiv.textContent = '🔍 Searching for location...';
     }
-    
+
     try {
         // Use Nominatim OpenStreetMap API (free, no API key required)
         const response = await fetch(
@@ -310,13 +216,13 @@ async function lookupLocation() {
                 }
             }
         );
-        
+
         if (!response.ok) {
             throw new Error('Geocoding service unavailable');
         }
-        
+
         const data = await response.json();
-        
+
         if (data.length === 0) {
             if (statusDiv) {
                 statusDiv.className = 'location-status error';
@@ -324,30 +230,30 @@ async function lookupLocation() {
             }
             return;
         }
-        
+
         const location = data[0];
         const lat = parseFloat(location.lat);
         const lon = parseFloat(location.lon);
-        
+
         // Update the input fields
         document.getElementById('latitude').value = lat.toFixed(4);
         document.getElementById('longitude').value = lon.toFixed(4);
-        
+
         // Get timezone offset based on longitude (rough approximation)
         const timezoneOffset = Math.round(lon / 15 * 2) / 2; // Round to nearest 0.5
         document.getElementById('timezone').value = timezoneOffset;
-        
+
         // Update status
         if (statusDiv) {
             statusDiv.className = 'location-status success';
             statusDiv.textContent = `✅ Found: ${location.display_name}`;
         }
-        
+
         // Auto-calculate sun times after successful lookup
         setTimeout(() => {
             calculateSunTimes();
         }, 500);
-        
+
     } catch (error) {
         console.error('Geocoding error:', error);
         if (statusDiv) {
@@ -363,38 +269,6 @@ async function lookupLocation() {
     }
 }
 
-// Alternative geocoding using a different service (backup)
-async function lookupLocationAlternative() {
-    const locationName = document.getElementById('locationName').value.trim();
-    
-    if (!locationName) return;
-    
-    try {
-        // Using geocode.maps.co (free API, no key required for basic use)
-        const response = await fetch(
-            `https://geocode.maps.co/search?q=${encodeURIComponent(locationName)}`
-        );
-        
-        if (!response.ok) {
-            throw new Error('Geocoding service unavailable');
-        }
-        
-        const data = await response.json();
-        
-        if (data.length === 0) {
-            return null;
-        }
-        
-        return {
-            lat: parseFloat(data[0].lat),
-            lon: parseFloat(data[0].lon),
-            display_name: data[0].display_name
-        };
-    } catch (error) {
-        console.error('Alternative geocoding error:', error);
-        return null;
-    }
-}
 
 // ============================================================================
 // INITIALIZATION
@@ -403,32 +277,32 @@ async function lookupLocationAlternative() {
 function initializePage() {
     // Set date to today
     document.getElementById('selectedDate').valueAsDate = new Date();
-    
+
     // Update current time display
     updateCurrentTime();
     setInterval(updateCurrentTime, 1000);
-    
+
     // Add enter key listener for location lookup
     const locationInput = document.getElementById('locationName');
     if (locationInput) {
-        locationInput.addEventListener('keypress', function(event) {
+        locationInput.addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 lookupLocation();
             }
         });
     }
-    
+
     // Add date change listener to update moon phase
     const dateInput = document.getElementById('selectedDate');
     if (dateInput) {
-        dateInput.addEventListener('change', function() {
+        dateInput.addEventListener('change', function () {
             if (sunriseTime && sunsetTime) {
                 updateMoonPhase();
                 autoSelectCurrentYama();
             }
         });
     }
-    
+
     // Initial moon phase calculation
     updateMoonPhase();
 }
@@ -449,37 +323,37 @@ function calculateSunrise(lat, lng, date) {
     const J2000 = 2451545.0;
     const rad = Math.PI / 180;
     const deg = 180 / Math.PI;
-    
+
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    
+
     const a = Math.floor((14 - month) / 12);
     const y = year + 4800 - a;
     const m = month + 12 * a - 3;
-    const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - 
-                Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+    const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) -
+        Math.floor(y / 100) + Math.floor(y / 400) - 32045;
     const n = jdn - J2000 + 0.0008;
-    
+
     const meanAnomaly = (357.5291 + 0.98560028 * n) % 360;
-    const center = 1.9148 * Math.sin(meanAnomaly * rad) + 
-                   0.0200 * Math.sin(2 * meanAnomaly * rad) + 
-                   0.0003 * Math.sin(3 * meanAnomaly * rad);
+    const center = 1.9148 * Math.sin(meanAnomaly * rad) +
+        0.0200 * Math.sin(2 * meanAnomaly * rad) +
+        0.0003 * Math.sin(3 * meanAnomaly * rad);
     const eclipticLongitude = (meanAnomaly + center + 180 + 102.9372) % 360;
-    
-    const solarTransit = n + 0.0053 * Math.sin(meanAnomaly * rad) - 
-                         0.0069 * Math.sin(2 * eclipticLongitude * rad);
-    
-    const declination = Math.asin(Math.sin(eclipticLongitude * rad) * 
-                                   Math.sin(23.44 * rad)) * deg;
-    
-    const hourAngle = Math.acos((Math.sin(-0.833 * rad) - 
-                                Math.sin(lat * rad) * Math.sin(declination * rad)) / 
-                                (Math.cos(lat * rad) * Math.cos(declination * rad))) * deg;
-    
+
+    const solarTransit = n + 0.0053 * Math.sin(meanAnomaly * rad) -
+        0.0069 * Math.sin(2 * eclipticLongitude * rad);
+
+    const declination = Math.asin(Math.sin(eclipticLongitude * rad) *
+        Math.sin(23.44 * rad)) * deg;
+
+    const hourAngle = Math.acos((Math.sin(-0.833 * rad) -
+        Math.sin(lat * rad) * Math.sin(declination * rad)) /
+        (Math.cos(lat * rad) * Math.cos(declination * rad))) * deg;
+
     const sunrise = (solarTransit - hourAngle / 360) * 24;
     const sunset = (solarTransit + hourAngle / 360) * 24;
-    
+
     return { sunrise, sunset };
 }
 
@@ -487,7 +361,7 @@ function hoursToTime(hours) {
     // Normalize hours to 24-hour format
     let normalizedHours = hours % 24;
     if (normalizedHours < 0) normalizedHours += 24;
-    
+
     const h = Math.floor(normalizedHours);
     const m = Math.floor((normalizedHours - h) * 60);
     const s = Math.floor(((normalizedHours - h) * 60 - m) * 60);
@@ -510,25 +384,25 @@ function calculateSunTimes() {
     }
 
     const times = calculateSunrise(lat, lng, selectedDate);
-    
+
     sunriseTime = times.sunrise + timezone;
     sunsetTime = times.sunset + timezone;
-    
+
     if (sunriseTime >= 24) sunriseTime -= 24;
     if (sunsetTime >= 24) sunsetTime -= 24;
-    
+
     dayDuration = sunsetTime - sunriseTime;
     if (dayDuration < 0) dayDuration += 24;
-    
+
     nightDuration = 24 - dayDuration;
-    
+
     yamaDayDuration = dayDuration / 5;
     yamaNightDuration = nightDuration / 5;
 
     const dayOfWeek = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
 
     let yamaTimesHTML = '<div class="yama-times">';
-    
+
     // Day Yamas
     for (let i = 1; i <= 5; i++) {
         const startTime = sunriseTime + (i - 1) * yamaDayDuration;
@@ -543,7 +417,7 @@ function calculateSunTimes() {
             </div>
         `;
     }
-    
+
     // Night Yamas
     for (let i = 1; i <= 5; i++) {
         const startTime = sunsetTime + (i - 1) * yamaNightDuration;
@@ -578,7 +452,7 @@ function calculateSunTimes() {
             ${yamaTimesHTML}
         </div>
     `;
-    
+
     // Auto-update moon phase and current yama after calculation
     updateMoonPhase();
     autoSelectCurrentYama();
@@ -589,9 +463,9 @@ function calculateSunTimes() {
 // ============================================================================
 
 function getSequenceId(currentDay, paksha, bird, dayNight) {
-    const record = sequenceData.find(item => 
-        item.day === currentDay && 
-        item.paksha === paksha && 
+    const record = sequenceData.find(item =>
+        item.day === currentDay &&
+        item.paksha === paksha &&
         item.bird === bird
     );
     if (!record) return null;
@@ -609,23 +483,23 @@ function getActivity(paksha, yamaNumber, bird, weekday) {
     paksha = paksha.charAt(0).toUpperCase() + paksha.slice(1).toLowerCase();
     bird = bird.charAt(0).toUpperCase() + bird.slice(1).toLowerCase();
     weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1).toLowerCase();
-    
+
     const yamaNum = typeof yamaNumber === 'string' ? parseInt(yamaNumber) : yamaNumber;
-    
+
     if (isNaN(yamaNum) || yamaNum < 1 || yamaNum > 5) {
         return { success: false, error: "Invalid Yama number" };
     }
-    
+
     const daySequenceId = getSequenceId(weekday, paksha, bird, "Day");
     const nightSequenceId = getSequenceId(weekday, paksha, bird, "Night");
-    
+
     if (!daySequenceId || !nightSequenceId) {
         return { success: false, error: "Sequence not found" };
     }
-    
+
     const dayActivity = getYamaElement(daySequenceId, yamaNum);
     const nightActivity = getYamaElement(nightSequenceId, yamaNum);
-    
+
     return {
         success: true,
         paksha, yamaNumber, bird, weekday,
@@ -657,24 +531,24 @@ function switchTab(tabName) {
 function activityLookup() {
     // Get bird (user selection - only field that's not auto-selected)
     const bird = document.getElementById('bird0').value;
-    
+
     // Get auto-selected values (from disabled fields)
     const pakshaSelect = document.getElementById('paksha0');
     const yamaNumSelect = document.getElementById('yamaNum0');
     const weekdaySelect = document.getElementById('weekday0');
-    
+
     pakshaSelect.disabled = false;
     yamaNumSelect.disabled = false;
     weekdaySelect.disabled = false;
-    
+
     const paksha = pakshaSelect.value;
     const yamaNum = yamaNumSelect.value;
     const weekday = weekdaySelect.value;
-    
+
     pakshaSelect.disabled = true;
     yamaNumSelect.disabled = true;
     weekdaySelect.disabled = true;
-    
+
     const resultDiv = document.getElementById('result0');
 
     if (!bird) {
@@ -683,7 +557,7 @@ function activityLookup() {
         resultDiv.innerHTML = '<h3>❌ Error</h3><p>Please select your bird based on your birth Nakshatra.</p>';
         return;
     }
-    
+
     if (!paksha || !yamaNum || !weekday) {
         resultDiv.className = 'result error';
         resultDiv.style.display = 'block';
@@ -746,28 +620,28 @@ function activityLookup() {
 function completeLookup() {
     // Get bird (user selection)
     const bird = document.getElementById('bird1').value;
-    
+
     // Get auto-selected values (from disabled fields)
     const daySelect = document.getElementById('day1');
     const pakshaSelect = document.getElementById('paksha1');
     const dayNightSelect = document.getElementById('daynight1');
     const yamaNumSelect = document.getElementById('yamaNum1');
-    
+
     daySelect.disabled = false;
     pakshaSelect.disabled = false;
     dayNightSelect.disabled = false;
     yamaNumSelect.disabled = false;
-    
+
     const day = daySelect.value;
     const paksha = pakshaSelect.value;
     const daynight = dayNightSelect.value;
     const yamaNum = yamaNumSelect.value;
-    
+
     daySelect.disabled = true;
     pakshaSelect.disabled = true;
     dayNightSelect.disabled = true;
     yamaNumSelect.disabled = true;
-    
+
     const resultDiv = document.getElementById('result1');
 
     if (!bird) {
@@ -776,7 +650,7 @@ function completeLookup() {
         resultDiv.innerHTML = '<h3>❌ Error</h3><p>Please select your bird based on your birth Nakshatra.</p>';
         return;
     }
-    
+
     if (!day || !paksha || !daynight || !yamaNum) {
         resultDiv.className = 'result error';
         resultDiv.style.display = 'block';
@@ -802,7 +676,7 @@ function completeLookup() {
     }
 
     const isDayTime = daynight === "Day";
-    const yamaStart = isDayTime ? 
+    const yamaStart = isDayTime ?
         sunriseTime + (yamaNum - 1) * yamaDayDuration :
         sunsetTime + (yamaNum - 1) * yamaNightDuration;
     const yamaEnd = isDayTime ?
@@ -836,13 +710,13 @@ function completeLookup() {
 function getCurrentYama() {
     // Get bird (user selection)
     const bird = document.getElementById('bird2').value;
-    
+
     // Get auto-selected paksha
     const pakshaSelect = document.getElementById('paksha2');
     pakshaSelect.disabled = false;
     const paksha = pakshaSelect.value;
     pakshaSelect.disabled = true;
-    
+
     const resultDiv = document.getElementById('result2');
 
     if (!bird) {
@@ -851,7 +725,7 @@ function getCurrentYama() {
         resultDiv.innerHTML = '<h3>❌ Error</h3><p>Please select your bird based on your birth Nakshatra.</p>';
         return;
     }
-    
+
     if (!paksha) {
         resultDiv.className = 'result error';
         resultDiv.style.display = 'block';
@@ -868,7 +742,7 @@ function getCurrentYama() {
 
     const now = new Date();
     const currentHour = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
-    
+
     const selectedDate = new Date(document.getElementById('selectedDate').value);
     const weekday = selectedDate.toLocaleDateString('en-US', { weekday: 'long' });
 
@@ -879,7 +753,7 @@ function getCurrentYama() {
         const elapsedTime = currentHour - sunriseTime;
         currentYamaNum = Math.floor(elapsedTime / yamaDayDuration) + 1;
         if (currentYamaNum > 5) currentYamaNum = 5;
-        
+
         yamaStart = sunriseTime + (currentYamaNum - 1) * yamaDayDuration;
         yamaEnd = sunriseTime + currentYamaNum * yamaDayDuration;
         sequenceId = getSequenceId(weekday, paksha, bird, "Day");
@@ -888,11 +762,11 @@ function getCurrentYama() {
         isDayTime = false;
         let adjustedCurrent = currentHour;
         if (currentHour < sunriseTime) adjustedCurrent += 24;
-        
+
         const elapsedTime = adjustedCurrent - sunsetTime;
         currentYamaNum = Math.floor(elapsedTime / yamaNightDuration) + 1;
         if (currentYamaNum > 5) currentYamaNum = 5;
-        
+
         yamaStart = sunsetTime + (currentYamaNum - 1) * yamaNightDuration;
         yamaEnd = sunsetTime + currentYamaNum * yamaNightDuration;
         sequenceId = getSequenceId(weekday, paksha, bird, "Night");

@@ -1,19 +1,19 @@
-Line1:MONTH
-Line2:DATE
-Line3:YEAR (digit)
+Line1:MONTH ONLY IN NUMBER FORMAT
+Line2:DATE ONLY IN NUMBER FORMAT
+Line3:YEAR ONLY IN 4 DIGTS
 Line4:HH.MMmmmmmm(where Hours.MMmmmm mm is decimals of minutes after .)
-Line5:-HH.MMmmmmmm(TimeZone -ve is east Hours.MMmmmm)
-Line6:-DD.MMmmmm (Longitudes -ve is east Degrees.MMmmmm)
-Line7:DD.MMmmmm (Latitude Degrees.MMmmmm)
-Line8:MM.mmmmmm (Altitude meters)
-Line9:-HH.dddddd(Winter TimeZone -ve is east, but here is in decimals)
-Line10:-HH.dddddd(Daylight TimeZone -ve is east,but here is in decimals)
+Line5:-HH.MMmmmmmm(Time Zone in Hours.MMmmmm -ve is east Hours.MMmmmm)
+Line6:-DD.MMmmmm (Longitudes in Degrees.MMmmmm -ve is east Degrees.MMmmmm)
+Line7:DD.MMmmmm (Latitude in Degrees.MMmmmm)
+Line8:MM.mmmmmm (Altitude in meters)
+Line9:-HH.dddddd(Winter TimeZone in Hours.dddddd -ve is east, but here is in decimals)
+Line10:-HH.dddddd(Daylight TimeZone in Hours.dddddd -ve is east,but here is in decimals)
 Line11:0 ( 1 is time in 24Hours format 0 is AM/PM)
 Line12:105 (Is this Mean Sea level? What is this? Changes with location selection?)
 Line13:Location (Location in Names)
 Line14:India (Country in names)
 Line15:1 (0-Julian Date 1 Gregorian date)
-Line16:88.000000 (Atmospheric pressure)
-Line17:99.000000 (temperature)
+Line16:88.000000 (Atmospheric pressure in mm of mercury)
+Line17:99.000000 (Temperature in degrees Celsius)
 Line18:1 (If 1 use temperature for calculations)
 Line19:

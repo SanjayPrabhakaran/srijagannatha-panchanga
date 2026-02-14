@@ -1,6 +1,5 @@
 //const { getYamaElement } = require("./panchapakshi");
-
-console.log("sjp.js.............");
+console.log(getExecutingFileName() + ".............");
 //All Globals
 var DEBUG = true;
 
@@ -2200,4 +2199,4 @@ function initSJP() {
     if (submit === true) calculate();
 
 }
-console.log("sjp.js Loaded.............");
+console.log(getExecutingFileName() + ".............LOADED");

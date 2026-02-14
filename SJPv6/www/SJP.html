@@ -6,6 +6,7 @@
   <title>Sri Jagannatha Panchanga</title>
   <link rel="icon" type="image/x-icon" href="img/logo.png" />
   <script type="text/javascript" src="cordova.js"></script>
+  <script src="helper.js"></script>
   <script src="sjp.js"></script>
   <script src="jyotish.js"></script>
   <script src="kcd.js"></script>
@@ -13,14 +14,8 @@
   <!--script type="text/javascript" src= "sjcformatter.js"></script-->
 
 
-  <!---For Here Maps https://www.here.com/docs/bundle/maps-api-for-javascript-developer-guide/page/topics/quick-start.html-->
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript"
-    charset="utf-8"></script>
-  <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <!-- Open Location Lookup Script -->
+  <script src="location_lookup.js"></script>
   <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=yes, maximum-scale=5.0" />
 
 
@@ -81,6 +76,7 @@
         <td>Place Name:</td>
         <td><input id=placename name=placename onchange="UpdatePlaceLatLong()" type=text size=15
             title="Ex: PlaceName, Latitude,Longitude= 41.40338, 2.17403 or 41°24'12.2&quot;N 2°10'26.5&quot;E or  41n24, 2e17">
+          <input type="button" value="Lookup Location" onclick="lookupLocation()">
         </td>
       </tr>
       <tr>
@@ -151,7 +147,6 @@
     }
   </style>
   <!--div id="map" class="mapdiv" width="75vw"></div-->
-  <!--script src='here-maps.js'></script-->
 
   <table>
     <tr>
