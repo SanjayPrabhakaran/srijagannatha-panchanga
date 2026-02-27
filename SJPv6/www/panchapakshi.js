@@ -224,10 +224,10 @@ console.log(scriptname + "........");
  * @returns {Array} - Array of matching bird objects
  */
 function getScheduleByDay(day) {
-    return waxingBirdSchedule.filter(row => {
+    return sequenceData.filter(row => {
         // Standardize to lowercase for easier searching
         const searchDay = day.toLowerCase();
-        const tableDay = row.daySP.toLowerCase();
+        const tableDay = row.day.toLowerCase();
 
         return tableDay.includes(searchDay);
     });
