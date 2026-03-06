@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chitra Shukla Paksha Pratipada – New Moon Chart</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.png" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap');
+
+        :root {
+            --bg: #0d0f1a;
+            --bg2: #13162a;
+            --panel: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 200, 80, 0.18);
+            --accent: #f9c34f;
+            --accent2: #e07b2a;
+            --text: #e8e4d8;
+            --muted: #8a8070;
+            --success: #67c49a;
+            --moon-col: #a8c4e8;
+            --sun-col: #f9c34f;
+            --row-hover: rgba(249, 195, 79, 0.07);
+            --radius: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0 0 60px;
+        }
+
+        /* ── Header ── */
+        header {
+            background: linear-gradient(135deg, #1a0e00 0%, #0d0f1a 60%);
+            border-bottom: 1px solid var(--border);
+            padding: 28px 32px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        header h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: .5px;
+        }
+
+        header h1 span {
+            color: var(--moon-col);
+        }
+
+        header p.subtitle {
+            font-size: .82rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* ── Controls ── */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-end;
+            padding: 28px 32px 0;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field label {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .field input,
+        .field select {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            padding: 8px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: .9rem;
+            outline: none;
+            transition: border-color .2s;
+            min-width: 120px;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--accent);
+        }
+
+        .field select option {
+            background: #1a1d30;
+        }
+
+        button#calcBtn {
+            padding: 10px 28px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #1a0e00;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            transition: filter .2s, transform .1s;
+            align-self: flex-end;
+        }
+
+        button#calcBtn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        button#calcBtn:active {
+            transform: none;
+            filter: brightness(.95);
+        }
+
+        button#calcBtn:disabled {
+            opacity: .5;
+            cursor: default;
+            transform: none;
+        }
+
+        /* ── Progress / Status ── */
+        #statusBar {
+            margin: 22px 32px 0;
+            font-size: .82rem;
+            color: var(--muted);
+            min-height: 22px;
+        }
+
+        #progressWrap {
+            margin: 8px 32px 0;
+            height: 4px;
+            background: var(--panel);
+            border-radius: 99px;
+            overflow: hidden;
+            display: none;
+        }
+
+        #progressBar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            width: 0%;
+            transition: width .15s;
+            border-radius: 99px;
+        }
+
+        /* ── Summary cards ── */
+        #summaryCards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            padding: 22px 32px 0;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 20px;
+            min-width: 170px;
+            flex: 1;
+        }
+
+        .card .card-label {
+            font-size: .7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .card .card-val {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ── Table ── */
+        .table-wrap {
+            margin: 22px 32px 0;
+            overflow-x: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .875rem;
+        }
+
+        thead tr {
+            background: rgba(249, 195, 79, .08);
+        }
+
+        thead th {
+            padding: 12px 14px;
+            text-align: left;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255, 200, 80, .06);
+            transition: background .15s;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: var(--row-hover);
+        }
+
+        tbody td {
+            padding: 11px 14px;
+            vertical-align: middle;
+        }
+
+        /* Highlight Chitra month */
+        tr.chitra-row {
+            background: rgba(168, 196, 232, .07);
+        }
+
+        tr.chitra-row td:first-child::after {
+            content: ' ★';
+            color: var(--moon-col);
+            font-size: .8rem;
+        }
+
+        .month-num {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(249, 195, 79, .12);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: .78rem;
+            text-align: center;
+            line-height: 26px;
+        }
+
+        .date-cell {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .day-cell {
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .time-cell {
+            font-family: monospace;
+            color: var(--success);
+            font-size: .9rem;
+            letter-spacing: .5px;
+        }
+
+        .nakshatra-cell.sun {
+            color: var(--sun-col);
+        }
+
+        .nakshatra-cell.moon {
+            color: var(--moon-col);
+        }
+
+        .angle-cell {
+            color: var(--muted);
+            font-family: monospace;
+            font-size: .8rem;
+        }
+
+        .tithi-cell {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: .82rem;
+        }
+
+        .rashi-cell {
+            font-size: .82rem;
+            color: var(--text);
+        }
+
+        /* ── Footer ── */
+        footer {
+            margin: 40px 32px 0;
+            color: var(--muted);
+            font-size: .75rem;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Spinner while loading scripts */
+        #loadingMsg {
+            padding: 60px 32px;
+            color: var(--muted);
+            font-size: .9rem;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            header,
+            .controls,
+            .table-wrap,
+            #statusBar,
+            #progressWrap,
+            #summaryCards,
+            footer {
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .table-wrap {
+                margin: 16px 0 0;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+
+            header h1 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ── Chart Layout Overrides (Vibrant Borders) ── */
+        .chart table {
+            border-collapse: collapse !important;
+            border: 2px solid var(--accent) !important;
+            background: rgba(255, 255, 255, 0.02);
+            margin: 25px auto !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart td {
+            border: 1px solid var(--accent) !important;
+            padding: 12px !important;
+            width: 6.5em !important;
+            height: 6.5em !important;
+            vertical-align: middle !important;
+            transition: background 0.2s;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .chart td:hover:not(#0) {
+            background: var(--row-hover);
+        }
+
+        .chart td#0 {
+            background: rgba(249, 195, 79, 0.1) !important;
+            color: var(--accent) !important;
+            font-weight: 700 !important;
+            font-family: 'Inter', sans-serif !important;
+            border: 1px solid var(--accent) !important;
+        }
+
+        .chart sub {
+            color: var(--muted);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>☉☽ Chitra <span>Shukla Paksha Pratipada</span> – New Moon Chart</h1>
+        <p class="subtitle">Exact Sun–Moon conjunction (Amavasya end / Shukla Pratipada start) for a given year and
+            location</p>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="field">
+            <label>Year</label>
+            <input type="number" id="year" value="2025" min="1900" max="2100" style="width:100px" />
+        </div>
+        <div class="field">
+            <label>Latitude °N</label>
+            <input type="number" id="lat" value="13.0827" step="0.0001" style="width:130px" />
+        </div>
+        <div class="field">
+            <label>Longitude °E</label>
+            <input type="number" id="lon" value="80.2707" step="0.0001" style="width:130px" />
+        </div>
+        <div class="field">
+            <label>Timezone (±h)</label>
+            <input type="number" id="tz" value="5.5" step="0.5" style="width:100px" />
+        </div>
+        <div class="field">
+            <label>Location Name</label>
+            <input type="text" id="placeName" value="Chennai, India" style="width:160px" />
+        </div>
+        <div class="field">
+            <label>&nbsp;</label>
+            <button id="calcBtn" onclick="startCalc()">Calculate</button>
+        </div>
+    </div>
+
+    <div id="statusBar">Loading ephemeris libraries…</div>
+    <div id="progressWrap">
+        <div id="progressBar"></div>
+    </div>
+
+    <div id="summaryCards"></div>
+
+    <div id="loadingMsg">
+        <div class="spinner"></div> Loading astronomical libraries, please wait…
+    </div>
+    <div id="resultArea" style="display:none"></div>
+
+    <footer>
+        <p>Calculations use the <strong>Moshier ephemeris</strong> (same engine as Sri Jagannatha Panchanga).</p>
+        <p>New Moon = moment when Moon longitude equals Sun longitude (elongation = 0°).
+            Shukla Paksha Pratipada begins right after this moment.</p>
+        <p>★ marks the <strong>Chitra month</strong> (Sun in Kanya/Virgo or Tula/Libra ≈ 150°–210° tropical).</p>
+        <p>©️ <a href="http://www.srijagannath.org">Sri Jagannatha Center</a> | <a href="SJP.html">Back to Panchanga</a>
+        </p>
+    </footer>
+
+    <!-- ==================== Ephemeris Scripts (same as SJP.html) ==================== -->
+    <!-- cordova stub so sjp.js loads without errors in browser -->
+    <script>
+        if (typeof cordova === 'undefined') {
+            window.cordova = { exec: function () { } };
+        }
+    </script>
+    <script src="helper.js"></script>
+    <script src="sjp.js"></script>
+    <script src="jyotish.js"></script>
+
+    <script src='ephemeris/index.js' charset='utf-8'></script>
+    <script src='ephemeris/common.js' charset='utf-8'></script>
+    <script src='ephemeris/load.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/index.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/index.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/constant.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/julian.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/delta.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/epsilon.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/lonlat.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/gplan.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/precess.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/util.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/kepler.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/body.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/sun.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/aberration.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/altaz.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/constellation.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/deflection.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/diurnal.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/fk4fk5.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/light.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/moon.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/nutation.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/planet.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/refraction.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/siderial.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/star.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/transit.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/vearth.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/processor.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/index.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/mercury.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/venus.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/earth.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/moonlr.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/moonlat.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/mars.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/jupiter.js' charset='utf-8'></script>
+    <script src='ephemeris/astronomy/moshier/plan404/saturn.js' charset='utf-8'></script>
+    <script src='ephemeris/shortcut.js' charset='utf-8'></script>
+
+    <!-- ==================== Main Calculation Logic ==================== -->
+    <script>
+        // ── Constants ──────────────────────────────────────────────────────────────────
+        const NAKSHATRA_NAMES = [
+            "Ashvini", "Bharani", "Krittika", "Rohini", "Mrigashira",
+            "Ardra", "Punarvasu", "Pushya", "Ashlesha", "Magha",
+            "Purva Phalguni", "Uttara Phalguni", "Hasta", "Chitra", "Swati",
+            "Vishakha", "Anuradha", "Jyeshtha", "Mula", "Purva Ashadha",
+            "Uttara Ashadha", "Shravana", "Dhanishtha", "Shatabhishaj",
+            "Purva Bhadrapada", "Uttara Bhadrapada", "Revati"
+        ];
+        const RASHI_NAMES = [
+            "Mesha ♈", "Vrishabha ♉", "Mithuna ♊", "Karka ♋",
+            "Simha ♌", "Kanya ♍", "Tula ♎", "Vrishchika ♏",
+            "Dhanu ♐", "Makara ♑", "Kumbha ♒", "Meena ♓"
+        ];
+        const MONTH_NAMES = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const LUNAR_MONTHS = [
+            "Chaitra", "Vaishakha", "Jyeshtha", "Ashadha", "Shravana", "Bhadrapada",
+            "Ashvina", "Kartika", "Margashirsha", "Pausha", "Magha", "Phalguna"
+        ];
+
+        // ── Ephemeris helpers ──────────────────────────────────────────────────────────
+        function getSunMoon(t) {
+            // Robust UTC date components from timestamp t
+            const d = new Date(t);
+            const utcDate = {
+                year: d.getUTCFullYear(),
+                month: d.getUTCMonth() + 1,
+                day: d.getUTCDate(),
+                hours: d.getUTCHours(),
+                minutes: d.getUTCMinutes(),
+                seconds: d.getUTCSeconds()
+            };
+
+            // Tithi and Ingress are independent of lat/long (geocentric)
+            $const.tlong = 0;
+            $const.glat = 0;
+            $processor.init();
+
+            $processor.calc(utcDate, $moshier.body.sun);
+            const sunLon = $moshier.body.sun.position.apparentLongitude;
+
+            $processor.calc(utcDate, $moshier.body.moon);
+            const moonLon = $moshier.body.moon.position.apparentLongitude;
+
+            const j = (t / 86400000) + 2440587.5;
+            const t1900 = (j - 2415020.5) / 36525.0;
+            const ayObj = new calcAyanamsa(t1900);
+            const sidSun = (sunLon + ayObj.ayanamsa + 360) % 360;
+
+            return { sun: sunLon, moon: moonLon, sidSun: sidSun, ayanamsa: ayObj.ayanamsa };
+        }
+
+        function elongationDeg(t) {
+            const { sun, moon } = getSunMoon(t);
+            return (moon - sun + 360) % 360;
+        }
+
+        // Generic function to find when Sun-Moon angular difference reaches targetDiff
+        // Generic function to find when Sun-Moon angular difference reaches targetDiff
+        async function findTithi(targetDiff, startTs, endTs, label = "Tithi") {
+            const MS_STEP = 12 * 3600 * 1000;
+            const MS_PREC = 1000;
+            const totalSteps = Math.ceil((endTs - startTs) / MS_STEP);
+
+            console.log(`[findTithi] ${label} - Target: ${targetDiff}, Range: ${new Date(startTs).toISOString()} to ${new Date(endTs).toISOString()}`);
+
+            let t0 = startTs, t1 = endTs;
+            let foundLo = null, foundHi = null;
+            let tPrev = t0;
+            let ePrev = (elongationDeg(t0) - targetDiff + 360) % 360;
+
+            let step = 0;
+            for (let t = t0 + MS_STEP; t <= t1 + MS_STEP; t += MS_STEP) {
+                step++;
+                let actualT = Math.min(t, t1);
+                let e = (elongationDeg(actualT) - targetDiff + 360) % 360;
+
+                if (ePrev > 180 && e < 180) {
+                    foundLo = tPrev;
+                    foundHi = actualT;
+                    break;
+                }
+                tPrev = actualT;
+                ePrev = e;
+
+                // Update status every iteration for transparency
+                setStatus(`${label}: Scanning day ${step}/${totalSteps}...`);
+                await sleep(5);
+                if (t >= t1) break;
+            }
+
+            if (foundLo === null) return null;
+
+            let lo = foundLo, hi = foundHi;
+            while (hi - lo > MS_PREC) {
+                let mid = (lo + hi) / 2;
+                let eMid = (elongationDeg(mid) - targetDiff + 360) % 360;
+                if (eMid > 180) lo = mid; else hi = mid;
+                await sleep(5);
+            }
+            return (lo + hi) / 2;
+        }
+
+        // Generic function to find moment when Sidereal Sun reaches a target longitude in a range
+        // Generic function to find moment when Sidereal Sun reaches a target longitude in a range
+        // Multi-level recursive scan: Day (24h) -> Hour (1h) -> Minute (1m)
+        async function findSunIngress(targetSidLon, startTs, endTs, label = "Ingress", msStep = 24 * 3600 * 1000) {
+            console.log(`[findSunIngress] ${label} - Target: ${targetSidLon}°, Range Span: ${((endTs - startTs) / 3600000).toFixed(1)}h, Step: ${msStep / 1000}s`);
+
+            let tPrev = startTs;
+            let sPrev = getSunMoon(tPrev).sidSun;
+            let foundLo = null, foundHi = null;
+
+            // Search loop
+            for (let t = startTs + msStep; t <= endTs + msStep; t += msStep) {
+                let actualT = Math.min(t, endTs);
+                const sCurr = getSunMoon(actualT).sidSun;
+
+                // Check crossing of targetSidLon (Sun moves forward)
+                let diffTarget = (targetSidLon - sPrev + 360) % 360;
+                let diffSpan = (sCurr - sPrev + 360) % 360;
+
+                if (diffTarget >= 0 && diffTarget <= diffSpan) {
+                    foundLo = tPrev;
+                    foundHi = actualT;
+                    break;
+                }
+                tPrev = actualT;
+                sPrev = sCurr;
+
+                if (msStep >= 3600000) { // Only substantial status updates at hour level or above
+                    setStatus(`${label}: Scanning...`, undefined);
+                    await sleep(5);
+                }
+                if (t >= endTs) break;
+            }
+
+            if (!foundLo) return null;
+
+            // Recursion Logic per user requirement: Day -> Hour -> Minute
+            if (msStep > 3600000) {
+                // If currently Day (86400s), move to Hour (3600s) precision
+                return await findSunIngress(targetSidLon, foundLo, foundHi, label, 3600000);
+            } else if (msStep > 60000) {
+                // If currently Hour (3600s), move to Minute (60s) precision
+                return await findSunIngress(targetSidLon, foundLo, foundHi, label, 60000);
+            }
+
+            // Target precision reached (1 minute level window)
+            return (foundLo + foundHi) / 2;
+        }
+
+
+        // Robust way to call sjp.js Jataka functions across any browser timezone
+        function callRobust(ts, lat, lon, targetTZ) {
+            const d = new Date(ts);
+            // Construct a date object that has target-local components in its local methods
+            const locTs = ts + targetTZ * 3600 * 1000;
+            const ld = new Date(locTs);
+            const dt = new Date();
+            dt.setFullYear(ld.getUTCFullYear(), ld.getUTCMonth(), ld.getUTCDate());
+            dt.setHours(ld.getUTCHours(), ld.getUTCMinutes(), ld.getUTCSeconds(), 0);
+
+            const oldTZ = Date.MyTimezoneOffset;
+            Date.MyTimezoneOffset = -targetTZ * 60;
+            const g = new getGrahasEph(dt, lat, lon);
+            const a = new calculateAscendant(dt, lat, lon);
+            Date.MyTimezoneOffset = oldTZ;
+            return { g, a };
+        }
+
+        function getSunrise(ts, lat, lon, tzH) {
+            const ld = new Date(ts + tzH * 3600000);
+            ld.setUTCHours(0, 0, 0, 0);
+            const utcMidnight = ld.getTime() - tzH * 3600000;
+            const jul = (utcMidnight / 86400000) + 2440587.5;
+            const srMins = calcSunriseGMT(jul, lat, lon);
+            return utcMidnight + srMins * 60000;
+        }
+
+        function getVedicLord(ts, lat, lon, tzH) {
+            if (!ts) return "---";
+            const srTs = getSunrise(ts, lat, lon, tzH);
+            const d = new Date(ts + tzH * 3600000);
+            let dayIdx = d.getUTCDay();
+            if (ts < srTs) dayIdx = (dayIdx + 6) % 7;
+            const LORDS = ["Surya", "Chandra", "Mangala", "Budha", "Guru", "Shukra", "Shani"];
+            return LORDS[dayIdx];
+        }
+
+        // ── Formatting helpers ─────────────────────────────────────────────────────────
+        function nakshatraOf(lon) {
+            const idx = Math.floor(lon / (360 / 27)) % 27;
+            const pad = (lon % (360 / 27)) / (360 / 27) * 100;
+            return NAKSHATRA_NAMES[idx] + ' (' + pad.toFixed(0) + '%)';
+        }
+        function rashiOf(lon) {
+            return RASHI_NAMES[Math.floor(lon / 30) % 12];
+        }
+        function pad2(n) { return String(n).padStart(2, '0'); }
+        function formatLocalTime(d) {
+            return pad2(d.getUTCHours()) + ':' + pad2(d.getUTCMinutes()) + ':' + pad2(d.getUTCSeconds());
+        }
+        function formatLocalDate(d) {
+            return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+        }
+        function dayName(d) {
+            return DAY_NAMES[d.getUTCDay()];
+        }
+
+        // Rough month name in Indian lunar calendar: based on Sun position at New Moon
+        // Chaitra ≈ Sun in Mesha (0–30), Vaishakha ≈ Vrishabha (30–60), etc.
+        function lunarMonthName(sunLon) {
+            const idx = Math.floor(sunLon / 30) % 12;
+            return LUNAR_MONTHS[idx];
+        }
+
+        // Is this the Chitra month? Sun in Kanya (150–180) = Mesha-maasa seed,
+        // Actually Chitra paksha Shukla Pratipada = New Moon when Sun is in Meena/Mesha.
+        // HOWEVER, the page title says "Chitra Shukla Paksha Pratipada" which in context
+        // of Sri Jagannatha Panchanga refers to tracking those New Moons where
+        // Sun is in Chitra nakshatra or around that longitude.
+        // Chitra nakshatra = 173.20° – 186.67° (tropical longitude).
+        // More broadly, any row where Sun nakshatra = Chitra is highlighted.
+        function isChitraRow(sunLon) {
+            // Chitra nakshatra spans tropical 173.2° to 186.67°
+            // But in sidereal (Lahiri ~23.85°): 173.2 + 23.85 = 197.05 → 186.67 + 23.85 = 210.52
+            // We'll use tropical for Moshier output (which is tropical):
+            return sunLon >= 173.2 && sunLon < 186.67;
+        }
+
+        // ── Main ───────────────────────────────────────────────────────────────────────
+        let ephReady = false;
+
+        window.addEventListener('load', function () {
+            // Give the synchronous script loader a moment
+            setTimeout(function () {
+                if (typeof $processor !== 'undefined' && typeof $moshier !== 'undefined') {
+                    ephReady = true;
+                    document.getElementById('loadingMsg').style.display = 'none';
+                    document.getElementById('resultArea').style.display = '';
+                    document.getElementById('statusBar').textContent = 'Ephemeris ready. Enter parameters and click Calculate.';
+                    document.getElementById('calcBtn').disabled = false;
+                    // Pre-fill year to current
+                    document.getElementById('year').value = new Date().getFullYear();
+                } else {
+                    document.getElementById('statusBar').textContent = 'ERROR: Could not load ephemeris libraries. Please run via a web server (not file:// directly).';
+                }
+            }, 800);
+        });
+
+        function setStatus(msg, pct) {
+            document.getElementById('statusBar').textContent = msg;
+            const internalMsg = document.getElementById('internalLoadingMsg');
+            if (internalMsg) internalMsg.textContent = msg;
+
+            if (pct !== undefined) {
+                document.getElementById('progressWrap').style.display = '';
+                const pBar = document.getElementById('progressBar');
+                if (pBar) pBar.style.width = pct + '%';
+            }
+        }
+
+        async function startCalc() {
+            try {
+                if (!ephReady) { alert('Ephemeris not ready yet.'); return; }
+
+                const year = parseInt(document.getElementById('year').value);
+                const lat = parseFloat(document.getElementById('lat').value);
+                const lon = parseFloat(document.getElementById('lon').value);
+                const tzH = parseFloat(document.getElementById('tz').value);
+                const place = document.getElementById('placeName').value;
+
+                if (isNaN(year) || isNaN(lat) || isNaN(lon) || isNaN(tzH)) {
+                    alert('Please fill in all fields correctly.'); return;
+                }
+
+                // Initial UI state
+                document.getElementById('calcBtn').disabled = true;
+                document.getElementById('summaryCards').innerHTML = '';
+                document.getElementById('resultArea').style.display = 'block';
+                document.getElementById('resultArea').innerHTML = `
+                    <div style="text-align:center; padding:40px;">
+                        <div class="loader"></div>
+                        <p style="margin-top:20px; color:var(--accent); font-weight:600;" id="internalLoadingMsg">Initializing Astronomical Search...</p>
+                    </div>`;
+                document.getElementById('progressWrap').style.display = 'block';
+
+                // CRITICAL: Let the browser paint the loader before starting heavy calc
+                await sleep(100);
+
+                // Sync SJP global settings
+                Date.MyTimezoneOffset = -tzH * 60;
+                TimeZoneOffset = tzH;
+
+                // 1. Find when Sun is in Meena (330° to 360° Sidereal)
+                const startSearch = Date.UTC(year, 1, 1);
+                const endSearch = Date.UTC(year, 4, 30);
+
+                setStatus('Initializing Sun-in-Meena Search...', 5);
+                await sleep(50);
+
+                setStatus('Searching for Pisces window (Meena Start)...', 10);
+                const piscesStart = await findSunIngress(330, startSearch, endSearch, "Meena Window Start");
+
+                setStatus('Searching for Pisces window end...', 30);
+                // End of Pisces is 0° (or 360°)
+                const piscesEnd = await findSunIngress(0, piscesStart || startSearch, endSearch + 15 * 864e5, "Meena Window End");
+
+                if (!piscesStart || !piscesEnd) {
+                    document.getElementById('resultArea').innerHTML = '<div class="card" style="text-align:center;">No Sun-in-Pisces window found in this year. Check the ephemeris range.</div>';
+                    document.getElementById('calcBtn').disabled = false;
+                    return;
+                }
+
+                // 2. Find all New Moons (Pratipada start = Tithi 0) in this window
+                setStatus('Finding New Moons in window...', 50);
+                const nmMoments = [];
+                let currT = piscesStart;
+                while (currT < piscesEnd) {
+                    const nextNM = await findTithi(0, currT, Math.min(currT + 31 * 864e5, piscesEnd + 1 * 864e5), "Pisces New Moon");
+                    if (nextNM !== null && nextNM <= piscesEnd) {
+                        nmMoments.push(nextNM);
+                        currT = nextNM + 10 * 864e5; // Skip ahead
+                    } else {
+                        break;
+                    }
+                    await sleep(10);
+                }
+
+                if (nmMoments.length === 0) {
+                    document.getElementById('resultArea').innerHTML = '<div class="card" style="text-align:center;">No New Moon found while Sun is in Pisces.</div>';
+                    document.getElementById('calcBtn').disabled = false;
+                    return;
+                }
+
+                // Pick the 2nd conjunction if available, else the 1st
+                const targetMs = nmMoments.length > 1 ? nmMoments[1] : nmMoments[0];
+                const gData = getSunMoon(targetMs);
+
+                const targetNM = {
+                    utcMs: targetMs,
+                    sunLon: gData.sun,
+                    moonLon: gData.moon,
+                    sidSun: gData.sidSun
+                };
+
+                setStatus('Calculating Navanayakas and Chart...', 80);
+                await renderResults(nmMoments, targetNM, lat, lon, tzH, place, year);
+
+                document.getElementById('calcBtn').disabled = false;
+                document.getElementById('progressWrap').style.display = 'none';
+                setStatus('Calculation complete.');
+            } catch (err) {
+                console.error("Critical Calc Error:", err);
+                alert("An error occurred during calculation. Check browser console (F12) for details.\nError: " + err.message);
+                document.getElementById('calcBtn').disabled = false;
+                setStatus('Error: ' + err.message);
+            }
+        }
+
+
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms || 4)); }
+
+        async function renderResults(nmMoments, targetNM, lat, lon, tzH, place, year) {
+            // Version check for the user
+            console.log("Starting renderResults - Version 7 (Diagnostic Mode)");
+
+            let html = '';
+            const safeLong = (v) => {
+                const n = parseFloat(v);
+                return (typeof n === 'number' && !isNaN(n)) ? n : 0;
+            };
+
+            try {
+                // --- Summary Section ---
+                const locDStr = getLocStr(targetNM.utcMs, tzH);
+                const summaryHtml = `
+                    <div class="card summary-card">
+                        <div class="label">Primary Pisces New Moon (CSP)</div>
+                        <div class="val" style="font-size:1.1rem;">${locDStr}</div>
+                        <div style="font-size:0.6rem; color:var(--muted); margin-top:5px;">v7.0.0</div>
+                    </div>
+                    <div class="card summary-card">
+                        <div class="label">Location</div>
+                        <div class="val">${place}</div>
+                    </div>
+                    <div class="card summary-card">
+                        <div class="label">Sun Longitude (Sidereal)</div>
+                        <div class="val">${safeLong(targetNM.sidSun).toFixed(4)}° (${rashiOf(safeLong(targetNM.sidSun))})</div>
+                    </div>
+                `;
+                document.getElementById('summaryCards').innerHTML = summaryHtml;
+
+                html += '<div class="card"><h3>All New Moons in Pisces Window</h3>';
+                html += '<table><thead><tr><th>#</th><th>Date (Local)</th><th>Sun (Sidereal)</th><th>Selected</th></tr></thead><tbody>';
+                for (const ms of nmMoments) {
+                    const sData = getSunMoon(ms);
+                    const timeStr = getLocStr(ms, tzH);
+                    const isTarget = (ms === targetNM.utcMs);
+                    html += `<tr style="${isTarget ? 'background:var(--row-hover); border-left:3px solid var(--accent);' : ''}">
+                        <td>${nmMoments.indexOf(ms) + 1}</td>
+                        <td>${timeStr}</td>
+                        <td>${safeLong(sData.sidSun).toFixed(2)}°</td>
+                        <td>${isTarget ? '⭐' : ''}</td>
+                    </tr>`;
+                    await sleep(1);
+                }
+                html += '</tbody></table></div>';
+            } catch (e) {
+                console.error("Summary/NM Table Error:", e);
+                html += `<div class="card" style="color:var(--error); padding:20px;">Error in Summary/NM Table: ${e.message}</div>`;
+            }
+
+            try {
+                // --- Jataka Chart Section ---
+                const gData = callRobust(targetNM.utcMs, lat, lon, tzH);
+                console.log("gData from callRobust (CSP Chart):", gData);
+
+                const chartArr = [
+                    { "tx": "Su", "long": safeLong(gData.g.grahas[0]), "retro": "", "id": 1 },
+                    { "tx": "Mo", "long": safeLong(gData.g.grahas[1]), "retro": "", "id": 2 },
+                    { "tx": "Ma", "long": safeLong(gData.g.grahas[2]), "retro": (gData.g.speed && gData.g.speed[2] < 0) ? "R" : "", "id": 3 },
+                    { "tx": "Me", "long": safeLong(gData.g.grahas[3]), "retro": (gData.g.speed && gData.g.speed[3] < 0) ? "R" : "", "id": 4 },
+                    { "tx": "Ju", "long": safeLong(gData.g.grahas[4]), "retro": (gData.g.speed && gData.g.speed[4] < 0) ? "R" : "", "id": 5 },
+                    { "tx": "Ve", "long": safeLong(gData.g.grahas[5]), "retro": (gData.g.speed && gData.g.speed[5] < 0) ? "R" : "", "id": 6 },
+                    { "tx": "Sa", "long": safeLong(gData.g.grahas[6]), "retro": (gData.g.speed && gData.g.speed[6] < 0) ? "R" : "", "id": 7 },
+                    { "tx": "Ra", "long": safeLong(gData.g.grahas[7]), "retro": "", "id": 8 },
+                    { "tx": "Ke", "long": (safeLong(gData.g.grahas[7]) + 180) % 360, "retro": "", "id": 9 },
+                    { "tx": "Lg", "long": safeLong(gData.a.Ascendant || gData.g.grahas[8]), "retro": "", "id": 10 }
+                ];
+
+                html += '<div class="card" style="text-align:center;">';
+                html += '<h2>CSP Chart (South Indian Jataka)</h2>';
+                const centerHtml = `<div style="font-size:0.8rem; font-weight:700;">${year}<br>CHITRA SHUKLA<br>${place}</div>`;
+                html += '<div style="display:flex; justify-content:center; margin-bottom:30px; min-height:200px;">';
+                try {
+                    html += getChart(chartArr, centerHtml, "Rashi", 8, true);
+                } catch (ce) {
+                    console.error("getChart component failed:", ce);
+                    html += `<div style="padding:20px; border:1px dashed var(--muted);">[Visual Chart Failed: ${ce.message}]</div>`;
+                }
+                html += '</div>';
+
+                html += '<div class="table-wrap"><table style="font-family:monospace; font-size:0.8rem;"><thead><tr><th>Body</th><th>Longitude</th><th>Sign</th><th>Nakshatra</th></tr></thead><tbody>';
+                chartArr.forEach(p => {
+                    // Ultra-defensive loop
+                    let lLong = safeLong(p.long);
+                    const lStr = lLong.toFixed(2) + '°';
+                    const rStr = rashiOf(lLong);
+                    const nStr = nakshatraOf(lLong);
+                    html += `<tr><td><b>${p.tx}${p.retro || ''}</b></td><td>${lStr}</td><td>${rStr}</td><td>${nStr}</td></tr>`;
+                });
+                html += '</tbody></table></div></div>';
+            } catch (e) {
+                console.error("Jataka Section Error:", e);
+                html += `<div class="card" style="color:var(--error); padding:20px;">Error in Jataka Section: ${e.message}</div>`;
+            }
+
+            try {
+                // --- Navanayaka (Lordship) Table ---
+                html += '<h2 style="color:var(--accent); margin-top:50px; margin-bottom:15px; text-align:center;">Navanayakas (Lordships)</h2>';
+                html += '<p style="text-align:center; font-size:0.85rem; color:var(--muted); margin-bottom:20px;">Lordship is determined by the Vedic Day (Sunrise to Sunrise) at the event moment.</p>';
+
+                // Updated findAfter to be more sequential and status-oriented
+                const findLordTs = async (lon, offsetDays, role) => {
+                    setStatus(`Calculating ${role}...`, undefined);
+                    // Use a much wider window (120 days) for safer capture
+                    const start = targetNM.utcMs + offsetDays * 864e5;
+                    const end = start + 120 * 864e5;
+                    const ts = await findSunIngress(lon, start, end, role);
+                    console.log(`[LordCheck] ${role} (Target Lon: ${lon}): ${ts ? new Date(ts).toISOString() : 'NOT FOUND'}`);
+                    return ts;
+                };
+
+                const definitions = [
+                    { role: "Raja", event: "Chaitra Pratipada", lon: null, ts: targetNM.utcMs },
+                    { role: "Mantri", event: "Mesh Sankranti", lon: 0, off: -15 },
+                    { role: "Senadhipati", event: "Simha Sankranti", lon: 120, off: 100 },
+                    { role: "Sasyaadhipati", event: "Karka Sankranti", lon: 90, off: 70 },
+                    { role: "Daanyaadhipati", event: "Dhanu Sankranti", lon: 240, off: 220 },
+                    { role: "Meghaadhipati", event: "Ardra Ingress", lon: 66.666, off: 50 },
+                    { role: "Rasaadhipati", event: "Tula Sankranti", lon: 180, off: 160 },
+                    { role: "Neerasaadhipati", event: "Makara Sankranti", lon: 270, off: 240 },
+                    { role: "Phalaadhipati", event: "Ashlesha Ingress", lon: 106.666, off: 80 }
+                ];
+
+                html += '<div class="table-wrap"><table class="lords-table"><thead><tr><th>Role</th><th>Determinant Event</th><th>Date / Time (Local)</th><th>Lord</th></tr></thead><tbody>';
+
+                for (const def of definitions) {
+                    let tsFound = def.ts;
+                    if (def.lon !== null && tsFound === undefined) {
+                        try {
+                            // Sequential await to avoid overwhelming processor and to show status
+                            tsFound = await findLordTs(def.lon, def.off, def.role);
+                        } catch (le) {
+                            console.error(`Search failed for ${def.role}:`, le);
+                            tsFound = null;
+                        }
+                    }
+
+                    const lord = tsFound ? getVedicLord(tsFound, lat, lon, tzH) : "---";
+                    const timeStr = tsFound ? getLocStr(tsFound, tzH) : "N/A";
+                    html += `<tr><td><b>${def.role}</b></td><td>${def.event}</td><td>${timeStr}</td><td class="lord-val">${lord}</td></tr>`;
+                    await sleep(10);
+                }
+                html += '</tbody></table></div>';
+            } catch (e) {
+                console.error("Lords Table Error:", e);
+                html += `<div class="card" style="color:var(--error); padding:20px;">Error in Lords Table: ${e.message}</div>`;
+            }
+
+            document.getElementById('resultArea').innerHTML = html;
+        }
+
+        // Helper for local time string
+        function getLocStr(ts, tzH) {
+            const d = new Date(ts + tzH * 3600 * 1000);
+            return `${d.getUTCFullYear()}-${pad2(d.getUTCMonth() + 1)}-${pad2(d.getUTCDate())} ${pad2(d.getUTCHours())}:${pad2(d.getUTCMinutes())}:${pad2(d.getUTCSeconds())}`;
+        }
+    </script>
+
+</body>
+
+</html>
