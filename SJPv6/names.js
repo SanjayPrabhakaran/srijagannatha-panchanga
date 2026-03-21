@@ -3,10 +3,13 @@ console.log(getExecutingFileName() + ".............");
 //By : Sanjay Prabhakaran
 //Signs: 1 Aries, 2 Taurus....12 and 0 Pisces
 //Grahas: 1 Sun, 2 Moon, 3 Mars, 4 Mercury, 5 Jupiter, 6 Venus, 7 Saturn, 8 Rahu, 9 Ketu, 10 and 0 Lagna. Lagna is not a planet but we can treat it as one for ease of calculation and representation. Lagna is the sign which is rising on the eastern horizon at the time of birth. It is also called Ascendant. It is very important in Jyotish as it represents the self and the body. It is also the first house in the birth chart. The position of Lagna and its lord (the planet which rules the sign of Lagna) in the birth chart gives a lot of information about the person's physical appearance, health, personality, etc.
-var SignNames = ["Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius","Pisces"];
-var GrahaNames = [ "Lagna","Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu","Ketu", `Lagna`];
-var GrahaNamesShort = [ "La","Su", "Mo", "Ma", "Me", "Ju", "Ve", "Sa", "Ra","Ke", `La`];
-var GrahaSymbosl = [ "/","☉", "☽", "♂", "☿", "♃", "♀", "♄", "☊","☋","/"];
+var SignNames = ["Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
+var GrahaNames = ["Lagna", "Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu", `Lagna`];
+var GrahaNamesShort = ["La", "Su", "Mo", "Ma", "Me", "Ju", "Ve", "Sa", "Ra", "Ke", `La`];
+var GrahaSymbosl = ["/", "☉", "☽", "♂", "☿", "♃", "♀", "♄", "☊", "☋", "/"];
+//पंचव्षौका युग होता है फिर वे बारह युण होते ह उन्दकर स्वामी कमे ष्णु 3 बहृस्पति २॥ १४॥
+var panchaSamvatsaraDeva = ["1 Vishnu", "2 Brihaspati", "3 Indra", "4 Bhuma", "5 Tvashta", "6 Ahirbudhnya",
+    "7 Pitru", "8 Vishwadeva", "9 Chandra", "10 Indragni", "11 Bhaga", "12 Ashwinikumara"];
 
 ///////////////////////////////////////////////////////////////////
 console.log(getExecutingFileName() + ".............LOADED");
