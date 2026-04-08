@@ -1630,6 +1630,12 @@ function doForm() {//Checked
         "<br/>" +
         panchanga.html;
     var editlink = "<a href=" + window.location.href.replace("&submit=Calculate", "") + "><strong>Change the Data</strong></a>";
+    tinyURL="https://tinyurl.com/35yakvre?"+window.location.href.split("?")[1];
+
+    editlink = editlink + "&emsp;<a href=javascript:navigator.clipboard.writeText(tinyURL)><strong>Copy URL</strong></a>";
+    //https://tinyurl.com/35yakvre
+
+
     //var kcdlink = "<div id=kcddiv></div><a href=javascript:document.getElementById('kcddiv').innerHTML=createTable(getKCDdasa(panchanga.nakshatra_cur-1,panchanga.date_time,true).dasa).outerHTML><strong>KCD Dasa</strong></a>";
 
     var kcdlink = "<div id=kcddiv><a href=javascript:document.getElementById('kcddiv').appendChild(createTable(getKCDdasa(panchanga.nakshatra_cur,panchanga.date_time,true).dasa))><strong>KCD Dasa</strong></a></div>";
