@@ -1630,7 +1630,7 @@ function doForm() {//Checked
         "<br/>" +
         panchanga.html;
     var editlink = "<a href=" + window.location.href.replace("&submit=Calculate", "") + "><strong>Change the Data</strong></a>";
-    tinyURL="https://tinyurl.com/35yakvre?"+window.location.href.split("?")[1];
+    tinyURL = "https://tinyurl.com/35yakvre?" + window.location.href.split("?")[1];
 
     editlink = editlink + "&emsp;<a href=javascript:navigator.clipboard.writeText(tinyURL)><strong>Copy URL</strong></a>";
     //https://tinyurl.com/35yakvre
@@ -2081,10 +2081,16 @@ function ParseJHD() {
     //document.getElementById("secs").value=Math.round(time[1].slice(2,5)*60/1000);
     tz = JHDtz2Dec(lines[4]);
     document.getElementById("timezone").value = tz;//lines[4];//*-1//tzone[0]+"."+tzone[1];
-    var l = lines[5].split(".");
-    document.getElementById('longitude').value = -1 * (l[0] + "." + l[1]);
-    l = lines[6].split(".");
-    document.getElementById('latitude').value = l[0] + "." + l[1];
+    //    var l = lines[5].split(".");
+    //const toDecimal = s => (d => (Math.trunc(d) + (d % 1 * 100 | 0) / 60 + (Math.abs(d) * 10000 % 100 | 0) / 3600) * Math.sign(d))(+s);//    long = 1 * l[0];
+    const toDecimal = s => (d => (Math.trunc(d) + (d % 1 * 100 | 0) / 60 + (Math.abs(d) * 10000 % 100 | 0) / 3600))(+s);//    long = 1 * l[0];
+    //const toDecimal = s => -((d => (Math.trunc(d) + (d % 1 * 100 | 0) / 60 + (Math.abs(d) * 10000 % 100 | 0) / 3600) * Math.sign(d))(+s));
+    //   long = -1 * (long + Math.sign(long) * (l[1].substring(0, 2) / 60 + l[1].substring(2, 4) / 3600));
+    document.getElementById('longitude').value = -toDecimal(lines[5]);
+    //    l = lines[6].split(".");
+    //  lat = 1 * l[0];
+    // lat = -1 * (lat + Math.sign(lat) * (l[1].substring(0, 2) / 60 + l[1].substring(2, 4) / 3600));
+    document.getElementById('latitude').value = toDecimal(lines[6]);
     if (lines.length > 11) document.getElementById('placename').value = lines[12] + "," + lines[13];
 }
 function ListenToJHDloader(e) {
