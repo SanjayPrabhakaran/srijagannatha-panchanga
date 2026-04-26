@@ -37,15 +37,11 @@
       <tr>
         <td colspan=2>
           Chart Name:<input id=chartname name="chartname" size=20 type=text onchange="UpdateChartName()" value=Prashna>
-          <div><br />
-            Load a .JHD file:
-            <input type="file" accept=".jhd" title=".jhd file name" id="fileInput">
-          </div>
           <input id=submit name=submit type=submit value=Calculate>
         </td>
       </tr>
       <tr>
-        <td colspan=2>OR Provide Date, Time, Time Zone, Location, Latitude and Longitude.
+        <td colspan=2>Provide Date, Time, Time Zone, Location, Latitude and Longitude.
         </td>
       </tr>
       <tr>
@@ -97,11 +93,16 @@
           <small>Convert to LMT</small><br />
         </td>
       </tr>
-      <tr>
+      <tr style="border:1px solid black;">
         <td>
-          JHD File Text:
+          <div>
+            <hr>
+            OR Load .JHD(Jagannatha Hora) file:
+            <input type="file" accept=".jhd" title=".jhd file name" id="fileInput">
+          </div>
         </td>
         <td>
+          <hr>
           <textarea title="You can also paste the JHD text here" onchange="ParseJHD()" id="inputTextToSave"
             style="width:50%;"></textarea>
 
