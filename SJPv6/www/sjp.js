@@ -2197,6 +2197,7 @@ function initSJP() {
         params = params[1].split("&");
         for (i = 0; i < params.length; ++i) {
             var p = params[i].split("=");
+            p[1]=decodeURI(p[1]);
             document.getElementById(p[0]).value = document.getElementById(p[0]).value.replace(/\+/g, " ");
             document.getElementById(p[0]).value = unescape(p[1]);
             p[1] = p[1].replace(/\+/g, " ");
